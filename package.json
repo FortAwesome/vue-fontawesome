@@ -1,0 +1,45 @@
+{
+  "name": "@fortawesome/vue-fontawesome",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "robmadole <robmadole@gmail.com>",
+  "license": "MIT",
+  "watch": {
+    "build": {
+      "patterns": [
+        "src/**/*.js"
+      ],
+      "delay": 2000
+    }
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "dist": "npm build",
+    "watch": "npm-watch",
+    "test": "jest"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@fortawesome/fontawesome": "^0.0.3",
+    "babel-jest": "^20.0.3",
+    "babel-preset-env": "^1.6.0",
+    "jest": "^20.0.4",
+    "npm-watch": "^0.2.0",
+    "regenerator-runtime": "^0.10.5",
+    "rollup": "^0.45.2",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "vue": "^2.4.2",
+    "vue-template-compiler": "^2.4.2",
+    "vue-template-es2015-compiler": "^1.5.3"
+  },
+  "dependencies": {
+    "camelcase": "^4.1.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ]
+  }
+}
