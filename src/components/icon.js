@@ -5,20 +5,49 @@ export default {
   name: 'FontAwesomeIcon',
 
   props: {
-    icon: {
+    name: { 
+      type: String,
+      default: ''
+    },
+    pack: { 
+      type: String,
+      default: 'fa' 
+    },
+    iconDefinition: {
       type: Object,
-      required: true
+      default: null
     }
   },
 
-  render (h) {
-    const { abstract } = fontawesome.icon(this.icon)
-    const convertCurry = convert.bind(null, h)
-
-    if (abstract.length === 1) {
-      return convertCurry(abstract[0])
-    } else {
-      return h('span', abstract.map(convertCurry))
+  data () {
+    return {
+      packNames: {
+        brands: 'fab',
+        light: 'fal',
+        regular: 'far',
+        solid: 'fas'
+      }
     }
+  },
+
+  computed: {
+    prefix () {
+      return this.packNames[this.pack] || this.pack
+    },
+
+    iconConfig () {
+      return { prefix: this.prefix, iconName: this.name }
+    },
+
+    icon () {
+      return fontawesome.icon(this.iconDefinition || this.iconConfig)
+    }
+  },
+
+  render (createElement) {
+    const { abstract } = this.icon
+    const convertCurry = convert.bind(null, createElement)
+
+    return convertCurry(abstract[0])
   }
 }

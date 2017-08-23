@@ -9,8 +9,12 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "@fortawesome/fontawesome": "^0.0.4",
-    "@fortawesome/fontawesome-solid": "^0.0.4",
+    "@fortawesome/fontawesome": "^0.0.7",
+    "@fortawesome/fontawesome-brands": "^0.0.7",
+    "@fortawesome/fontawesome-light": "^0.0.7",
+    "@fortawesome/fontawesome-regular": "^0.0.7",
+    "@fortawesome/fontawesome-solid": "^0.0.7",
+    "@fortawesome/vue-fontawesome": "^0.0.2",
     "vue": "^2.3.3"
   },
   "devDependencies": {

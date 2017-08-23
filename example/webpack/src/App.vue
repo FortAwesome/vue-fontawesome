@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <font-awesome-icon class="test" :icon="icon" />
+    <font-awesome-icon class="test" :icon-definition="icon" />
+    <font-awesome-icon class="test" pack="fas" name="coffee" />
   </div>
 </template>
 
