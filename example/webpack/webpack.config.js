@@ -2,11 +2,15 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    external: path.resolve(__dirname, './src/external.js'),
+    library: path.resolve(__dirname, './src/library.js'),
+    explicit: path.resolve(__dirname, './src/explicit.js')
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [

@@ -1,0 +1,31 @@
+<template>
+  <div id="app">
+    <h1>
+      <font-awesome-icon :icon-definition="icon" />
+    </h1>
+  </div>
+</template>
+
+<script>
+import { faCoffee } from '@fortawesome/fontawesome-solid'
+
+export default {
+  name: 'FAExplicitExample',
+
+  computed: {
+    icon () {
+      return faCoffee
+    }
+  }
+}
+</script>
+
+<style>
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
