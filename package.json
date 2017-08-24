@@ -1,6 +1,6 @@
 {
   "name": "@fortawesome/vue-fontawesome",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "author": "robmadole <robmadole@gmail.com>",
   "license": "MIT",
@@ -18,9 +18,10 @@
     "watch": "npm-watch",
     "test": "jest"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@fortawesome/fontawesome": "^0.0.7"
+  },
   "devDependencies": {
-    "@fortawesome/fontawesome": "^0.0.3",
     "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.6.0",
     "jest": "^20.0.4",
