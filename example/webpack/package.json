@@ -8,6 +8,7 @@
     "build": {
       "patterns": [
         "src/**/*.js",
+        "src/**/*.vue",
         "../../index.js"
       ]
     }

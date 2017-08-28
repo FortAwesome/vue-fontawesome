@@ -5,23 +5,55 @@ export default {
   name: 'FontAwesomeIcon',
 
   props: {
-    name: {
-      type: String,
-      default: ''
+    border: {
+      type: Boolean,
+      default: false
     },
-    pack: {
+    fixedWidth: {
+      type: Boolean,
+      default: false
+    },
+    flip: {
       type: String,
-      default: 'fa'
+      default: null,
+      validator: (value) => ['horizontal', 'vertical', 'both'].indexOf(value) > -1
     },
     iconDefinition: {
       type: Object,
       default: null
     },
-    spin: {
+    listItem: {
       type: Boolean,
       default: false
     },
-    fixedWidth: {
+    pack: {
+      type: String,
+      default: 'fa'
+    },
+    pull: {
+      type: String,
+      default: null,
+      validator: (value) => ['right', 'left'].indexOf(value) > -1
+    },
+    pulse: {
+      type: Boolean,
+      default: false
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    rotation: {
+      type: Number,
+      default: null,
+      validator: (value) => [90, 180, 270].indexOf(value) > -1
+    },
+    size: {
+      type: String,
+      default: null,
+      validator: (value) => ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1
+    },
+    spin: {
       type: Boolean,
       default: false
     }
@@ -50,7 +82,15 @@ export default {
     classList () {
       let classes = {
         'fa-spin': this.spin,
-        'fa-fw': this.fixedWidth
+        'fa-pulse': this.pulse,
+        'fa-fw': this.fixedWidth,
+        'fa-border': this.border,
+        'fa-li': this.listItem,
+        'fa-flip-horizontal': this.flip === 'horizontal' || this.flip === 'both',
+        'fa-flip-vertical': this.flip === 'vertical' || this.flip === 'both',
+        [`fa-${this.size}`]: this.size !== null,
+        [`fa-rotate-${this.rotation}`]: this.rotation !== null,
+        [`fa-pull-${this.pull}`]: this.pull !== null
       }
 
       return Object.keys(classes)

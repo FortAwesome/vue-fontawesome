@@ -4,7 +4,28 @@
       <font-awesome-icon pack="fab" name="font-awesome" />
       <font-awesome-icon pack="fas" name="coffee" />
       <font-awesome-icon pack="fas" name="cog" :spin="true" :fixed-width="false" />
+      <font-awesome-icon pack="fab" name="fort-awesome" size="4x" />
+      <font-awesome-icon pack="fas" name="spinner" :pulse="true" :fixed-width="true" />
+      <font-awesome-icon pack="fab" name="fort-awesome" :rotation="90" />
+      <font-awesome-icon pack="fab" name="internet-explorer" flip="both" />
     </h1>
+    <div>
+      <p>
+        <font-awesome-icon pack="fas" name="quote-left" size="2x" :border="true" pull="left" />...tomorrow we 
+        will run faster, stretch out our arms farther...And then one fine morning&mdash; So we beat on, boats 
+        against the current, borne back ceaselessly into the past.
+      </p>
+    </div>
+    <div>
+      <p>
+        <ul class="fa-ul">
+          <li><font-awesome-icon pack="fas" name="check-square" :list-item="true" />List icons</li>
+          <li><font-awesome-icon pack="fas" name="check-square" :list-item="true" />can be used</li>
+          <li><font-awesome-icon pack="fas" name="square" :list-item="true" />as bullets</li>
+          <li><font-awesome-icon pack="fas" name="square" :list-item="true" />in lists</li>
+        </ul>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -24,8 +45,14 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  text-align: center;
+}
+
+p {
+  display: inline-block;
+  width: 250px;
+  text-align: left;
 }
 </style>
