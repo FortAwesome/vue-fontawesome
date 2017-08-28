@@ -7,8 +7,14 @@
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
 export default {
-  name: 'FAExternalExample'
+  name: 'FAExternalExample',
+
+  components: {
+    FontAwesomeIcon
+  }
 }
 </script>
 

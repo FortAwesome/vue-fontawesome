@@ -5,17 +5,25 @@ export default {
   name: 'FontAwesomeIcon',
 
   props: {
-    name: { 
+    name: {
       type: String,
       default: ''
     },
-    pack: { 
+    pack: {
       type: String,
-      default: 'fa' 
+      default: 'fa'
     },
     iconDefinition: {
       type: Object,
       default: null
+    },
+    spin: {
+      type: Boolean,
+      default: false
+    },
+    fixedWidth: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -39,8 +47,21 @@ export default {
       return { prefix: this.prefix, iconName: this.name }
     },
 
+    classList () {
+      let classes = {
+        'fa-spin': this.spin,
+        'fa-fw': this.fixedWidth
+      }
+
+      return Object.keys(classes)
+        .map(key => classes[key] ? key : null)
+        .filter(key => key)
+    },
+
     icon () {
-      return fontawesome.icon(this.iconDefinition || this.iconConfig)
+      return fontawesome.icon(this.iconDefinition || this.iconConfig, {
+        classes: this.classList
+      })
     }
   },
 

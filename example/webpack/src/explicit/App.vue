@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { faCoffee } from '@fortawesome/fontawesome-solid'
 
 export default {
@@ -16,6 +17,10 @@ export default {
     icon () {
       return faCoffee
     }
+  },
+
+  components: {
+    FontAwesomeIcon
   }
 }
 </script>
