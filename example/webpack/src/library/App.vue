@@ -26,6 +26,14 @@
         </ul>
       </p>
     </div>
+    <div>
+      <span>
+        <font-awesome-icon pack="fab" name="font-awesome" transform="grow-40 left-4 rotate-15" />
+      </span>
+      <span style="padding-left: 50px">
+        <font-awesome-icon pack="fab" name="font-awesome" :transform="{ flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 }" />
+      </span>
+    </div>
   </div>
 </template>
 

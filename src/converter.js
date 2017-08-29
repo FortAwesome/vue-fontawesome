@@ -2,12 +2,16 @@ import camelCase from 'camelcase'
 
 function styleToObject (style) {
   return style.split(';')
-    .map((s) => { s.trim() })
+    .map(s => s.trim() )
+    .filter(s => s)
     .reduce((acc, pair) => {
       const i = pair.indexOf(':')
-      const prop = pair.slice(0, i)
+      const prop = camelCase(pair.slice(0, i))
       const value = pair.slice(i + 1).trim()
-      return acc[camelCase(prop)] = value
+      
+      acc[prop] = value
+
+      return acc
     }, {})
 }
 
@@ -15,6 +19,7 @@ function classToObject (cls) {
   return cls.split(/\s+/)
     .reduce((acc, c) => {
       acc[c] = true
+      
       return acc
     }, {})
 }

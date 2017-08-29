@@ -56,6 +56,10 @@ export default {
     spin: {
       type: Boolean,
       default: false
+    },
+    transform: {
+      type: [String, Object],
+      default: null
     }
   },
 
@@ -98,10 +102,17 @@ export default {
         .filter(key => key)
     },
 
+    transformDirectives () {
+      return (typeof this.transform === 'string') ? fontawesome.parse.transform(this.transform) : this.transform
+    },
+
     icon () {
-      return fontawesome.icon(this.iconDefinition || this.iconConfig, {
-        classes: this.classList
-      })
+      let params = Object.assign({},
+        this.classList.length > 0 && {classes: this.classList},
+        this.transformDirectives && {transform: this.transformDirectives}
+      )
+
+      return fontawesome.icon(this.iconDefinition || this.iconConfig, params)
     }
   },
 
