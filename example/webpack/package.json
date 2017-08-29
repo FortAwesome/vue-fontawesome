@@ -4,41 +4,26 @@
   "version": "1.0.0",
   "author": "robmadole <robmadole@gmail.com>",
   "private": true,
-  "watch": {
-    "build": {
-      "patterns": [
-        "src/**/*.js",
-        "src/**/*.vue",
-        "../../index.js"
-      ]
-    }
-  },
   "scripts": {
-    "build": "webpack --hide-modules",
-    "watch": "concurrently --kill-others \"npm run watch.build\" \"npm run watch.static\"",
-    "watch.build": "npm-watch",
-    "watch.static": "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'"
+    "build": "webpack --hide-modules"
   },
   "dependencies": {
-    "@fortawesome/fontawesome": "^0.0.8",
-    "@fortawesome/fontawesome-brands": "^0.0.8",
-    "@fortawesome/fontawesome-light": "^0.0.8",
-    "@fortawesome/fontawesome-regular": "^0.0.8",
-    "@fortawesome/fontawesome-solid": "^0.0.8",
-    "vue": "^2.3.3"
+    "@fortawesome/fontawesome": "^0.0.9",
+    "@fortawesome/fontawesome-brands": "^0.0.9",
+    "@fortawesome/fontawesome-light": "^0.0.9",
+    "@fortawesome/fontawesome-regular": "^0.0.9",
+    "@fortawesome/fontawesome-solid": "^0.0.9",
+    "@fortawesome/vue-fontawesome": "^0.0.5",
+    "vue": "^2.3.3",
+    "vue-template-compiler": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.5.1",
-    "concurrently": "^3.5.0",
     "css-loader": "^0.28.5",
     "file-loader": "^0.11.2",
-    "node-static": "^0.7.9",
-    "npm-watch": "^0.2.0",
     "vue-loader": "^13.0.4",
-    "vue-template-compiler": "^2.3.3",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.4.5"
+    "webpack": "^3.5.5"
   }
 }
