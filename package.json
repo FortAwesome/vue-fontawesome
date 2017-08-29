@@ -5,34 +5,45 @@
   "author": "robmadole <robmadole@gmail.com>",
   "license": "MIT",
   "watch": {
-    "build": {
+    "build.main": {
+      "patterns": ["src"],
+      "extensions": ["js"]
+    },
+    "build.example.webpack": {
       "patterns": [
-        "src/**/*.js"
-      ]
+        "example/webpack/src/**/*.js",
+        "example/webpack/src/**/*.vue",
+        "index.js"
+      ],
+      "extensions": ["js", "vue"]
     }
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "dist": "npm build",
-    "watch": "npm-watch",
+    "watch": "concurrently --kill-others \"npm run watch.all\" \"npm run serve.static\"",
+    "watch.all": "npm-watch",
+    "build": "npm run build.main && npm run build.example.webpack",
+    "build.main": "rollup -c rollup.config.js",
+    "build.example.webpack": "cd example/webpack && webpack --hide-modules",
+    "serve.static": "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' example/webpack",
+    "dist": "NODE_ENV=production npm run build",
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": "^0.0.8"
+    "@fortawesome/fontawesome": "^0.0.9"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome": "^0.0.9",
     "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.6.0",
+    "concurrently": "^3.5.0",
     "jest": "^20.0.4",
+    "node-static": "^0.7.9",
     "npm-watch": "^0.2.0",
-    "regenerator-runtime": "^0.10.5",
     "rollup": "^0.45.2",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "vue": "^2.4.2",
-    "vue-template-compiler": "^2.4.2",
-    "vue-template-es2015-compiler": "^1.5.3"
+    "vue": "^2.4.2"
   },
   "dependencies": {
     "camelcase": "^4.1.0"
