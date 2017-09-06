@@ -3,16 +3,18 @@ import commonJs from 'rollup-plugin-commonjs'
 import buble from 'rollup-plugin-buble'
 
 export default {
-  entry: 'src/index.js',
-  dest: 'index.js',
   external: [
     '@fortawesome/fontawesome'
   ],
   globals: {
     '@fortawesome/fontawesome': 'FontAwesome'
   },
-  moduleName: 'vue-fontawesome',
-  format: 'umd',
+  input: 'src/index.js',
+  name: 'vue-fontawesome',
+  output: {
+    format: 'umd',
+    file: 'index.js'
+  },
   plugins: [
     resolve({
       jsnext: true,

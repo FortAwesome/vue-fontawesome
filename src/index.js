@@ -1,3 +1,3 @@
-import icon from './components/icon'
+import FontAwesomeIcon from './components/FontAwesomeIcon'
 
-export default icon
+export default FontAwesomeIcon

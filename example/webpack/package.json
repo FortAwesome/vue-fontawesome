@@ -8,11 +8,11 @@
     "build": "webpack --hide-modules"
   },
   "dependencies": {
-    "@fortawesome/fontawesome": "^0.0.9",
-    "@fortawesome/fontawesome-brands": "^0.0.9",
-    "@fortawesome/fontawesome-light": "^0.0.9",
-    "@fortawesome/fontawesome-regular": "^0.0.9",
-    "@fortawesome/fontawesome-solid": "^0.0.9",
+    "@fortawesome/fontawesome": "^0.0.10",
+    "@fortawesome/fontawesome-brands": "^0.0.10",
+    "@fortawesome/fontawesome-light": "^0.0.10",
+    "@fortawesome/fontawesome-regular": "^0.0.10",
+    "@fortawesome/fontawesome-solid": "^0.0.10",
     "@fortawesome/vue-fontawesome": "^0.0.5",
     "vue": "^2.3.3",
     "vue-template-compiler": "^2.4.2"
