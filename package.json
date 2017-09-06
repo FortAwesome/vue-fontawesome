@@ -2,7 +2,10 @@
   "name": "@fortawesome/vue-fontawesome",
   "version": "0.0.7",
   "main": "index.js",
-  "author": "robmadole <robmadole@gmail.com>",
+  "contributors": [
+    "Travis Chase <travis@fontawesome.com>",
+    "Rob Madole <rob@fontawesome.com>"
+  ],
   "license": "MIT",
   "watch": {
     "build.main": {
