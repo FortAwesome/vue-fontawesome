@@ -36,7 +36,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": "^0.0.9"
+    "@fortawesome/fontawesome": "^0.0.10"
   },
   "devDependencies": {
     "@fortawesome/fontawesome": "^0.0.10",
