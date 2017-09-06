@@ -104,20 +104,13 @@ export default {
 
     transformDirectives () {
       return (typeof this.transform === 'string') ? fontawesome.parse.transform(this.transform) : this.transform
-    },
-
-    icon () {
-      let params = Object.assign({},
-        this.classList.length > 0 && {classes: this.classList},
-        this.transformDirectives && {transform: this.transformDirectives}
-      )
-
-      return fontawesome.icon(this.iconDefinition || this.iconConfig, params)
     }
   },
 
   render (createElement) {
-    const { abstract } = this.icon
+    const classes = this.classList.length > 0 ? {classes: this.classList} : {}
+    const transform = this.transformDirectives ? {transform: this.transformDirectives} : {}
+    const {abstract} = fontawesome.icon(this.iconDefinition || this.iconConfig, { ...classes, ...transform })
     const convertCurry = convert.bind(null, createElement)
 
     return convertCurry(abstract[0])

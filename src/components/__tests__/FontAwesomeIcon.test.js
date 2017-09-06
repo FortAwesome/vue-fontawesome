@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Icon from '../FontAwesomeIcon'
+import FontAwesomeIcon from '../FontAwesomeIcon'
 import fontawesome from '@fortawesome/fontawesome'
 
 const faCoffee = { 
@@ -17,8 +17,8 @@ const faCoffee = {
 fontawesome.library.add(faCoffee)
 
 function mount (propsData = {}) {
-  const FontAwesomeIcon = Vue.extend(Icon)
-  return new FontAwesomeIcon({ propsData }).$mount()
+  const Icon = Vue.extend(FontAwesomeIcon)
+  return new Icon({ propsData }).$mount()
 }
 
 test('using pack and name', () => {

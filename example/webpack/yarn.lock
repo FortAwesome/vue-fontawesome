@@ -2,29 +2,21 @@
 # yarn lockfile v1
 
 
-"@fortawesome/fontawesome-brands@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-brands/-/fontawesome-brands-0.0.10.tgz#b4a78f577730d5ecd681eb2e0d1714a9109305c9"
+"@fortawesome/fontawesome-free-brands@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-0.0.11.tgz#73f3da2310ca1a80ffd50471660d12a4316c8d98"
 
-"@fortawesome/fontawesome-light@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-light/-/fontawesome-light-0.0.10.tgz#fc7b56ec5463c5d84c8e64c865004ae25e1ab6ba"
+"@fortawesome/fontawesome-free-solid@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.11.tgz#b294124beb7f1f20c4078d7780dae26ba30c4b38"
 
-"@fortawesome/fontawesome-regular@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-regular/-/fontawesome-regular-0.0.10.tgz#980e9c887023c46b50bd80152d8ec5447eddb132"
+"@fortawesome/fontawesome@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.11.tgz#312b1f03894ea83d88db06c8e25fbb4883584fa1"
 
-"@fortawesome/fontawesome-solid@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-solid/-/fontawesome-solid-0.0.10.tgz#29a0cd7e01a1850d3fc28d6a6da2b30b57a1d3d9"
-
-"@fortawesome/fontawesome@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.10.tgz#3ce3ca261c17e223745058f27fe7acf84f5cbf49"
-
-"@fortawesome/vue-fontawesome@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.7.tgz#4cdb51dbd44d9eef3f36c291bed8cd79b481d198"
+"@fortawesome/vue-fontawesome@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.9.tgz#f7b79bbcb58ed230996a98b07566abfcaba05d0a"
   dependencies:
     camelcase "^4.1.0"
 
@@ -3378,8 +3370,8 @@ webpack-sources@^1.0.1:
     source-map "~0.5.3"
 
 webpack@^3.5.5:
-  version "3.5.5"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.5.tgz#3226f09fc8b3e435ff781e7af34f82b68b26996c"
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.6.tgz#a492fb6c1ed7f573816f90e00c8fbb5a20cc5c36"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"

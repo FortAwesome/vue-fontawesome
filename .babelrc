@@ -1,9 +1,3 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      }
-    }]
-  ]
+  "presets": ["es2015", "stage-3"]
 }

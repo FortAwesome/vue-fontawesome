@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './library/App.vue'
 import fontawesome from '@fortawesome/fontawesome'
-import brands from '@fortawesome/fontawesome-brands'
-import { faCoffee, faCog, faSpinner, faQuoteLeft, faSquare, faCheckSquare } from '@fortawesome/fontawesome-solid'
+import brands from '@fortawesome/fontawesome-free-brands'
+import { faCoffee, faCog, faSpinner, faQuoteLeft, faSquare, faCheckSquare } from '@fortawesome/fontawesome-free-solid'
 
 fontawesome.library.add(brands, faCoffee, faCog, faSpinner, faQuoteLeft, faSquare, faCheckSquare)
 

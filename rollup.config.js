@@ -1,6 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonJs from 'rollup-plugin-commonjs'
-import buble from 'rollup-plugin-buble'
+import babel from 'rollup-plugin-babel'
 
 export default {
   external: [
@@ -21,6 +21,13 @@ export default {
       main: true
     }),
     commonJs(),
-    buble()
+    babel({
+      babelrc: false,
+      presets: [
+        ["es2015", { "modules": false }], 
+        "stage-3"
+      ],
+      exclude: 'node_modules/**'
+    })
   ]
 }

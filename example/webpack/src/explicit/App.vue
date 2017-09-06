@@ -8,7 +8,7 @@
 
 <script>
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { faCoffee } from '@fortawesome/fontawesome-solid'
+import { faCoffee } from '@fortawesome/fontawesome-free-solid'
 
 export default {
   name: 'FAExplicitExample',
