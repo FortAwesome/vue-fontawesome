@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "index.js",
   "contributors": [
     "Travis Chase <travis@fontawesome.com>",
@@ -40,11 +40,11 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": "^0.0.11",
+    "@fortawesome/fontawesome": "^0.0.13",
     "vue": "^2.4.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome": "^0.0.11",
+    "@fortawesome/fontawesome": "0.0.13",
     "babel-jest": "^21.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
