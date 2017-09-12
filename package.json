@@ -1,8 +1,13 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "index.js",
+  "homepage": "https://github.com/FortAwesome/vue-fontawesome",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FortAwesome/vue-fontawesome.git"
+  },
   "contributors": [
     "Travis Chase <travis@fontawesome.com>",
     "Rob Madole <rob@fontawesome.com>"
