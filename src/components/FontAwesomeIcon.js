@@ -1,8 +1,40 @@
 import fontawesome from '@fortawesome/fontawesome'
 import convert from '../converter'
 
+const packNames = {
+  brands: 'fab',
+  light: 'fal',
+  regular: 'far',
+  solid: 'fas'
+}
+
+function objectWithKey (key, value) {
+  return ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) ? {[key]: value} : {}
+}
+
+function classList (props) {
+  let classes = {
+    'fa-spin': props.spin,
+    'fa-pulse': props.pulse,
+    'fa-fw': props.fixedWidth,
+    'fa-border': props.border,
+    'fa-li': props.listItem,
+    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
+    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
+    [`fa-${props.size}`]: props.size !== null,
+    [`fa-rotate-${props.rotation}`]: props.rotation !== null,
+    [`fa-pull-${props.pull}`]: props.pull !== null
+  }
+
+  return Object.keys(classes)
+    .map(key => classes[key] ? key : null)
+    .filter(key => key)
+}
+
 export default {
   name: 'FontAwesomeIcon',
+
+  functional: true,
 
   props: {
     border: {
@@ -63,54 +95,14 @@ export default {
     }
   },
 
-  data () {
-    return {
-      packNames: {
-        brands: 'fab',
-        light: 'fal',
-        regular: 'far',
-        solid: 'fas'
-      }
-    }
-  },
+  render (createElement, context) {
+    const { props } = context
 
-  computed: {
-    prefix () {
-      return this.packNames[this.pack] || this.pack
-    },
+    const iconConfig = { prefix: (packNames[props.pack] || props.pack), iconName: props.name }
+    const classes = objectWithKey('classes', classList(context.props))
+    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
 
-    iconConfig () {
-      return { prefix: this.prefix, iconName: this.name }
-    },
-
-    classList () {
-      let classes = {
-        'fa-spin': this.spin,
-        'fa-pulse': this.pulse,
-        'fa-fw': this.fixedWidth,
-        'fa-border': this.border,
-        'fa-li': this.listItem,
-        'fa-flip-horizontal': this.flip === 'horizontal' || this.flip === 'both',
-        'fa-flip-vertical': this.flip === 'vertical' || this.flip === 'both',
-        [`fa-${this.size}`]: this.size !== null,
-        [`fa-rotate-${this.rotation}`]: this.rotation !== null,
-        [`fa-pull-${this.pull}`]: this.pull !== null
-      }
-
-      return Object.keys(classes)
-        .map(key => classes[key] ? key : null)
-        .filter(key => key)
-    },
-
-    transformDirectives () {
-      return (typeof this.transform === 'string') ? fontawesome.parse.transform(this.transform) : this.transform
-    }
-  },
-
-  render (createElement) {
-    const classes = this.classList.length > 0 ? {classes: this.classList} : {}
-    const transform = this.transformDirectives ? {transform: this.transformDirectives} : {}
-    const {abstract} = fontawesome.icon(this.iconDefinition || this.iconConfig, { ...classes, ...transform })
+    const {abstract} = fontawesome.icon(props.iconDefinition || iconConfig, { ...classes, ...transform })
     const convertCurry = convert.bind(null, createElement)
 
     return convertCurry(abstract[0])
