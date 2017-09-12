@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "main": "index.js",
   "contributors": [
     "Travis Chase <travis@fontawesome.com>",
@@ -40,7 +40,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": "^0.0.13",
+    "@fortawesome/fontawesome": ">=0.0.13",
     "vue": "^2.4.2"
   },
   "devDependencies": {
