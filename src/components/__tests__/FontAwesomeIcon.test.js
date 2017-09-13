@@ -2,23 +2,32 @@ import Vue from 'vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import fontawesome from '@fortawesome/fontawesome'
 
-const faCoffee = { 
-  prefix: 'fas', 
-  iconName: 'coffee', 
+const faCoffee = {
+  prefix: 'fas',
+  iconName: 'coffee',
   icon: [
-    640, 
-    512, 
-    [], 
-    "f0f4", 
+    640,
+    512,
+    [],
+    "f0f4",
     "M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z"
-  ] 
+  ]
 }
 
 fontawesome.library.add(faCoffee)
 
 function mount (propsData = {}) {
-  const Icon = Vue.extend(FontAwesomeIcon)
-  return new Icon({ propsData }).$mount()
+  const opts = {
+    render: (h) => h(
+      FontAwesomeIcon,
+      { props: propsData }
+    )
+  }
+
+  const vm = new Vue(opts)
+  vm.$mount()
+
+  return vm
 }
 
 test('using pack and name', () => {
@@ -60,13 +69,13 @@ describe('using flip', () => {
 
     expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
   })
-  
+
   test('vertical', () => {
     const vm = mount({ iconDefinition: faCoffee, flip: "vertical" })
 
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
   })
-  
+
   test('both', () => {
     const vm = mount({ iconDefinition: faCoffee, flip: "both" })
 
@@ -87,7 +96,7 @@ describe('using pull', () => {
 
     expect(vm.$el.classList.contains('fa-pull-right')).toBeTruthy()
   })
-  
+
   test('left', () => {
     const vm = mount({ iconDefinition: faCoffee, pull: "left" })
 
@@ -107,7 +116,7 @@ describe('using rotation', () => {
 
     expect(vm.$el.classList.contains('fa-rotate-90')).toBeTruthy()
   })
-  
+
   test('180', () => {
     const vm = mount({ iconDefinition: faCoffee, rotation: 180 })
 
