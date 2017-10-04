@@ -1,4 +1,4 @@
-import camelCase from 'camelcase'
+import humps from 'humps';
 
 function styleToObject (style) {
   return style.split(';')
@@ -6,7 +6,7 @@ function styleToObject (style) {
     .filter(s => s)
     .reduce((acc, pair) => {
       const i = pair.indexOf(':')
-      const prop = camelCase(pair.slice(0, i))
+      const prop = humps.camelize(pair.slice(0, i))
       const value = pair.slice(i + 1).trim()
       
       acc[prop] = value

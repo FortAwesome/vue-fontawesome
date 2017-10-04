@@ -64,6 +64,6 @@
     "vue": "^2.4.2"
   },
   "dependencies": {
-    "camelcase": "^4.1.0"
+    "humps": "^2.0.1"
   }
 }
