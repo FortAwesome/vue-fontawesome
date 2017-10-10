@@ -8,7 +8,7 @@ function styleToObject (style) {
       const i = pair.indexOf(':')
       const prop = camelCase(pair.slice(0, i))
       const value = pair.slice(i + 1).trim()
-      
+
       acc[prop] = value
 
       return acc
@@ -19,7 +19,7 @@ function classToObject (cls) {
   return cls.split(/\s+/)
     .reduce((acc, c) => {
       acc[c] = true
-      
+
       return acc
     }, {})
 }

@@ -1,6 +1,12 @@
 import fontawesome from '@fortawesome/fontawesome'
 import convert from '../converter'
 
+let PRODUCTION = false
+
+try {
+  PRODUCTION = process.env.NODE_ENV === 'production'
+} catch (e) { }
+
 const packNames = {
   brands: 'fab',
   light: 'fal',
@@ -101,6 +107,17 @@ export default {
     const iconConfig = { prefix: (packNames[props.pack] || props.pack), iconName: props.name }
     const classes = objectWithKey('classes', classList(context.props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
+
+    const iconArgs = props.iconDefinition || iconConfig
+    const icon = fontawesome.icon(iconArgs, { ...classes, ...transform })
+
+    if (!icon) {
+      if (!PRODUCTION && console && typeof console.error === 'function') {
+        console.error('Could not find icon', iconArgs)
+      }
+
+      return null
+    }
 
     const {abstract} = fontawesome.icon(props.iconDefinition || iconConfig, { ...classes, ...transform })
     const convertCurry = convert.bind(null, createElement)

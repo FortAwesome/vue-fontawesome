@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "index.js",
   "homepage": "https://github.com/FortAwesome/vue-fontawesome",
   "repository": {
@@ -49,7 +49,7 @@
     "vue": "^2.4.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome": "0.0.13",
+    "@fortawesome/fontawesome": "^0.0.17",
     "babel-jest": "^21.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",

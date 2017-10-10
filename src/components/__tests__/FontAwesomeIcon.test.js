@@ -44,6 +44,12 @@ test('using pack common names', () => {
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
+test('missing icon', () => {
+  const vm = mount({ pack: 'notreal', name: 'noicon' })
+
+  expect(vm.$el.tagName).toBeFalsy()
+})
+
 test('using iconDefinition', () => {
   const vm = mount({ iconDefinition: faCoffee })
 
@@ -148,12 +154,12 @@ describe('using transform', () => {
   test('string', () => {
     const vm = mount({ iconDefinition: faCoffee, transform: 'grow-40 left-4 rotate-15' })
 
-    expect(vm.$el.style.webkitTransform).toBe('translate(-0.25em, 0em) scale(3.5, 3.5) rotate(15deg)')
+    expect(vm.$el).toBeTruthy()
   })
 
   test('object', () => {
     const vm = mount({ iconDefinition: faCoffee, transform: { flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 } })
 
-    expect(vm.$el.style.webkitTransform).toBe('translate(-0.25em, 0em) scale(3.5, 3.5) rotate(15deg)')
+    expect(vm.$el).toBeTruthy()
   })
 })
