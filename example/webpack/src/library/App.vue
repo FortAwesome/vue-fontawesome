@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <h1>
-      <font-awesome-icon pack="fab" name="font-awesome" />
-      <font-awesome-icon pack="fas" name="coffee" />
-      <font-awesome-icon pack="fas" name="cog" :spin="true" :fixed-width="false" />
-      <font-awesome-icon pack="fab" name="fort-awesome" size="4x" />
-      <font-awesome-icon pack="fas" name="spinner" :pulse="true" :fixed-width="true" />
-      <font-awesome-icon pack="fab" name="fort-awesome" :rotation="90" />
-      <font-awesome-icon pack="fab" name="internet-explorer" flip="both" />
+      <font-awesome-icon :icon="['fab', 'font-awesome']" />
+      <font-awesome-icon :icon="['fas', 'coffee']" />
+      <font-awesome-icon :icon="['fas', 'cog']" :spin="true" :fixed-width="false" />
+      <font-awesome-icon :icon="['fab', 'fort-awesome']" size="4x" />
+      <font-awesome-icon :icon="['fas', 'spinner']" :pulse="true" :fixed-width="true" />
+      <font-awesome-icon :icon="['fab', 'fort-awesome']" :rotation="90" />
+      <font-awesome-icon :icon="['fab', 'internet-explorer']" flip="both" />
     </h1>
     <div>
       <p>
@@ -19,19 +19,19 @@
     <div>
       <p>
         <ul class="fa-ul">
-          <li><font-awesome-icon pack="fas" name="check-square" :list-item="true" />List icons</li>
-          <li><font-awesome-icon pack="fas" name="check-square" :list-item="true" />can be used</li>
-          <li><font-awesome-icon pack="fas" name="square" :list-item="true" />as bullets</li>
-          <li><font-awesome-icon pack="fas" name="square" :list-item="true" />in lists</li>
+          <li><font-awesome-icon :icon="['fas', 'check-square']" :list-item="true" />List icons</li>
+          <li><font-awesome-icon :icon="['fas', 'check-square']" :list-item="true" />can be used</li>
+          <li><font-awesome-icon :icon="['fas', 'square']" :list-item="true" />as bullets</li>
+          <li><font-awesome-icon :icon="['fas', 'square']" :list-item="true" />in lists</li>
         </ul>
       </p>
     </div>
     <div>
       <span>
-        <font-awesome-icon pack="fab" name="font-awesome" transform="grow-40 left-4 rotate-15" />
+        <font-awesome-icon :icon="['fab', 'font-awesome']" transform="grow-40 left-4 rotate-15" />
       </span>
       <span style="padding-left: 50px">
-        <font-awesome-icon pack="fab" name="font-awesome" :transform="{ flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 }" />
+        <font-awesome-icon :icon="['fab', 'font-awesome']" :transform="{ flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 }" />
       </span>
     </div>
   </div>
@@ -42,7 +42,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'FALibraryExample',
-  
+
   components: {
     FontAwesomeIcon
   }

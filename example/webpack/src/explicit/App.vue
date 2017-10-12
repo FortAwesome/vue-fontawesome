@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>
-      <font-awesome-icon :icon-definition="icon" />
+      <font-awesome-icon :icon="icon" />
     </h1>
   </div>
 </template>
