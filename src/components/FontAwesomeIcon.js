@@ -7,13 +7,6 @@ try {
   PRODUCTION = process.env.NODE_ENV === 'production'
 } catch (e) { }
 
-const packNames = {
-  brands: 'fab',
-  light: 'fal',
-  regular: 'far',
-  solid: 'fas'
-}
-
 function objectWithKey (key, value) {
   return ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) ? {[key]: value} : {}
 }
@@ -37,6 +30,24 @@ function classList (props) {
     .filter(key => key)
 }
 
+function normalizeIconArgs (icon) {
+  if (icon === null) {
+    return null
+  }
+
+  if (typeof icon === 'object' && icon.prefix && icon.iconName) {
+    return icon
+  }
+
+  if (Array.isArray(icon) && icon.length === 2) {
+    return { prefix: icon[0], iconName: icon[1] }
+  }
+
+  if (typeof icon === 'string') {
+    return { prefix: 'fas', iconName: icon }
+  }
+}
+
 export default {
   name: 'FontAwesomeIcon',
 
@@ -56,17 +67,17 @@ export default {
       default: null,
       validator: (value) => ['horizontal', 'vertical', 'both'].indexOf(value) > -1
     },
-    iconDefinition: {
-      type: Object,
+    icon: {
+      type: [Object, Array, String],
+      required: true
+    },
+    compose: {
+      type: [Object, Array, String],
       default: null
     },
     listItem: {
       type: Boolean,
       default: false
-    },
-    pack: {
-      type: String,
-      default: 'fa'
     },
     pull: {
       type: String,
@@ -76,10 +87,6 @@ export default {
     pulse: {
       type: Boolean,
       default: false
-    },
-    name: {
-      type: String,
-      default: ''
     },
     rotation: {
       type: Number,
@@ -98,28 +105,36 @@ export default {
     transform: {
       type: [String, Object],
       default: null
+    },
+    symbol: {
+      type: [Boolean, String],
+      default: false
     }
   },
 
   render (createElement, context) {
     const { props } = context
 
-    const iconConfig = { prefix: (packNames[props.pack] || props.pack), iconName: props.name }
-    const classes = objectWithKey('classes', classList(context.props))
+    const { icon: iconArgs, compose: composeArgs, symbol } = props
+    const icon = normalizeIconArgs(iconArgs)
+    const classes = objectWithKey('classes', classList(props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
+    const compose = objectWithKey('compose', normalizeIconArgs(composeArgs))
 
-    const iconArgs = props.iconDefinition || iconConfig
-    const icon = fontawesome.icon(iconArgs, { ...classes, ...transform })
+    const renderedIcon = fontawesome.icon(
+      icon,
+      { ...classes, ...transform, ...compose, symbol }
+    )
 
-    if (!icon) {
+    if (!renderedIcon) {
       if (!PRODUCTION && console && typeof console.error === 'function') {
-        console.error('Could not find icon', iconArgs)
+        console.error('Could not find icon', icon)
       }
 
       return null
     }
 
-    const {abstract} = fontawesome.icon(props.iconDefinition || iconConfig, { ...classes, ...transform })
+    const {abstract} = renderedIcon
     const convertCurry = convert.bind(null, createElement)
 
     return convertCurry(abstract[0])

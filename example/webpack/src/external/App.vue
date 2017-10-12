@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>
-      <font-awesome-icon pack="fa" name="coffee" />
+      <font-awesome-icon :icon="['fas', 'coffee']" />
     </h1>
   </div>
 </template>

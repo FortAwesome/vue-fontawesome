@@ -2,21 +2,21 @@
 # yarn lockfile v1
 
 
-"@fortawesome/fontawesome-free-brands@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-0.0.12.tgz#02f54b63392d0d50ecc47cebd7f939055a3c9ea5"
+"@fortawesome/fontawesome-free-brands@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-0.0.16.tgz#fe5df700d8d6fe151d6c02329dec8e65c214ec96"
 
-"@fortawesome/fontawesome-free-solid@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.12.tgz#0a7ec4543919e48e1a8cf3ebb84bb6feee7ec017"
+"@fortawesome/fontawesome-free-solid@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.15.tgz#881e4d37765d75886d6951a5a719291c088d4a3c"
 
-"@fortawesome/fontawesome@0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.13.tgz#1394d1471e232e0ae3678047421f69cff0b117e7"
+"@fortawesome/fontawesome@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.18.tgz#90a18b499468ab2da3a7a1cbeb922cb3fa900e3d"
 
-"@fortawesome/vue-fontawesome@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.10.tgz#3acfdee02cf416f88bb6ca6523825f2c2d19b627"
+"@fortawesome/vue-fontawesome@>0.0.10":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.15.tgz#9c8f50ddb268313cfa3a0682436160433a8cdf37"
   dependencies:
     camelcase "^4.1.0"
 
