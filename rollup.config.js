@@ -11,10 +11,12 @@ export default {
   },
   input: 'src/index.js',
   name: 'vue-fontawesome',
-  output: {
-    format: 'umd',
-    file: 'index.js'
-  },
+  output: [
+    {
+      format: 'umd',
+      file: 'index.js'
+    }
+  ],
   plugins: [
     resolve({
       jsnext: true,
@@ -24,8 +26,11 @@ export default {
     babel({
       babelrc: false,
       presets: [
-        ["es2015", { "modules": false }], 
-        "stage-3"
+        ['es2015', { modules: false }],
+        'stage-3'
+      ],
+      plugins: [
+        'external-helpers'
       ],
       exclude: 'node_modules/**'
     })
