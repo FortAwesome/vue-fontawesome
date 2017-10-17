@@ -1,34 +1,27 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import fontawesome from '@fortawesome/fontawesome'
+import { faCoffee, faCircle } from '../__fixtures__/icons'
 
-const faCoffee = {
-  prefix: 'fas',
-  iconName: 'coffee',
-  icon: [
-    640,
-    512,
-    [],
-    "f0f4",
-    "M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z"
-  ]
+beforeEach(() => {
+  fontawesome.library.add(faCoffee, faCircle)
+  Vue.component('font-awesome-icon', FontAwesomeIcon)
+})
+
+function compileAndMount (str, params = {}) {
+  const res = Vue.compile(str)
+  const vm = new Vue({
+    ...params,
+    render: res.render,
+    staticRenderFn: res.staticRenderFn
+  })
+
+  vm.$mount()
+
+  return vm
 }
 
-const faCircle = {
-  prefix: 'fas',
-  iconName: 'circle',
-  icon: [
-    640,
-    512,
-    [],
-    "f0f4",
-    "M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z"
-  ]
-}
-
-fontawesome.library.add(faCoffee, faCircle)
-
-function mount (propsData = {}) {
+function mountFromProps (propsData = {}) {
   const opts = {
     render: (h) => h(
       FontAwesomeIcon,
@@ -43,59 +36,111 @@ function mount (propsData = {}) {
 }
 
 test('using array format', () => {
-  const vm = mount({ icon: ['fas', 'coffee'] })
+  const vm = mountFromProps({ icon: ['fas', 'coffee'] })
 
   expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
 test('using string format', () => {
-  const vm = mount({ icon: 'coffee' })
+  const vm = mountFromProps({ icon: 'coffee' })
 
   expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
 test('missing icon', () => {
-  const vm = mount({ icon: ['fas', 'noicon'] })
+  const vm = mountFromProps({ icon: ['fas', 'noicon'] })
 
   expect(vm.$el.tagName).toBeFalsy()
 })
 
 test('using iconDefinition', () => {
-  const vm = mount({ icon: faCoffee })
+  const vm = mountFromProps({ icon: faCoffee })
 
   expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
+describe('unrelated Vue data options', () => {
+  test('with extra static class', () => {
+    const vm = compileAndMount(
+      `<font-awesome-icon class="extra" :icon="icon" />`,
+      { data: { icon: faCoffee } }
+    )
+
+    expect(vm.$el.classList.contains('extra')).toBeTruthy()
+  })
+
+  test('with extra bound class', () => {
+    const vm = compileAndMount(
+      `<font-awesome-icon :class="['extra1', {'extra2': true}]" :icon="icon" />`,
+      { data: { icon: faCoffee } }
+    )
+
+    expect(vm.$el.classList.contains('extra1')).toBeTruthy()
+    expect(vm.$el.classList.contains('extra2')).toBeTruthy()
+  })
+
+  test('with extra style', () => {
+    const vm = compileAndMount(
+      `<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`,
+      { data: { icon: faCoffee } }
+    )
+
+    expect(vm.$el.style.getPropertyValue('font-size')).toBe('42px')
+  })
+
+  test('with extra DOM property', () => {
+    const vm = compileAndMount(
+      `<font-awesome-icon rel="local" :icon="icon" />`,
+      { data: { icon: faCoffee } }
+    )
+
+    expect(vm.$el.getAttribute('rel')).toBe('local')
+  })
+
+  test('with listener', () => {
+    let hasBeenClicked = false
+
+    const vm = compileAndMount(
+      `<font-awesome-icon @click="clicked" :icon="icon" />`,
+      { data: { icon: faCoffee }, methods: { clicked () { hasBeenClicked = true } } }
+    )
+
+    expect(hasBeenClicked).toBeFalsy()
+    vm.$el.click()
+    expect(hasBeenClicked).toBeTruthy()
+  })
+})
+
 test('using border', () => {
-  const vm = mount({ icon: faCoffee, border: true })
+  const vm = mountFromProps({ icon: faCoffee, border: true })
 
   expect(vm.$el.classList.contains('fa-border')).toBeTruthy()
 })
 
 test('using fixedWidth', () => {
-  const vm = mount({ icon: faCoffee, fixedWidth: true })
+  const vm = mountFromProps({ icon: faCoffee, fixedWidth: true })
 
   expect(vm.$el.classList.contains('fa-fw')).toBeTruthy()
 })
 
 describe('using flip', () => {
   test('horizontal', () => {
-    const vm = mount({ icon: faCoffee, flip: "horizontal" })
+    const vm = mountFromProps({ icon: faCoffee, flip: "horizontal" })
 
     expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
   })
 
   test('vertical', () => {
-    const vm = mount({ icon: faCoffee, flip: "vertical" })
+    const vm = mountFromProps({ icon: faCoffee, flip: "vertical" })
 
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
   })
 
   test('both', () => {
-    const vm = mount({ icon: faCoffee, flip: "both" })
+    const vm = mountFromProps({ icon: faCoffee, flip: "both" })
 
     expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
@@ -103,46 +148,46 @@ describe('using flip', () => {
 })
 
 test('using listItem', () => {
-  const vm = mount({ icon: faCoffee, listItem: true })
+  const vm = mountFromProps({ icon: faCoffee, listItem: true })
 
   expect(vm.$el.classList.contains('fa-li')).toBeTruthy()
 })
 
 describe('using pull', () => {
   test('right', () => {
-    const vm = mount({ icon: faCoffee, pull: "right" })
+    const vm = mountFromProps({ icon: faCoffee, pull: "right" })
 
     expect(vm.$el.classList.contains('fa-pull-right')).toBeTruthy()
   })
 
   test('left', () => {
-    const vm = mount({ icon: faCoffee, pull: "left" })
+    const vm = mountFromProps({ icon: faCoffee, pull: "left" })
 
     expect(vm.$el.classList.contains('fa-pull-left')).toBeTruthy()
   })
 })
 
 test('using pulse', () => {
-  const vm = mount({ icon: faCoffee, pulse: true })
+  const vm = mountFromProps({ icon: faCoffee, pulse: true })
 
   expect(vm.$el.classList.contains('fa-pulse')).toBeTruthy()
 })
 
 describe('using rotation', () => {
   test('90', () => {
-    const vm = mount({ icon: faCoffee, rotation: 90 })
+    const vm = mountFromProps({ icon: faCoffee, rotation: 90 })
 
     expect(vm.$el.classList.contains('fa-rotate-90')).toBeTruthy()
   })
 
   test('180', () => {
-    const vm = mount({ icon: faCoffee, rotation: 180 })
+    const vm = mountFromProps({ icon: faCoffee, rotation: 180 })
 
     expect(vm.$el.classList.contains('fa-rotate-180')).toBeTruthy()
   })
 
   test('270', () => {
-    const vm = mount({ icon: faCoffee, rotation: 270 })
+    const vm = mountFromProps({ icon: faCoffee, rotation: 270 })
 
     expect(vm.$el.classList.contains('fa-rotate-270')).toBeTruthy()
   })
@@ -150,27 +195,27 @@ describe('using rotation', () => {
 
 test('using size', () => {
   ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
-    const vm = mount({ icon: faCoffee, size: size })
+    const vm = mountFromProps({ icon: faCoffee, size: size })
 
     expect(vm.$el.classList.contains(`fa-${size}`)).toBeTruthy()
   })
 })
 
 test('using spin', () => {
-  const vm = mount({ icon: faCoffee, spin: true })
+  const vm = mountFromProps({ icon: faCoffee, spin: true })
 
   expect(vm.$el.classList.contains('fa-spin')).toBeTruthy()
 })
 
 describe('using transform', () => {
   test('string', () => {
-    const vm = mount({ icon: faCoffee, transform: 'grow-40 left-4 rotate-15' })
+    const vm = mountFromProps({ icon: faCoffee, transform: 'grow-40 left-4 rotate-15' })
 
     expect(vm.$el).toBeTruthy()
   })
 
   test('object', () => {
-    const vm = mount({ icon: faCoffee, transform: { flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 } })
+    const vm = mountFromProps({ icon: faCoffee, transform: { flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 } })
 
     expect(vm.$el).toBeTruthy()
   })
@@ -178,30 +223,26 @@ describe('using transform', () => {
 
 describe('compose', () => {
   test('will add icon', () => {
-    const vm = mount({ icon: faCoffee, compose: faCircle })
+    const vm = mountFromProps({ icon: faCoffee, compose: faCircle })
 
     expect(vm.$el.innerHTML).toMatch(/clippath/)
   })
 })
 
 describe('symbol', () => {
-  const spy = jest.spyOn(fontawesome, 'icon')
-
-  afterEach(() => {
-    spy.mockClear()
-  })
-
   test("will not create a symbol", () => {
-    const vm = mount({ icon: faCoffee })
+    const vm = mountFromProps({ icon: faCoffee })
 
-    expect(spy.mock.calls[0][1].symbol)
-      .toBe(false)
+    expect(vm.$el.style.getPropertyValue('display'))
+      .toBe('')
   })
 
   test("will create a symbol", () => {
-    const vm = mount({ icon: faCoffee, symbol: 'coffee-icon' })
+    const vm = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
-    expect(spy.mock.calls[0][1].symbol)
-      .toBe('coffee-icon')
+    expect(vm.$el.style.getPropertyValue('display'))
+      .toBe('none')
+    expect(vm.$el.children[0].tagName)
+      .toBe('symbol')
   })
 })

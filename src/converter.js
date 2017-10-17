@@ -24,7 +24,19 @@ function classToObject (cls) {
     }, {})
 }
 
-function convert (h, element, props = {}) {
+function combineClassObjects (...objs) {
+  return objs.reduce((acc, obj) => {
+    if (Array.isArray(obj)) {
+      acc = acc.concat(obj)
+    } else {
+      acc.push(obj)
+    }
+
+    return acc
+  }, [])
+}
+
+function convert (h, element, props = {}, data = {}) {
   const children = (element.children || []).map(convert.bind(null, h))
 
   const mixins = Object.keys(element.attributes || {}).reduce((acc, key) => {
@@ -44,12 +56,15 @@ function convert (h, element, props = {}) {
     return acc
   }, { 'class': {}, style: {}, attrs: {} })
 
+  const { class: dClass = {}, style: dStyle = {}, attrs: dAttrs = {}, ...remainingData } = data
+
   return h(
     element.tag,
     {
-      class: mixins.class,
-      style: mixins.style,
-      attrs: mixins.attrs,
+      class: combineClassObjects(mixins.class, dClass),
+      style: { ...mixins.style, ...dStyle },
+      attrs: { ...mixins.attrs, ...dAttrs },
+      ...remainingData,
       props
     },
     children

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>
-      <font-awesome-icon :icon="icon" />
+      <font-awesome-icon key="1" @click="log" rel="test" :style="{'color': 'red'}" :class="['test']" :icon="icon" />
     </h1>
   </div>
 </template>
@@ -16,6 +16,12 @@ export default {
   computed: {
     icon () {
       return faCoffee
+    }
+  },
+
+  methods: {
+    log () {
+      console.log('icon clicked')
     }
   },
 
