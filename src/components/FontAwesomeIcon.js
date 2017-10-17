@@ -1,11 +1,6 @@
 import fontawesome from '@fortawesome/fontawesome'
 import convert from '../converter'
-
-let PRODUCTION = false
-
-try {
-  PRODUCTION = process.env.NODE_ENV === 'production'
-} catch (e) { }
+import log from '../logger'
 
 function objectWithKey (key, value) {
   return ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) ? {[key]: value} : {}
@@ -126,17 +121,11 @@ export default {
       { ...classes, ...transform, ...compose, symbol }
     )
 
-    if (!renderedIcon) {
-      if (!PRODUCTION && console && typeof console.error === 'function') {
-        console.error('Could not find icon', icon)
-      }
-
-      return null
-    }
+    if (!renderedIcon) return log('Could not find icon', icon)
 
     const {abstract} = renderedIcon
     const convertCurry = convert.bind(null, createElement)
 
-    return convertCurry(abstract[0])
+    return convertCurry(abstract[0], {}, context.data)
   }
 }

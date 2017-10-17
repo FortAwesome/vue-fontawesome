@@ -11,7 +11,7 @@
     </h1>
     <div>
       <p>
-        <font-awesome-icon pack="fas" name="quote-left" size="2x" :border="true" pull="left" />...tomorrow we 
+        <font-awesome-icon :icon="['fas', 'quote-left']" size="2x" :border="true" pull="left" />...tomorrow we 
         will run faster, stretch out our arms farther...And then one fine morning&mdash; So we beat on, boats 
         against the current, borne back ceaselessly into the past.
       </p>

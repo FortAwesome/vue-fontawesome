@@ -2,23 +2,23 @@
 # yarn lockfile v1
 
 
-"@fortawesome/fontawesome-free-brands@^0.0.16":
+"@fortawesome/fontawesome-free-brands@^0.0":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-0.0.17.tgz#342a49c3966027f9410850936061a2dfee4c6f56"
+
+"@fortawesome/fontawesome-free-solid@^0.0":
   version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-0.0.16.tgz#fe5df700d8d6fe151d6c02329dec8e65c214ec96"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.16.tgz#03b919120fa0a36d35a72b647d94d59c5e932ae4"
 
-"@fortawesome/fontawesome-free-solid@^0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.15.tgz#881e4d37765d75886d6951a5a719291c088d4a3c"
+"@fortawesome/fontawesome@^0.0":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.19.tgz#e7ec0cef812f50accf785571cc6878167995af71"
 
-"@fortawesome/fontawesome@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.18.tgz#90a18b499468ab2da3a7a1cbeb922cb3fa900e3d"
-
-"@fortawesome/vue-fontawesome@>0.0.10":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.15.tgz#9c8f50ddb268313cfa3a0682436160433a8cdf37"
+"@fortawesome/vue-fontawesome@^0.0":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.0.16.tgz#a41e92dfc2ed615e9cc87233fc24f5d2280fee13"
   dependencies:
-    camelcase "^4.1.0"
+    humps "^2.0.1"
 
 abbrev@1:
   version "1.1.0"
@@ -1699,6 +1699,10 @@ http-signature@~1.1.0:
 https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
+
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
 
 icss-replace-symbols@^1.1.0:
   version "1.1.0"
