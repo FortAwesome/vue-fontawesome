@@ -15,6 +15,10 @@ export default {
     {
       format: 'umd',
       file: 'index.js'
+    },
+    {
+      format: 'es',
+      file: 'index.es.js'
     }
   ],
   plugins: [
@@ -22,7 +26,9 @@ export default {
       jsnext: true,
       main: true
     }),
-    commonJs(),
+    commonJs({
+      include: 'node_modules/**'
+    }),
     babel({
       babelrc: false,
       presets: [

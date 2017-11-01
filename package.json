@@ -68,5 +68,5 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "vue": "^2.4.4"
   },
-  "dependencies": { }
+  "dependencies": {}
 }
