@@ -121,7 +121,9 @@ export default {
       { ...classes, ...transform, ...compose, symbol }
     )
 
-    if (!renderedIcon) return log('Could not find icon', icon)
+    if (!renderedIcon) {
+      return log('Check not find one or more icon(s)', icon, compose)
+    }
 
     const {abstract} = renderedIcon
     const convertCurry = convert.bind(null, createElement)

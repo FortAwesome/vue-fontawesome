@@ -227,6 +227,10 @@ describe('compose', () => {
 
     expect(vm.$el.innerHTML).toMatch(/clippath/)
   })
+
+  test('will add icon referencing librbary', () => {
+    const vm = mountFromProps({ icon: ['fas', 'coffee'], compose: ['fas', 'circle'] })
+  })
 })
 
 describe('symbol', () => {
