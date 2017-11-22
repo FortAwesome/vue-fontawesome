@@ -1,29 +1,7 @@
 import fontawesome from '@fortawesome/fontawesome'
 import convert from '../converter'
 import log from '../logger'
-
-function objectWithKey (key, value) {
-  return ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) ? {[key]: value} : {}
-}
-
-function classList (props) {
-  let classes = {
-    'fa-spin': props.spin,
-    'fa-pulse': props.pulse,
-    'fa-fw': props.fixedWidth,
-    'fa-border': props.border,
-    'fa-li': props.listItem,
-    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
-    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
-    [`fa-${props.size}`]: props.size !== null,
-    [`fa-rotate-${props.rotation}`]: props.rotation !== null,
-    [`fa-pull-${props.pull}`]: props.pull !== null
-  }
-
-  return Object.keys(classes)
-    .map(key => classes[key] ? key : null)
-    .filter(key => key)
-}
+import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
   if (icon === null) {
@@ -125,7 +103,7 @@ export default {
       return log('Check not find one or more icon(s)', icon, compose)
     }
 
-    const {abstract} = renderedIcon
+    const { abstract } = renderedIcon
     const convertCurry = convert.bind(null, createElement)
 
     return convertCurry(abstract[0], {}, context.data)

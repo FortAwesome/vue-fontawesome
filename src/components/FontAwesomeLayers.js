@@ -1,10 +1,5 @@
 import fontawesome from '@fortawesome/fontawesome'
-
-function add(to, what) {
-  const val = (to || '').length === 0 ? [] : [to]
-
-  return val.concat(what).join(' ')
-}
+import { addStaticClass } from '../utils'
 
 export default {
   name: 'FontAwesomeLayers',
@@ -31,7 +26,7 @@ export default {
       'div',
       {
         ...context.data,
-        staticClass: add(staticClass, classes)
+        staticClass: addStaticClass(staticClass, classes)
       },
       context.children
     )
