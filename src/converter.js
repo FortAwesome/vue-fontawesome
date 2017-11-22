@@ -58,17 +58,21 @@ function convert (h, element, props = {}, data = {}) {
 
   const { class: dClass = {}, style: dStyle = {}, attrs: dAttrs = {}, ...remainingData } = data
 
-  return h(
-    element.tag,
-    {
-      class: combineClassObjects(mixins.class, dClass),
-      style: { ...mixins.style, ...dStyle },
-      attrs: { ...mixins.attrs, ...dAttrs },
-      ...remainingData,
-      props
-    },
-    children
-  )
+  if (typeof element === 'string') {
+    return element
+  } else {
+    return h(
+      element.tag,
+      {
+        class: combineClassObjects(mixins.class, dClass),
+        style: { ...mixins.style, ...dStyle },
+        attrs: { ...mixins.attrs, ...dAttrs },
+        ...remainingData,
+        props
+      },
+      children
+    )
+  }
 }
 
 export default convert

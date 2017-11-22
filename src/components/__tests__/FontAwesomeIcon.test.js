@@ -2,38 +2,12 @@ import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import fontawesome from '@fortawesome/fontawesome'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
+import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
   fontawesome.library.add(faCoffee, faCircle)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
 })
-
-function compileAndMount (str, params = {}) {
-  const res = Vue.compile(str)
-  const vm = new Vue({
-    ...params,
-    render: res.render,
-    staticRenderFn: res.staticRenderFn
-  })
-
-  vm.$mount()
-
-  return vm
-}
-
-function mountFromProps (propsData = {}) {
-  const opts = {
-    render: (h) => h(
-      FontAwesomeIcon,
-      { props: propsData }
-    )
-  }
-
-  const vm = new Vue(opts)
-  vm.$mount()
-
-  return vm
-}
 
 test('using array format', () => {
   const vm = mountFromProps({ icon: ['fas', 'coffee'] })

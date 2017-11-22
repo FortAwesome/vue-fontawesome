@@ -14,6 +14,7 @@ export default {
   output: [
     {
       format: 'umd',
+      exports: 'named',
       file: 'index.js'
     },
     {
