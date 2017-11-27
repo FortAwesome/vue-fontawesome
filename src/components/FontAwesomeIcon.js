@@ -44,7 +44,7 @@ export default {
       type: [Object, Array, String],
       required: true
     },
-    compose: {
+    mask: {
       type: [Object, Array, String],
       default: null
     },
@@ -88,19 +88,19 @@ export default {
   render (createElement, context) {
     const { props } = context
 
-    const { icon: iconArgs, compose: composeArgs, symbol } = props
+    const { icon: iconArgs, mask: maskArgs, symbol } = props
     const icon = normalizeIconArgs(iconArgs)
     const classes = objectWithKey('classes', classList(props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
-    const compose = objectWithKey('compose', normalizeIconArgs(composeArgs))
+    const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
 
     const renderedIcon = fontawesome.icon(
       icon,
-      { ...classes, ...transform, ...compose, symbol }
+      { ...classes, ...transform, ...mask, symbol }
     )
 
     if (!renderedIcon) {
-      return log('Check not find one or more icon(s)', icon, compose)
+      return log('Check not find one or more icon(s)', icon, mask)
     }
 
     const { abstract } = renderedIcon

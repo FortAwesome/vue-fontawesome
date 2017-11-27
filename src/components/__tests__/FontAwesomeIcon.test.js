@@ -195,15 +195,15 @@ describe('using transform', () => {
   })
 })
 
-describe('compose', () => {
+describe('mask', () => {
   test('will add icon', () => {
-    const vm = mountFromProps({ icon: faCoffee, compose: faCircle })
+    const vm = mountFromProps({ icon: faCoffee, mask: faCircle })
 
     expect(vm.$el.innerHTML).toMatch(/clippath/)
   })
 
   test('will add icon referencing librbary', () => {
-    const vm = mountFromProps({ icon: ['fas', 'coffee'], compose: ['fas', 'circle'] })
+    const vm = mountFromProps({ icon: ['fas', 'coffee'], mask: ['fas', 'circle'] })
   })
 })
 

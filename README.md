@@ -197,10 +197,10 @@ Power Transforms:
 <font-awesome-icon icon="spinner" :transform="{ rotate: 42 }" />
 ```
 
-Composition:
+Masking:
 
 ```javascript
-<font-awesome-icon icon="coffee" :compose="['far', 'circle']" />
+<font-awesome-icon icon="coffee" :mask="['far', 'circle']" />
 ```
 
 Symbols:
