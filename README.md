@@ -2,8 +2,6 @@
 
 Font Awesome 5 Vue component
 
-**This API is in early alpha stages and is likely to change**
-
 ## Installation
 
 ```
