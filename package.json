@@ -47,11 +47,11 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": ">=0.0.22",
+    "@fortawesome/fontawesome": ">=1.0.0",
     "vue": "^2.4.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome": ">=0.0.22",
+    "@fortawesome/fontawesome": ">=1.0.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
