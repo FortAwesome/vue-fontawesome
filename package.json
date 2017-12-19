@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -42,7 +42,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome": ">=1.0.0",
+    "@fortawesome/fontawesome": ">=1.1.0",
     "vue": "^2.4.2"
   },
   "devDependencies": {
