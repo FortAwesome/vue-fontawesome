@@ -100,7 +100,7 @@ export default {
     )
 
     if (!renderedIcon) {
-      return log('Check not find one or more icon(s)', icon, mask)
+      return log('Could not find one or more icon(s)', icon, mask)
     }
 
     const { abstract } = renderedIcon
