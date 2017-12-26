@@ -37,7 +37,7 @@ Explicit prefix (note the Vue bind shorthand because this uses an array):
 Explicit icon definition (this is pseudo-code, see examples below for more detail):
 
 ```javascript
-import { faCoffee } from '@fortawesome/fontawesome-free-solid'
+import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
 
 <font-awesome-icon :icon="getIcon" />
 
@@ -63,7 +63,7 @@ Import the specific icons that you need:
 
 <script>
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { faCoffee } from '@fortawesome/fontawesome-free-solid'
+import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
 
 export default {
   name: 'FAExample',
@@ -93,7 +93,7 @@ import Vue from 'vue'
 import Main from './Main.vue'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
-import { faSpinner } from '@fortawesome/fontawesome-free-solid'
+import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
 
 fontawesome.library.add(brands, faSpinner)
 
