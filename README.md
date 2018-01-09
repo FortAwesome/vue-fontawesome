@@ -1,5 +1,7 @@
 # vue-fontawesome
 
+[![npm](https://img.shields.io/npm/v/@fortawesome/vue-fontawesome.svg?style=flat-square)](https://www.npmjs.com/package/@fortawesome/vue-fontawesome)
+
 Font Awesome 5 Vue component
 
 ## Installation
