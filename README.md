@@ -228,9 +228,9 @@ export default {
 
 You can then simply layer up your icons:
 ```html
-<font-awesome-layers>
+<font-awesome-layers class="fa-lg">
   <font-awesome-icon icon="circle" />
-  <font-awesome-icon icon="check" style="color: white;" transform="shrink-6" />
+  <font-awesome-icon icon="check" transform="shrink-6" style="color: white;" />
 </font-awesome-layers>
 ```
 
