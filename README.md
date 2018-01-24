@@ -209,3 +209,28 @@ Symbols:
 <font-awesome-icon icon="edit" symbol />
 <font-awesome-icon icon="edit" symbol="edit-icon" />
 ```
+
+Layers:
+
+For this you should import FontAwesomeLayers as well:
+```javascript
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
+
+export default {
+  ...
+  components: {
+    FontAwesomeIcon,
+    FontAwesomeLayers
+  }
+  ...
+}
+```
+
+You can then simply layer up your icons:
+```html
+<font-awesome-layers class="fa-lg">
+  <font-awesome-icon icon="circle" />
+  <font-awesome-icon icon="check" transform="shrink-6" style="color: white;" />
+</font-awesome-layers>
+```
+
