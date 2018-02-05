@@ -8,6 +8,7 @@ Font Awesome 5 Vue component
 
 ```
 $ npm i --save @fortawesome/fontawesome
+$ npm i --save @fortawesome/fontawesome-free-solid
 $ npm i --save @fortawesome/vue-fontawesome
 ```
 
@@ -15,6 +16,7 @@ or
 
 ```
 $ yarn add @fortawesome/fontawesome
+$ yarn add @fortawesome/fontawesome-free-solid
 $ yarn add @fortawesome/vue-fontawesome
 ```
 
@@ -93,6 +95,7 @@ App.js
 ```javascript
 import Vue from 'vue'
 import Main from './Main.vue'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
 import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
