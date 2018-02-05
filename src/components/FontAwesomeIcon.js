@@ -17,7 +17,7 @@ function normalizeIconArgs (icon) {
   }
 
   if (typeof icon === 'string') {
-    const { familyPrefix } = fontawesome.config
+    const familyPrefix = fontawesome.config.familyPrefix || 'fas';
     return { prefix: familyPrefix, iconName: icon }
   }
 }
