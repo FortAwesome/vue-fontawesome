@@ -39,7 +39,8 @@
     "serve.static":
       "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' example/webpack",
     "dist": "cross-env NODE_ENV=production npm run build",
-    "test": "jest"
+    "test": "jest",
+    "prepack": "yarn dist"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome": ">=1.1.0",
