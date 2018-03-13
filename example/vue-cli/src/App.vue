@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <main class="w-100 min-vh-100 bg-gray8 white sans-serif pa6 flex flex-column justify-center items-center">
+      <div class="mw8 center overflow-hidden">
+        <h2 class="tc ttu tracked3 b f2 mt0 mb2 teal0 o-30">react-fontawesome</h2>
+
+        <ul class="list ma0 pa0 flex flex-row flex-wrap teal4">
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon icon="coffee" size="4x" />
+          </li>
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon :icon="['fas', 'coffee']" flip="horizontal" size="4x" />
+          </li>
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon :icon="['far', 'comment']" size="4x" />
+          </li>
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon icon="child" transform="shrink-4 down-2 right-2" :mask="['fas', 'circle']" size="4x" />
+          </li>
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon :icon="['fab', 'twitter']" size="4x" />
+          </li>
+          <li class="pv3 ph2 ma0 link grow">
+            <font-awesome-icon :icon="queen" size="4x" />
+          </li>
+        </ul>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import { faChessQueen } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  computed: {
+    queen () {
+      return faChessQueen
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

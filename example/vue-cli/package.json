@@ -13,6 +13,12 @@
     "vue": "^2.5.2"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-7",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0-4",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0-4",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-4",
+    "@fortawesome/vue-fontawesome": "^0.1.0-1",
+    "ajv": "^6.2.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
