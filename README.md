@@ -7,22 +7,86 @@ Font Awesome 5 Vue component
 ## Installation
 
 ```
-$ npm i --save @fortawesome/fontawesome
-$ npm i --save @fortawesome/fontawesome-free-solid
+$ npm i --save @fortawesome/fontawesome-svg-core
+$ npm i --save @fortawesome/free-solid-svg-icons
 $ npm i --save @fortawesome/vue-fontawesome
 ```
 
-or
+<details><summary>Add more styles or Pro icons</summary>
+
+Brands are separated into their own style and for customers upgrading from
+version 4 to 5 we have a limited number of Regular icons available.
 
 ```
-$ yarn add @fortawesome/fontawesome
-$ yarn add @fortawesome/fontawesome-free-solid
+$ npm i --save @fortawesome/free-brands-svg-icons
+$ npm i --save @fortawesome/free-regular-svg-icons
+```
+
+If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages.
+
+```
+$ npm i --save @fortawesome/pro-solid-svg-icons
+$ npm i --save @fortawesome/pro-regular-svg-icons
+$ npm i --save @fortawesome/pro-light-svg-icons
+```
+</details>
+
+<details><summary>or with Yarn</summary>
+
+```
+$ yarn add @fortawesome/fontawesome-svg-core
+$ yarn add @fortawesome/free-solid-svg-icons
 $ yarn add @fortawesome/vue-fontawesome
 ```
 
+</details>
+
 ## Usage
 
-### The basics
+### Recommended
+
+The following examples are based on a project configured with [vue-cli](https://github.com/vuejs/vue-cli)].
+
+`src/main.js`
+
+```
+import Vue from 'vue'
+import App from './App'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faCoffee)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '<App/>'
+})
+```
+
+`src/App.js`
+
+```
+<template>
+  <div id="app">
+    <font-awesome-icon icon="coffee" />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+```
+
+### The icon property
 
 The `icon` property of the `FontAwesomeIcon` component can be used in the following way:
 
@@ -30,6 +94,16 @@ Shorthand that assumes a prefix of `fas`:
 
 ```javascript
 <font-awesome-icon icon="spinner" />
+<font-awesome-icon :icon="['fas', 'spinner']" /> # Same as above
+```
+
+For the above to work you must add the `spinner` icon to the library.
+
+```javascript
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSpinner)
 ```
 
 Explicit prefix (note the Vue bind shorthand because this uses an array):
@@ -38,100 +112,74 @@ Explicit prefix (note the Vue bind shorthand because this uses an array):
 <font-awesome-icon :icon="['far', 'spinner']" />
 ```
 
-Explicit icon definition (this is pseudo-code, see examples below for more detail):
+For the above to work you must add the regular `spinner` icon (Pro only) to the library.
 
 ```javascript
-import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSpinner } from '@fortawesome/pro-regular-svg-icons'
 
-<font-awesome-icon :icon="getIcon" />
-
-function getIcon () {
-  return faCoffee
-}
+library.add(faSpinner)
 ```
 
-### Using it with Vue
+Explicit icon definition through something like a computed property:
 
-Using an explicit icon offers the advantage of only bundling the icons that you
+```javascript
+<template>
+  <div id="app">
+    <font-awesome-icon icon="appIcon" />
+  </div>
+</template>
+
+<script>
+import { faChessQueen } from '@fortawesome/free-solid-svg-icons'
+
+export default {
+  name: 'App',
+
+  computed: {
+    appIcon () {
+      return faChessQueen
+    }
+  }
+}
+</script>
+```
+
+### Why use the concept of a library?
+
+Explicitly selecting icons offer the advantage of only bundling the icons that you
 use in your final bundled file. This allows us to subset Font Awesome's
 thousands of icons to just the small number that are normally used.
 
 Import the specific icons that you need:
 
 ```javascript
-<template>
-  <div id="app">
-    <font-awesome-icon :icon="icon" />
-  </div>
-</template>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faSpinner } from '@fortawesome/pro-light-svg-icons'
 
-<script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
-
-export default {
-  name: 'FAExample',
-
-  computed: {
-    icon () {
-      return faCoffee
-    }
-  },
-
-  components: {
-    FontAwesomeIcon
-  }
-}
-</script>
+library.add(faCoffee, fab, faSpinner)
 ```
 
-It can be tedious to always import the icons individually so a library can be
-configured and shorthand can be used when rendering the icon.
+### Tree shaking alternative
 
-Define a library that can be used without explicit imports:
-
-App.js
-
-```javascript
-import Vue from 'vue'
-import Main from './Main.vue'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import fontawesome from '@fortawesome/fontawesome'
-import brands from '@fortawesome/fontawesome-free-brands'
-import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
-
-fontawesome.library.add(brands, faSpinner)
-
-new Vue({
-  el: '#app',
-  render: h => h(Main)
-})
-```
-
-FAExample.vue
+Keeping the bundles small when using `import { faCoffee }` relies on
+[tree-shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking).
+If you are not using a tool that supports tree shaking **you may end up bundling more
+icons than you intend**. Here are some alternative import syntaxes:
 
 ```javascript
-<template>
-  <div id="app">
-    <!-- If you are using the "Solid" style you can simply use the icon name -->
-    <font-awesome-icon icon="spinner" />
-    <!-- Using another style needs a prefix in the following array format -->
-    <font-awesome-icon :icon="['fab', 'font-awesome']" />
-  </div>
-</template>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import faCoffee from '@fortawesome/free-solid-svg-icons/faCoffee'
+import faSpinner from '@fortawesome/pro-light-svg-icons/faSpinner'
 
-<script>
-export default {
-  name: 'FAExample',
-
-  components: {
-    FontAwesomeIcon
-  }
-}
-</script>
+library.add(faCoffee, faSpinner)
 ```
 
 ## Features
+
+TODO link to fontawesome.com/how-to-use
 
 ### Basic
 
@@ -152,12 +200,6 @@ Border:
 
 ```javascript
 <font-awesome-icon icon="spinner" border />
-```
-
-List items:
-
-```javascript
-<font-awesome-icon icon="spinner" list-item />
 ```
 
 Flip horizontally, vertically, or both:
@@ -236,4 +278,3 @@ You can then simply layer up your icons:
   <font-awesome-icon icon="check" transform="shrink-6" style="color: white;" />
 </font-awesome-layers>
 ```
-
