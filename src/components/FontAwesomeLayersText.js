@@ -1,4 +1,4 @@
-import fontawesome from '@fortawesome/fontawesome'
+import { parse, text } from '@fortawesome/fontawesome-svg-core'
 import convert from '../converter'
 import { objectWithKey } from '../utils'
 
@@ -20,9 +20,9 @@ export default {
 
   render (createElement, context) {
     const { props } = context
-    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
+    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? parse.transform(props.transform) : props.transform)
 
-    const renderedText = fontawesome.text(props.value, { ...transform })
+    const renderedText = text(props.value, { ...transform })
 
     const { abstract } = renderedText
 
