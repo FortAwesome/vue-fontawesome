@@ -146,6 +146,37 @@ export default {
 </script>
 ```
 
+### Alternative using component property
+
+With Vue you can tell your component to resolve other component explicitly.
+
+```javascript
+<template>
+  <div>
+    <font-awesome-icon :icon="myIcon" />
+  </div>
+</template>
+
+<script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+export default {
+  name: 'MyComponent',
+
+  data () {
+    return {
+      myIcon: faSpinner
+    }
+  },
+
+  components: {
+    FontAwesomeIcon
+  }
+}
+</script>
+```
+
 ### Why use the concept of a library?
 
 Explicitly selecting icons offer the advantage of only bundling the icons that you
