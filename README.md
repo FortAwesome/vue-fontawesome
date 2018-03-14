@@ -179,9 +179,9 @@ Size:
 Rotate:
 
 ```javascript
-<font-awesome-icon icon="spinner" rotate="90" />
-<font-awesome-icon icon="spinner" rotate="180" />
-<font-awesome-icon icon="spinner" rotate="270" />
+<font-awesome-icon icon="spinner" rotation="90" />
+<font-awesome-icon icon="spinner" rotation="180" />
+<font-awesome-icon icon="spinner" rotation="270" />
 ```
 
 Pull left or right:
