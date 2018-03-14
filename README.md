@@ -12,7 +12,7 @@ $ npm i --save @fortawesome/free-solid-svg-icons
 $ npm i --save @fortawesome/vue-fontawesome
 ```
 
-<details><summary>Add more styles or Pro icons</summary>
+## Add more styles or Pro icons
 
 Brands are separated into their own style and for customers upgrading from
 version 4 to 5 we have a limited number of Regular icons available.
@@ -31,17 +31,14 @@ $ npm i --save @fortawesome/pro-light-svg-icons
 ```
 
 Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/js-component-packages).
-</details>
 
-<details><summary>or with Yarn</summary>
+## or with Yarn
 
 ```
 $ yarn add @fortawesome/fontawesome-svg-core
 $ yarn add @fortawesome/free-solid-svg-icons
 $ yarn add @fortawesome/vue-fontawesome
 ```
-
-</details>
 
 ## Usage
 
