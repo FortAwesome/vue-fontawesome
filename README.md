@@ -17,6 +17,8 @@ $ npm i --save @fortawesome/vue-fontawesome
 Brands are separated into their own style and for customers upgrading from
 version 4 to 5 we have a limited number of Regular icons available.
 
+**Visit [fontawesome.com/icons](https://fontawesome.com/icons) to search for free and Pro icons**
+
 ```
 $ npm i --save @fortawesome/free-brands-svg-icons
 $ npm i --save @fortawesome/free-regular-svg-icons
