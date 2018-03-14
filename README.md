@@ -302,7 +302,7 @@ Layers text:
 
 ```html
 <font-awesome-layers full-width class="fa-4x">
-  <font-awesome-icon :icon="queen"/>
+  <font-awesome-icon icon="queen"/>
   <font-awesome-layers-text class="gray8" transform="down-2 shrink-8" value="Q" />
 </font-awesome-layers>
 ```
