@@ -2,7 +2,36 @@
 
 [![npm](https://img.shields.io/npm/v/@fortawesome/vue-fontawesome.svg?style=flat-square)](https://www.npmjs.com/package/@fortawesome/vue-fontawesome)
 
-Font Awesome 5 Vue component using SVG with JS
+> Font Awesome 5 Vue component using SVG with JS
+
+Hey there! We're glad you're here...
+
+#### Upgrading Font Awesome?
+
+If you've used Font Awesome in the past (version 4 or older) there are some
+things that you should learn before you dive in.
+
+> https://fontawesome.com/how-to-use/upgrading-from-4
+
+#### Get started
+
+This package is for integrating with Vue.js. If you aren't using Vue then it's
+not going to help you. Head over to our "Get Started" page for some guidance.
+
+> https://fontawesome.com/get-started
+
+#### Learn about our new SVG implementation
+
+This package, under the hood, uses SVG with JS and the `@fortawesome/fontawesome-svg-core` library. This implementation differs drastically from
+the web fonts implementation that was used in version 4 and older of Font Awesome. You might head over there to learn about how it works.
+
+> https://fontawesome.com/how-to-use/svg-with-js
+
+#### Going from 0.0.x to 0.1.0
+
+See [UPGRADING.md](./UPGRADING.md).
+
+You might also be interested in the larger umbrella project [UPGRADING.md](https://github.com/FortAwesome/Font-Awesome/blob/master/UPGRADING.md)
 
 ## Installation
 
