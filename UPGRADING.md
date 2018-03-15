@@ -101,5 +101,5 @@ your page or app with `<svg>` you'll need to explicitly control that now.
 ```javascript
 import { watch } from '@fortawesome/fontawesome-svg-core'
 
-watch() # This will kick of the replacement of i tags and configure a MutationObserver
+watch() // This will kick of the replacement of i tags and configure a MutationObserver
 ```

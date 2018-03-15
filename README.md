@@ -116,6 +116,18 @@ export default {
 </script>
 ```
 
+#### Quick warning about self-closing tags
+
+If you are using inline templates or HTML as templates you need to be careful to avoid self-closing tags.
+
+See [this issue on the Vue.js project](https://github.com/vuejs/vue/issues/1036)
+
+If you are writing these types of templates make sure and use valid HTML syntax:
+
+```html
+<font-awesome-icon icon="coffee"></font-awesome-icon>
+```
+
 ### The icon property
 
 The `icon` property of the `FontAwesomeIcon` component can be used in the following way:
