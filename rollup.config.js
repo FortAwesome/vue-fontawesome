@@ -4,10 +4,10 @@ import babel from 'rollup-plugin-babel'
 
 export default {
   external: [
-    '@fortawesome/fontawesome'
+    '@fortawesome/fontawesome-svg-core'
   ],
   globals: {
-    '@fortawesome/fontawesome': 'FontAwesome'
+    '@fortawesome/fontawesome-svg-core': 'FontAwesome'
   },
   input: 'src/index.js',
   name: 'vue-fontawesome',
