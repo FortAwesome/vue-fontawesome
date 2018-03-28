@@ -128,6 +128,26 @@ If you are writing these types of templates make sure and use valid HTML syntax:
 <font-awesome-icon icon="coffee"></font-awesome-icon>
 ```
 
+#### Processing `<i>` tags into `<svg>` using Font Awesome
+
+A basic installation of [Font Awesome](https://fontawesome.com/get-started) has
+the ability to automatically transform `<i class="fas fa-coffee"></i>` into
+`<svg class="...">...</svg>` icons. This technology works with the browser's
+DOM, [`requestAnimationFrame`][raf], and [`MutationObserver`][mo].
+
+When using the `@fortawesome/fontawesome-svg-core` package this **behavior is
+disabled by default**. This project uses that package so you will have to
+explicitly enable it like this:
+
+```
+import { dom } from '@fortawesome/fontawesome-svg-core'
+
+dom.watch() // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+```
+
+[raf]: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+[mo]: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+
 ### The icon property
 
 The `icon` property of the `FontAwesomeIcon` component can be used in the following way:
