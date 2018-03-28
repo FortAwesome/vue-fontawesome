@@ -1,4 +1,4 @@
-import fontawesome from '@fortawesome/fontawesome'
+import { config } from '@fortawesome/fontawesome-svg-core'
 import { addStaticClass } from '../utils'
 
 export default {
@@ -14,7 +14,7 @@ export default {
   },
 
   render (createElement, context) {
-    const { familyPrefix } = fontawesome.config
+    const { familyPrefix } = config
     let { data: { staticClass } } = context
 
     const classes = [
