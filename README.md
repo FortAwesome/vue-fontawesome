@@ -1,6 +1,7 @@
 # vue-fontawesome
 
 [![npm](https://img.shields.io/npm/v/@fortawesome/vue-fontawesome.svg?style=flat-square)](https://www.npmjs.com/package/@fortawesome/vue-fontawesome)
+[![Travis-CI](https://img.shields.io/travis/FortAwesome/vue-fontawesome/master.svg)](https://travis-ci.org/FortAwesome/vue-fontawesome)
 
 > Font Awesome 5 Vue component using SVG with JS
 
