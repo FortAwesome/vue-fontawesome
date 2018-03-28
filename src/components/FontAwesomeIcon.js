@@ -1,4 +1,4 @@
-import fontawesome from '@fortawesome/fontawesome'
+import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
 import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
@@ -91,10 +91,10 @@ export default {
     const { icon: iconArgs, mask: maskArgs, symbol } = props
     const icon = normalizeIconArgs(iconArgs)
     const classes = objectWithKey('classes', classList(props))
-    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? fontawesome.parse.transform(props.transform) : props.transform)
+    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
     const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
 
-    const renderedIcon = fontawesome.icon(
+    const renderedIcon = faIcon(
       icon,
       { ...classes, ...transform, ...mask, symbol }
     )
