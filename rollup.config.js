@@ -2,22 +2,27 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonJs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 
+const name = 'vue-fontawesome'
+const globals = {
+  '@fortawesome/fontawesome-svg-core': 'FontAwesome'
+}
+
 export default {
   external: [
     '@fortawesome/fontawesome-svg-core'
   ],
-  globals: {
-    '@fortawesome/fontawesome-svg-core': 'FontAwesome'
-  },
   input: 'src/index.js',
-  name: 'vue-fontawesome',
   output: [
     {
+      name,
+      globals,
       format: 'umd',
       exports: 'named',
-      file: 'index.js'
+      file: 'index.js',
     },
     {
+      name,
+      globals,
       format: 'es',
       file: 'index.es.js'
     }
@@ -33,7 +38,11 @@ export default {
     babel({
       babelrc: false,
       presets: [
-        ['es2015', { modules: false }],
+        ['env', {
+          debug: true,
+          targets: {"browsers": ["> 1%", "last 2 versions", "ie > 9"]},
+          modules: false
+        }],
         'stage-3'
       ],
       plugins: [
