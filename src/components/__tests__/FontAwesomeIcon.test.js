@@ -83,7 +83,7 @@ describe('unrelated Vue data options', () => {
     )
 
     expect(hasBeenClicked).toBeFalsy()
-    vm.$el.click()
+    vm.$el.dispatchEvent(new Event('click'))
     expect(hasBeenClicked).toBeTruthy()
   })
 })
@@ -199,7 +199,7 @@ describe('mask', () => {
   test('will add icon', () => {
     const vm = mountFromProps({ icon: faCoffee, mask: faCircle })
 
-    expect(vm.$el.innerHTML).toMatch(/clippath/)
+    expect(vm.$el.innerHTML).toMatch(/clipPath/)
   })
 
   test('will add icon referencing librbary', () => {
