@@ -139,7 +139,7 @@ When using the `@fortawesome/fontawesome-svg-core` package this **behavior is
 disabled by default**. This project uses that package so you will have to
 explicitly enable it like this:
 
-```
+```javascript
 import { dom } from '@fortawesome/fontawesome-svg-core'
 
 dom.watch() // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
