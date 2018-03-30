@@ -95,7 +95,6 @@ App.js
 ```javascript
 import Vue from 'vue'
 import Main from './Main.vue'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
 import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
@@ -121,6 +120,7 @@ FAExample.vue
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 export default {
   name: 'FAExample',
 
