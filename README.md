@@ -14,18 +14,17 @@
     + [Going from 0.0.x to 0.1.0](#going-from-00x-to-010)
 - [Installation](#installation)
 - [Add more styles or Pro icons](#add-more-styles-or-pro-icons)
-- [or with Yarn](#or-with-yarn)
 - [Usage](#usage)
   * [Recommended](#recommended)
     + [Quick warning about self-closing tags](#quick-warning-about-self-closing-tags)
-    + [Processing `` tags into `` using Font Awesome](#processing--tags-into--using-font-awesome)
+    + [Processing i tags into svg using Font Awesome](#processing-i-tags-into-svg-using-font-awesome)
   * [The icon property](#the-icon-property)
-    + [Shorthand that assumes a prefix of `fas`:](#shorthand-that-assumes-a-prefix-of-fas)
-    + [Explicit prefix (note the Vue bind shorthand because this uses an array):](#explicit-prefix-note-the-vue-bind-shorthand-because-this-uses-an-array)
-    + [Explicit icon definition through something like a computed property:](#explicit-icon-definition-through-something-like-a-computed-property)
+    + [Shorthand that assumes a prefix of "fas"](#shorthand-that-assumes-a-prefix-of-fas)
+    + [Explicit prefix (note the Vue bind shorthand because this uses an array)](#explicit-prefix-note-the-vue-bind-shorthand-because-this-uses-an-array)
+    + [Explicit icon definition through something like a computed property](#explicit-icon-definition-through-something-like-a-computed-property)
   * [Alternative using component property](#alternative-using-component-property)
   * [Why use the concept of a library?](#why-use-the-concept-of-a-library)
-    + [Import the specific icons that you need:](#import-the-specific-icons-that-you-need)
+    + [Import the specific icons that you need](#import-the-specific-icons-that-you-need)
     + [Import entire styles](#import-entire-styles)
   * [Tree shaking alternative](#tree-shaking-alternative)
 - [Features](#features)
@@ -102,7 +101,7 @@ $ npm i --save @fortawesome/pro-light-svg-icons@prerelease
 
 Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/js-component-packages).
 
-## or with Yarn
+Or with Yarn:
 
 ```
 $ yarn add @fortawesome/fontawesome-svg-core@prerelease
@@ -167,7 +166,7 @@ If you are writing these types of templates make sure and use valid HTML syntax:
 <font-awesome-icon icon="coffee"></font-awesome-icon>
 ```
 
-#### Processing `<i>` tags into `<svg>` using Font Awesome
+#### Processing i tags into svg using Font Awesome
 
 A basic installation of [Font Awesome](https://fontawesome.com/get-started) has
 the ability to automatically transform `<i class="fas fa-coffee"></i>` into
@@ -191,7 +190,7 @@ dom.watch() // This will kick of the initial replacement of i to svg tags and co
 
 The `icon` property of the `FontAwesomeIcon` component can be used in the following way:
 
-#### Shorthand that assumes a prefix of `fas`:
+#### Shorthand that assumes a prefix of "fas"
 
 ```javascript
 <font-awesome-icon icon="spinner" />
@@ -207,7 +206,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 library.add(faSpinner)
 ```
 
-#### Explicit prefix (note the Vue bind shorthand because this uses an array):
+#### Explicit prefix (note the Vue bind shorthand because this uses an array)
 
 ```javascript
 <font-awesome-icon :icon="['far', 'spinner']" />
@@ -222,7 +221,7 @@ import { faSpinner } from '@fortawesome/pro-regular-svg-icons'
 library.add(faSpinner)
 ```
 
-#### Explicit icon definition through something like a computed property:
+#### Explicit icon definition through something like a computed property
 
 ```javascript
 <template>
@@ -283,7 +282,7 @@ Explicitly selecting icons offer the advantage of only bundling the icons that y
 use in your final bundled file. This allows us to subset Font Awesome's
 thousands of icons to just the small number that are normally used.
 
-#### Import the specific icons that you need:
+#### Import the specific icons that you need
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'

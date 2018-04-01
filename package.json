@@ -23,7 +23,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "README.md": ["markdown-toc -i"]
+    "README.md": ["markdown-toc -i", "git add"]
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": ">= 1.2.0 < 1.3",
