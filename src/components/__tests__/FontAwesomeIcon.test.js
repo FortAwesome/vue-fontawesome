@@ -1,11 +1,11 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
-import fontawesome from '@fortawesome/fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
 import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
-  fontawesome.library.add(faCoffee, faCircle)
+  library.add(faCoffee, faCircle)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
 })
 
@@ -83,7 +83,7 @@ describe('unrelated Vue data options', () => {
     )
 
     expect(hasBeenClicked).toBeFalsy()
-    vm.$el.click()
+    vm.$el.dispatchEvent(new Event('click'))
     expect(hasBeenClicked).toBeTruthy()
   })
 })
@@ -199,7 +199,7 @@ describe('mask', () => {
   test('will add icon', () => {
     const vm = mountFromProps({ icon: faCoffee, mask: faCircle })
 
-    expect(vm.$el.innerHTML).toMatch(/clippath/)
+    expect(vm.$el.innerHTML).toMatch(/clipPath/)
   })
 
   test('will add icon referencing librbary', () => {

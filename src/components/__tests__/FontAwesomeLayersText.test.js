@@ -1,6 +1,5 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeLayersText from '../FontAwesomeLayersText'
-import fontawesome from '@fortawesome/fontawesome'
 import { compileAndMount } from '../__fixtures__/helpers'
 
 beforeEach(() => {
