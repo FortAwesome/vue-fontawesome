@@ -31,6 +31,11 @@
   * [Register your components first](#register-your-components-first)
   * [Basic](#basic)
   * [Advanced](#advanced)
+- [FAQ](#faq)
+  * [Why so explicit (the :icon="['far', 'coffee']" syntax)?](#why-so-explicit-the-iconfar-coffee-syntax)
+    + [How about a separate property for the prefix?](#how-about-a-separate-property-for-the-prefix)
+    + [Bindings become boilerplate and verbose](#bindings-become-boilerplate-and-verbose)
+    + [Properties can disagree with each other](#properties-can-disagree-with-each-other)
 
 <!-- tocstop -->
 
@@ -434,4 +439,121 @@ Layers text:
   <font-awesome-icon icon="queen"/>
   <font-awesome-layers-text class="gray8" transform="down-2 shrink-8" value="Q" />
 </font-awesome-layers>
+```
+
+## FAQ
+
+### Why so explicit (the :icon="['far', 'coffee']" syntax)?
+
+It's been brought up a few times that the array syntax used for specifying an
+icon from the library is a bit cumbersome. Initially, this does seem to
+be the case but we do have good reasons.
+
+#### How about a separate property for the prefix?
+
+```html
+<font-awesome-icon far icon="spinner" />
+```
+
+or
+
+```html
+<font-awesome-icon prefix="far" icon="spinner" />
+```
+
+The problem with this is that it does not provide a consistent or concise way to specify the mask.
+
+```html
+<font-awesome-icon far icon="spinner" mask="circle" />
+```
+
+Does the `far` apply to the icon or the mask? What is the prefix for the property it does not apply to?
+
+Whereas this is consistent and concise:
+
+```html
+<font-awesome-icon :icon="['far', 'spinner']" :mask="['fas', 'circle']" />
+```
+
+#### Bindings become boilerplate and verbose
+
+Since icons are not always static but can change based on Vue component
+`methods` or `computed` values we have to take that into consideration.
+
+Icon properties end up being more verbose:
+
+```html
+<font-awesome-icon :far="style === 'far'" :fal="style === 'fal'" :icon="icon" />
+```
+
+vs.
+
+```html
+<font-awesome-icon :icon="[style, icon]" />
+```
+
+Or if you are using a `prefix` property it smells of needless boilerplate:
+
+```html
+<template>
+  <font-awesome-icon :prefix="iconPrefix" :icon="iconName" />
+</template>
+
+<script>
+export default {
+  computed: {
+    iconPrefix() {
+      return 'fas'
+    },
+    iconName() {
+      return 'coffee'
+    }
+  }
+}
+</script>
+```
+
+vs.
+
+```html
+<template>
+  <font-awesome-icon :icon="icon" />
+</template>
+
+<script>
+export default {
+  computed: {
+    icon() {
+      return ['fas', 'coffee']
+    }
+  }
+}
+</script>
+```
+
+#### Properties can disagree with each other
+
+If we allow prefix definition through a property and we also allow an icon to
+be specified as an object through direct import these two have a chance to
+argue with eachother. This could lead to some head-scratching when an icon
+doesn't appear in the expected style.
+
+In the following case which style should be used (light from the icon definition or regular from the far boolean):
+
+```html
+import { faSpinner } from `@fortawesome/pro-light-svg-icons`
+
+<template>
+  <font-awesome-icon far :icon="faSpinner" />
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      faSpinner
+    }
+  }
+}
+</script>
 ```
