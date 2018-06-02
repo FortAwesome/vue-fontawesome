@@ -288,6 +288,12 @@ thousands of icons to just the small number that are normally used.
 #### Import the specific icons that you need
 
 ```javascript
+import Vue from 'vue'
+import Main from './Main.vue'
+import fontawesome from '@fortawesome/fontawesome'
+import brands from '@fortawesome/fontawesome-free-brands'
+import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/pro-light-svg-icons'
@@ -299,6 +305,11 @@ library.add(faCoffee, fab, faSpinner)
 
 ```javascript
 import { fab } from '@fortawesome/free-brands-svg-icons'
+
+<script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+export default {
+  name: 'FAExample',
 
 library.add(fab)
 ```
