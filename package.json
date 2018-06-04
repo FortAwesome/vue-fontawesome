@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -35,7 +35,7 @@
     "watch.all": "npm-watch",
     "build": "npm run build.main && npm run build.example.webpack",
     "build.main": "rollup -c rollup.config.js",
-    "build.example.webpack": "cd example/webpack && webpack --hide-modules",
+    "build.example.webpack": "cd example/webpack && webpack-cli --hide-modules",
     "serve.static":
       "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' example/webpack",
     "dist": "cross-env NODE_ENV=production npm run build",

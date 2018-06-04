@@ -5,7 +5,7 @@
   "author": "robmadole <robmadole@gmail.com>",
   "private": true,
   "scripts": {
-    "build": "webpack --hide-modules"
+    "build": "webpack-cli --hide-modules"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^0.0",
@@ -22,6 +22,7 @@
     "css-loader": "^0.28.5",
     "file-loader": "^0.11.2",
     "vue-loader": "^13.0.4",
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "webpack-cli": "^1.5.3"
   }
 }
