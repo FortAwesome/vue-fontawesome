@@ -13,9 +13,10 @@ The pre-release is at a **release candidate** level and we could use your help t
 ## Installation
 
 ```
-$ npm i --save @fortawesome/fontawesome
-$ npm i --save @fortawesome/fontawesome-free-solid
-$ npm i --save @fortawesome/vue-fontawesome
+npm i --save @fortawesome/fontawesome
+npm i --save @fortawesome/fontawesome-free-solid
+npm i --save @fortawesome/fontawesome-free-regular
+npm i --save @fortawesome/vue-fontawesome
 ```
 
 or
