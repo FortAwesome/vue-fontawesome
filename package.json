@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.1.0-5",
+  "version": "0.1.0",
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -30,7 +30,7 @@
     "vue": "~2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.0-7",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",

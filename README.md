@@ -77,9 +77,9 @@ You might also be interested in the larger umbrella project [UPGRADING.md](https
 ## Installation
 
 ```
-$ npm i --save @fortawesome/fontawesome-svg-core@prerelease
-$ npm i --save @fortawesome/free-solid-svg-icons@prerelease
-$ npm i --save @fortawesome/vue-fontawesome@prerelease
+$ npm i --save @fortawesome/fontawesome-svg-core
+$ npm i --save @fortawesome/free-solid-svg-icons
+$ npm i --save @fortawesome/vue-fontawesome
 ```
 
 ## Add more styles or Pro icons
@@ -90,16 +90,16 @@ version 4 to 5 we have a limited number of Regular icons available.
 **Visit [fontawesome.com/icons](https://fontawesome.com/icons) to search for free and Pro icons**
 
 ```
-$ npm i --save @fortawesome/free-brands-svg-icons@prerelease
-$ npm i --save @fortawesome/free-regular-svg-icons@prerelease
+$ npm i --save @fortawesome/free-brands-svg-icons
+$ npm i --save @fortawesome/free-regular-svg-icons
 ```
 
 If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages.
 
 ```
-$ npm i --save @fortawesome/pro-solid-svg-icons@prerelease
-$ npm i --save @fortawesome/pro-regular-svg-icons@prerelease
-$ npm i --save @fortawesome/pro-light-svg-icons@prerelease
+$ npm i --save @fortawesome/pro-solid-svg-icons
+$ npm i --save @fortawesome/pro-regular-svg-icons
+$ npm i --save @fortawesome/pro-light-svg-icons
 ```
 
 Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/js-component-packages).
@@ -107,9 +107,9 @@ Using the Pro packages requires [additional configuration](https://fontawesome.c
 Or with Yarn:
 
 ```
-$ yarn add @fortawesome/fontawesome-svg-core@prerelease
-$ yarn add @fortawesome/free-solid-svg-icons@prerelease
-$ yarn add @fortawesome/vue-fontawesome@prerelease
+$ yarn add @fortawesome/fontawesome-svg-core
+$ yarn add @fortawesome/free-solid-svg-icons
+$ yarn add @fortawesome/vue-fontawesome
 ```
 
 ## Usage
