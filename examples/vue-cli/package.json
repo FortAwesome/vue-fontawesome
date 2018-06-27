@@ -13,11 +13,11 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.0-11",
-    "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
-    "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
-    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
-    "@fortawesome/vue-fontawesome": "^0.1.0-4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0",
+    "@fortawesome/vue-fontawesome": "^0.1.0",
     "ajv": "^6.5.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.26.3",
