@@ -292,7 +292,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/pro-light-svg-icons'
 
-library.add(faCoffee, fab, faSpinner)
+library.add(faCoffee, faSpinner)
 ```
 
 #### Import entire styles
