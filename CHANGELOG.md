@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.1.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.1)  - 2018-07-16
+
+### Fixed
+* LayersText can use a number as it's value #115
+
+---
+
 ## [0.1.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.0)  - 2018-06-20
 
 ### Changed
