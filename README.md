@@ -40,6 +40,9 @@
     + [How about a separate property for the prefix?](#how-about-a-separate-property-for-the-prefix)
     + [Bindings become boilerplate and verbose](#bindings-become-boilerplate-and-verbose)
     + [Properties can disagree with each other](#properties-can-disagree-with-each-other)
+- [How to Help](#how-to-help)
+- [Contributors](#contributors)
+- [Releasing this project](#releasing-this-project)
 
 <!-- tocstop -->
 
@@ -555,3 +558,39 @@ export default {
 }
 </script>
 ```
+
+## How to Help
+
+Review the following docs before diving in:
+
+* [CONTRIBUTING.md](CONTRIBUTING.md)
+* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+
+And then:
+
+1. Check the existing issue and see if you can help!
+
+## Contributors
+
+The following contributors have either hepled to start this project, have contributed
+code, are actively maintaining it (including documentation), or in other ways
+being awesome contributors to this project. **We'd like to take a moment to recognize them.**
+
+|                                                            | Name           | GitHub                                             |
+| :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
+| <img src="https://github.com/SirLamer.png?size=72" />      | SirLamer       | [@SirLamer](https://github.com/SirLamer)           |
+
+If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
+
+The Font Awesome team:
+
+|                                                            | Name           | GitHub                                             |
+| :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
+| <img src="https://github.com/supercodepoet.png?size=72" /> | Travis Chase   | [@supercodepoet](https://github.com/supercodepoet) |
+| <img src="https://github.com/robmadole.png?size=72" />     | Rob Madole     | [@robmadole](https://github.com/robmadole)         |
+| <img src="https://github.com/mlwilkerson.png?size=72" />   | Mike Wilkerson | [@mlwilkerson](https://github.com/mlwilkerson)     |
+| <img src="https://github.com/talbs.png?size=72" />         | Brian Talbot   | [@talbs](https://github.com/talbs)                 |
+
+## Releasing this project
+
+See [DEVELOPMENT.md](DEVELOPMENT.md#release)
