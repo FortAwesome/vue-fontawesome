@@ -2,3 +2,6 @@ node_modules
 index.js
 index.es.js
 .DS_Store
+
+# WebStorm / PHPStorm
+.idea

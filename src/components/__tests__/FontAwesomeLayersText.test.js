@@ -19,6 +19,13 @@ test('simple text', () => {
   expect(vm.$el.innerHTML).toBe('Test')
 })
 
+test('accept number for value', () => {
+    const vm = compileAndMount('<font-awesome-layers-text :value="42" />')
+
+    expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
+    expect(vm.$el.innerHTML).toBe('42')
+})
+
 describe('transform', () => {
   test('string', () => {
     const vm = compileAndMount('<font-awesome-layers-text value="1" transform="shrink-6" />')

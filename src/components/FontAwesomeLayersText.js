@@ -9,7 +9,7 @@ export default {
 
   props: {
     value: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     transform: {
@@ -22,7 +22,7 @@ export default {
     const { props } = context
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? parse.transform(props.transform) : props.transform)
 
-    const renderedText = text(props.value, { ...transform })
+    const renderedText = text(props.value.toString(), { ...transform })
 
     const { abstract } = renderedText
 
