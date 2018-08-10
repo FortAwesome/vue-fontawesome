@@ -429,7 +429,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 ```html
 <font-awesome-layers class="fa-lg">
   <font-awesome-icon icon="circle" />
-  <font-awesome-icon icon="check" transform="shrink-6" style="color: white;" />
+  <font-awesome-icon icon="check" transform="shrink-6" :style="{ color: 'white' }" />
 </font-awesome-layers>
 ```
 
