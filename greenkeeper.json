@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "examples/vue-cli/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
