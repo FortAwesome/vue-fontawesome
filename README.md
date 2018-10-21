@@ -212,6 +212,13 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 library.add(faSpinner)
 ```
 
+In the event that you are using an icon with a multi-word name please note that
+you would need to pass in the icon name using _kebab-case_ as opposed to _camelCase_.
+
+```javascript
+<font-awesome-icon icon="address-card" />
+```
+
 #### Explicit prefix (note the Vue bind shorthand because this uses an array)
 
 ```javascript
