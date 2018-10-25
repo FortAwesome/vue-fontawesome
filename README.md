@@ -127,10 +127,10 @@ The following examples are based on a project configured with [vue-cli](https://
 import Vue from 'vue'
 import App from './App'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee)
+library.add(faUserSecret)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -149,7 +149,7 @@ new Vue({
 ```javascript
 <template>
   <div id="app">
-    <font-awesome-icon icon="coffee" />
+    <font-awesome-icon icon="user-secret" />
   </div>
 </template>
 
@@ -200,23 +200,26 @@ The `icon` property of the `FontAwesomeIcon` component can be used in the follow
 
 ```javascript
 <font-awesome-icon icon="spinner" />
+<font-awesome-icon icon="align-left" />
+
 <font-awesome-icon :icon="['fas', 'spinner']" /> # Same as above
+<font-awesome-icon :icon="['fas', 'align-left']" /> # Same as above
 ```
 
-For the above to work you must add the `spinner` icon to the library.
+For the above to work you must add the `spinner` and `align-left` icon to the library.
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner, faAlignLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSpinner)
+library.add(faSpinner, faAlignLeft)
 ```
 
 In the event that you are using an icon with a multi-word name please note that
 you would need to pass in the icon name using _kebab-case_ as opposed to _camelCase_.
 
 ```javascript
-<font-awesome-icon icon="address-card" />
+<font-awesome-icon icon="address-card" />  # import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 ```
 
 #### Explicit prefix (note the Vue bind shorthand because this uses an array)
