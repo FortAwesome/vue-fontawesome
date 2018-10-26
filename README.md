@@ -35,6 +35,8 @@
   * [Register your components first](#register-your-components-first)
   * [Basic](#basic)
   * [Advanced](#advanced)
+- [Integrating with other tools and frameworks](#integrating-with-other-tools-and-frameworks)
+  * [Nuxt.js](#nuxtjs)
 - [FAQ](#faq)
   * [Why so explicit (the :icon="['far', 'coffee']" syntax)?](#why-so-explicit-the-iconfar-coffee-syntax)
     + [How about a separate property for the prefix?](#how-about-a-separate-property-for-the-prefix)
@@ -450,6 +452,49 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
   <font-awesome-icon icon="queen"/>
   <font-awesome-layers-text class="gray8" transform="down-2 shrink-8" value="Q" />
 </font-awesome-layers>
+```
+
+## Integrating with other tools and frameworks
+
+### Nuxt.js
+
+Install `@fortawesome/vue-fontawesome` and `@fortawesome/fontawesome-svg-core` and any icon packages.
+
+```
+npm install --save @fortawesome/vue-fontawesome @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons
+```
+
+Inside your Nuxt.js project add a `plugins/fontawesome.js` file.
+
+```javascript
+import Vue from 'vue'
+import { library, config } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+// This is important, we are going to let Nuxt.js worry about the CSS
+config.autoAddCss = false
+
+// You can add your icons directly in this plugin. See other examples for how you
+// can add other styles or just individual icons.
+library.add(fas)
+
+// Register the component globally
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+```
+
+Modify `nuxt.config.js` adding to the `css` and `plugins` sections.
+
+```javascript
+css: [
+  '@fortawesome/fontawesome-svg-core/styles.css'
+]
+```
+
+```javascript
+plugins: [
+  '~/plugins/fontawesome.js'
+]
 ```
 
 ## FAQ
