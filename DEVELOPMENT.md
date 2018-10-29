@@ -16,7 +16,8 @@ test        | Execute unit tests
 1. Update `package.json` and change `version`
 1. Update `README.md` and add any contributors
 1. Update the `CHANGELOG.md`
+1. `npm publish`
+1. `git add index.js index.es.js`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
-1. `npm publish`
 1. Create a [new release](https://github.com/FortAwesome/vue-fontawesome/releases/new) with CHANGELOG details
