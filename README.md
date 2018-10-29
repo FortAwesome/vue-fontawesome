@@ -37,6 +37,7 @@
   * [Advanced](#advanced)
 - [Integrating with other tools and frameworks](#integrating-with-other-tools-and-frameworks)
   * [Nuxt.js](#nuxtjs)
+  * [Web Components with vue-web-component-wrapper](#web-components-with-vue-web-component-wrapper)
 - [FAQ](#faq)
   * [Why so explicit (the :icon="['far', 'coffee']" syntax)?](#why-so-explicit-the-iconfar-coffee-syntax)
     + [How about a separate property for the prefix?](#how-about-a-separate-property-for-the-prefix)
@@ -495,6 +496,64 @@ css: [
 plugins: [
   '~/plugins/fontawesome.js'
 ]
+```
+
+### Web Components with vue-web-component-wrapper
+
+The Vue [project provides a wrapper](https://github.com/vuejs/vue-web-component-wrapper)
+that will register your Vue components as [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+
+This project and all Font Awesome SVG icons will work just fine in these
+components but we need to take an additional step to add the CSS correctly.
+
+To take advantage of encapsulation that the Shadow DOM provides and to keep
+other areas of the DOM clean we need to add the Font Awesome CSS to the root of
+the Shadow DOM.
+
+Here is an example that leverages the `mounted()` lifecycle hook to insert the CSS.
+
+```javascript
+<script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { config, dom } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee, faStroopwafel, faDragon } from '@fortawesome/free-solid-svg-icons'
+
+// Make sure you tell Font Awesome to skip auto-inserting CSS into the <head>
+config.autoAddCss = false
+
+const component = {
+  name: 'MyCustomElement',
+
+  template: `<font-awesome-icon :icon="icon" />`,
+
+  components: {
+    FontAwesomeIcon
+  },
+
+  mounted () {
+    // This will only work on your root Vue component since it's using $parent
+    const { shadowRoot } = this.$parent.$options
+    const id = 'fa-styles'
+
+    if (!shadowRoot.getElementById(`${id}`)) {
+      const faStyles = document.createElement('style')
+      faStyles.setAttribute('id', id)
+      faStyles.textContent = dom.css()
+      shadowRoot.appendChild(faStyles)
+    }
+  },
+
+  computed: {
+    icon () {
+      const icons = [faCoffee, faStroopwafel, faDragon]
+
+      return icons[Math.floor(Math.random() * 3)]
+    }
+  }
+}
+
+export default component
+</script>
 ```
 
 ## FAQ
