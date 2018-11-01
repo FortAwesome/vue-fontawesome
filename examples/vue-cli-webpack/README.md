@@ -1,4 +1,4 @@
-# vue-cli
+# vue-cli-webpack
 
 > A Vue.js project
 
