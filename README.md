@@ -53,6 +53,10 @@
 
 Hey there! We're glad you're here...
 
+### CodeSandbox Starter Sample 🚀
+
+Here's a [CodeSandbox Starter Sample](https://codesandbox.io/s/github/FortAwesome/vue-fontawesome/tree/master/examples/vue-cli-webpack) on how to display Solid, Regular, and Brand icons [using the Icon Library](https://github.com/FortAwesome/vue-fontawesome#usage).
+
 #### Upgrading Font Awesome?
 
 If you've used Font Awesome in the past (version 4 or older) there are some

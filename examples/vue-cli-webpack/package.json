@@ -11,14 +11,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"
-  },
-  "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.7",
     "@fortawesome/free-brands-svg-icons": "^5.4.2",
     "@fortawesome/free-regular-svg-icons": "^5.4.2",
     "@fortawesome/free-solid-svg-icons": "^5.4.2",
     "@fortawesome/vue-fontawesome": "^0.1.2",
+    "vue": "^2.5.2"
+  },
+  "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
