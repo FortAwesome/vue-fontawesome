@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.1.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.3)  - 2018-12-04
+
+### Added
+* Adding TypeScript definition file #159
+
+---
+
 ## [0.1.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.2)  - 2018-10-29
 
 ### Added

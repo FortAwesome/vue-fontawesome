@@ -12,6 +12,7 @@
 <!-- toc -->
 
 - [Introduction](#introduction)
+  * [CodeSandbox Starter Sample 🚀](#codesandbox-starter-sample-%F0%9F%9A%80)
     + [Upgrading Font Awesome?](#upgrading-font-awesome)
     + [Get started](#get-started)
     + [Learn about our new SVG implementation](#learn-about-our-new-svg-implementation)
@@ -697,6 +698,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 |                                                            | Name           | GitHub                                             |
 | :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
 | <img src="https://github.com/SirLamer.png?size=72" />      | SirLamer       | [@SirLamer](https://github.com/SirLamer)           |
+| <img src="https://github.com/meteorlxy.png?size=72" />     | Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)         |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
