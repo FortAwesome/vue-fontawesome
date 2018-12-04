@@ -19,8 +19,12 @@
     "build": "rollup -c rollup.config.js",
     "dist": "cross-env NODE_ENV=production npm run build",
     "test": "jest",
-    "prepack": "npm run dist",
-    "precommit": "lint-staged"
+    "prepack": "npm run dist"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "README.md": [
@@ -42,7 +46,7 @@
     "concurrently": "^3.5.0",
     "cross-env": "^5.1.1",
     "humps": "^2.0.1",
-    "husky": "^1.1.2",
+    "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lint-staged": "^7.0.1",
     "markdown-toc": "^1.2.0",
