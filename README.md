@@ -337,8 +337,8 @@ icons than you intend**. Here are some alternative import syntaxes:
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
-import faCoffee from '@fortawesome/free-solid-svg-icons/faCoffee'
-import faSpinner from '@fortawesome/pro-light-svg-icons/faSpinner'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee'
+import { faSpinner } from '@fortawesome/pro-light-svg-icons/faSpinner'
 
 library.add(faCoffee, faSpinner)
 ```
