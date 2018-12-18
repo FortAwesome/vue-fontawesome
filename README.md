@@ -152,9 +152,9 @@ new Vue({
 })
 ```
 
-`src/App.js`
+`src/App.vue`
 
-```javascript
+```vue
 <template>
   <div id="app">
     <font-awesome-icon icon="user-secret" />
