@@ -82,13 +82,17 @@ export default {
     symbol: {
       type: [Boolean, String],
       default: false
+    },
+    title: {
+      type: String,
+      default: null
     }
   },
 
   render (createElement, context) {
     const { props } = context
 
-    const { icon: iconArgs, mask: maskArgs, symbol } = props
+    const { icon: iconArgs, mask: maskArgs, symbol, title } = props
     const icon = normalizeIconArgs(iconArgs)
     const classes = objectWithKey('classes', classList(props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
@@ -96,7 +100,7 @@ export default {
 
     const renderedIcon = faIcon(
       icon,
-      { ...classes, ...transform, ...mask, symbol }
+      { ...classes, ...transform, ...mask, symbol, title }
     )
 
     if (!renderedIcon) {

@@ -224,3 +224,19 @@ describe('symbol', () => {
       .toBe('symbol')
   })
 })
+
+describe('title', () => {
+  test('using title', () => {
+    const vm = mountFromProps({ icon: faCoffee, title: 'Coffee' })
+
+    expect(vm.$el.getElementsByTagName('title')[0].innerHTML)
+      .toBe('Coffee')
+  })
+
+  test('not using title', () => {
+    const vm = mountFromProps({ icon: faCoffee })
+
+    expect(vm.$el.getElementsByTagName('title').length)
+      .toBe(0)
+  })
+})
