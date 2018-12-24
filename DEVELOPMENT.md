@@ -14,7 +14,7 @@ test        | Execute unit tests
 <a name="release"></a>
 
 1. Update `package.json` and change `version`
-1. Update `README.md` and add any contributors
+1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
 1. `npm publish`
 1. `git add index.js index.es.js`

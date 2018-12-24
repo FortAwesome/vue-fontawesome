@@ -699,6 +699,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 | :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
 | <img src="https://github.com/SirLamer.png?size=72" />      | SirLamer       | [@SirLamer](https://github.com/SirLamer)           |
 | <img src="https://github.com/meteorlxy.png?size=72" />     | Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)         |
+| <img src="https://github.com/schulz3000.png?size=72" />    | Xaver Schulz   | [@schulz3000](https://github.com/schulz3000)       |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
