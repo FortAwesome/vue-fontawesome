@@ -1,6 +1,10 @@
 declare module '@fortawesome/vue-fontawesome' {
   import { FunctionalComponentOptions } from 'vue'
-  export const FontAwesomeIcon: FunctionalComponentOptions
-  export const FontAwesomeLayers: FunctionalComponentOptions
-  export const FontAwesomeLayersText: FunctionalComponentOptions
+  import { PropsDefinition } from 'vue/types/options'
+  interface FontAwesomeIconProps { }
+  interface FontAwesomeLayersProps { }
+  interface FontAwesomeLayersTextProps { }
+  export const FontAwesomeIcon: FunctionalComponentOptions<FontAwesomeIconProps, PropsDefinition<FontAwesomeIconProps>>
+  export const FontAwesomeLayers: FunctionalComponentOptions<FontAwesomeLayersProps, PropsDefinition<FontAwesomeLayersProps>>
+  export const FontAwesomeLayersText: FunctionalComponentOptions<FontAwesomeLayersTextProps, PropsDefinition<FontAwesomeLayersTextProps>>
 }
