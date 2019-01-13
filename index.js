@@ -417,6 +417,10 @@
 	    symbol: {
 	      type: [Boolean, String],
 	      default: false
+	    },
+	    title: {
+	      type: String,
+	      default: null
 	    }
 	  },
 
@@ -424,14 +428,15 @@
 	    var props = context.props;
 	    var iconArgs = props.icon,
 	        maskArgs = props.mask,
-	        symbol = props.symbol;
+	        symbol = props.symbol,
+	        title = props.title;
 
 	    var icon = normalizeIconArgs(iconArgs);
 	    var classes = objectWithKey('classes', classList(props));
 	    var transform = objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
 	    var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
 
-	    var renderedIcon = fontawesomeSvgCore.icon(icon, _extends({}, classes, transform, mask, { symbol: symbol }));
+	    var renderedIcon = fontawesomeSvgCore.icon(icon, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
 
 	    if (!renderedIcon) {
 	      return log('Could not find one or more icon(s)', icon, mask);

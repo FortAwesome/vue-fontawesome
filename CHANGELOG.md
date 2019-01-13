@@ -5,9 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
-## [0.1.4](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.4)  - 2018-12-24
+## [0.1.5](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.5)  - 2019-01-13
 
 ### Added
+* Title prop #164
+
+---
+
+## [0.1.4](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.4)  - 2018-12-24
+
+### Fixed
 * Fixing TypeScript definition file #165
 
 ---
