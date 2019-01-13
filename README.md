@@ -13,10 +13,10 @@
 
 - [Introduction](#introduction)
   * [CodeSandbox Starter Sample 🚀](#codesandbox-starter-sample-%F0%9F%9A%80)
-    + [Upgrading Font Awesome?](#upgrading-font-awesome)
-    + [Get started](#get-started)
-    + [Learn about our new SVG implementation](#learn-about-our-new-svg-implementation)
-    + [Going from 0.0.x to 0.1.0](#going-from-00x-to-010)
+  * [Upgrading Font Awesome?](#upgrading-font-awesome)
+  * [Get started](#get-started)
+  * [Learn about our new SVG implementation](#learn-about-our-new-svg-implementation)
+  * [Going from 0.0.x to 0.1.0](#going-from-00x-to-010)
 - [Installation](#installation)
 - [Add more styles or Pro icons](#add-more-styles-or-pro-icons)
 - [Usage](#usage)
@@ -30,6 +30,7 @@
   * [Alternative using component property](#alternative-using-component-property)
   * [Why use the concept of a library?](#why-use-the-concept-of-a-library)
     + [Import the specific icons that you need](#import-the-specific-icons-that-you-need)
+    + [Import the same icon from different styles](#import-the-same-icon-from-different-styles)
     + [Import entire styles](#import-entire-styles)
   * [Tree shaking alternative](#tree-shaking-alternative)
 - [Features](#features)
@@ -58,28 +59,28 @@ Hey there! We're glad you're here...
 
 Here's a [CodeSandbox Starter Sample](https://codesandbox.io/s/github/FortAwesome/vue-fontawesome/tree/master/examples/vue-cli-webpack) on how to display Solid, Regular, and Brand icons [using the Icon Library](https://github.com/FortAwesome/vue-fontawesome#usage).
 
-#### Upgrading Font Awesome?
+### Upgrading Font Awesome?
 
 If you've used Font Awesome in the past (version 4 or older) there are some
 things that you should learn before you dive in.
 
 > https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4
 
-#### Get started
+### Get started
 
 This package is for integrating with Vue.js. If you aren't using Vue then it's
 not going to help you. Head over to our "Get Started" page for some guidance.
 
 > https://fontawesome.com/how-to-use/on-the-web/setup/getting-started
 
-#### Learn about our new SVG implementation
+### Learn about our new SVG implementation
 
 This package, under the hood, uses SVG with JS and the `@fortawesome/fontawesome-svg-core` library. This implementation differs drastically from
 the web fonts implementation that was used in version 4 and older of Font Awesome. You might head over there to learn about how it works.
 
 > https://fontawesome.com/how-to-use/on-the-web/advanced/svg-javascript-core
 
-#### Going from 0.0.x to 0.1.0
+### Going from 0.0.x to 0.1.0
 
 See [UPGRADING.md](./UPGRADING.md).
 
@@ -314,6 +315,17 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/pro-light-svg-icons'
 
 library.add(faCoffee, faSpinner)
+```
+
+#### Import the same icon from different styles
+
+```javascript
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee as fasCoffee } from '@fortawesome/pro-solid-svg-icons'
+import { faCoffee as farCoffee } from '@fortawesome/pro-regular-svg-icons'
+import { faCoffee as falCoffee } from '@fortawesome/pro-light-svg-icons'
+
+library.add(fasCoffee, farCoffee, falCoffee)
 ```
 
 #### Import entire styles
