@@ -389,10 +389,10 @@ var FontAwesomeIcon = {
       default: false
     },
     rotation: {
-      type: Number,
+      type: [String, Number],
       default: null,
       validator: function validator(value) {
-        return [90, 180, 270].indexOf(value) > -1;
+        return [90, 180, 270].indexOf(parseInt(value, 10)) > -1;
       }
     },
     size: {

@@ -165,6 +165,12 @@ describe('using rotation', () => {
 
     expect(vm.$el.classList.contains('fa-rotate-270')).toBeTruthy()
   })
+
+  test('as a string', () => {
+    const vm = mountFromProps({ icon: faCoffee, rotation: '90' })
+
+    expect(vm.$el.classList.contains('fa-rotate-90')).toBeTruthy()
+  })
 })
 
 test('using size', () => {
