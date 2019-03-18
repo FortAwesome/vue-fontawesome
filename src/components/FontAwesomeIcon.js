@@ -62,9 +62,9 @@ export default {
       default: false
     },
     rotation: {
-      type: Number,
+      type: [String, Number],
       default: null,
-      validator: (value) => [90, 180, 270].indexOf(value) > -1
+      validator: (value) => [90, 180, 270].indexOf(parseInt(value, 10)) > -1
     },
     size: {
       type: String,
