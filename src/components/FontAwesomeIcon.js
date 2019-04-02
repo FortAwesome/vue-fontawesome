@@ -86,6 +86,10 @@ export default {
     title: {
       type: String,
       default: null
+    },
+    inverse: {
+      type: Boolean,
+      default: false
     }
   },
 

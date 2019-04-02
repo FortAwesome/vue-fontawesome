@@ -34,3 +34,18 @@ describe('transform', () => {
     expect(vm.$el)
   })
 })
+
+describe('counter', () => {
+  test('simple', () => {
+    const vm = compileAndMount('<font-awesome-layers-text :value="42" :counter="true" />')
+
+    expect(vm.$el.getAttribute('class')).toBe('fa-layers-counter')
+    expect(vm.$el.getAttribute('class')).not.toBe('fa-layers-text')
+    expect(vm.$el.innerHTML).toBe('42')
+  })
+  test('position', () => {
+    const vm = compileAndMount('<font-awesome-layers-text value="42" counter position="bottom-right" />')
+
+    expect(vm.$el.getAttribute('class')).toBe('fa-layers-counter fa-layers-bottom-right')
+  })
+})
