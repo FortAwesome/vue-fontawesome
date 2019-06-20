@@ -251,7 +251,7 @@ library.add(faSpinner)
 ```javascript
 <template>
   <div id="app">
-    <font-awesome-icon icon="appIcon" />
+    <font-awesome-icon :icon="appIcon" />
   </div>
 </template>
 
