@@ -184,7 +184,7 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret)
 ```
 
-```javascript
+```html
 <!-- The solid style is implicit -->
 <font-awesome-icon icon="user-secret" />
 
@@ -202,7 +202,7 @@ import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
 library.add(faFontAwesome)
 ```
 
-```javascript
+```html
 <!-- Don't forget to bind the property with ":" (we forget all the time!) -->
 <font-awesome-icon :icon="['fab', 'font-awesome']" />
 ```
@@ -219,7 +219,7 @@ import { faUserSecret } from '@fortawesome/pro-regular-svg-icons'
 library.add(faUserSecret)
 ```
 
-```javascript
+```html
 <font-awesome-icon :icon="['far', 'user-secret']" />
 ```
 
@@ -233,7 +233,7 @@ import { faUserSecret } from '@fortawesome/pro-light-svg-icons'
 library.add(faUserSecret)
 ```
 
-```javascript
+```html
 <font-awesome-icon :icon="['fal', 'user-secret']" />
 ```
 
@@ -247,7 +247,7 @@ import { faUserSecret } from '@fortawesome/pro-duotone-svg-icons'
 library.add(faUserSecret)
 ```
 
-```javascript
+```html
 <font-awesome-icon :icon="['fad', 'user-secret']" />
 ```
 
