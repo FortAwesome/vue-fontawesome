@@ -315,7 +315,7 @@
 	    'fa-li': props.listItem,
 	    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
 	    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-	  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), _classes);
+	  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
 
 	  return Object.keys(classes).map(function (key) {
 	    return classes[key] ? key : null;
@@ -398,6 +398,10 @@
 	      validator: function validator(value) {
 	        return [90, 180, 270].indexOf(parseInt(value, 10)) > -1;
 	      }
+	    },
+	    swapOpacity: {
+	      type: Boolean,
+	      default: false
 	    },
 	    size: {
 	      type: String,

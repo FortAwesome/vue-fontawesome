@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.1.7](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.7)  - 2019-08-31
+
+### Added
+* Duotone icon support
+
+---
+
 ## [0.1.6](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.6)  - 2019-03-18
 
 ### Changed
