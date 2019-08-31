@@ -177,14 +177,14 @@ export default {
 
 #### Using Solid icons
 
-```
+```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUserSecret)
 ```
 
-```
+```javascript
 <!-- The solid style is implicit -->
 <font-awesome-icon icon="user-secret" />
 
@@ -195,14 +195,14 @@ library.add(faUserSecret)
 
 #### Using Brand icons
 
-```
+```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faFontAwesome)
 ```
 
-```
+```javascript
 <!-- Don't forget to bind the property with ":" (we forget all the time!) -->
 <font-awesome-icon :icon="['fab', 'font-awesome']" />
 ```
@@ -211,7 +211,7 @@ library.add(faFontAwesome)
 
 Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
 
-```
+```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
 # Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-regular-svg-icons'
@@ -219,15 +219,13 @@ import { faUserSecret } from '@fortawesome/pro-regular-svg-icons'
 library.add(faUserSecret)
 ```
 
-```
+```javascript
 <font-awesome-icon :icon="['far', 'user-secret']" />
 ```
 
 #### Using Light icons
 
-Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
-
-```
+```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
 # Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-light-svg-icons'
@@ -235,15 +233,13 @@ import { faUserSecret } from '@fortawesome/pro-light-svg-icons'
 library.add(faUserSecret)
 ```
 
-```
+```javascript
 <font-awesome-icon :icon="['fal', 'user-secret']" />
 ```
 
 #### Using Duotone icons
 
-Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
-
-```
+```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
 # Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-duotone-svg-icons'
@@ -251,7 +247,7 @@ import { faUserSecret } from '@fortawesome/pro-duotone-svg-icons'
 library.add(faUserSecret)
 ```
 
-```
+```javascript
 <font-awesome-icon :icon="['fad', 'user-secret']" />
 ```
 
@@ -462,7 +458,7 @@ A good place to do this is in `main.js` or in the module you are calling `new
 Vue()`. **Make sure you register the component** and **have added icons to your
 library** before you bootstrap your Vue application.
 
-```
+```javascript
 import Vue from 'vue'
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
 
@@ -521,6 +517,12 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 ```html
 <font-awesome-icon icon="spinner" pull="left" />
 <font-awesome-icon icon="spinner" pull="right" />
+```
+
+[Swap opacity](https://fontawesome.com/how-to-use/on-the-web/styling/duotone-icons#swapping-layers):
+
+```html
+<font-awesome-icon :icon="['fad', 'spinner']" swap-opacity />
 ```
 
 ### Advanced
