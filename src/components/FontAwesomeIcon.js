@@ -66,6 +66,10 @@ export default {
       default: null,
       validator: (value) => [90, 180, 270].indexOf(parseInt(value, 10)) > -1
     },
+    swapOpacity: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
       default: null,
