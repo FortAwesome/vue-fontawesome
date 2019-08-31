@@ -13,7 +13,8 @@ export function classList (props) {
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,
     [`fa-rotate-${props.rotation}`]: props.rotation !== null,
-    [`fa-pull-${props.pull}`]: props.pull !== null
+    [`fa-pull-${props.pull}`]: props.pull !== null,
+    'fa-swap-opacity': props.swapOpacity
   }
 
   return Object.keys(classes)

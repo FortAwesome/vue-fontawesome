@@ -173,6 +173,12 @@ describe('using rotation', () => {
   })
 })
 
+test('swap opacity', () => {
+  const vm = mountFromProps({ icon: faCoffee, swapOpacity: true })
+
+  expect(vm.$el.classList.contains('fa-swap-opacity')).toBeTruthy()
+})
+
 test('using size', () => {
   ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
     const vm = mountFromProps({ icon: faCoffee, size: size })
