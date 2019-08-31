@@ -106,7 +106,7 @@ $ npm i --save @fortawesome/free-brands-svg-icons
 $ npm i --save @fortawesome/free-regular-svg-icons
 ```
 
-If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages.
+If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages after these [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers) are made.
 
 ```
 $ npm i --save @fortawesome/pro-solid-svg-icons
@@ -115,8 +115,6 @@ $ npm i --save @fortawesome/pro-light-svg-icons
 ```
 
 **Duotone icons are currently in pre-release and are coming soon to this component.**
-
-Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
 
 Or with Yarn:
 
