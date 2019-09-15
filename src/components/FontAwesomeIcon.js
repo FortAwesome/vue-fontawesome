@@ -90,6 +90,22 @@ export default {
     title: {
       type: String,
       default: null
+    },
+    primaryColor: {
+      type: String,
+      default: null
+    },
+    secondaryColor: {
+      type: String,
+      default: null
+    },
+    primaryOpacity: {
+      type: [String, Number],
+      default: 1.0
+    },
+    secondaryOpacity: {
+      type: [String, Number],
+      default: 0.4
     }
   },
 
@@ -102,9 +118,20 @@ export default {
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
     const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
 
+    let styles = {
+      '--fa-primary-opacity': props.primaryOpacity.toString(),
+      '--fa-secondary-opacity': props.secondaryOpacity.toString()
+    }
+    if (props.primaryColor) {
+      styles['--fa-primary-color'] = props.primaryColor
+    }
+    if (props.secondaryColor) {
+      styles['--fa-secondary-color'] = props.secondaryColor
+    }
+
     const renderedIcon = faIcon(
       icon,
-      { ...classes, ...transform, ...mask, symbol, title }
+      { ...classes, ...transform, ...mask, symbol, title, styles }
     )
 
     if (!renderedIcon) {
