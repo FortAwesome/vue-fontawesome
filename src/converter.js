@@ -6,7 +6,8 @@ function styleToObject (style) {
     .filter(s => s)
     .reduce((acc, pair) => {
       const i = pair.indexOf(':')
-      const prop = humps.camelize(pair.slice(0, i))
+      const propName = pair.slice(0, i)
+      const prop = prop.indexOf('--') === 0 ? propName : humps.camelize(propName)
       const value = pair.slice(i + 1).trim()
 
       acc[prop] = value
