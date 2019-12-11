@@ -415,6 +415,13 @@ import { faCoffee as fadCoffee } from '@fortawesome/pro-duotone-svg-icons'
 library.add(fasCoffee, farCoffee, falCoffee, fadCoffee)
 ```
 
+```html
+<font-awesome-icon :icon="['fas', 'coffee']"/>
+<font-awesome-icon :icon="['far', 'coffee']"/>
+<font-awesome-icon :icon="['fal', 'coffee']"/>
+<font-awesome-icon :icon="['fad', 'coffee']"/>
+```
+
 #### Import entire styles
 
 ```javascript
