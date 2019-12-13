@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.1.9](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.9)  - 2019-12-13
+
+### Added
+* Counters support for the FontAwesomeLayersText component #174
+* FontAwesomeIcon now supports the "inverse" property #174
+
+---
+
 ## [0.1.8](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.8)  - 2019-11-03
 
 ### Fixed
