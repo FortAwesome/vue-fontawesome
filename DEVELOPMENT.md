@@ -17,6 +17,8 @@ test        | Execute unit tests
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
 1. `npm publish`
+1. `npm pack`
+1. `CLOUDSMITH_API_KEY=API_TOKEN cloudsmith upload npm fortawesome/fontawesome-pro ./fortawesome-vue-fontawesome-VERSION.tgz`
 1. `git add index.js index.es.js`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
