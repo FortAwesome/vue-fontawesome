@@ -526,6 +526,12 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 <font-awesome-icon icon="spinner" pull="right" />
 ```
 
+[Inverse](https://fontawesome.com/how-to-use/on-the-web/styling/stacking-icons):
+
+```html
+<font-awesome-icon icon="spinner" inverse />
+```
+
 [Swap opacity](https://fontawesome.com/how-to-use/on-the-web/styling/duotone-icons#swapping-layers):
 
 ```html
@@ -569,6 +575,15 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 <font-awesome-layers full-width class="fa-4x">
   <font-awesome-icon icon="queen"/>
   <font-awesome-layers-text class="gray8" transform="down-2 shrink-8" value="Q" />
+</font-awesome-layers>
+```
+
+[Counters](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+
+```html
+<font-awesome-layers full-width class="fa-4x">
+  <font-awesome-icon icon="envelope"/>
+  <font-awesome-layers-text counter value="1" position="top-right" />
 </font-awesome-layers>
 ```
 
@@ -807,13 +822,14 @@ The following contributors have either hepled to start this project, have contri
 code, are actively maintaining it (including documentation), or in other ways
 being awesome contributors to this project. **We'd like to take a moment to recognize them.**
 
-|                                                            | Name           | GitHub                                             |
-| :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
-| <img src="https://github.com/SirLamer.png?size=72" />      | SirLamer       | [@SirLamer](https://github.com/SirLamer)           |
-| <img src="https://github.com/meteorlxy.png?size=72" />     | Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)         |
-| <img src="https://github.com/schulz3000.png?size=72" />    | Xaver Schulz   | [@schulz3000](https://github.com/schulz3000)       |
-| <img src="https://github.com/ihmels.png?size=72" />        | Yannick Ihmels | [@ihmels](https://github.com/ihmels)               |
-| <img src="https://github.com/btaens.png?size=72" />        | btaens         | [@btaens](https://github.com/btaens)               |
+|                                                             | Name           | GitHub                                               |
+| :--------------------------------------------------------:  | -------------- | ---------------------------------------------------- |
+| <img src="https://github.com/SirLamer.png?size=72" />       | SirLamer       | [@SirLamer](https://github.com/SirLamer)             |
+| <img src="https://github.com/meteorlxy.png?size=72" />      | Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)           |
+| <img src="https://github.com/schulz3000.png?size=72" />     | Xaver Schulz   | [@schulz3000](https://github.com/schulz3000)         |
+| <img src="https://github.com/ihmels.png?size=72" />         | Yannick Ihmels | [@ihmels](https://github.com/ihmels)                 |
+| <img src="https://github.com/btaens.png?size=72" />         | btaens         | [@btaens](https://github.com/btaens)                 |
+| <img src="https://github.com/david-driscoll.png?size=72" /> | David Driscoll | [@david-driscoll](https://github.com/david-driscoll) |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 

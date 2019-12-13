@@ -20,10 +20,10 @@ test('simple text', () => {
 })
 
 test('accept number for value', () => {
-    const vm = compileAndMount('<font-awesome-layers-text :value="42" />')
+  const vm = compileAndMount('<font-awesome-layers-text :value="42" />')
 
-    expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
-    expect(vm.$el.innerHTML).toBe('42')
+  expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
+  expect(vm.$el.innerHTML).toBe('42')
 })
 
 describe('transform', () => {
@@ -43,6 +43,7 @@ describe('counter', () => {
     expect(vm.$el.getAttribute('class')).not.toBe('fa-layers-text')
     expect(vm.$el.innerHTML).toBe('42')
   })
+
   test('position', () => {
     const vm = compileAndMount('<font-awesome-layers-text value="42" counter position="bottom-right" />')
 
