@@ -193,6 +193,12 @@ test('using spin', () => {
   expect(vm.$el.classList.contains('fa-spin')).toBeTruthy()
 })
 
+test('using inverse', () => {
+  const vm = mountFromProps({ icon: faCoffee, inverse: true })
+
+  expect(vm.$el.classList.contains('fa-inverse')).toBeTruthy()
+})
+
 describe('using transform', () => {
   test('string', () => {
     const vm = mountFromProps({ icon: faCoffee, transform: 'grow-40 left-4 rotate-15' })

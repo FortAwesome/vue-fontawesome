@@ -9,6 +9,7 @@ export function classList (props) {
     'fa-fw': props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,
+    'fa-inverse': props.inverse,
     'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,

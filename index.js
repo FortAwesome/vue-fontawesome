@@ -313,6 +313,7 @@
 	    'fa-fw': props.fixedWidth,
 	    'fa-border': props.border,
 	    'fa-li': props.listItem,
+	    'fa-inverse': props.inverse,
 	    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
 	    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
 	  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
@@ -425,6 +426,10 @@
 	    title: {
 	      type: String,
 	      default: null
+	    },
+	    inverse: {
+	      type: Boolean,
+	      default: false
 	    }
 	  },
 
@@ -492,18 +497,37 @@
 	    transform: {
 	      type: [String, Object],
 	      default: null
+	    },
+	    counter: {
+	      type: Boolean,
+	      default: false
+	    },
+	    position: {
+	      type: String,
+	      default: null,
+	      validator: function validator(value) {
+	        return ['bottom-left', 'bottom-right', 'top-left', 'top-right'].indexOf(value) > -1;
+	      }
 	    }
 	  },
 
 	  render: function render(createElement, context) {
+	    var familyPrefix = fontawesomeSvgCore.config.familyPrefix;
 	    var props = context.props;
+
+
+	    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
 
 	    var transform = objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
 
-	    var renderedText = fontawesomeSvgCore.text(props.value.toString(), _extends({}, transform));
+	    var renderedText = fontawesomeSvgCore.text(props.value.toString(), _extends({}, transform, classes));
 
 	    var abstract = renderedText.abstract;
 
+
+	    if (props.counter) {
+	      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
+	    }
 
 	    var convertCurry = convert.bind(null, createElement);
 
