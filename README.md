@@ -44,6 +44,7 @@
   * [Advanced](#advanced)
 - [Integrating with other tools and frameworks](#integrating-with-other-tools-and-frameworks)
   * [Nuxt.js](#nuxtjs)
+  * [PurgeCSS](#purgecss)
   * [Web Components with vue-web-component-wrapper](#web-components-with-vue-web-component-wrapper)
 - [FAQ](#faq)
   * [Why so explicit (the :icon="['far', 'coffee']" syntax)?](#why-so-explicit-the-iconfar-coffee-syntax)
@@ -628,6 +629,18 @@ css: [
 plugins: [
   '~/plugins/fontawesome.js'
 ]
+```
+
+### PurgeCSS
+
+If you use PurgeCSS, or use the nuxt.js tailwindcss module which comes with PurgeCSS prebundled, you need to add fontawesome css classes to the whitelist, as the classes only gets inserted on rendering, and PurgeCSS will treat them as unused and remove them otherwise.
+
+In your `nuxt.config.js`, add a purgeCSS config object. You may adjust the regex to your liking:
+
+```javascript
+purgeCSS: {
+  whitelistPatterns: [/svg.*/, /fa.*/]
+},
 ```
 
 ### Web Components with vue-web-component-wrapper
