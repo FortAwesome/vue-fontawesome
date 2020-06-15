@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -19,7 +19,8 @@
     "Xaver Schulz <github.com/schulz3000>",
     "Yannick Ihmels <github.com/ihmels>",
     "btaens <github.com/btaens>",
-    "David Driscoll <github.com/david-driscoll>"
+    "David Driscoll <github.com/david-driscoll>",
+    "Tyranteon <github.com/tyranteon>"
   ],
   "license": "MIT",
   "scripts": {

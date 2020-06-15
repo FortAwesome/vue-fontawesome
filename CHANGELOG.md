@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.1.10](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.10)  - 2020-06-15
+
+### Fixed
+* Add TSX support to Typescript definition
+
+---
+
 ## [0.1.9](https://github.com/FortAwesome/vue-fontawesome/releases/tag/0.1.9)  - 2019-12-13
 
 ### Added
