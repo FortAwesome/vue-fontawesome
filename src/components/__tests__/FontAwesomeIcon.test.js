@@ -1,7 +1,7 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCircle } from '../__fixtures__/icons'
+import { faCoffee, faCircle, farCoffee } from '../__fixtures__/icons'
 import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
@@ -256,5 +256,28 @@ describe('title', () => {
 
     expect(vm.$el.getElementsByTagName('title').length)
       .toBe(0)
+  })
+})
+
+
+describe('set prefix', () => {
+  library.add(farCoffee)
+    
+  test('default prefix is fas', () => {
+    const vm = mountFromProps({ icon: 'coffee' })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
+    expect(vm.$el.getAttribute('data-prefix')).toBe('fas')
+  })
+
+  test('default prefix is changed after setPrefix is called', () => {
+    FontAwesomeIcon.setPrefix('far')
+
+    const vm = mountFromProps({ icon: 'coffee' })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
+    expect(vm.$el.getAttribute('data-prefix')).toBe('far')
   })
 })

@@ -21,3 +21,15 @@ export const faCircle = {
     "..."
   ]
 }
+
+export const farCoffee = {
+  prefix: 'far',
+  iconName: 'coffee',
+  icon: [
+    640,
+    512,
+    [],
+    "f001",
+    "..."
+  ],
+}
