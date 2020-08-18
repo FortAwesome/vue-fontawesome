@@ -541,7 +541,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 
 ### Advanced
 
-[Power Transforms]((https://fontawesome.com/how-to-use/on-the-web/styling/power-transforms)):
+[Power Transforms](https://fontawesome.com/how-to-use/on-the-web/styling/power-transforms):
 
 ```html
 <font-awesome-icon icon="spinner" transform="shrink-6 left-4" />
