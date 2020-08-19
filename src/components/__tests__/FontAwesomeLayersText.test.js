@@ -1,52 +1,79 @@
-import Vue from 'vue/dist/vue'
-import FontAwesomeLayersText from '../FontAwesomeLayersText'
 import { compileAndMount } from '../__fixtures__/helpers'
-
-beforeEach(() => {
-  Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
-})
+import FontAwesomeLayersText from '../FontAwesomeLayersText'
 
 test('empty', () => {
-  const vm = compileAndMount('<font-awesome-layers-text />')
+  const wrapper = compileAndMount({
+    template: '<font-awesome-layers-text />',
+    components: {
+      FontAwesomeLayersText
+    }
+  })
+  console.warn(wrapper.element)
 
-  expect(vm.$el.tagName).toBe('SPAN')
+  expect(wrapper.element.tagName).toBe('span')
 })
 
 test('simple text', () => {
-  const vm = compileAndMount('<font-awesome-layers-text value="Test" />')
+  const vm = compileAndMount({
+    template: '<font-awesome-layers-text value="Test" />',
+    components: {
+      FontAwesomeLayersText
+    }
+  })
 
   expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
   expect(vm.$el.innerHTML).toBe('Test')
 })
 
 test('accept number for value', () => {
-  const vm = compileAndMount('<font-awesome-layers-text :value="42" />')
+  const wrapper = compileAndMount({
+    template: '<font-awesome-layers-text :value="42" />',
+    components: {
+      FontAwesomeLayersText
+    }
+  })
 
-  expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
-  expect(vm.$el.innerHTML).toBe('42')
+  expect(wrapper.element.getAttribute('class')).toBe('fa-layers-text')
+  expect(wrapper.element.innerHTML).toBe('42')
 })
 
 describe('transform', () => {
   test('string', () => {
-    const vm = compileAndMount('<font-awesome-layers-text value="1" transform="shrink-6" />')
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers-text value="1" transform="shrink-6" />',
+      components: {
+        FontAwesomeLayersText
+      }
+    })
 
     // It appears the jsdom doesn't set the transform for this, not sure why
-    expect(vm.$el)
+    console.warn(wrapper.html())
+    expect(wrapper.element)
   })
 })
 
 describe('counter', () => {
   test('simple', () => {
-    const vm = compileAndMount('<font-awesome-layers-text :value="42" :counter="true" />')
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers-text :value="42" :counter="true" />',
+      components: {
+        FontAwesomeLayersText
+      }
+    })
 
-    expect(vm.$el.getAttribute('class')).toBe('fa-layers-counter')
-    expect(vm.$el.getAttribute('class')).not.toBe('fa-layers-text')
-    expect(vm.$el.innerHTML).toBe('42')
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers-counter')
+    expect(wrapper.element.getAttribute('class')).not.toBe('fa-layers-text')
+    expect(wrapper.element.innerHTML).toBe('42')
   })
 
   test('position', () => {
-    const vm = compileAndMount('<font-awesome-layers-text value="42" counter position="bottom-right" />')
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers-text value="42" counter position="bottom-right" />',
+      components: {
+        FontAwesomeLayersText
+      }
+    })
 
-    expect(vm.$el.getAttribute('class')).toBe('fa-layers-counter fa-layers-bottom-right')
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers-counter fa-layers-bottom-right')
   })
 })
