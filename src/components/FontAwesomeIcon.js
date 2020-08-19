@@ -1,4 +1,5 @@
 import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
+import { defineComponent } from 'vue'
 import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
@@ -21,10 +22,8 @@ function normalizeIconArgs (icon) {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'FontAwesomeIcon',
-
-  functional: true,
 
   props: {
     border: {
@@ -64,7 +63,7 @@ export default {
     rotation: {
       type: [String, Number],
       default: null,
-      validator: (value) => [90, 180, 270].indexOf(parseInt(value, 10)) > -1
+      validator: (value) => [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
     },
     swapOpacity: {
       type: Boolean,
@@ -97,27 +96,31 @@ export default {
     }
   },
 
-  render (createElement, context) {
-    const { props } = context
-
-    const { icon: iconArgs, mask: maskArgs, symbol, title } = props
-    const icon = normalizeIconArgs(iconArgs)
+  setup (props, { attrs }) {
+    const { symbol, title } = props
+    const icon = normalizeIconArgs(props.icon)
     const classes = objectWithKey('classes', classList(props))
-    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
-    const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
-
-    const renderedIcon = faIcon(
-      icon,
-      { ...classes, ...transform, ...mask, symbol, title }
+    const transform = objectWithKey(
+      'transform',
+      (typeof props.transform === 'string')
+        ? faParse.transform(props.transform)
+        : props.transform
     )
+    const mask = objectWithKey('mask', normalizeIconArgs(props.mask))
+
+    const renderedIcon = faIcon(icon, {
+      ...classes,
+      ...transform,
+      ...mask,
+      symbol,
+      title
+    })
 
     if (!renderedIcon) {
       return log('Could not find one or more icon(s)', icon, mask)
     }
 
-    const { abstract } = renderedIcon
-    const convertCurry = convert.bind(null, createElement)
-
-    return convertCurry(abstract[0], {}, context.data)
+    const abstractElement = renderedIcon.abstract[0]
+    return convert(abstractElement, {}, attrs)
   }
-}
+})
