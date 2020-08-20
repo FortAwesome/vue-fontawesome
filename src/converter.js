@@ -1,5 +1,5 @@
-import { h, render } from 'vue'
-import { camelize } from 'humps'
+import { h } from 'vue'
+import humps from 'humps'
 
 /**
  * Converts a CSS style into a plain Javascript object.
@@ -13,7 +13,7 @@ function styleToObject (style) {
     .reduce(
       (output, pair) => {
         const idx = pair.indexOf(':')
-        const prop = camelize(pair.slice(0, idx))
+        const prop = humps.camelize(pair.slice(0, idx))
         const value = pair.slice(idx + 1).trim()
 
         output[prop] = value
