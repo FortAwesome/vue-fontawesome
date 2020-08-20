@@ -1,6 +1,5 @@
 import { config } from '@fortawesome/fontawesome-svg-core'
 import { defineComponent, h } from 'vue'
-import { addStaticClass } from '../utils'
 
 export default defineComponent({
   name: 'FontAwesomeLayers',
@@ -12,22 +11,14 @@ export default defineComponent({
     }
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const { familyPrefix } = config
 
-    const classes = [
+    const className = [
       `${familyPrefix}-layers`,
       ...(props.fixedWidth ? [`${familyPrefix}-fw`] : [])
     ]
 
-    return () =>
-      h(
-        'div',
-        {
-          ...attrs,
-          staticClass: addStaticClass(attrs.staticClass, classes)
-        },
-        slots.default
-      )
+    return () => h('div', { class: className }, slots.default ? slots.default() : [])
   }
 })
