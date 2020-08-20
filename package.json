@@ -58,7 +58,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "vue": "3.0.0-rc.5"
+    "vue": "3.0.0-rc.6"
   },
   "dependencies": {},
   "husky": {
