@@ -248,8 +248,10 @@ describe('mask', () => {
     expect(wrapper.element.innerHTML).toMatch(/clipPath/)
   })
 
-  test('will add icon referencing librbary', () => {
+  test('will add icon referencing library', () => {
     const wrapper = mountFromProps({ icon: ['fas', 'coffee'], mask: ['fas', 'circle'] })
+
+    // missing assertion here
   })
 })
 
@@ -257,17 +259,14 @@ describe('symbol', () => {
   test("will not create a symbol", () => {
     const wrapper = mountFromProps({ icon: faCoffee })
 
-    expect(wrapper.element.style.getPropertyValue('display'))
-      .toBe('')
+    expect(wrapper.element.style.getPropertyValue('display')).toBe('')
   })
 
   test("will create a symbol", () => {
     const wrapper = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
-    expect(wrapper.element.style.getPropertyValue('display'))
-      .toBe('none')
-    expect(wrapper.element.children[0].tagName)
-      .toBe('symbol')
+    expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
+    expect(wrapper.element.children[0].tagName).toBe('symbol')
   })
 })
 
@@ -275,14 +274,12 @@ describe('title', () => {
   test('using title', () => {
     const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
 
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML)
-      .toBe('Coffee')
+    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
   })
 
   test('not using title', () => {
     const wrapper = mountFromProps({ icon: faCoffee })
 
-    expect(wrapper.element.getElementsByTagName('title').length)
-      .toBe(0)
+    expect(wrapper.element.getElementsByTagName('title').length).toBe(0)
   })
 })
