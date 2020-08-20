@@ -8,21 +8,20 @@ test('empty', () => {
       FontAwesomeLayersText
     }
   })
-  console.warn(wrapper.element)
 
-  expect(wrapper.element.tagName).toBe('span')
+  expect(wrapper.element.tagName).toBe('SPAN')
 })
 
 test('simple text', () => {
-  const vm = compileAndMount({
+  const wrapper = compileAndMount({
     template: '<font-awesome-layers-text value="Test" />',
     components: {
       FontAwesomeLayersText
     }
   })
 
-  expect(vm.$el.getAttribute('class')).toBe('fa-layers-text')
-  expect(vm.$el.innerHTML).toBe('Test')
+  expect(wrapper.element.getAttribute('class')).toBe('fa-layers-text')
+  expect(wrapper.element.innerHTML).toBe('Test')
 })
 
 test('accept number for value', () => {
@@ -47,7 +46,6 @@ describe('transform', () => {
     })
 
     // It appears the jsdom doesn't set the transform for this, not sure why
-    console.warn(wrapper.html())
     expect(wrapper.element)
   })
 })

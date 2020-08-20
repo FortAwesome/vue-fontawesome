@@ -38,7 +38,8 @@ describe('class handling', () => {
       }
     })
 
-    expect(wrapper.element.getAttribute('class')).toBe('extra fa-layers')
+    expect(wrapper.element.classList.contains('extra')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
   })
 
   test('extra bound', () => {
