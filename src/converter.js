@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, render } from 'vue'
 import { camelize } from 'humps'
 
 /**
@@ -49,9 +49,9 @@ function combineClassObjects (...collections) {
 
   collections.forEach(set => {
     if (Array.isArray(set)) {
-      set.forEach(className => finalSet.add(className))
+      finalSet.forEach(className => finalSet.add(className))
     } else {
-      set.add(set)
+      finalSet.add(set)
     }
   })
 
@@ -63,19 +63,22 @@ function combineClassObjects (...collections) {
  * @param {AbstractElement | String} abstractElement The element to convert.
  * @param {Object} props The user-defined props.
  * @param {Object} attrs The user-defined native HTML attributes.
- * @returns {Function}
+ * @returns {Function | String}
  */
 export default function convert (abstractElement, props = {}, attrs = {}) {
   // If the abstract element is a string, we'll just return a string render function
   if (typeof abstractElement === 'string') {
-    return () => abstractElement
+    return abstractElement
   }
 
-  // Converting abstract element children into Vue render functions
-  const children = (abstractElement.children || []).map(convert)
+  // Converting abstract element children into Vue render functions, then we'll execute
+  // them to retrieve VDOM elements
+  const children = (abstractElement.children || [])
+    .map(child => convert(child))
+    .map(renderFn => typeof renderFn === 'string' ? renderFn : renderFn())
 
   // Converting abstract element attributes into valid Vue format
-  const mixins = Object.keys(abstractElement.attributes)
+  const mixins = Object.keys(abstractElement.attributes || {})
     .reduce(
       (mixins, key) => {
         const value = abstractElement.attributes[key]
@@ -101,14 +104,14 @@ export default function convert (abstractElement, props = {}, attrs = {}) {
     )
 
   // Now, we'll return the render function of the 
-  const { class: aClass = {}, style: aStyle = {}, ...otherAttrs } = attrs
+  const { class: _aClass = {}, style: aStyle = {}, ...otherAttrs } = attrs
 
   return () =>
     h(
       abstractElement.tag,
       {
         ...props,
-        class: combineClassObjects(mixins.class, aClass),
+        class: mixins.class,
         style: { ...mixins.style, ...aStyle },
         ...mixins.attrs,
         ...otherAttrs
