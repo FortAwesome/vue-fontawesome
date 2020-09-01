@@ -37,10 +37,11 @@
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": ">= 1.2.0 < 1.3",
-    "vue": "~2"
+    "vue": "3.0.0-rc.6"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@vue/test-utils": "^2.0.0-beta.2",
     "babel-core": "^6.26.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -57,7 +58,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "vue": "^2.4.4"
+    "vue": "3.0.0-rc.6"
   },
   "dependencies": {},
   "husky": {

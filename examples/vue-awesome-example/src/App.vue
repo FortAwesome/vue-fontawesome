@@ -44,18 +44,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import { faChessQueen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
 
-export default {
+export default defineComponent({
   name: 'App',
 
-  computed: {
-    queen () {
-      return faChessQueen
-    }
+  setup () {
+    const queen = computed(() => faChessQueen)
+
+    return { queen }
+  },
+
+  components: {
+    FontAwesomeIcon,
+    FontAwesomeLayers,
+    FontAwesomeLayersText
   }
-}
+})
 </script>
 
 <style>

@@ -1,11 +1,10 @@
 import { config, parse, text } from '@fortawesome/fontawesome-svg-core'
+import { defineComponent } from 'vue'
 import convert from '../converter'
 import { objectWithKey } from '../utils'
 
-export default {
+export default defineComponent({
   name: 'FontAwesomeLayersText',
-
-  functional: true,
 
   props: {
     value: {
@@ -27,27 +26,21 @@ export default {
     },
   },
 
-  render (createElement, context) {
+  setup (props, { attrs }) {
     const { familyPrefix } = config
-    const { props } = context
 
     const classes = objectWithKey('classes', [
       ...(props.counter ? [`${familyPrefix}-layers-counter`] : []),
       ...(props.position ? [`${familyPrefix}-layers-${props.position}`] : [])
-    ]);
-
-    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? parse.transform(props.transform) : props.transform)
-
+    ])
+    const transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform)
     const renderedText = text(props.value.toString(), { ...transform, ...classes })
 
     const { abstract } = renderedText
-
     if (props.counter) {
       abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '')
     }
 
-    const convertCurry = convert.bind(null, createElement)
-
-    return convertCurry(abstract[0], {}, context.data)
+    return convert(abstract[0], {}, attrs)
   }
-}
+})

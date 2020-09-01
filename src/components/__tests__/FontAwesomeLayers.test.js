@@ -1,55 +1,66 @@
-import Vue from 'vue/dist/vue'
-import FontAwesomeLayers from '../FontAwesomeLayers'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
 import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import FontAwesomeLayers from '../FontAwesomeLayers'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle)
-  Vue.component('font-awesome-layers', FontAwesomeLayers)
 })
 
 test('empty layers', () => {
-  const vm = compileAndMount(
-    `<font-awesome-layers />`
-  )
+  const wrapper = compileAndMount({
+    template: '<font-awesome-layers />',
+    components: {
+      FontAwesomeLayers
+    }
+  })
 
-  expect(vm.$el.children.length).toBe(0)
+  expect(wrapper.element.children.length).toBe(0)
 })
 
 test('empty layers', () => {
-  const vm = compileAndMount(
-    `<font-awesome-layers><i /><i /></font-awesome-layers>`
-  )
+  const wrapper = compileAndMount({
+    template: '<font-awesome-layers><i /><i /></font-awesome-layers>',
+    components: {
+      FontAwesomeLayers
+    }
+  })
 
-  expect(vm.$el.children.length).toBe(2)
+  expect(wrapper.element.children.length).toBe(2)
 })
 
 describe('class handling', () => {
   test('extra static', () => {
-    const vm = compileAndMount(
-      `<font-awesome-layers class="extra" />`,
-    )
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers class="extra" />',
+      components: {
+        FontAwesomeLayers
+      }
+    })
 
-    expect(vm.$el.getAttribute('class'))
-      .toBe('extra fa-layers')
+    expect(wrapper.element.classList.contains('extra')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
   })
 
   test('extra bound', () => {
-    const vm = compileAndMount(
-      `<font-awesome-layers :class="['extra']" />`,
-    )
+    const wrapper = compileAndMount({
+      template: `<font-awesome-layers :class="['extra']" />`,
+      components: {
+        FontAwesomeLayers
+      }
+    })
 
-    expect(vm.$el.getAttribute('class'))
-      .toBe('fa-layers extra')
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers extra')
   })
 
   test('fixed width', () => {
-    const vm = compileAndMount(
-      `<font-awesome-layers fixed-width />`,
-    )
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers fixed-width />',
+      components: {
+        FontAwesomeLayers
+      }
+    })
 
-    expect(vm.$el.getAttribute('class'))
-      .toBe('fa-layers fa-fw')
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
   })
 })
