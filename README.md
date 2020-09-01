@@ -9,6 +9,15 @@
 
 > Font Awesome 5 Vue component using SVG with JS
 
+---
+
+**Vue 3 is just around the corner!**
+
+**If you have been using 0.1.x of vue-fontawesome, you can safely upgrade to
+2.x. We have some upgrading information in the [CHANGELOG](./CHANGELOG.md)**
+
+---
+
 <!-- toc -->
 
 - [Introduction](#introduction)
@@ -16,7 +25,6 @@
   * [Upgrading Font Awesome?](#upgrading-font-awesome)
   * [Get started](#get-started)
   * [Learn about our new SVG implementation](#learn-about-our-new-svg-implementation)
-  * [Going from 0.0.x to 0.1.0](#going-from-00x-to-010)
 - [Installation](#installation)
 - [Add more styles or Pro icons](#add-more-styles-or-pro-icons)
 - [Usage](#usage)
@@ -86,25 +94,31 @@ the web fonts implementation that was used in version 4 and older of Font Awesom
 
 > https://fontawesome.com/how-to-use/on-the-web/advanced/svg-javascript-core
 
-### Going from 0.0.x to 0.1.0
-
-See [UPGRADING.md](./UPGRADING.md).
-
-You might also be interested in the larger umbrella project [UPGRADING.md](https://github.com/FortAwesome/Font-Awesome/blob/master/UPGRADING.md)
-
 ## Installation
+
+Install the core package and icon content.
 
 ```
 $ npm i --save @fortawesome/fontawesome-svg-core
 $ npm i --save @fortawesome/free-solid-svg-icons
-$ npm i --save @fortawesome/vue-fontawesome
 ```
 
 Or with Yarn:
 ```
 $ yarn add @fortawesome/fontawesome-svg-core
 $ yarn add @fortawesome/free-solid-svg-icons
-$ yarn add @fortawesome/vue-fontawesome
+```
+
+**Using Vue 2.x**
+
+```
+$ npm i --save @fortawesome/vue-fontawesome@2
+```
+
+**Using Vue 3.x**
+
+```
+$ npm i --save @fortawesome/vue-fontawesome@3
 ```
 
 ## Add more styles or Pro icons
@@ -127,9 +141,6 @@ $ npm i --save @fortawesome/pro-regular-svg-icons
 $ npm i --save @fortawesome/pro-light-svg-icons
 $ npm i --save @fortawesome/pro-duotone-svg-icons
 ```
-
-**Duotone icons are currently in pre-release and are coming soon to this component.**
-
 
 ## Usage
 
