@@ -100,6 +100,13 @@ $ npm i --save @fortawesome/free-solid-svg-icons
 $ npm i --save @fortawesome/vue-fontawesome
 ```
 
+Or with Yarn:
+```
+$ yarn add @fortawesome/fontawesome-svg-core
+$ yarn add @fortawesome/free-solid-svg-icons
+$ yarn add @fortawesome/vue-fontawesome
+```
+
 ## Add more styles or Pro icons
 
 Brands are separated into their own style and for customers upgrading from
@@ -123,13 +130,6 @@ $ npm i --save @fortawesome/pro-duotone-svg-icons
 
 **Duotone icons are currently in pre-release and are coming soon to this component.**
 
-Or with Yarn:
-
-```
-$ yarn add @fortawesome/fontawesome-svg-core
-$ yarn add @fortawesome/free-solid-svg-icons
-$ yarn add @fortawesome/vue-fontawesome
-```
 
 ## Usage
 
