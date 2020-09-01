@@ -139,7 +139,7 @@
         'canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,' +
         'th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,' +
         'option,output,progress,select,textarea,details,dialog,menu,' +
-        'summary,content,template,blockquote,iframe,tfoot';
+        'summary,template,blockquote,iframe,tfoot';
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Element
     const SVG_TAGS = 'svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,' +
         'defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,' +
@@ -357,7 +357,11 @@
         const effects = new Set();
         const add = (effectsToAdd) => {
             if (effectsToAdd) {
-                effectsToAdd.forEach(effect => effects.add(effect));
+                effectsToAdd.forEach(effect => {
+                    if (effect !== activeEffect) {
+                        effects.add(effect);
+                    }
+                });
             }
         };
         if (type === "clear" /* CLEAR */) {
@@ -564,35 +568,39 @@
     const toReadonly = (value) => isObject(value) ? readonly(value) : value;
     const toShallow = (value) => value;
     const getProto = (v) => Reflect.getPrototypeOf(v);
-    function get$1(target, key, wrap) {
-        target = toRaw(target);
+    function get$1(target, key, isReadonly = false, isShallow = false) {
+        // #1772: readonly(reactive(Map)) should return readonly + reactive version
+        // of the value
+        target = target["__v_raw" /* RAW */];
+        const rawTarget = toRaw(target);
         const rawKey = toRaw(key);
         if (key !== rawKey) {
-            track(target, "get" /* GET */, key);
+            !isReadonly && track(rawTarget, "get" /* GET */, key);
         }
-        track(target, "get" /* GET */, rawKey);
-        const { has, get } = getProto(target);
-        if (has.call(target, key)) {
-            return wrap(get.call(target, key));
+        !isReadonly && track(rawTarget, "get" /* GET */, rawKey);
+        const { has } = getProto(rawTarget);
+        const wrap = isReadonly ? toReadonly : isShallow ? toShallow : toReactive;
+        if (has.call(rawTarget, key)) {
+            return wrap(target.get(key));
         }
-        else if (has.call(target, rawKey)) {
-            return wrap(get.call(target, rawKey));
+        else if (has.call(rawTarget, rawKey)) {
+            return wrap(target.get(rawKey));
         }
     }
-    function has$1(key) {
-        const target = toRaw(this);
+    function has$1(key, isReadonly = false) {
+        const target = this["__v_raw" /* RAW */];
+        const rawTarget = toRaw(target);
         const rawKey = toRaw(key);
         if (key !== rawKey) {
-            track(target, "has" /* HAS */, key);
+            !isReadonly && track(rawTarget, "has" /* HAS */, key);
         }
-        track(target, "has" /* HAS */, rawKey);
-        const has = getProto(target).has;
-        return has.call(target, key) || has.call(target, rawKey);
+        !isReadonly && track(rawTarget, "has" /* HAS */, rawKey);
+        return target.has(key) || target.has(rawKey);
     }
-    function size(target) {
-        target = toRaw(target);
-        track(target, "iterate" /* ITERATE */, ITERATE_KEY);
-        return Reflect.get(getProto(target), 'size', target);
+    function size(target, isReadonly = false) {
+        target = target["__v_raw" /* RAW */];
+        !isReadonly && track(toRaw(target), "iterate" /* ITERATE */, ITERATE_KEY);
+        return Reflect.get(target, 'size', target);
     }
     function add(value) {
         value = toRaw(value);
@@ -661,11 +669,11 @@
         }
         return result;
     }
-    function createForEach(isReadonly, shallow) {
+    function createForEach(isReadonly, isShallow) {
         return function forEach(callback, thisArg) {
             const observed = this;
             const target = toRaw(observed);
-            const wrap = isReadonly ? toReadonly : shallow ? toShallow : toReactive;
+            const wrap = isReadonly ? toReadonly : isShallow ? toShallow : toReactive;
             !isReadonly && track(target, "iterate" /* ITERATE */, ITERATE_KEY);
             // important: create sure the callback is
             // 1. invoked with the reactive map as `this` and 3rd arg
@@ -676,16 +684,17 @@
             return getProto(target).forEach.call(target, wrappedCallback);
         };
     }
-    function createIterableMethod(method, isReadonly, shallow) {
+    function createIterableMethod(method, isReadonly, isShallow) {
         return function (...args) {
-            const target = toRaw(this);
-            const isMap = target instanceof Map;
+            const target = this["__v_raw" /* RAW */];
+            const rawTarget = toRaw(target);
+            const isMap = rawTarget instanceof Map;
             const isPair = method === 'entries' || (method === Symbol.iterator && isMap);
             const isKeyOnly = method === 'keys' && isMap;
-            const innerIterator = getProto(target)[method].apply(target, args);
-            const wrap = isReadonly ? toReadonly : shallow ? toShallow : toReactive;
+            const innerIterator = target[method](...args);
+            const wrap = isReadonly ? toReadonly : isShallow ? toShallow : toReactive;
             !isReadonly &&
-                track(target, "iterate" /* ITERATE */, isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
+                track(rawTarget, "iterate" /* ITERATE */, isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
             // return a wrapped iterator which returns observed versions of the
             // values emitted from the real iterator
             return {
@@ -717,7 +726,7 @@
     }
     const mutableInstrumentations = {
         get(key) {
-            return get$1(this, key, toReactive);
+            return get$1(this, key);
         },
         get size() {
             return size(this);
@@ -731,7 +740,7 @@
     };
     const shallowInstrumentations = {
         get(key) {
-            return get$1(this, key, toShallow);
+            return get$1(this, key, false, true);
         },
         get size() {
             return size(this);
@@ -745,12 +754,14 @@
     };
     const readonlyInstrumentations = {
         get(key) {
-            return get$1(this, key, toReadonly);
+            return get$1(this, key, true);
         },
         get size() {
-            return size(this);
+            return size(this, true);
         },
-        has: has$1,
+        has(key) {
+            return has$1.call(this, key, true);
+        },
         add: createReadonlyMethod("add" /* ADD */),
         set: createReadonlyMethod("set" /* SET */),
         delete: createReadonlyMethod("delete" /* DELETE */),
@@ -802,13 +813,25 @@
         }
     }
 
-    const collectionTypes = new Set([Set, Map, WeakMap, WeakSet]);
-    const isObservableType = /*#__PURE__*/ makeMap('Object,Array,Map,Set,WeakMap,WeakSet');
-    const canObserve = (value) => {
-        return (!value["__v_skip" /* SKIP */] &&
-            isObservableType(toRawType(value)) &&
-            !Object.isFrozen(value));
-    };
+    function targetTypeMap(rawType) {
+        switch (rawType) {
+            case 'Object':
+            case 'Array':
+                return 1 /* COMMON */;
+            case 'Map':
+            case 'Set':
+            case 'WeakMap':
+            case 'WeakSet':
+                return 2 /* COLLECTION */;
+            default:
+                return 0 /* INVALID */;
+        }
+    }
+    function getTargetType(value) {
+        return value["__v_skip" /* SKIP */] || !Object.isExtensible(value)
+            ? 0 /* INVALID */
+            : targetTypeMap(toRawType(value));
+    }
     function reactive(target) {
         // if trying to observe a readonly proxy, return the readonly version.
         if (target && target["__v_isReadonly" /* IS_READONLY */]) {
@@ -847,10 +870,11 @@
             return target[reactiveFlag];
         }
         // only a whitelist of value types can be observed.
-        if (!canObserve(target)) {
+        const targetType = getTargetType(target);
+        if (targetType === 0 /* INVALID */) {
             return target;
         }
-        const observed = new Proxy(target, collectionTypes.has(target.constructor) ? collectionHandlers : baseHandlers);
+        const observed = new Proxy(target, targetType === 2 /* COLLECTION */ ? collectionHandlers : baseHandlers);
         def(target, reactiveFlag, observed);
         return observed;
     }
@@ -1091,40 +1115,37 @@
         }
     }
 
-    const queue = [];
-    const postFlushCbs = [];
-    const resolvedPromise = Promise.resolve();
-    let currentFlushPromise = null;
     let isFlushing = false;
     let isFlushPending = false;
-    let flushIndex = -1;
-    let pendingPostFlushCbs = null;
-    let pendingPostFlushIndex = 0;
+    const queue = [];
+    let flushIndex = 0;
+    const pendingPreFlushCbs = [];
+    let activePreFlushCbs = null;
+    let preFlushIndex = 0;
+    const pendingPostFlushCbs = [];
+    let activePostFlushCbs = null;
+    let postFlushIndex = 0;
+    const resolvedPromise = Promise.resolve();
+    let currentFlushPromise = null;
+    let currentPreFlushParentJob = null;
     const RECURSION_LIMIT = 100;
     function nextTick(fn) {
         const p = currentFlushPromise || resolvedPromise;
         return fn ? p.then(fn) : p;
     }
     function queueJob(job) {
-        if (!queue.includes(job, flushIndex + 1)) {
+        // the dedupe search uses the startIndex argument of Array.includes()
+        // by default the search index includes the current job that is being run
+        // so it cannot recursively trigger itself again.
+        // if the job is a watch() callback, the search will start with a +1 index to
+        // allow it recursively trigger itself - it is the user's responsibility to
+        // ensure it doesn't end up in an infinite loop.
+        if ((!queue.length ||
+            !queue.includes(job, isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex)) &&
+            job !== currentPreFlushParentJob) {
             queue.push(job);
             queueFlush();
         }
-    }
-    function queuePostFlushCb(cb) {
-        if (!isArray(cb)) {
-            if (!pendingPostFlushCbs ||
-                !pendingPostFlushCbs.includes(cb, pendingPostFlushIndex + 1)) {
-                postFlushCbs.push(cb);
-            }
-        }
-        else {
-            // if cb is an array, it is a component lifecycle hook which can only be
-            // triggered by a job, which is already deduped in the main queue, so
-            // we can skip dupicate check here to improve perf
-            postFlushCbs.push(...cb);
-        }
-        queueFlush();
     }
     function queueFlush() {
         if (!isFlushing && !isFlushPending) {
@@ -1132,30 +1153,74 @@
             currentFlushPromise = resolvedPromise.then(flushJobs);
         }
     }
-    function flushPostFlushCbs(seen) {
-        if (postFlushCbs.length) {
-            pendingPostFlushCbs = [...new Set(postFlushCbs)];
-            postFlushCbs.length = 0;
+    function queueCb(cb, activeQueue, pendingQueue, index) {
+        if (!isArray(cb)) {
+            if (!activeQueue ||
+                !activeQueue.includes(cb, cb.allowRecurse ? index + 1 : index)) {
+                pendingQueue.push(cb);
+            }
+        }
+        else {
+            // if cb is an array, it is a component lifecycle hook which can only be
+            // triggered by a job, which is already deduped in the main queue, so
+            // we can skip duplicate check here to improve perf
+            pendingQueue.push(...cb);
+        }
+        queueFlush();
+    }
+    function queuePreFlushCb(cb) {
+        queueCb(cb, activePreFlushCbs, pendingPreFlushCbs, preFlushIndex);
+    }
+    function queuePostFlushCb(cb) {
+        queueCb(cb, activePostFlushCbs, pendingPostFlushCbs, postFlushIndex);
+    }
+    function flushPreFlushCbs(seen, parentJob = null) {
+        if (pendingPreFlushCbs.length) {
+            currentPreFlushParentJob = parentJob;
+            activePreFlushCbs = [...new Set(pendingPreFlushCbs)];
+            pendingPreFlushCbs.length = 0;
             if ((process.env.NODE_ENV !== 'production')) {
                 seen = seen || new Map();
             }
-            for (pendingPostFlushIndex = 0; pendingPostFlushIndex < pendingPostFlushCbs.length; pendingPostFlushIndex++) {
+            for (preFlushIndex = 0; preFlushIndex < activePreFlushCbs.length; preFlushIndex++) {
                 if ((process.env.NODE_ENV !== 'production')) {
-                    checkRecursiveUpdates(seen, pendingPostFlushCbs[pendingPostFlushIndex]);
+                    checkRecursiveUpdates(seen, activePreFlushCbs[preFlushIndex]);
                 }
-                pendingPostFlushCbs[pendingPostFlushIndex]();
+                activePreFlushCbs[preFlushIndex]();
             }
-            pendingPostFlushCbs = null;
-            pendingPostFlushIndex = 0;
+            activePreFlushCbs = null;
+            preFlushIndex = 0;
+            currentPreFlushParentJob = null;
+            // recursively flush until it drains
+            flushPreFlushCbs(seen, parentJob);
         }
     }
-    const getId = (job) => (job.id == null ? Infinity : job.id);
+    function flushPostFlushCbs(seen) {
+        if (pendingPostFlushCbs.length) {
+            activePostFlushCbs = [...new Set(pendingPostFlushCbs)];
+            pendingPostFlushCbs.length = 0;
+            if ((process.env.NODE_ENV !== 'production')) {
+                seen = seen || new Map();
+            }
+            activePostFlushCbs.sort((a, b) => getId(a) - getId(b));
+            for (postFlushIndex = 0; postFlushIndex < activePostFlushCbs.length; postFlushIndex++) {
+                if ((process.env.NODE_ENV !== 'production')) {
+                    checkRecursiveUpdates(seen, activePostFlushCbs[postFlushIndex]);
+                }
+                activePostFlushCbs[postFlushIndex]();
+            }
+            activePostFlushCbs = null;
+            postFlushIndex = 0;
+        }
+    }
+    const getId = (job) => job.id == null ? Infinity : job.id;
     function flushJobs(seen) {
         isFlushPending = false;
         isFlushing = true;
         if ((process.env.NODE_ENV !== 'production')) {
             seen = seen || new Map();
         }
+        flushPreFlushCbs(seen);
         // Sort queue before flush.
         // This ensures that:
         // 1. Components are updated from parent to child. (because parent is always
@@ -1166,24 +1231,28 @@
         // Jobs can never be null before flush starts, since they are only invalidated
         // during execution of another flushed job.
         queue.sort((a, b) => getId(a) - getId(b));
-        for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
-            const job = queue[flushIndex];
-            if (job) {
-                if ((process.env.NODE_ENV !== 'production')) {
-                    checkRecursiveUpdates(seen, job);
+        try {
+            for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
+                const job = queue[flushIndex];
+                if (job) {
+                    if ((process.env.NODE_ENV !== 'production')) {
+                        checkRecursiveUpdates(seen, job);
+                    }
+                    callWithErrorHandling(job, null, 14 /* SCHEDULER */);
                 }
-                callWithErrorHandling(job, null, 14 /* SCHEDULER */);
             }
         }
-        flushIndex = -1;
-        queue.length = 0;
-        flushPostFlushCbs(seen);
-        isFlushing = false;
-        currentFlushPromise = null;
-        // some postFlushCb queued jobs!
-        // keep flushing until it drains.
-        if (queue.length || postFlushCbs.length) {
-            flushJobs(seen);
+        finally {
+            flushIndex = 0;
+            queue.length = 0;
+            flushPostFlushCbs(seen);
+            isFlushing = false;
+            currentFlushPromise = null;
+            // some postFlushCb queued jobs!
+            // keep flushing until it drains.
+            if (queue.length || pendingPostFlushCbs.length) {
+                flushJobs(seen);
+            }
         }
     }
     function checkRecursiveUpdates(seen, fn) {
@@ -1193,9 +1262,11 @@
         else {
             const count = seen.get(fn);
             if (count > RECURSION_LIMIT) {
-                throw new Error('Maximum recursive updates exceeded. ' +
-                    "You may have code that is mutating state in your component's " +
-                    'render function or updated hook or watcher source function.');
+                throw new Error(`Maximum recursive updates exceeded. ` +
+                    `This means you have a reactive effect that is mutating its own ` +
+                    `dependencies and thus recursively triggering itself. Possible sources ` +
+                    `include component template, render function, updated hook or ` +
+                    `watcher source function.`);
             }
             else {
                 seen.set(fn, count + 1);
@@ -1327,6 +1398,8 @@
     const isTeleport = (type) => type.__isTeleport;
     const NULL_DYNAMIC_COMPONENT = Symbol();
 
+    let isRenderingTemplateSlot = false;
+
     const Fragment = Symbol((process.env.NODE_ENV !== 'production') ? 'Fragment' : undefined);
     const Text = Symbol((process.env.NODE_ENV !== 'production') ? 'Text' : undefined);
     const Comment = Symbol((process.env.NODE_ENV !== 'production') ? 'Comment' : undefined);
@@ -1452,17 +1525,19 @@
             warn(`VNode created with invalid key (NaN). VNode type:`, vnode.type);
         }
         normalizeChildren(vnode, children);
-        // presence of a patch flag indicates this node needs patching on updates.
-        // component nodes also should always be patched, because even if the
-        // component doesn't need to update, it needs to persist the instance on to
-        // the next vnode so that it can be properly unmounted later.
-        if (shouldTrack$1 > 0 &&
+        if ((shouldTrack$1 > 0 || isRenderingTemplateSlot) &&
+            // avoid a block node from tracking itself
             !isBlockNode &&
+            // has current parent block
             currentBlock &&
+            // presence of a patch flag indicates this node needs patching on updates.
+            // component nodes also should always be patched, because even if the
+            // component doesn't need to update, it needs to persist the instance on to
+            // the next vnode so that it can be properly unmounted later.
+            (patchFlag > 0 || shapeFlag & 6 /* COMPONENT */) &&
             // the EVENTS flag is only for hydration and if it is the only flag, the
             // vnode should not be considered dynamic due to handler caching.
-            patchFlag !== 32 /* HYDRATE_EVENTS */ &&
-            (patchFlag > 0 || shapeFlag & 6 /* COMPONENT */)) {
+            patchFlag !== 32 /* HYDRATE_EVENTS */) {
             currentBlock.push(vnode);
         }
         return vnode;
@@ -1766,6 +1841,7 @@
         });
         return state;
     }
+    const TransitionHookValidator = [Function, Array];
     const BaseTransitionImpl = {
         name: `BaseTransition`,
         props: {
@@ -1773,20 +1849,20 @@
             appear: Boolean,
             persisted: Boolean,
             // enter
-            onBeforeEnter: Function,
-            onEnter: Function,
-            onAfterEnter: Function,
-            onEnterCancelled: Function,
+            onBeforeEnter: TransitionHookValidator,
+            onEnter: TransitionHookValidator,
+            onAfterEnter: TransitionHookValidator,
+            onEnterCancelled: TransitionHookValidator,
             // leave
-            onBeforeLeave: Function,
-            onLeave: Function,
-            onAfterLeave: Function,
-            onLeaveCancelled: Function,
+            onBeforeLeave: TransitionHookValidator,
+            onLeave: TransitionHookValidator,
+            onAfterLeave: TransitionHookValidator,
+            onLeaveCancelled: TransitionHookValidator,
             // appear
-            onBeforeAppear: Function,
-            onAppear: Function,
-            onAfterAppear: Function,
-            onAppearCancelled: Function
+            onBeforeAppear: TransitionHookValidator,
+            onAppear: TransitionHookValidator,
+            onAfterAppear: TransitionHookValidator,
+            onAppearCancelled: TransitionHookValidator
         },
         setup(props, { slots }) {
             const instance = getCurrentInstance();
@@ -2089,7 +2165,8 @@
                 `a reactive object, or an array of these types.`);
         };
         let getter;
-        if (isRef(source)) {
+        const isRefSource = isRef(source);
+        if (isRefSource) {
             getter = () => source.value;
         }
         else if (isReactive(source)) {
@@ -2152,7 +2229,7 @@
             if (cb) {
                 // watch(source, cb)
                 const newValue = runner();
-                if (deep || hasChanged(newValue, oldValue)) {
+                if (deep || isRefSource || hasChanged(newValue, oldValue)) {
                     // cleanup before running cb again
                     if (cleanup) {
                         cleanup();
@@ -2171,6 +2248,9 @@
                 runner();
             }
         };
+        // important: mark the job as a watcher callback so that scheduler knows it
+        // it is allowed to self-trigger (#1727)
+        job.allowRecurse = !!cb;
         let scheduler;
         if (flush === 'sync') {
             scheduler = job;
@@ -2180,7 +2260,7 @@
             job.id = -1;
             scheduler = () => {
                 if (!instance || instance.isMounted) {
-                    queueJob(job);
+                    queuePreFlushCb(job);
                 }
                 else {
                     // with 'pre' option, the first call must happen before
@@ -2254,6 +2334,7 @@
         }
         return value;
     }
+    let isInBeforeCreate = false;
     function resolveMergedOptions(instance) {
         const raw = instance.type;
         const { __merged, mixins, extends: extendsOptions } = raw;
@@ -2346,7 +2427,7 @@
                     accessCache[key] = 3 /* CONTEXT */;
                     return ctx[key];
                 }
-                else {
+                else if (!__VUE_OPTIONS_API__ || !isInBeforeCreate) {
                     accessCache[key] = 4 /* OTHER */;
                 }
             }
@@ -2378,9 +2459,10 @@
             }
             else if ((process.env.NODE_ENV !== 'production') &&
                 currentRenderingInstance &&
-                // #1091 avoid internal isRef/isVNode checks on component instance leading
-                // to infinite warning loop
-                key.indexOf('__v') !== 0) {
+                (!isString(key) ||
+                    // #1091 avoid internal isRef/isVNode checks on component instance leading
+                    // to infinite warning loop
+                    key.indexOf('__v') !== 0)) {
                 if (data !== EMPTY_OBJ && key[0] === '$' && hasOwn(data, key)) {
                     warn(`Property ${JSON.stringify(key)} must be accessed via $data because it starts with a reserved ` +
                         `character and is not proxied on the render context.`);
@@ -2503,9 +2585,7 @@
 
     // implementation, close to no-op
     function defineComponent(options) {
-        return isFunction(options)
-            ? { setup: options, name: options.name }
-            : options;
+        return isFunction(options) ? { setup: options, name: options.name } : options;
     }
 
     // Actual implementation
@@ -2638,18 +2718,23 @@
     }
     const importantRE = /\s*!important$/;
     function setStyle(style, name, val) {
-        if (name.startsWith('--')) {
-            // custom property definition
-            style.setProperty(name, val);
+        if (isArray(val)) {
+            val.forEach(v => setStyle(style, name, v));
         }
         else {
-            const prefixed = autoPrefix(style, name);
-            if (importantRE.test(val)) {
-                // !important
-                style.setProperty(hyphenate(prefixed), val.replace(importantRE, ''), 'important');
+            if (name.startsWith('--')) {
+                // custom property definition
+                style.setProperty(name, val);
             }
             else {
-                style[prefixed] = val;
+                const prefixed = autoPrefix(style, name);
+                if (importantRE.test(val)) {
+                    // !important
+                    style.setProperty(hyphenate(prefixed), val.replace(importantRE, ''), 'important');
+                }
+                else {
+                    style[prefixed] = val;
+                }
             }
         }
     }
@@ -2769,20 +2854,24 @@
         el.removeEventListener(event, handler, options);
     }
     function patchEvent(el, rawName, prevValue, nextValue, instance = null) {
-        const invoker = prevValue && prevValue.invoker;
-        if (nextValue && invoker) {
-            prevValue.invoker = null;
-            invoker.value = nextValue;
-            nextValue.invoker = invoker;
+        // vei = vue event invokers
+        const invokers = el._vei || (el._vei = {});
+        const existingInvoker = invokers[rawName];
+        if (nextValue && existingInvoker) {
+            // patch
+            existingInvoker.value = nextValue;
         }
         else {
             const [name, options] = parseName(rawName);
             if (nextValue) {
-                addEventListener(el, name, createInvoker(nextValue, instance), options);
+                // add
+                const invoker = (invokers[rawName] = createInvoker(nextValue, instance));
+                addEventListener(el, name, invoker, options);
             }
-            else if (invoker) {
+            else if (existingInvoker) {
                 // remove
-                removeEventListener(el, name, invoker, options);
+                removeEventListener(el, name, existingInvoker, options);
+                invokers[rawName] = undefined;
             }
         }
     }
@@ -2813,7 +2902,6 @@
             }
         };
         invoker.value = initialValue;
-        initialValue.invoker = invoker;
         invoker.attached = getNow();
         return invoker;
     }
@@ -2888,6 +2976,11 @@
         // Note that `contentEditable` doesn't have this problem: its DOM
         // property is also enumerated string values.
         if (key === 'spellcheck' || key === 'draggable') {
+            return false;
+        }
+        // #1787 form as an attribute must be a string, while it accepts an Element as
+        // a prop
+        if (key === 'form' && typeof value === 'string') {
             return false;
         }
         // #1526 <input list> must be set as attribute
@@ -3296,7 +3389,7 @@
     // This entry exports the runtime only, and is built as
     (process.env.NODE_ENV !== 'production') && initDev();
 
-    var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
     function createCommonjsModule(fn, module) {
     	return module = { exports: {} }, fn(module, module.exports), module.exports;

@@ -13,12 +13,14 @@ test        | Execute unit tests
 ## Release this project
 <a name="release"></a>
 
+**During pre release, make sure and use `--tag` and `--npm-dist-tag`**
+
 1. Update `package.json` and change `version`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
-1. `npm publish`
+1. `npm publish --tag prerelease`
 1. `npm pack`
-1. `CLOUDSMITH_API_KEY=API_TOKEN cloudsmith upload npm fortawesome/fontawesome-pro ./fortawesome-vue-fontawesome-VERSION.tgz`
+1. `CLOUDSMITH_API_KEY=API_TOKEN cloudsmith upload npm --npm-dist-tag prerelease fortawesome/fontawesome-pro ./fortawesome-vue-fontawesome-VERSION.tgz`
 1. `git add .`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
