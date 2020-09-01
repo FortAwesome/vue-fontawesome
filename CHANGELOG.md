@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+- [Vue 3.x compatible version of this component](https://github.com/FortAwesome/vue-fontawesome/tree/3.x)
+- [CHANGELOG for version 3.x](https://github.com/FortAwesome/vue-fontawesome/blob/3.x/CHANGELOG.md)
+
+---
+
 ## [2.0.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.0)  - 2020-09-01
 
 This release marks the official major release of the component as preparation
