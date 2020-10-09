@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [3.0.0-2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0-2) - 2020-10-09
+
+### Fixed
+
+* Make Vue as an external dependency #258 #260
+
+---
+
 ## [3.0.0-1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0-1) - 2020-09-01
 
 ### Added
