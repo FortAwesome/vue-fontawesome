@@ -34,6 +34,7 @@
     + [Using Regular icons](#using-regular-icons)
     + [Using Light icons](#using-light-icons)
     + [Using Duotone icons](#using-duotone-icons)
+    + [Import all icons from a package](#import-all-icons-from-a-package)
     + [Quick warning about self-closing tags](#quick-warning-about-self-closing-tags)
     + [Processing i tags into svg using Font Awesome](#processing-i-tags-into-svg-using-font-awesome)
   * [The icon property](#the-icon-property)
@@ -261,6 +262,19 @@ library.add(faUserSecret)
 
 ```html
 <font-awesome-icon :icon="['fad', 'user-secret']" />
+```
+
+#### Import all icons from a package 
+
+```javascript
+import { library } from '@fortawesome/fontawesome-svg-core'
+# Note we are gettings all icons here (eg: Regular icons)
+import * as icons from '@fortawesome/free-solid-svg-icons'
+# Note we are adding them all to the library
+for (const [key] of Object.entries(icons)) {
+  if (key !== "fas" && key !== "prefix")
+    library.add(icons[key])
+}
 ```
 
 You can also [import the same icon from different
