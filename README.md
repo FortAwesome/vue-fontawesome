@@ -118,7 +118,7 @@ $ npm i --save @fortawesome/vue-fontawesome@2
 **Using Vue 3.x**
 
 ```
-$ npm i --save @fortawesome/vue-fontawesome@3
+$ npm i --save @fortawesome/vue-fontawesome@3.0.0-1
 ```
 
 ## Add more styles or Pro icons
