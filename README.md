@@ -112,7 +112,7 @@ $ yarn add @fortawesome/free-solid-svg-icons
 **Using Vue 2.x**
 
 ```
-$ npm i --save @fortawesome/vue-fontawesome@2
+$ npm i --save @fortawesome/vue-fontawesome@latest
 ```
 
 **Using Vue 3.x**
