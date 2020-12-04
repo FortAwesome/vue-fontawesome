@@ -40,7 +40,7 @@
     "vue": "~2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/fontawesome-svg-core": "file:../fontawesome-buildsystem/dist/pro/js-packages/@fortawesome/fontawesome-svg-core",
     "babel-core": "^6.26.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-external-helpers": "^6.22.0",
