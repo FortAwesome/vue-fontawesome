@@ -4,7 +4,27 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
-  return faParse.icon(icon)
+  console.log("icon", icon)
+  
+  if (faParse.icon) {
+    return faParse.icon(icon)
+  }
+
+  if (icon === null) {
+    return null
+  }
+
+  if (typeof icon === 'object' && icon.prefix && icon.iconName) {
+    return icon
+  }
+
+  if (Array.isArray(icon) && icon.length === 2) {
+    return { prefix: icon[0], iconName: icon[1] }
+  }
+
+  if (typeof icon === 'string') {
+    return { prefix: 'fas', iconName: icon }
+  }
 }
 
 export default {
