@@ -85,26 +85,15 @@ export default {
 
   render (createElement, context) {
     const { props } = context
-
-    console.log("===== Props from Render  =====", props)
-
     const { icon: iconArgs, mask: maskArgs, symbol, title } = props
     const icon = normalizeIconArgs(iconArgs)
-
-    console.log("===== ICON from Render  =====", icon)
-
     const classes = objectWithKey('classes', classList(props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
     const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
-
-    console.log("===== FA Icon =====", faIcon({ icon: 'viking'}))
-
     const renderedIcon = faIcon(
       icon,
       { ...classes, ...transform, ...mask, symbol, title }
     )
-
-    console.log("===== Rendered Icon =====", renderedIcon)
 
     if (!renderedIcon) {
       return log('Could not find one or more icon(s)', icon, mask)
