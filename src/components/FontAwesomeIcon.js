@@ -4,9 +4,7 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
-  console.log("icon", icon)
-  
-  if (faParse && faParse.icon) {
+  if (faParse.icon) {
     return faParse.icon(icon)
   }
 

@@ -1,5 +1,6 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
+import { parse } from '@fortawesome/fontawesome-svg-core'
 
 export function compileAndMount (str, params = {}) {
   const res = Vue.compile(str)
@@ -27,3 +28,11 @@ export function mountFromProps (propsData = {}) {
 
   return vm
 }
+
+export function coreHasFeature (feature) {
+  if (feature === REFERENCE_ICON_BY_STYLE) {
+    return parse.icon
+  }
+}
+
+export const REFERENCE_ICON_BY_STYLE = 0x00

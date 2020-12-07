@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import { coreHasFeature, REFERENCE_ICON_BY_STYLE, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle, faSpartan)
@@ -16,19 +16,21 @@ test('using a FAT icon with array format', () => {
   expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
 })
 
-test('find a THIN icon with array format', () => {
-  const vm = mountFromProps({ icon: ['thin', 'spartan'] })
+if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  test('find a THIN icon with array format', () => {
+    const vm = mountFromProps({ icon: ['thin', 'spartan'] })
 
-  expect(vm.$el.tagName).toBe('svg')
-  expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
-})
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+  })
 
-test('find a FA-THIN icon with array format', () => {
-  const vm = mountFromProps({ icon: ['fa-thin', 'spartan'] })
+  test('find a FA-THIN icon with array format', () => {
+    const vm = mountFromProps({ icon: ['fa-thin', 'spartan'] })
 
-  expect(vm.$el.tagName).toBe('svg')
-  expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
-})
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+  })
+}
 
 test('using array format', () => {
   const vm = mountFromProps({ icon: ['fas', 'coffee'] })
