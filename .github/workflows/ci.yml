@@ -25,6 +25,7 @@ jobs:
         npm run test.next.proregistry
       env:
         CI: true
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
     - name: dist
       run: |
         npm run dist
