@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [3.0.0-3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0-3) - 2020-12-09
+
+### Fixed
+
+* Allow for non-RC releases of Vue 3
+
+---
+
 ## [3.0.0-2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0-2) - 2020-10-09
 
 ### Fixed
