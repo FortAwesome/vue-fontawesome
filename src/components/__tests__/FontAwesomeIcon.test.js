@@ -6,24 +6,8 @@ import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
 import { coreHasFeature, REFERENCE_ICON_BY_STYLE, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faSpartan, faXmark, faClose)
+  library.add(faCoffee, faCircle, faSpartan)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
-})
-
-test('find a free-solid-svg-icon with array format', () => {
-  const vm = mountFromProps({ icon: ['fas', 'xmark'] })
-
-  expect(vm.$el.tagName).toBe('svg')
-  expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
-})
-
-test('find a free-solid-svg-icon that is an alias ', () => {
-  library.reset()
-  library.add(faClose)
-  const vm = mountFromProps({ icon: ['fas', 'close'] })
-
-  expect(vm.$el.tagName).toBe('svg')
-  expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
 })
 
 test('using a FAT icon with array format', () => {
@@ -34,6 +18,24 @@ test('using a FAT icon with array format', () => {
 })
 
 if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  test('find a free-solid-svg-icon with array format', () => {
+    library.reset()
+    library.add(faClose)
+    const vm = mountFromProps({ icon: ['fas', 'xmark'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
+  })
+
+  test('find a free-solid-svg-icon that is an alias ', () => {
+    library.reset()
+    library.add(faClose)
+    const vm = mountFromProps({ icon: ['fas', 'close'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
+  })
+
   test('find a THIN icon with array format', () => {
     const vm = mountFromProps({ icon: ['thin', 'spartan'] })
 
