@@ -36,4 +36,4 @@ export function coreHasFeature (feature) {
 }
 
 export const REFERENCE_ICON_BY_STYLE = 0x00
-export const ICON_ALIASES = true
+export const ICON_ALIASES = 0x01
