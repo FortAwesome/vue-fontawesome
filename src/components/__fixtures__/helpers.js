@@ -30,9 +30,10 @@ export function mountFromProps (propsData = {}) {
 }
 
 export function coreHasFeature (feature) {
-  if (feature === REFERENCE_ICON_BY_STYLE) {
+  if (feature === REFERENCE_ICON_BY_STYLE || feature === ICON_ALIASES) {
     return parse.icon
   }
 }
 
 export const REFERENCE_ICON_BY_STYLE = 0x00
+export const ICON_ALIASES = true
