@@ -10,6 +10,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [2.0.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.2)  - 2020-12-17
+
+### Fixed
+* Bumping version to fix a failed release for 2.0.1
+
+---
+
 ## [2.0.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.1)  - 2020-12-17
 
 ### Added

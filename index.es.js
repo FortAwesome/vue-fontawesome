@@ -328,6 +328,10 @@ function addStaticClass(to, what) {
 }
 
 function normalizeIconArgs(icon$$1) {
+  if (parse.icon) {
+    return parse.icon(icon$$1);
+  }
+
   if (icon$$1 === null) {
     return null;
   }
@@ -440,7 +444,6 @@ var FontAwesomeIcon = {
     var classes = objectWithKey('classes', classList(props));
     var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
     var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
-
     var renderedIcon = icon(icon$$1, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
 
     if (!renderedIcon) {

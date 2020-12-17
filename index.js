@@ -332,6 +332,10 @@
 	}
 
 	function normalizeIconArgs(icon) {
+	  if (fontawesomeSvgCore.parse.icon) {
+	    return fontawesomeSvgCore.parse.icon(icon);
+	  }
+
 	  if (icon === null) {
 	    return null;
 	  }
@@ -444,7 +448,6 @@
 	    var classes = objectWithKey('classes', classList(props));
 	    var transform = objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
 	    var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
-
 	    var renderedIcon = fontawesomeSvgCore.icon(icon, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
 
 	    if (!renderedIcon) {
