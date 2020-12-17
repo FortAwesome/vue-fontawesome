@@ -4,6 +4,10 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
+  if (faParse.icon) {
+    return faParse.icon(icon)
+  }
+
   if (icon === null) {
     return null
   }
@@ -99,13 +103,11 @@ export default {
 
   render (createElement, context) {
     const { props } = context
-
     const { icon: iconArgs, mask: maskArgs, symbol, title } = props
     const icon = normalizeIconArgs(iconArgs)
     const classes = objectWithKey('classes', classList(props))
     const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
     const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
-
     const renderedIcon = faIcon(
       icon,
       { ...classes, ...transform, ...mask, symbol, title }

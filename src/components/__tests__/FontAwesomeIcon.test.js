@@ -1,13 +1,57 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCircle } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
+import { coreHasFeature, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle)
+  library.add(faCoffee, faCircle, faSpartan)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
 })
+
+test('using a FAT icon with array format', () => {
+  const vm = mountFromProps({ icon: ['fat', 'spartan'] })
+
+  expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+})
+
+if(coreHasFeature(ICON_ALIASES)) {
+  test('find a free-solid-svg-icon with array format', () => {
+    library.reset()
+    library.add(faClose)
+    const vm = mountFromProps({ icon: ['fas', 'xmark'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
+  })
+
+  test('find a free-solid-svg-icon that is an alias ', () => {
+    library.reset()
+    library.add(faClose)
+    const vm = mountFromProps({ icon: ['fas', 'close'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
+  })
+}
+
+if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  test('find a THIN icon with array format', () => {
+    const vm = mountFromProps({ icon: ['thin', 'spartan'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+  })
+
+  test('find a FA-THIN icon with array format', () => {
+    const vm = mountFromProps({ icon: ['fa-thin', 'spartan'] })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+  })
+}
 
 test('using array format', () => {
   const vm = mountFromProps({ icon: ['fas', 'coffee'] })

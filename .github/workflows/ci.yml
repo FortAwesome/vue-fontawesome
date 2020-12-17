@@ -21,9 +21,11 @@ jobs:
       run: |
         npm install
         npm run build
-        npm run test
+        npm run test.latest
+        npm run test.next.proregistry
       env:
         CI: true
+        FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     - name: dist
       run: |
         npm run dist

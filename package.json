@@ -26,7 +26,10 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dist": "cross-env NODE_ENV=production npm run build",
-    "test": "jest",
+    "test": "npm run test.latest && npm run test.next",
+    "test.latest": "npm --no-save install @fortawesome/fontawesome-svg-core@latest @fortawesome/free-solid-svg-icons@latest && jest --silent",
+    "test.next": "npm --no-save install @fortawesome/fontawesome-svg-core@next @fortawesome/free-solid-svg-icons@next && jest --silent",
+    "test.next.proregistry": "npm --userconfig .npmrc.proregistry --registry https://npm.fontawesome.com install --no-save @fortawesome/fontawesome-svg-core@next @fortawesome/free-solid-svg-icons@next && jest --silent",
     "prepack": "npm run dist"
   },
   "lint-staged": {
@@ -40,7 +43,8 @@
     "vue": "~2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "babel-core": "^6.26.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-external-helpers": "^6.22.0",
