@@ -10,6 +10,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [2.0.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.1)  - 2020-12-17
+
+### Added
+* Support for the new parse.icon function from the Font Awesome version 6 @fortawesome/fontawesome-svg-core
+
+---
+
 ## [2.0.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.0)  - 2020-09-01
 
 This release marks the official major release of the component as preparation
