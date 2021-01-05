@@ -27,7 +27,7 @@ if(coreHasFeature(ICON_ALIASES)) {
     expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
   })
 
-  test('find a free-solid-svg-icon that is an alias ', () => {
+  test('find a free-solid-svg-icon that is an alias', () => {
     library.reset()
     library.add(faClose)
     const vm = mountFromProps({ icon: ['fas', 'close'] })
@@ -38,6 +38,20 @@ if(coreHasFeature(ICON_ALIASES)) {
 }
 
 if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  test('find an icon using string format', () => {
+    const vm = mountFromProps({ icon: 'fa-coffee' })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
+  })
+
+  test('find an icon using string format with style', () => {
+    const vm = mountFromProps({ icon: 'fa-solid fa-coffee' })
+
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
+  })
+
   test('find a THIN icon with array format', () => {
     const vm = mountFromProps({ icon: ['thin', 'spartan'] })
 
