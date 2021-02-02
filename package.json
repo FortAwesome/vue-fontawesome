@@ -59,7 +59,7 @@
     "markdown-toc": "^1.2.0",
     "rollup": "^0.68.2",
     "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^3.0.0",
     "vue": "^2.6.12"
   },
