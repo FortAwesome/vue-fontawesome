@@ -1,9 +1,16 @@
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faClose} from '@fortawesome/free-solid-svg-icons'
 import Vue from 'vue/dist/vue'
+
+import {
+  compileAndMount,
+  coreHasFeature,
+  ICON_ALIASES,
+  mountFromProps,
+  REFERENCE_ICON_BY_STYLE
+} from '../__fixtures__/helpers'
+import {faCircle, faCoffee, faSpartan} from '../__fixtures__/icons'
 import FontAwesomeIcon from '../FontAwesomeIcon'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faClose } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
-import { coreHasFeature, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle, faSpartan)
@@ -13,57 +20,57 @@ beforeEach(() => {
 test('using a FAT icon with array format', () => {
   const vm = mountFromProps({ icon: ['fat', 'spartan'] })
 
-  expect(vm.$el.tagName).toBe('svg')
+expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
 })
 
-if(coreHasFeature(ICON_ALIASES)) {
+  if (coreHasFeature(ICON_ALIASES)) {
   test('find a free-solid-svg-icon with array format', () => {
     library.reset()
-    library.add(faClose)
-    const vm = mountFromProps({ icon: ['fas', 'xmark'] })
+  library.add(faClose)
+  const vm = mountFromProps({icon : [ 'fas', 'xmark' ]})
 
-    expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
   })
 
   test('find a free-solid-svg-icon that is an alias ', () => {
     library.reset()
-    library.add(faClose)
-    const vm = mountFromProps({ icon: ['fas', 'close'] })
+  library.add(faClose)
+  const vm = mountFromProps({icon : [ 'fas', 'close' ]})
 
-    expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
   })
-}
+  }
 
-if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
   test('find a THIN icon with array format', () => {
     const vm = mountFromProps({ icon: ['thin', 'spartan'] })
 
-    expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
   })
 
   test('find a FA-THIN icon with array format', () => {
     const vm = mountFromProps({ icon: ['fa-thin', 'spartan'] })
 
-    expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
   })
-}
+  }
 
 test('using array format', () => {
   const vm = mountFromProps({ icon: ['fas', 'coffee'] })
 
-  expect(vm.$el.tagName).toBe('svg')
+expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
 test('using string format', () => {
   const vm = mountFromProps({ icon: 'coffee' })
 
-  expect(vm.$el.tagName).toBe('svg')
+expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
@@ -76,7 +83,7 @@ test('missing icon', () => {
 test('using iconDefinition', () => {
   const vm = mountFromProps({ icon: faCoffee })
 
-  expect(vm.$el.tagName).toBe('svg')
+expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
@@ -96,7 +103,7 @@ describe('unrelated Vue data options', () => {
       { data: { icon: faCoffee } }
     )
 
-    expect(vm.$el.classList.contains('extra1')).toBeTruthy()
+  expect(vm.$el.classList.contains('extra1')).toBeTruthy()
     expect(vm.$el.classList.contains('extra2')).toBeTruthy()
   })
 
@@ -121,13 +128,14 @@ describe('unrelated Vue data options', () => {
   test('with listener', () => {
     let hasBeenClicked = false
 
-    const vm = compileAndMount(
-      `<font-awesome-icon @click="clicked" :icon="icon" />`,
-      { data: { icon: faCoffee }, methods: { clicked () { hasBeenClicked = true } } }
-    )
+  const vm =
+      compileAndMount(`<font-awesome-icon @click="clicked" :icon="icon" />`, {
+        data : {icon : faCoffee},
+        methods : {clicked() { hasBeenClicked = true }}
+      })
 
-    expect(hasBeenClicked).toBeFalsy()
-    vm.$el.dispatchEvent(new Event('click'))
+  expect(hasBeenClicked).toBeFalsy()
+  vm.$el.dispatchEvent(new Event('click'))
     expect(hasBeenClicked).toBeTruthy()
   })
 })
@@ -160,7 +168,7 @@ describe('using flip', () => {
   test('both', () => {
     const vm = mountFromProps({ icon: faCoffee, flip: "both" })
 
-    expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
+  expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
   })
 })
@@ -280,8 +288,7 @@ describe('symbol', () => {
   test("will create a symbol", () => {
     const vm = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
-    expect(vm.$el.style.getPropertyValue('display'))
-      .toBe('none')
+  expect(vm.$el.style.getPropertyValue('display')).toBe('none')
     expect(vm.$el.children[0].tagName)
       .toBe('symbol')
   })
