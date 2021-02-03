@@ -1,150 +1,173 @@
-import { parse, icon, config, text } from '@fortawesome/fontawesome-svg-core';
+import { config, icon, parse, text } from "@fortawesome/fontawesome-svg-core";
 
-var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+var commonjsGlobal =
+  typeof window !== "undefined"
+    ? window
+    : typeof global !== "undefined"
+    ? global
+    : typeof self !== "undefined"
+    ? self
+    : {};
 
 function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  return (module = { exports: {} }), fn(module, module.exports), module.exports;
 }
 
 var humps = createCommonjsModule(function (module) {
-(function(global) {
+  (function (global) {
+    var _processKeys = function (convert, obj, options) {
+      if (
+        !_isObject(obj) ||
+        _isDate(obj) ||
+        _isRegExp(obj) ||
+        _isBoolean(obj) ||
+        _isFunction(obj)
+      ) {
+        return obj;
+      }
 
-  var _processKeys = function(convert, obj, options) {
-    if(!_isObject(obj) || _isDate(obj) || _isRegExp(obj) || _isBoolean(obj) || _isFunction(obj)) {
-      return obj;
-    }
-
-    var output,
+      var output,
         i = 0,
         l = 0;
 
-    if(_isArray(obj)) {
-      output = [];
-      for(l=obj.length; i<l; i++) {
-        output.push(_processKeys(convert, obj[i], options));
-      }
-    }
-    else {
-      output = {};
-      for(var key in obj) {
-        if(Object.prototype.hasOwnProperty.call(obj, key)) {
-          output[convert(key, options)] = _processKeys(convert, obj[key], options);
+      if (_isArray(obj)) {
+        output = [];
+        for (l = obj.length; i < l; i++) {
+          output.push(_processKeys(convert, obj[i], options));
+        }
+      } else {
+        output = {};
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            output[convert(key, options)] = _processKeys(
+              convert,
+              obj[key],
+              options
+            );
+          }
         }
       }
+      return output;
+    };
+
+    // String conversion methods
+
+    var separateWords = function (string, options) {
+      options = options || {};
+      var separator = options.separator || "_";
+      var split = options.split || /(?=[A-Z])/;
+
+      return string.split(split).join(separator);
+    };
+
+    var camelize = function (string) {
+      if (_isNumerical(string)) {
+        return string;
+      }
+      string = string.replace(/[\-_\s]+(.)?/g, function (match, chr) {
+        return chr ? chr.toUpperCase() : "";
+      });
+      // Ensure 1st char is always lowercase
+      return string.substr(0, 1).toLowerCase() + string.substr(1);
+    };
+
+    var pascalize = function (string) {
+      var camelized = camelize(string);
+      // Ensure 1st char is always uppercase
+      return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
+    };
+
+    var decamelize = function (string, options) {
+      return separateWords(string, options).toLowerCase();
+    };
+
+    // Utilities
+    // Taken from Underscore.js
+
+    var toString = Object.prototype.toString;
+
+    var _isFunction = function (obj) {
+      return typeof obj === "function";
+    };
+    var _isObject = function (obj) {
+      return obj === Object(obj);
+    };
+    var _isArray = function (obj) {
+      return toString.call(obj) == "[object Array]";
+    };
+    var _isDate = function (obj) {
+      return toString.call(obj) == "[object Date]";
+    };
+    var _isRegExp = function (obj) {
+      return toString.call(obj) == "[object RegExp]";
+    };
+    var _isBoolean = function (obj) {
+      return toString.call(obj) == "[object Boolean]";
+    };
+
+    // Performant way to determine if obj coerces to a number
+    var _isNumerical = function (obj) {
+      obj = obj - 0;
+      return obj === obj;
+    };
+
+    // Sets up function which handles processing keys
+    // allowing the convert function to be modified by a callback
+    var _processor = function (convert, options) {
+      var callback =
+        options && "process" in options ? options.process : options;
+
+      if (typeof callback !== "function") {
+        return convert;
+      }
+
+      return function (string, options) {
+        return callback(string, convert, options);
+      };
+    };
+
+    var humps = {
+      camelize: camelize,
+      decamelize: decamelize,
+      pascalize: pascalize,
+      depascalize: decamelize,
+      camelizeKeys: function (object, options) {
+        return _processKeys(_processor(camelize, options), object);
+      },
+      decamelizeKeys: function (object, options) {
+        return _processKeys(_processor(decamelize, options), object, options);
+      },
+      pascalizeKeys: function (object, options) {
+        return _processKeys(_processor(pascalize, options), object);
+      },
+      depascalizeKeys: function () {
+        return this.decamelizeKeys.apply(this, arguments);
+      },
+    };
+
+    if (typeof undefined === "function" && undefined.amd) {
+      undefined(humps);
+    } else if ("object" !== "undefined" && module.exports) {
+      module.exports = humps;
+    } else {
+      global.humps = humps;
     }
-    return output;
-  };
-
-  // String conversion methods
-
-  var separateWords = function(string, options) {
-    options = options || {};
-    var separator = options.separator || '_';
-    var split = options.split || /(?=[A-Z])/;
-
-    return string.split(split).join(separator);
-  };
-
-  var camelize = function(string) {
-    if (_isNumerical(string)) {
-      return string;
-    }
-    string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-      return chr ? chr.toUpperCase() : '';
-    });
-    // Ensure 1st char is always lowercase
-    return string.substr(0, 1).toLowerCase() + string.substr(1);
-  };
-
-  var pascalize = function(string) {
-    var camelized = camelize(string);
-    // Ensure 1st char is always uppercase
-    return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
-  };
-
-  var decamelize = function(string, options) {
-    return separateWords(string, options).toLowerCase();
-  };
-
-  // Utilities
-  // Taken from Underscore.js
-
-  var toString = Object.prototype.toString;
-
-  var _isFunction = function(obj) {
-    return typeof(obj) === 'function';
-  };
-  var _isObject = function(obj) {
-    return obj === Object(obj);
-  };
-  var _isArray = function(obj) {
-    return toString.call(obj) == '[object Array]';
-  };
-  var _isDate = function(obj) {
-    return toString.call(obj) == '[object Date]';
-  };
-  var _isRegExp = function(obj) {
-    return toString.call(obj) == '[object RegExp]';
-  };
-  var _isBoolean = function(obj) {
-    return toString.call(obj) == '[object Boolean]';
-  };
-
-  // Performant way to determine if obj coerces to a number
-  var _isNumerical = function(obj) {
-    obj = obj - 0;
-    return obj === obj;
-  };
-
-  // Sets up function which handles processing keys
-  // allowing the convert function to be modified by a callback
-  var _processor = function(convert, options) {
-    var callback = options && 'process' in options ? options.process : options;
-
-    if(typeof(callback) !== 'function') {
-      return convert;
-    }
-
-    return function(string, options) {
-      return callback(string, convert, options);
-    }
-  };
-
-  var humps = {
-    camelize: camelize,
-    decamelize: decamelize,
-    pascalize: pascalize,
-    depascalize: decamelize,
-    camelizeKeys: function(object, options) {
-      return _processKeys(_processor(camelize, options), object);
-    },
-    decamelizeKeys: function(object, options) {
-      return _processKeys(_processor(decamelize, options), object, options);
-    },
-    pascalizeKeys: function(object, options) {
-      return _processKeys(_processor(pascalize, options), object);
-    },
-    depascalizeKeys: function () {
-      return this.decamelizeKeys.apply(this, arguments);
-    }
-  };
-
-  if (typeof undefined === 'function' && undefined.amd) {
-    undefined(humps);
-  } else if ('object' !== 'undefined' && module.exports) {
-    module.exports = humps;
-  } else {
-    global.humps = humps;
-  }
-
-})(commonjsGlobal);
+  })(commonjsGlobal);
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
+var _typeof =
+  typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
+    ? function (obj) {
+        return typeof obj;
+      }
+    : function (obj) {
+        return obj &&
+          typeof Symbol === "function" &&
+          obj.constructor === Symbol &&
+          obj !== Symbol.prototype
+          ? "symbol"
+          : typeof obj;
+      };
 
 var defineProperty = function (obj, key, value) {
   if (key in obj) {
@@ -152,7 +175,7 @@ var defineProperty = function (obj, key, value) {
       value: value,
       enumerable: true,
       configurable: true,
-      writable: true
+      writable: true,
     });
   } else {
     obj[key] = value;
@@ -161,19 +184,21 @@ var defineProperty = function (obj, key, value) {
   return obj;
 };
 
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
+var _extends =
+  Object.assign ||
+  function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
 
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
       }
     }
-  }
 
-  return target;
-};
+    return target;
+  };
 
 var objectWithoutProperties = function (obj, keys) {
   var target = {};
@@ -189,7 +214,8 @@ var objectWithoutProperties = function (obj, keys) {
 
 var toConsumableArray = function (arr) {
   if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++)
+      arr2[i] = arr[i];
 
     return arr2;
   } else {
@@ -198,19 +224,23 @@ var toConsumableArray = function (arr) {
 };
 
 function styleToObject(style) {
-  return style.split(';').map(function (s) {
-    return s.trim();
-  }).filter(function (s) {
-    return s;
-  }).reduce(function (acc, pair) {
-    var i = pair.indexOf(':');
-    var prop = humps.camelize(pair.slice(0, i));
-    var value = pair.slice(i + 1).trim();
+  return style
+    .split(";")
+    .map(function (s) {
+      return s.trim();
+    })
+    .filter(function (s) {
+      return s;
+    })
+    .reduce(function (acc, pair) {
+      var i = pair.indexOf(":");
+      var prop = humps.camelize(pair.slice(0, i));
+      var value = pair.slice(i + 1).trim();
 
-    acc[prop] = value;
+      acc[prop] = value;
 
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 }
 
 function classToObject(cls) {
@@ -222,7 +252,11 @@ function classToObject(cls) {
 }
 
 function combineClassObjects() {
-  for (var _len = arguments.length, objs = Array(_len), _key = 0; _key < _len; _key++) {
+  for (
+    var _len = arguments.length, objs = Array(_len), _key = 0;
+    _key < _len;
+    _key++
+  ) {
     objs[_key] = arguments[_key];
   }
 
@@ -238,58 +272,68 @@ function combineClassObjects() {
 }
 
 function convert(h, element) {
-  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var data = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  var props =
+    arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var data =
+    arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
   var children = (element.children || []).map(convert.bind(null, h));
 
-  var mixins = Object.keys(element.attributes || {}).reduce(function (acc, key) {
-    var val = element.attributes[key];
+  var mixins = Object.keys(element.attributes || {}).reduce(
+    function (acc, key) {
+      var val = element.attributes[key];
 
-    switch (key) {
-      case 'class':
-        acc['class'] = classToObject(val);
-        break;
-      case 'style':
-        acc['style'] = styleToObject(val);
-        break;
-      default:
-        acc.attrs[key] = val;
-    }
+      switch (key) {
+        case "class":
+          acc["class"] = classToObject(val);
+          break;
+        case "style":
+          acc["style"] = styleToObject(val);
+          break;
+        default:
+          acc.attrs[key] = val;
+      }
 
-    return acc;
-  }, { 'class': {}, style: {}, attrs: {} });
+      return acc;
+    },
+    { class: {}, style: {}, attrs: {} }
+  );
 
   var _data$class = data.class,
-      dClass = _data$class === undefined ? {} : _data$class,
-      _data$style = data.style,
-      dStyle = _data$style === undefined ? {} : _data$style,
-      _data$attrs = data.attrs,
-      dAttrs = _data$attrs === undefined ? {} : _data$attrs,
-      remainingData = objectWithoutProperties(data, ['class', 'style', 'attrs']);
+    dClass = _data$class === undefined ? {} : _data$class,
+    _data$style = data.style,
+    dStyle = _data$style === undefined ? {} : _data$style,
+    _data$attrs = data.attrs,
+    dAttrs = _data$attrs === undefined ? {} : _data$attrs,
+    remainingData = objectWithoutProperties(data, ["class", "style", "attrs"]);
 
-
-  if (typeof element === 'string') {
+  if (typeof element === "string") {
     return element;
   } else {
-    return h(element.tag, _extends({
-      class: combineClassObjects(mixins.class, dClass),
-      style: _extends({}, mixins.style, dStyle),
-      attrs: _extends({}, mixins.attrs, dAttrs)
-    }, remainingData, {
-      props: props
-    }), children);
+    return h(
+      element.tag,
+      _extends(
+        {
+          class: combineClassObjects(mixins.class, dClass),
+          style: _extends({}, mixins.style, dStyle),
+          attrs: _extends({}, mixins.attrs, dAttrs),
+        },
+        remainingData,
+        { props: props }
+      ),
+      children
+    );
   }
 }
 
 var PRODUCTION = false;
 
 try {
-  PRODUCTION = process.env.NODE_ENV === 'production';
+  PRODUCTION = process.env.NODE_ENV === "production";
 } catch (e) {}
 
-function log () {
-  if (!PRODUCTION && console && typeof console.error === 'function') {
+function log() {
+  if (!PRODUCTION && console && typeof console.error === "function") {
     var _console;
 
     (_console = console).error.apply(_console, arguments);
@@ -297,34 +341,50 @@ function log () {
 }
 
 function objectWithKey(key, value) {
-  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? defineProperty({}, key, value) : {};
+  return (Array.isArray(value) && value.length > 0) ||
+    (!Array.isArray(value) && value)
+    ? defineProperty({}, key, value)
+    : {};
 }
 
 function classList(props) {
   var _classes;
 
-  var classes = (_classes = {
-    'fa-spin': props.spin,
-    'fa-pulse': props.pulse,
-    'fa-fw': props.fixedWidth,
-    'fa-border': props.border,
-    'fa-li': props.listItem,
-    'fa-inverse': props.inverse,
-    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
-    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
+  var classes =
+    ((_classes = {
+      "fa-spin": props.spin,
+      "fa-pulse": props.pulse,
+      "fa-fw": props.fixedWidth,
+      "fa-border": props.border,
+      "fa-li": props.listItem,
+      "fa-inverse": props.inverse,
+      "fa-flip-horizontal":
+        props.flip === "horizontal" || props.flip === "both",
+      "fa-flip-vertical": props.flip === "vertical" || props.flip === "both",
+    }),
+    defineProperty(_classes, "fa-" + props.size, props.size !== null),
+    defineProperty(
+      _classes,
+      "fa-rotate-" + props.rotation,
+      props.rotation !== null
+    ),
+    defineProperty(_classes, "fa-pull-" + props.pull, props.pull !== null),
+    defineProperty(_classes, "fa-swap-opacity", props.swapOpacity),
+    _classes);
 
-  return Object.keys(classes).map(function (key) {
-    return classes[key] ? key : null;
-  }).filter(function (key) {
-    return key;
-  });
+  return Object.keys(classes)
+    .map(function (key) {
+      return classes[key] ? key : null;
+    })
+    .filter(function (key) {
+      return key;
+    });
 }
 
 function addStaticClass(to, what) {
-  var val = (to || '').length === 0 ? [] : [to];
+  var val = (to || "").length === 0 ? [] : [to];
 
-  return val.concat(what).join(' ');
+  return val.concat(what).join(" ");
 }
 
 function normalizeIconArgs(icon$$1) {
@@ -336,7 +396,12 @@ function normalizeIconArgs(icon$$1) {
     return null;
   }
 
-  if ((typeof icon$$1 === 'undefined' ? 'undefined' : _typeof(icon$$1)) === 'object' && icon$$1.prefix && icon$$1.iconName) {
+  if (
+    (typeof icon$$1 === "undefined" ? "undefined" : _typeof(icon$$1)) ===
+      "object" &&
+    icon$$1.prefix &&
+    icon$$1.iconName
+  ) {
     return icon$$1;
   }
 
@@ -344,110 +409,98 @@ function normalizeIconArgs(icon$$1) {
     return { prefix: icon$$1[0], iconName: icon$$1[1] };
   }
 
-  if (typeof icon$$1 === 'string') {
-    return { prefix: 'fas', iconName: icon$$1 };
+  if (typeof icon$$1 === "string") {
+    return { prefix: "fas", iconName: icon$$1 };
   }
 }
 
 var FontAwesomeIcon = {
-  name: 'FontAwesomeIcon',
+  name: "FontAwesomeIcon",
 
   functional: true,
 
   props: {
-    border: {
-      type: Boolean,
-      default: false
-    },
-    fixedWidth: {
-      type: Boolean,
-      default: false
-    },
+    border: { type: Boolean, default: false },
+    fixedWidth: { type: Boolean, default: false },
     flip: {
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['horizontal', 'vertical', 'both'].indexOf(value) > -1;
-      }
+        return ["horizontal", "vertical", "both"].indexOf(value) > -1;
+      },
     },
-    icon: {
-      type: [Object, Array, String],
-      required: true
-    },
-    mask: {
-      type: [Object, Array, String],
-      default: null
-    },
-    listItem: {
-      type: Boolean,
-      default: false
-    },
+    icon: { type: [Object, Array, String], required: true },
+    mask: { type: [Object, Array, String], default: null },
+    listItem: { type: Boolean, default: false },
     pull: {
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['right', 'left'].indexOf(value) > -1;
-      }
+        return ["right", "left"].indexOf(value) > -1;
+      },
     },
-    pulse: {
-      type: Boolean,
-      default: false
-    },
+    pulse: { type: Boolean, default: false },
     rotation: {
       type: [String, Number],
       default: null,
       validator: function validator(value) {
         return [90, 180, 270].indexOf(parseInt(value, 10)) > -1;
-      }
+      },
     },
-    swapOpacity: {
-      type: Boolean,
-      default: false
-    },
+    swapOpacity: { type: Boolean, default: false },
     size: {
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1;
-      }
+        return (
+          [
+            "lg",
+            "xs",
+            "sm",
+            "1x",
+            "2x",
+            "3x",
+            "4x",
+            "5x",
+            "6x",
+            "7x",
+            "8x",
+            "9x",
+            "10x",
+          ].indexOf(value) > -1
+        );
+      },
     },
-    spin: {
-      type: Boolean,
-      default: false
-    },
-    transform: {
-      type: [String, Object],
-      default: null
-    },
-    symbol: {
-      type: [Boolean, String],
-      default: false
-    },
-    title: {
-      type: String,
-      default: null
-    },
-    inverse: {
-      type: Boolean,
-      default: false
-    }
+    spin: { type: Boolean, default: false },
+    transform: { type: [String, Object], default: null },
+    symbol: { type: [Boolean, String], default: false },
+    title: { type: String, default: null },
+    inverse: { type: Boolean, default: false },
   },
 
   render: function render(createElement, context) {
     var props = context.props;
     var iconArgs = props.icon,
-        maskArgs = props.mask,
-        symbol = props.symbol,
-        title = props.title;
+      maskArgs = props.mask,
+      symbol = props.symbol,
+      title = props.title;
 
     var icon$$1 = normalizeIconArgs(iconArgs);
-    var classes = objectWithKey('classes', classList(props));
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
-    var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
-    var renderedIcon = icon(icon$$1, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
+    var classes = objectWithKey("classes", classList(props));
+    var transform = objectWithKey(
+      "transform",
+      typeof props.transform === "string"
+        ? parse.transform(props.transform)
+        : props.transform
+    );
+    var mask = objectWithKey("mask", normalizeIconArgs(maskArgs));
+    var renderedIcon = icon(
+      icon$$1,
+      _extends({}, classes, transform, mask, { symbol: symbol, title: title })
+    );
 
     if (!renderedIcon) {
-      return log('Could not find one or more icon(s)', icon$$1, mask);
+      return log("Could not find one or more icon(s)", icon$$1, mask);
     }
 
     var abstract = renderedIcon.abstract;
@@ -455,83 +508,97 @@ var FontAwesomeIcon = {
     var convertCurry = convert.bind(null, createElement);
 
     return convertCurry(abstract[0], {}, context.data);
-  }
+  },
 };
 
 var FontAwesomeLayers = {
-  name: 'FontAwesomeLayers',
+  name: "FontAwesomeLayers",
 
   functional: true,
 
-  props: {
-    fixedWidth: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: { fixedWidth: { type: Boolean, default: false } },
 
   render: function render(createElement, context) {
     var familyPrefix = config.familyPrefix;
     var staticClass = context.data.staticClass;
 
+    var classes = [familyPrefix + "-layers"].concat(
+      toConsumableArray(context.props.fixedWidth ? [familyPrefix + "-fw"] : [])
+    );
 
-    var classes = [familyPrefix + '-layers'].concat(toConsumableArray(context.props.fixedWidth ? [familyPrefix + '-fw'] : []));
-
-    return createElement('div', _extends({}, context.data, {
-      staticClass: addStaticClass(staticClass, classes)
-    }), context.children);
-  }
+    return createElement(
+      "div",
+      _extends({}, context.data, {
+        staticClass: addStaticClass(staticClass, classes),
+      }),
+      context.children
+    );
+  },
 };
 
 var FontAwesomeLayersText = {
-  name: 'FontAwesomeLayersText',
+  name: "FontAwesomeLayersText",
 
   functional: true,
 
   props: {
-    value: {
-      type: [String, Number],
-      default: ''
-    },
-    transform: {
-      type: [String, Object],
-      default: null
-    },
-    counter: {
-      type: Boolean,
-      default: false
-    },
+    value: { type: [String, Number], default: "" },
+    transform: { type: [String, Object], default: null },
+    counter: { type: Boolean, default: false },
     position: {
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['bottom-left', 'bottom-right', 'top-left', 'top-right'].indexOf(value) > -1;
-      }
-    }
+        return (
+          ["bottom-left", "bottom-right", "top-left", "top-right"].indexOf(
+            value
+          ) > -1
+        );
+      },
+    },
   },
 
   render: function render(createElement, context) {
     var familyPrefix = config.familyPrefix;
     var props = context.props;
 
+    var classes = objectWithKey(
+      "classes",
+      [].concat(
+        toConsumableArray(
+          props.counter ? [familyPrefix + "-layers-counter"] : []
+        ),
+        toConsumableArray(
+          props.position ? [familyPrefix + "-layers-" + props.position] : []
+        )
+      )
+    );
 
-    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
+    var transform = objectWithKey(
+      "transform",
+      typeof props.transform === "string"
+        ? parse.transform(props.transform)
+        : props.transform
+    );
 
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
-
-    var renderedText = text(props.value.toString(), _extends({}, transform, classes));
+    var renderedText = text(
+      props.value.toString(),
+      _extends({}, transform, classes)
+    );
 
     var abstract = renderedText.abstract;
 
-
     if (props.counter) {
-      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
+      abstract[0].attributes.class = abstract[0].attributes.class.replace(
+        "fa-layers-text",
+        ""
+      );
     }
 
     var convertCurry = convert.bind(null, createElement);
 
     return convertCurry(abstract[0], {}, context.data);
-  }
+  },
 };
 
 export { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText };
