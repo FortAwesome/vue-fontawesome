@@ -63,7 +63,7 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.1.11",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^5.7.3"
   },
   "engines": {
     "node": ">= 6.0.0",
