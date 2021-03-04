@@ -4,6 +4,8 @@ import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
+let prefix = 'fas';
+
 function normalizeIconArgs (icon) {
   if (icon === null) {
     return null
@@ -18,11 +20,11 @@ function normalizeIconArgs (icon) {
   }
 
   if (typeof icon === 'string') {
-    return { prefix: 'fas', iconName: icon }
+    return { prefix, iconName: icon }
   }
 }
 
-export default defineComponent({
+const FontAwesomeIcon = defineComponent({
   name: 'FontAwesomeIcon',
 
   props: {
@@ -124,3 +126,11 @@ export default defineComponent({
     return convert(abstractElement, {}, attrs)
   }
 })
+
+const FontAwesomeIconInitiator = (iconSet) => {
+  prefix = iconSet;
+
+  return FontAwesomeIcon;
+}
+
+export { FontAwesomeIcon, FontAwesomeIconInitiator }

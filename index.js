@@ -4,7 +4,7 @@
 	(factory((global['vue-fontawesome'] = {}),global.vue,global.FontAwesome));
 }(this, (function (exports,vue,fontawesomeSvgCore) { 'use strict';
 
-	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -347,7 +347,7 @@
 	  }
 
 	  if (typeof icon === 'string') {
-	    return { prefix: 'fas', iconName: icon };
+	    return { prefix: 'far', iconName: icon };
 	  }
 	}
 

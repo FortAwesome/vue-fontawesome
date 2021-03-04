@@ -30,6 +30,7 @@ interface FontAwesomeLayersTextProps {
   position: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' | null
 }
 
+declare const FontAwesomeIconInitiator: (iconSet: string) => ComponentPublicInstance<FontAwesomeIconProps>
 declare const FontAwesomeIcon: ComponentPublicInstance<FontAwesomeIconProps>
 declare const FontAwesomeLayers: ComponentPublicInstance<FontAwesomeLayersProps>
 declare const FontAwesomeLayersText: ComponentPublicInstance<FontAwesomeLayersTextProps>
