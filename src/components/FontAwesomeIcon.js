@@ -1,5 +1,5 @@
 import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
 import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
@@ -97,30 +97,31 @@ export default defineComponent({
   },
 
   setup (props, { attrs }) {
-    const { symbol, title } = props
-    const icon = normalizeIconArgs(props.icon)
-    const classes = objectWithKey('classes', classList(props))
-    const transform = objectWithKey(
+    const icon = computed(() => normalizeIconArgs(props.icon))
+    const classes = computed(() => objectWithKey('classes', classList(props)))
+    const transform = computed(() => objectWithKey(
       'transform',
       (typeof props.transform === 'string')
         ? faParse.transform(props.transform)
         : props.transform
-    )
-    const mask = objectWithKey('mask', normalizeIconArgs(props.mask))
+    ))
+    const mask = computed(() => objectWithKey('mask', normalizeIconArgs(props.mask)))
 
-    const renderedIcon = faIcon(icon, {
-      ...classes,
-      ...transform,
-      ...mask,
-      symbol,
-      title
-    })
+    const renderedIcon = computed(() => faIcon(icon.value, {
+      ...classes.value,
+      ...transform.value,
+      ...mask.value,
+      symbol: props.symbol,
+      title: props.title
+    }))
 
-    if (!renderedIcon) {
-      return log('Could not find one or more icon(s)', icon, mask)
-    }
+    watch(renderedIcon, (value) => {
+      if (!value) {
+        return log('Could not find one or more icon(s)', icon.value, mask.value)
+      }
+    }, { immediate: true })
 
-    const abstractElement = renderedIcon.abstract[0]
-    return convert(abstractElement, {}, attrs)
+    const vnode = computed(() => renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null)
+    return () => vnode.value
   }
 })

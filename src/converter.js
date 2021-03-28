@@ -59,11 +59,11 @@ function combineClassObjects (...collections) {
 }
 
 /**
- * Converts a FontAwesome abstract element of an icon into a Vue render function.
+ * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
  * @param {Object} props The user-defined props.
  * @param {Object} attrs The user-defined native HTML attributes.
- * @returns {Function | String}
+ * @returns {VNode}
  */
 export default function convert (abstractElement, props = {}, attrs = {}) {
   // If the abstract element is a string, we'll just return a string render function
@@ -71,11 +71,9 @@ export default function convert (abstractElement, props = {}, attrs = {}) {
     return abstractElement
   }
 
-  // Converting abstract element children into Vue render functions, then we'll execute
-  // them to retrieve VDOM elements
+  // Converting abstract element children into Vue VNodes
   const children = (abstractElement.children || [])
     .map(child => convert(child))
-    .map(renderFn => typeof renderFn === 'string' ? renderFn : renderFn())
 
   // Converting abstract element attributes into valid Vue format
   const mixins = Object.keys(abstractElement.attributes || {})
@@ -103,19 +101,18 @@ export default function convert (abstractElement, props = {}, attrs = {}) {
       }
     )
 
-  // Now, we'll return the render function of the 
+  // Now, we'll return the VNode
   const { class: _aClass = {}, style: aStyle = {}, ...otherAttrs } = attrs
 
-  return () =>
-    h(
-      abstractElement.tag,
-      {
-        ...props,
-        class: mixins.class,
-        style: { ...mixins.style, ...aStyle },
-        ...mixins.attrs,
-        ...otherAttrs
-      },
-      children
-    )
+  return h(
+    abstractElement.tag,
+    {
+      ...props,
+      class: mixins.class,
+      style: { ...mixins.style, ...aStyle },
+      ...mixins.attrs,
+      ...otherAttrs
+    },
+    children
+  )
 }

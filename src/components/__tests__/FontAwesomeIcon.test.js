@@ -283,3 +283,17 @@ describe('title', () => {
     expect(wrapper.element.getElementsByTagName('title').length).toBe(0)
   })
 })
+
+describe('reactivity', () => {
+  test('changing props should update the element', async () => {
+    const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
+
+    expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+
+    await wrapper.setProps({ icon: faCircle, title: 'Circle' })
+
+    expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
+    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+  })
+})

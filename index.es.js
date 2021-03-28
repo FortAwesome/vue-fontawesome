@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue';
+import { h, defineComponent, computed, watch } from 'vue';
 import { parse, icon, config, text } from '@fortawesome/fontawesome-svg-core';
 
-var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -231,11 +231,11 @@ function classToObject(classes) {
 }
 
 /**
- * Converts a FontAwesome abstract element of an icon into a Vue render function.
+ * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
  * @param {Object} props The user-defined props.
  * @param {Object} attrs The user-defined native HTML attributes.
- * @returns {Function | String}
+ * @returns {VNode}
  */
 function convert(abstractElement) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -246,12 +246,9 @@ function convert(abstractElement) {
     return abstractElement;
   }
 
-  // Converting abstract element children into Vue render functions, then we'll execute
-  // them to retrieve VDOM elements
+  // Converting abstract element children into Vue VNodes
   var children = (abstractElement.children || []).map(function (child) {
     return convert(child);
-  }).map(function (renderFn) {
-    return typeof renderFn === 'string' ? renderFn : renderFn();
   });
 
   // Converting abstract element attributes into valid Vue format
@@ -276,19 +273,17 @@ function convert(abstractElement) {
     style: {}
   });
 
-  // Now, we'll return the render function of the 
+  // Now, we'll return the VNode
 
   var _attrs$class = attrs.class,
       _attrs$style = attrs.style,
       aStyle = _attrs$style === undefined ? {} : _attrs$style,
       otherAttrs = objectWithoutProperties(attrs, ['class', 'style']);
 
-  return function () {
-    return h(abstractElement.tag, _extends({}, props, {
-      class: mixins.class,
-      style: _extends({}, mixins.style, aStyle)
-    }, mixins.attrs, otherAttrs), children);
-  };
+  return h(abstractElement.tag, _extends({}, props, {
+    class: mixins.class,
+    style: _extends({}, mixins.style, aStyle)
+  }, mixins.attrs, otherAttrs), children);
 }
 
 var PRODUCTION = false;
@@ -432,25 +427,39 @@ var FontAwesomeIcon = defineComponent({
 
   setup: function setup(props, _ref) {
     var attrs = _ref.attrs;
-    var symbol = props.symbol,
-        title = props.title;
 
-    var icon$$1 = normalizeIconArgs(props.icon);
-    var classes = objectWithKey('classes', classList(props));
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
-    var mask = objectWithKey('mask', normalizeIconArgs(props.mask));
+    var icon$$1 = computed(function () {
+      return normalizeIconArgs(props.icon);
+    });
+    var classes = computed(function () {
+      return objectWithKey('classes', classList(props));
+    });
+    var transform = computed(function () {
+      return objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
+    });
+    var mask = computed(function () {
+      return objectWithKey('mask', normalizeIconArgs(props.mask));
+    });
 
-    var renderedIcon = icon(icon$$1, _extends({}, classes, transform, mask, {
-      symbol: symbol,
-      title: title
-    }));
+    var renderedIcon = computed(function () {
+      return icon(icon$$1.value, _extends({}, classes.value, transform.value, mask.value, {
+        symbol: props.symbol,
+        title: props.title
+      }));
+    });
 
-    if (!renderedIcon) {
-      return log('Could not find one or more icon(s)', icon$$1, mask);
-    }
+    watch(renderedIcon, function (value) {
+      if (!value) {
+        return log('Could not find one or more icon(s)', icon$$1.value, mask.value);
+      }
+    }, { immediate: true });
 
-    var abstractElement = renderedIcon.abstract[0];
-    return convert(abstractElement, {}, attrs);
+    var vnode = computed(function () {
+      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
+    });
+    return function () {
+      return vnode.value;
+    };
   }
 });
 
@@ -469,10 +478,12 @@ var FontAwesomeLayers = defineComponent({
     var familyPrefix = config.familyPrefix;
 
 
-    var className = [familyPrefix + '-layers'].concat(toConsumableArray(props.fixedWidth ? [familyPrefix + '-fw'] : []));
+    var className = computed(function () {
+      return [familyPrefix + '-layers'].concat(toConsumableArray(props.fixedWidth ? [familyPrefix + '-fw'] : []));
+    });
 
     return function () {
-      return h('div', { class: className }, slots.default ? slots.default() : []);
+      return h('div', { class: className.value }, slots.default ? slots.default() : []);
     };
   }
 });
@@ -507,17 +518,28 @@ var FontAwesomeLayersText = defineComponent({
     var familyPrefix = config.familyPrefix;
 
 
-    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
-    var renderedText = text(props.value.toString(), _extends({}, transform, classes));
+    var classes = computed(function () {
+      return objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
+    });
+    var transform = computed(function () {
+      return objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
+    });
+    var abstractElement = computed(function () {
+      var _text = text(props.value.toString(), _extends({}, transform.value, classes.value)),
+          abstract = _text.abstract;
 
-    var abstract = renderedText.abstract;
+      if (props.counter) {
+        abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
+      }
+      return abstract[0];
+    });
 
-    if (props.counter) {
-      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
-    }
-
-    return convert(abstract[0], {}, attrs);
+    var vnode = computed(function () {
+      return convert(abstractElement.value, {}, attrs);
+    });
+    return function () {
+      return vnode.value;
+    };
   }
 });
 

@@ -4,7 +4,7 @@
 	(factory((global['vue-fontawesome'] = {}),global.vue,global.FontAwesome));
 }(this, (function (exports,vue,fontawesomeSvgCore) { 'use strict';
 
-	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -234,11 +234,11 @@
 	}
 
 	/**
-	 * Converts a FontAwesome abstract element of an icon into a Vue render function.
+	 * Converts a FontAwesome abstract element of an icon into a Vue VNode.
 	 * @param {AbstractElement | String} abstractElement The element to convert.
 	 * @param {Object} props The user-defined props.
 	 * @param {Object} attrs The user-defined native HTML attributes.
-	 * @returns {Function | String}
+	 * @returns {VNode}
 	 */
 	function convert(abstractElement) {
 	  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -249,12 +249,9 @@
 	    return abstractElement;
 	  }
 
-	  // Converting abstract element children into Vue render functions, then we'll execute
-	  // them to retrieve VDOM elements
+	  // Converting abstract element children into Vue VNodes
 	  var children = (abstractElement.children || []).map(function (child) {
 	    return convert(child);
-	  }).map(function (renderFn) {
-	    return typeof renderFn === 'string' ? renderFn : renderFn();
 	  });
 
 	  // Converting abstract element attributes into valid Vue format
@@ -279,19 +276,17 @@
 	    style: {}
 	  });
 
-	  // Now, we'll return the render function of the 
+	  // Now, we'll return the VNode
 
 	  var _attrs$class = attrs.class,
 	      _attrs$style = attrs.style,
 	      aStyle = _attrs$style === undefined ? {} : _attrs$style,
 	      otherAttrs = objectWithoutProperties(attrs, ['class', 'style']);
 
-	  return function () {
-	    return vue.h(abstractElement.tag, _extends({}, props, {
-	      class: mixins.class,
-	      style: _extends({}, mixins.style, aStyle)
-	    }, mixins.attrs, otherAttrs), children);
-	  };
+	  return vue.h(abstractElement.tag, _extends({}, props, {
+	    class: mixins.class,
+	    style: _extends({}, mixins.style, aStyle)
+	  }, mixins.attrs, otherAttrs), children);
 	}
 
 	var PRODUCTION = false;
@@ -435,25 +430,39 @@
 
 	  setup: function setup(props, _ref) {
 	    var attrs = _ref.attrs;
-	    var symbol = props.symbol,
-	        title = props.title;
 
-	    var icon = normalizeIconArgs(props.icon);
-	    var classes = objectWithKey('classes', classList(props));
-	    var transform = objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
-	    var mask = objectWithKey('mask', normalizeIconArgs(props.mask));
+	    var icon = vue.computed(function () {
+	      return normalizeIconArgs(props.icon);
+	    });
+	    var classes = vue.computed(function () {
+	      return objectWithKey('classes', classList(props));
+	    });
+	    var transform = vue.computed(function () {
+	      return objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
+	    });
+	    var mask = vue.computed(function () {
+	      return objectWithKey('mask', normalizeIconArgs(props.mask));
+	    });
 
-	    var renderedIcon = fontawesomeSvgCore.icon(icon, _extends({}, classes, transform, mask, {
-	      symbol: symbol,
-	      title: title
-	    }));
+	    var renderedIcon = vue.computed(function () {
+	      return fontawesomeSvgCore.icon(icon.value, _extends({}, classes.value, transform.value, mask.value, {
+	        symbol: props.symbol,
+	        title: props.title
+	      }));
+	    });
 
-	    if (!renderedIcon) {
-	      return log('Could not find one or more icon(s)', icon, mask);
-	    }
+	    vue.watch(renderedIcon, function (value) {
+	      if (!value) {
+	        return log('Could not find one or more icon(s)', icon.value, mask.value);
+	      }
+	    }, { immediate: true });
 
-	    var abstractElement = renderedIcon.abstract[0];
-	    return convert(abstractElement, {}, attrs);
+	    var vnode = vue.computed(function () {
+	      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
+	    });
+	    return function () {
+	      return vnode.value;
+	    };
 	  }
 	});
 
@@ -472,10 +481,12 @@
 	    var familyPrefix = fontawesomeSvgCore.config.familyPrefix;
 
 
-	    var className = [familyPrefix + '-layers'].concat(toConsumableArray(props.fixedWidth ? [familyPrefix + '-fw'] : []));
+	    var className = vue.computed(function () {
+	      return [familyPrefix + '-layers'].concat(toConsumableArray(props.fixedWidth ? [familyPrefix + '-fw'] : []));
+	    });
 
 	    return function () {
-	      return vue.h('div', { class: className }, slots.default ? slots.default() : []);
+	      return vue.h('div', { class: className.value }, slots.default ? slots.default() : []);
 	    };
 	  }
 	});
@@ -510,17 +521,28 @@
 	    var familyPrefix = fontawesomeSvgCore.config.familyPrefix;
 
 
-	    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
-	    var transform = objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
-	    var renderedText = fontawesomeSvgCore.text(props.value.toString(), _extends({}, transform, classes));
+	    var classes = vue.computed(function () {
+	      return objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
+	    });
+	    var transform = vue.computed(function () {
+	      return objectWithKey('transform', typeof props.transform === 'string' ? fontawesomeSvgCore.parse.transform(props.transform) : props.transform);
+	    });
+	    var abstractElement = vue.computed(function () {
+	      var _text = fontawesomeSvgCore.text(props.value.toString(), _extends({}, transform.value, classes.value)),
+	          abstract = _text.abstract;
 
-	    var abstract = renderedText.abstract;
+	      if (props.counter) {
+	        abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
+	      }
+	      return abstract[0];
+	    });
 
-	    if (props.counter) {
-	      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
-	    }
-
-	    return convert(abstract[0], {}, attrs);
+	    var vnode = vue.computed(function () {
+	      return convert(abstractElement.value, {}, attrs);
+	    });
+	    return function () {
+	      return vnode.value;
+	    };
 	  }
 	});
 
