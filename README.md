@@ -148,6 +148,8 @@ $ npm i --save @fortawesome/pro-duotone-svg-icons
 
 The following examples are based on a project configured with [vue-cli](https://github.com/vuejs/vue-cli).
 
+**Using Vue 2.x**
+
 `src/main.js`
 
 ```javascript
@@ -169,6 +171,25 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+```
+
+**Using Vue 3.x**
+
+`src/main.js`
+
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faUserSecret)
+
+
+createApp(App)
+.component('font-awesome-icon', FontAwesomeIcon)
+.mount('#app')
 ```
 
 `src/App.vue`
