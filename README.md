@@ -21,7 +21,6 @@
 <!-- toc -->
 
 - [Introduction](#introduction)
-  * [CodeSandbox Starter Sample 🚀](#codesandbox-starter-sample-%F0%9F%9A%80)
   * [Upgrading Font Awesome?](#upgrading-font-awesome)
   * [Get started](#get-started)
   * [Learn about our new SVG implementation](#learn-about-our-new-svg-implementation)
@@ -68,10 +67,6 @@
 ## Introduction
 
 Hey there! We're glad you're here...
-
-### CodeSandbox Starter Sample 🚀
-
-Here's a [CodeSandbox Starter Sample](https://codesandbox.io/s/github/FortAwesome/vue-fontawesome/tree/master/examples/vue-cli-webpack) on how to display Solid, Regular, and Brand icons [using the Icon Library](https://github.com/FortAwesome/vue-fontawesome#usage).
 
 ### Upgrading Font Awesome?
 
