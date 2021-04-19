@@ -109,17 +109,15 @@ $ yarn add @fortawesome/fontawesome-svg-core
 $ yarn add @fortawesome/free-solid-svg-icons
 ```
 
-**Using Vue 2.x**
-
-```
-$ npm i --save @fortawesome/vue-fontawesome@latest
-```
-
-**Using Vue 3.x**
+**Install this Vue component**
 
 ```
 $ npm i --save @fortawesome/vue-fontawesome@prerelease
 ```
+
+The `prerelease` tag is compatible with Vue 3 but not Vue 2.
+
+If you are still using Vue 2.x you can [read about usage here](https://github.com/FortAwesome/vue-fontawesome/tree/2.x).
 
 ## Add more styles or Pro icons
 
@@ -148,31 +146,7 @@ $ npm i --save @fortawesome/pro-duotone-svg-icons
 
 The following examples are based on a project configured with [vue-cli](https://github.com/vuejs/vue-cli).
 
-**Using Vue 2.x**
-
-`src/main.js`
-
-```javascript
-import Vue from 'vue'
-import App from './App'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faUserSecret)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.config.productionTip = false
-
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>'
-})
-```
-**Using Vue 3.x**
+**Registering the component**
 
 `src/main.js`
 
