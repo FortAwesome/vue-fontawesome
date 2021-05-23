@@ -1,5 +1,5 @@
 import { config } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, computed } from 'vue'
 
 export default defineComponent({
   name: 'FontAwesomeLayers',
@@ -14,11 +14,11 @@ export default defineComponent({
   setup (props, { slots }) {
     const { familyPrefix } = config
 
-    const className = [
+    const className = computed(() => [
       `${familyPrefix}-layers`,
       ...(props.fixedWidth ? [`${familyPrefix}-fw`] : [])
-    ]
+    ])
 
-    return () => h('div', { class: className }, slots.default ? slots.default() : [])
+    return () => h('div', { class: className.value }, slots.default ? slots.default() : [])
   }
 })

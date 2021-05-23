@@ -64,3 +64,20 @@ describe('class handling', () => {
     expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
   })
 })
+
+describe('reactivity', () => {
+  test('changing props should update the element', async () => {
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers fixed-width />',
+      components: {
+        FontAwesomeLayers
+      }
+    })
+
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
+
+    await wrapper.setProps({ fixedWidth: false })
+
+    expect(wrapper.element.getAttribute('class')).toBe('fa-layers')
+  })
+})

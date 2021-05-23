@@ -1,5 +1,5 @@
 import { config, parse, text } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import convert from '../converter'
 import { objectWithKey } from '../utils'
 
@@ -29,18 +29,21 @@ export default defineComponent({
   setup (props, { attrs }) {
     const { familyPrefix } = config
 
-    const classes = objectWithKey('classes', [
+    const classes = computed(() => objectWithKey('classes', [
       ...(props.counter ? [`${familyPrefix}-layers-counter`] : []),
       ...(props.position ? [`${familyPrefix}-layers-${props.position}`] : [])
-    ])
-    const transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform)
-    const renderedText = text(props.value.toString(), { ...transform, ...classes })
+    ]))
+    const transform = computed(() => objectWithKey('transform', 
+      typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform))
+    const abstractElement = computed(() => {
+      const { abstract } = text(props.value.toString(), { ...transform.value, ...classes.value })
+      if (props.counter) {
+        abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '')
+      }
+      return abstract[0]
+    })
 
-    const { abstract } = renderedText
-    if (props.counter) {
-      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '')
-    }
-
-    return convert(abstract[0], {}, attrs)
+    const vnode = computed(() => convert(abstractElement.value, {}, attrs))
+    return () => vnode.value
   }
 })
