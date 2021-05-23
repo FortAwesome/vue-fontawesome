@@ -339,7 +339,7 @@ function normalizeIconArgs(icon$$1) {
   }
 
   if (typeof icon$$1 === 'string') {
-    return { prefix: 'fas', iconName: icon$$1 };
+    return { prefix: 'far', iconName: icon$$1 };
   }
 }
 

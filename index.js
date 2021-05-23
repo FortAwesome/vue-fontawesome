@@ -342,7 +342,7 @@
 	  }
 
 	  if (typeof icon === 'string') {
-	    return { prefix: 'fas', iconName: icon };
+	    return { prefix: 'far', iconName: icon };
 	  }
 	}
 
