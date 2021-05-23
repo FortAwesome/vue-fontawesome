@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 5",
-  "version": "3.0.0-3",
+  "version": "3.0.0-4",
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -21,7 +21,8 @@
     "btaens <github.com/btaens>",
     "David Driscoll <github.com/david-driscoll>",
     "Tyranteon <github.com/tyranteon>",
-    "Vinicius Rangel <github.com/viniciuslrangel>"
+    "Vinicius Rangel <github.com/viniciuslrangel>",
+    "Okke Tijhuis <github.com/otijhuis>"
   ],
   "license": "MIT",
   "scripts": {

@@ -846,6 +846,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 | <img src="https://github.com/tyranteon.png?size=72" />       | Tyranteon       | [@tyranteon](https://github.com/tyranteon)             |
 | <img src="https://github.com/rigma.png?size=72" />           | Romain Failla   | [@rigma](https://github.com/rigma)                     |
 | <img src="https://github.com/viniciuslrangel.png?size=72" /> | Vinicius Rangel | [@viniciuslrangel](https://github.com/viniciuslrangel) |
+| <img src="https://github.com/otijhuis.png?size=72" />        | Okke Tijhuis    | [@otijhuis](https://github.com/otijhuis)               |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
