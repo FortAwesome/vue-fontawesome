@@ -1,5 +1,5 @@
 import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent, computed, watch } from 'vue'
+import { defineComponent, computed, watch, h } from 'vue'
 import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
@@ -122,6 +122,6 @@ export default defineComponent({
     }, { immediate: true })
 
     const vnode = computed(() => renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null)
-    return () => vnode.value
+    return () => h(() => vnode.value)
   }
 })
