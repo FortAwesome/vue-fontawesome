@@ -461,7 +461,9 @@
 	      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
 	    });
 	    return function () {
-	      return vnode.value;
+	      return vue.h(function () {
+	        return vnode.value;
+	      });
 	    };
 	  }
 	});
@@ -541,7 +543,9 @@
 	      return convert(abstractElement.value, {}, attrs);
 	    });
 	    return function () {
-	      return vnode.value;
+	      return vue.h(function () {
+	        return vnode.value;
+	      });
 	    };
 	  }
 	});

@@ -458,7 +458,9 @@ var FontAwesomeIcon = defineComponent({
       return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
     });
     return function () {
-      return vnode.value;
+      return h(function () {
+        return vnode.value;
+      });
     };
   }
 });
@@ -538,7 +540,9 @@ var FontAwesomeLayersText = defineComponent({
       return convert(abstractElement.value, {}, attrs);
     });
     return function () {
-      return vnode.value;
+      return h(function () {
+        return vnode.value;
+      });
     };
   }
 });

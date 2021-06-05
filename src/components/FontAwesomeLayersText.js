@@ -1,5 +1,5 @@
 import { config, parse, text } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, h } from 'vue'
 import convert from '../converter'
 import { objectWithKey } from '../utils'
 
@@ -44,6 +44,6 @@ export default defineComponent({
     })
 
     const vnode = computed(() => convert(abstractElement.value, {}, attrs))
-    return () => vnode.value
+    return () => h(() => vnode.value)
   }
 })
