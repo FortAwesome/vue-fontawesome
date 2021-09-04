@@ -1,13 +1,17 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faClose } from '@fortawesome/free-solid-svg-icons'
+import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
 import { coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle, faSpartan)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
+})
+
+afterEach(() => {
+  library.reset()
 })
 
 test('using a FAT icon with array format', () => {
@@ -33,7 +37,7 @@ if(coreHasFeature(ICON_ALIASES)) {
     const vm = mountFromProps({ icon: ['fas', 'close'] })
 
     expect(vm.$el.tagName).toBe('svg')
-    expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
   })
 }
 
@@ -68,6 +72,13 @@ if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
     expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
   })
 }
+
+test('passing icon directly', () => {
+  const vm = mountFromProps({ icon: faUser })
+
+  expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.classList.contains('fa-user')).toBeTruthy()
+})
 
 test('using array format', () => {
   const vm = mountFromProps({ icon: ['fas', 'coffee'] })
