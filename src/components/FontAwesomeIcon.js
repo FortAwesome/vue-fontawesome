@@ -4,6 +4,12 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
+  // this has everything that it needs to be rendered which means it was probably imported
+  // directly from an icon svg package
+  if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
+    return icon
+  }
+
   if (faParse.icon) {
     return faParse.icon(icon)
   }

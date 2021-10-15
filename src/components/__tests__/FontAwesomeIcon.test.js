@@ -1,13 +1,17 @@
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faClose } from '@fortawesome/free-solid-svg-icons'
+import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
 import { coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle, faSpartan)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
+})
+
+afterEach(() => {
+  library.reset()
 })
 
 test('using a FAT icon with array format', () => {
@@ -81,6 +85,12 @@ test('using string format', () => {
 
   expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
+})
+
+test.only('using imported object from svg icons package', () => {
+  const vm = mountFromProps({ icon: faUser })
+
+  expect(vm.$el.tagName).toBe('svg')
 })
 
 test('missing icon', () => {
