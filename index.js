@@ -332,6 +332,12 @@
 	}
 
 	function normalizeIconArgs(icon) {
+	  // this has everything that it needs to be rendered which means it was probably imported
+	  // directly from an icon svg package
+	  if (icon && (typeof icon === 'undefined' ? 'undefined' : _typeof(icon)) === 'object' && icon.prefix && icon.iconName && icon.icon) {
+	    return icon;
+	  }
+
 	  if (fontawesomeSvgCore.parse.icon) {
 	    return fontawesomeSvgCore.parse.icon(icon);
 	  }

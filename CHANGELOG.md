@@ -10,6 +10,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [2.0.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.3)  - 2021-10-15
+
+### Fixed
+* Skip parse.icon if the icon is imported directly from an icon package
+
+---
+
 ## [2.0.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.2)  - 2020-12-17
 
 ### Fixed

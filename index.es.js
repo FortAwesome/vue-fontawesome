@@ -328,6 +328,12 @@ function addStaticClass(to, what) {
 }
 
 function normalizeIconArgs(icon$$1) {
+  // this has everything that it needs to be rendered which means it was probably imported
+  // directly from an icon svg package
+  if (icon$$1 && (typeof icon$$1 === 'undefined' ? 'undefined' : _typeof(icon$$1)) === 'object' && icon$$1.prefix && icon$$1.iconName && icon$$1.icon) {
+    return icon$$1;
+  }
+
   if (parse.icon) {
     return parse.icon(icon$$1);
   }
