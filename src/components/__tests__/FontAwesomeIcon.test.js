@@ -250,7 +250,7 @@ test('swap opacity', () => {
 })
 
 test('using size', () => {
-  ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
+  ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
     const vm = mountFromProps({ icon: faCoffee, size: size })
 
     expect(vm.$el.classList.contains(`fa-${size}`)).toBeTruthy()
@@ -261,6 +261,13 @@ test('using spin', () => {
   const vm = mountFromProps({ icon: faCoffee, spin: true })
 
   expect(vm.$el.classList.contains('fa-spin')).toBeTruthy()
+})
+
+test('using spinPulse and spinReverse', () => {
+  const vm = mountFromProps({ icon: faCoffee, spinPulse: true, spinReverse: true })
+
+  expect(vm.$el.classList.contains('fa-spin-pulse')).toBeTruthy()
+  expect(vm.$el.classList.contains('fa-spin-reverse')).toBeTruthy()
 })
 
 test('using inverse', () => {
