@@ -150,9 +150,9 @@ import Vue from 'vue'
 import App from './App'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import * as fontAwesomeIcons from '@/fontAwesomeIcons'
 
-library.add(faUserSecret)
+library.add(...Object.values(fontAwesomeIcons));
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -164,6 +164,15 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+```
+
+`src/fontAwesomeIcons.js`
+
+```js
+export {
+  faUser,
+  faUserSecret
+} from '@fortawesome/free-solid-svg-icons';
 ```
 
 `src/App.vue`
