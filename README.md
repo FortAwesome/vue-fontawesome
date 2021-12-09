@@ -119,7 +119,7 @@ $ npm i --save @fortawesome/vue-fontawesome@prerelease
 ## Add more styles or Pro icons
 
 Brands are separated into their own style and for customers upgrading from
-version 4 to 5 we have a limited number of Regular icons available.
+version 4/5 to 6 we have a limited number of Regular icons available.
 
 **Visit [fontawesome.com/icons](https://fontawesome.com/icons) to search for free and Pro icons**
 
@@ -341,7 +341,7 @@ library.add(faSpinner)
 
 #### Explicit icon definition through something like a computed property
 
-```javascript
+```html
 <template>
   <div id="app">
     <font-awesome-icon :icon="appIcon" />
