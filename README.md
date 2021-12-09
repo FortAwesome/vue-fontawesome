@@ -841,18 +841,16 @@ The following contributors have either hepled to start this project, have contri
 code, are actively maintaining it (including documentation), or in other ways
 being awesome contributors to this project. **We'd like to take a moment to recognize them:**
 
-SirLamer ([@SirLamer](https://github.com/SirLamer)), Liu Xinyu ([@meteorlxy](https://github.com/meteorlxy)), Xaver Schulz ([@schulz3000](https://github.com/schulz3000)), Yannick Ihmels ([@ihmels](https://github.com/ihmels)), btaens ([@btaens](https://github.com/btaens)), David Driscoll ([@david-driscoll](https://github.com/david-driscoll)), Tyranteon ([@tyranteon](https://github.com/tyranteon)) and the <a href="mailto:hello@fontawesome.com">Font Awesome team</a>!
-
-| Name           | GitHub                                               |
-| -------------- | ---------------------------------------------------- |
-| SirLamer       | [@SirLamer](https://github.com/SirLamer)             |
-| Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)           |
-| Xaver Schulz   | [@schulz3000](https://github.com/schulz3000)         |
-| Yannick Ihmels | [@ihmels](https://github.com/ihmels)                 |
-| btaens         | [@btaens](https://github.com/btaens)                 |
-| David Driscoll | [@david-driscoll](https://github.com/david-driscoll) |
-| Tyranteon      | [@tyranteon](https://github.com/tyranteon)           |
-
+| Name              | GitHub                                                    |
+| ----------------- | --------------------------------------------------------- |
+| SirLamer          | [@SirLamer](https://github.com/SirLamer)                  |
+| Liu Xinyu         | [@meteorlxy](https://github.com/meteorlxy)                |
+| Xaver Schulz      | [@schulz3000](https://github.com/schulz3000)              |
+| Yannick Ihmels    | [@ihmels](https://github.com/ihmels)                      |
+| btaens            | [@btaens](https://github.com/btaens)                      |
+| David Driscoll    | [@david-driscoll](https://github.com/david-driscoll)      |
+| Tyranteon         | [@tyranteon](https://github.com/tyranteon)                |
+| Font Awesome Team | [@FortAwesome](https://github.com/orgs/FortAwesome/people)|
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
