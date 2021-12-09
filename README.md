@@ -7,7 +7,7 @@
 [![npm](https://img.shields.io/npm/v/@fortawesome/vue-fontawesome.svg?style=flat-square)](https://www.npmjs.com/package/@fortawesome/vue-fontawesome)
 [![GitHub Actions Status](https://github.com/FortAwesome/vue-fontawesome/workflows/CI/badge.svg)](https://github.com/FortAwesome/vue-fontawesome/actions)
 
-> Font Awesome 5 Vue component using SVG with JS
+> Font Awesome 6 Vue component using SVG with JS
 
 ---
 
@@ -70,24 +70,24 @@ Hey there! We're glad you're here...
 
 ### Upgrading Font Awesome?
 
-If you've used Font Awesome in the past (version 4 or older) there are some
+If you've used Font Awesome in the past (version 5 or older) there are some
 things that you should learn before you dive in.
 
-> https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4
+> https://fontawesome.com/v6.0/docs/web/setup/upgrading/
 
 ### Get started
 
 This package is for integrating with Vue.js. If you aren't using Vue then it's
-not going to help you. Head over to our "Get Started" page for some guidance.
+not going to help you. Head over to our "Quick Start" page for some guidance.
 
-> https://fontawesome.com/how-to-use/on-the-web/setup/getting-started
+> https://fontawesome.com/v6.0/docs/web/setup/quick-start
 
 ### Learn about our new SVG implementation
 
 This package, under the hood, uses SVG with JS and the `@fortawesome/fontawesome-svg-core` library. This implementation differs drastically from
 the web fonts implementation that was used in version 4 and older of Font Awesome. You might head over there to learn about how it works.
 
-> https://fontawesome.com/how-to-use/on-the-web/advanced/svg-javascript-core
+> https://fontawesome.com/v6.0/docs/web/dig-deeper/svg-core
 
 ## Installation
 
@@ -128,7 +128,7 @@ $ npm i --save @fortawesome/free-brands-svg-icons
 $ npm i --save @fortawesome/free-regular-svg-icons
 ```
 
-If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages after these [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers) are made.
+If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages after these [additional configuration](https://fontawesome.com/v6.0/docs/web/setup/packages) are made.
 
 ```
 $ npm i --save @fortawesome/pro-solid-svg-icons
@@ -216,7 +216,7 @@ library.add(faFontAwesome)
 
 #### Using Regular icons
 
-Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
+Using the Pro packages requires [additional configuration](https://fontawesome.com/v6.0/docs/web/setup/packages).
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -276,7 +276,7 @@ If you are writing these types of templates make sure and use valid HTML syntax:
 
 #### Processing i tags into svg using Font Awesome
 
-A basic installation of [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=svg-with-js) has
+A basic installation of [Font Awesome](https://fontawesome.com/v6.0/docs/web/setup/quick-start) has
 the ability to automatically transform `<i class="fas fa-coffee"></i>` into
 `<svg class="...">...</svg>` icons. This technology works with the browser's
 DOM, [`requestAnimationFrame`][raf], and [`MutationObserver`][mo].
@@ -483,7 +483,7 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 ### Basic
 
-[Size](https://fontawesome.com/how-to-use/on-the-web/styling/sizing-icons):
+[Size](https://fontawesome.com/v6.0/docs/web/style/size):
 
 ```html
 <font-awesome-icon icon="spinner" size="xs" />
@@ -491,13 +491,13 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 <font-awesome-icon icon="spinner" size="6x" />
 ```
 
-[Fixed width](https://fontawesome.com/how-to-use/on-the-web/styling/fixed-width-icons):
+[Fixed width](https://fontawesome.com/v6.0/docs/web/style/fixed-width):
 
 ```html
 <font-awesome-icon icon="spinner" fixed-width />
 ```
 
-[Rotate](https://fontawesome.com/how-to-use/on-the-web/styling/rotating-icons):
+[Rotate](https://fontawesome.com/v6.0/docs/web/style/rotate):
 
 ```html
 <font-awesome-icon icon="spinner" rotation="90" />
@@ -513,33 +513,33 @@ Flip horizontally, vertically, or both:
 <font-awesome-icon icon="spinner" flip="both" />
 ```
 
-Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling/animating-icons):
+Spin and pulse [animation](https://fontawesome.com/v6.0/docs/web/style/animate):
 
 ```html
 <font-awesome-icon icon="spinner" spin />
 <font-awesome-icon icon="spinner" pulse />
 ```
 
-[Border](https://fontawesome.com/how-to-use/on-the-web/styling/bordered-pulled-icons):
+[Border](https://fontawesome.com/v6.0/docs/web/style/pull#bordered-and-pulled-classes):
 
 ```html
 <font-awesome-icon icon="spinner" border />
 ```
 
-[Pull left or right](https://fontawesome.com/how-to-use/on-the-web/styling/bordered-pulled-icons):
+[Pull left or right](https://fontawesome.com/v6.0/docs/web/style/pull):
 
 ```html
 <font-awesome-icon icon="spinner" pull="left" />
 <font-awesome-icon icon="spinner" pull="right" />
 ```
 
-[Inverse](https://fontawesome.com/how-to-use/on-the-web/styling/stacking-icons):
+[Inverse](https://fontawesome.com/v6.0/docs/web/style/style-cheatsheet):
 
 ```html
 <font-awesome-icon icon="spinner" inverse />
 ```
 
-[Swap opacity](https://fontawesome.com/how-to-use/on-the-web/styling/duotone-icons#swapping-layers):
+[Swap opacity](https://fontawesome.com/v6.0/docs/web/style/duotone#swapping-layer-opacity):
 
 ```html
 <font-awesome-icon :icon="['fad', 'spinner']" swap-opacity />
@@ -547,27 +547,27 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 
 ### Advanced
 
-[Power Transforms](https://fontawesome.com/how-to-use/on-the-web/styling/power-transforms):
+[Power Transforms](https://fontawesome.com/v6.0/docs/web/style/power-transform):
 
 ```html
 <font-awesome-icon icon="spinner" transform="shrink-6 left-4" />
 <font-awesome-icon icon="spinner" :transform="{ rotate: 42 }" />
 ```
 
-[Masking](https://fontawesome.com/how-to-use/on-the-web/styling/masking):
+[Masking](https://fontawesome.com/v6.0/docs/web/style/mask):
 
 ```html
 <font-awesome-icon icon="coffee" :mask="['far', 'circle']" />
 ```
 
-[Symbols](https://fontawesome.com/how-to-use/on-the-web/advanced/svg-symbols):
+[Symbols](https://fontawesome.com/v6.0/docs/web/add-icons/svg-symbols):
 
 ```html
 <font-awesome-icon icon="edit" symbol />
 <font-awesome-icon icon="edit" symbol="edit-icon" />
 ```
 
-[Layers](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Layers](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers class="fa-lg">
@@ -576,7 +576,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 </font-awesome-layers>
 ```
 
-[Layers text](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Layers text](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers full-width class="fa-4x">
@@ -585,7 +585,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 </font-awesome-layers>
 ```
 
-[Counters](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Counters](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers full-width class="fa-4x">
