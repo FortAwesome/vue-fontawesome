@@ -300,7 +300,7 @@ The `icon` property of the `FontAwesomeIcon` component can be used in the follow
 
 #### Shorthand that assumes a prefix of "fas"
 
-```javascript
+```vue
 <font-awesome-icon icon="spinner" />
 <font-awesome-icon icon="align-left" />
 
@@ -326,7 +326,7 @@ you would need to pass in the icon name using _kebab-case_ as opposed to _camelC
 
 #### Explicit prefix (note the Vue bind shorthand because this uses an array)
 
-```javascript
+```vue
 <font-awesome-icon :icon="['far', 'spinner']" />
 ```
 
@@ -341,7 +341,7 @@ library.add(faSpinner)
 
 #### Explicit icon definition through something like a computed property
 
-```javascript
+```vue
 <template>
   <div id="app">
     <font-awesome-icon :icon="appIcon" />
@@ -367,7 +367,7 @@ export default {
 
 With Vue you can tell your component to resolve other component explicitly.
 
-```javascript
+```vue
 <template>
   <div>
     <font-awesome-icon :icon="myIcon" />
@@ -663,7 +663,7 @@ the Shadow DOM.
 
 Here is an example that leverages the `mounted()` lifecycle hook to insert the CSS.
 
-```javascript
+```vue
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { config, dom } from '@fortawesome/fontawesome-svg-core'
@@ -760,7 +760,7 @@ vs.
 
 Or if you are using a `prefix` property it smells of needless boilerplate:
 
-```html
+```vue
 <template>
   <font-awesome-icon :prefix="iconPrefix" :icon="iconName" />
 </template>
@@ -781,7 +781,7 @@ export default {
 
 vs.
 
-```html
+```vue
 <template>
   <font-awesome-icon :icon="icon" />
 </template>
@@ -806,7 +806,7 @@ doesn't appear in the expected style.
 
 In the following case which style should be used (light from the icon definition or regular from the far boolean):
 
-```html
+```vue
 import { faSpinner } from `@fortawesome/pro-light-svg-icons`
 
 <template>
