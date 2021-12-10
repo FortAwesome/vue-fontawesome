@@ -73,21 +73,21 @@ Hey there! We're glad you're here...
 If you've used Font Awesome in the past (version 4 or older) there are some
 things that you should learn before you dive in.
 
-> https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4
+> https://fontawesome.com/v6.0/docs/web/setup/upgrading/
 
 ### Get started
 
 This package is for integrating with Vue.js. If you aren't using Vue then it's
 not going to help you. Head over to our "Get Started" page for some guidance.
 
-> https://fontawesome.com/how-to-use/on-the-web/setup/getting-started
+> https://fontawesome.com/v6.0/docs/web/setup/quick-start
 
 ### Learn about our new SVG implementation
 
 This package, under the hood, uses SVG with JS and the `@fortawesome/fontawesome-svg-core` library. This implementation differs drastically from
 the web fonts implementation that was used in version 4 and older of Font Awesome. You might head over there to learn about how it works.
 
-> https://fontawesome.com/how-to-use/on-the-web/advanced/svg-javascript-core
+> https://fontawesome.com/v6.0/docs/web/dig-deeper/svg-core
 
 ## Installation
 
@@ -126,7 +126,7 @@ $ npm i --save @fortawesome/free-brands-svg-icons
 $ npm i --save @fortawesome/free-regular-svg-icons
 ```
 
-If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages after these [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers) are made.
+If you are a [Font Awesome Pro](https://fontawesome.com/pro) subscriber you can install Pro packages after these [additional configuration](https://fontawesome.com/v6.0/docs/web/setup/packages) are made.
 
 ```
 $ npm i --save @fortawesome/pro-solid-svg-icons
@@ -210,7 +210,7 @@ library.add(faFontAwesome)
 
 #### Using Regular icons
 
-Using the Pro packages requires [additional configuration](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers).
+Using the Pro packages requires [additional configuration](https://fontawesome.com/v6.0/docs/web/setup/packages).
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -270,7 +270,7 @@ If you are writing these types of templates make sure and use valid HTML syntax:
 
 #### Processing i tags into svg using Font Awesome
 
-A basic installation of [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=svg-with-js) has
+A basic installation of [Font Awesome](https://fontawesome.com/v6.0/docs/web/setup/quick-start) has
 the ability to automatically transform `<i class="fas fa-coffee"></i>` into
 `<svg class="...">...</svg>` icons. This technology works with the browser's
 DOM, [`requestAnimationFrame`][raf], and [`MutationObserver`][mo].
@@ -335,7 +335,7 @@ library.add(faSpinner)
 
 #### Explicit icon definition through something like a computed property
 
-```javascript
+```vue
 <template>
   <div id="app">
     <font-awesome-icon :icon="appIcon" />
@@ -361,7 +361,7 @@ export default {
 
 With Vue you can tell your component to resolve other component explicitly.
 
-```javascript
+```vue
 <template>
   <div>
     <font-awesome-icon :icon="myIcon" />
@@ -477,7 +477,7 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 ### Basic
 
-[Size](https://fontawesome.com/how-to-use/on-the-web/styling/sizing-icons):
+[Size](https://fontawesome.com/v6.0/docs/web/style/size):
 
 ```html
 <font-awesome-icon icon="spinner" size="xs" />
@@ -485,13 +485,13 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 <font-awesome-icon icon="spinner" size="6x" />
 ```
 
-[Fixed width](https://fontawesome.com/how-to-use/on-the-web/styling/fixed-width-icons):
+[Fixed width](https://fontawesome.com/v6.0/docs/web/style/fixed-width):
 
 ```html
 <font-awesome-icon icon="spinner" fixed-width />
 ```
 
-[Rotate](https://fontawesome.com/how-to-use/on-the-web/styling/rotating-icons):
+[Rotate](https://fontawesome.com/v6.0/docs/web/style/rotate):
 
 ```html
 <font-awesome-icon icon="spinner" rotation="90" />
@@ -507,33 +507,33 @@ Flip horizontally, vertically, or both:
 <font-awesome-icon icon="spinner" flip="both" />
 ```
 
-Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling/animating-icons):
+Spin and pulse [animation](https://fontawesome.com/v6.0/docs/web/style/animate):
 
 ```html
 <font-awesome-icon icon="spinner" spin />
 <font-awesome-icon icon="spinner" pulse />
 ```
 
-[Border](https://fontawesome.com/how-to-use/on-the-web/styling/bordered-pulled-icons):
+[Border](https://fontawesome.com/v6.0/docs/web/style/pull#bordered-and-pulled-classes):
 
 ```html
 <font-awesome-icon icon="spinner" border />
 ```
 
-[Pull left or right](https://fontawesome.com/how-to-use/on-the-web/styling/bordered-pulled-icons):
+[Pull left or right](https://fontawesome.com/v6.0/docs/web/style/pull):
 
 ```html
 <font-awesome-icon icon="spinner" pull="left" />
 <font-awesome-icon icon="spinner" pull="right" />
 ```
 
-[Inverse](https://fontawesome.com/how-to-use/on-the-web/styling/stacking-icons):
+[Inverse](https://fontawesome.com/v6.0/docs/web/style/style-cheatsheet):
 
 ```html
 <font-awesome-icon icon="spinner" inverse />
 ```
 
-[Swap opacity](https://fontawesome.com/how-to-use/on-the-web/styling/duotone-icons#swapping-layers):
+[Swap opacity](https://fontawesome.com/v6.0/docs/web/style/duotone#swapping-layer-opacity):
 
 ```html
 <font-awesome-icon :icon="['fad', 'spinner']" swap-opacity />
@@ -541,27 +541,27 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 
 ### Advanced
 
-[Power Transforms](https://fontawesome.com/how-to-use/on-the-web/styling/power-transforms):
+[Power Transforms](https://fontawesome.com/v6.0/docs/web/style/power-transform):
 
 ```html
 <font-awesome-icon icon="spinner" transform="shrink-6 left-4" />
 <font-awesome-icon icon="spinner" :transform="{ rotate: 42 }" />
 ```
 
-[Masking](https://fontawesome.com/how-to-use/on-the-web/styling/masking):
+[Masking](https://fontawesome.com/v6.0/docs/web/style/mask):
 
 ```html
 <font-awesome-icon icon="coffee" :mask="['far', 'circle']" />
 ```
 
-[Symbols](https://fontawesome.com/how-to-use/on-the-web/advanced/svg-symbols):
+[Symbols](https://fontawesome.com/v6.0/docs/web/add-icons/svg-symbols):
 
 ```html
 <font-awesome-icon icon="edit" symbol />
 <font-awesome-icon icon="edit" symbol="edit-icon" />
 ```
 
-[Layers](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Layers](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers class="fa-lg">
@@ -570,7 +570,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 </font-awesome-layers>
 ```
 
-[Layers text](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Layers text](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers full-width class="fa-4x">
@@ -579,7 +579,7 @@ Spin and pulse [animation](https://fontawesome.com/how-to-use/on-the-web/styling
 </font-awesome-layers>
 ```
 
-[Counters](https://fontawesome.com/how-to-use/on-the-web/styling/layering):
+[Counters](https://fontawesome.com/v6.0/docs/web/style/layer):
 
 ```html
 <font-awesome-layers full-width class="fa-4x">
@@ -657,7 +657,7 @@ the Shadow DOM.
 
 Here is an example that leverages the `mounted()` lifecycle hook to insert the CSS.
 
-```javascript
+```vue
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { config, dom } from '@fortawesome/fontawesome-svg-core'
@@ -754,7 +754,7 @@ vs.
 
 Or if you are using a `prefix` property it smells of needless boilerplate:
 
-```html
+```vue
 <template>
   <font-awesome-icon :prefix="iconPrefix" :icon="iconName" />
 </template>
@@ -775,7 +775,7 @@ export default {
 
 vs.
 
-```html
+```vue
 <template>
   <font-awesome-icon :icon="icon" />
 </template>
@@ -800,7 +800,7 @@ doesn't appear in the expected style.
 
 In the following case which style should be used (light from the icon definition or regular from the far boolean):
 
-```html
+```vue
 import { faSpinner } from `@fortawesome/pro-light-svg-icons`
 
 <template>
@@ -835,29 +835,22 @@ The following contributors have either hepled to start this project, have contri
 code, are actively maintaining it (including documentation), or in other ways
 being awesome contributors to this project. **We'd like to take a moment to recognize them.**
 
-|                                                              | Name            | GitHub                                                 |
-| :----------------------------------------------------------: | --------------- | ------------------------------------------------------ |
-| <img src="https://github.com/SirLamer.png?size=72" />        | SirLamer        | [@SirLamer](https://github.com/SirLamer)               |
-| <img src="https://github.com/meteorlxy.png?size=72" />       | Liu Xinyu       | [@meteorlxy](https://github.com/meteorlxy)             |
-| <img src="https://github.com/schulz3000.png?size=72" />      | Xaver Schulz    | [@schulz3000](https://github.com/schulz3000)           |
-| <img src="https://github.com/ihmels.png?size=72" />          | Yannick Ihmels  | [@ihmels](https://github.com/ihmels)                   |
-| <img src="https://github.com/btaens.png?size=72" />          | btaens          | [@btaens](https://github.com/btaens)                   |
-| <img src="https://github.com/david-driscoll.png?size=72" />  | David Driscoll  | [@david-driscoll](https://github.com/david-driscoll)   |
-| <img src="https://github.com/tyranteon.png?size=72" />       | Tyranteon       | [@tyranteon](https://github.com/tyranteon)             |
-| <img src="https://github.com/rigma.png?size=72" />           | Romain Failla   | [@rigma](https://github.com/rigma)                     |
-| <img src="https://github.com/viniciuslrangel.png?size=72" /> | Vinicius Rangel | [@viniciuslrangel](https://github.com/viniciuslrangel) |
-| <img src="https://github.com/otijhuis.png?size=72" />        | Okke Tijhuis    | [@otijhuis](https://github.com/otijhuis)               |
+
+| Name              | GitHub                                                    |
+| ----------------- | --------------------------------------------------------- |
+| SirLamer          | [@SirLamer](https://github.com/SirLamer)                  |
+| Liu Xinyu         | [@meteorlxy](https://github.com/meteorlxy)                |
+| Xaver Schulz      | [@schulz3000](https://github.com/schulz3000)              |
+| Yannick Ihmels    | [@ihmels](https://github.com/ihmels)                      |
+| btaens            | [@btaens](https://github.com/btaens)                      |
+| David Driscoll    | [@david-driscoll](https://github.com/david-driscoll)      |
+| Tyranteon         | [@tyranteon](https://github.com/tyranteon)                |
+| Romain Failla     | [@rigma](https://github.com/rigma)                        |
+| Vinicius Rangel   | [@viniciuslrangel](https://github.com/viniciuslrangel)    |
+| Okke Tijhuis      | [@otijhuis](https://github.com/otijhuis)                  |
+| Font Awesome Team | [@FortAwesome](https://github.com/orgs/FortAwesome/people)|
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
-
-The Font Awesome team:
-
-|                                                            | Name           | GitHub                                             |
-| :--------------------------------------------------------: | -------------- | -------------------------------------------------- |
-| <img src="https://github.com/supercodepoet.png?size=72" /> | Travis Chase   | [@supercodepoet](https://github.com/supercodepoet) |
-| <img src="https://github.com/robmadole.png?size=72" />     | Rob Madole     | [@robmadole](https://github.com/robmadole)         |
-| <img src="https://github.com/mlwilkerson.png?size=72" />   | Mike Wilkerson | [@mlwilkerson](https://github.com/mlwilkerson)     |
-| <img src="https://github.com/talbs.png?size=72" />         | Brian Talbot   | [@talbs](https://github.com/talbs)                 |
 
 ## Releasing this project
 
