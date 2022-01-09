@@ -214,7 +214,7 @@ Using the Pro packages requires [additional configuration](https://fontawesome.c
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
-# Note we are using the Pro style here
+// Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-regular-svg-icons'
 
 library.add(faUserSecret)
@@ -228,7 +228,7 @@ library.add(faUserSecret)
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
-# Note we are using the Pro style here
+// Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-light-svg-icons'
 
 library.add(faUserSecret)
@@ -242,7 +242,7 @@ library.add(faUserSecret)
 
 ```javascript
 import { library } from '@fortawesome/fontawesome-svg-core'
-# Note we are using the Pro style here
+// Note we are using the Pro style here
 import { faUserSecret } from '@fortawesome/pro-duotone-svg-icons'
 
 library.add(faUserSecret)
@@ -298,8 +298,8 @@ The `icon` property of the `FontAwesomeIcon` component can be used in the follow
 <font-awesome-icon icon="spinner" />
 <font-awesome-icon icon="align-left" />
 
-<font-awesome-icon :icon="['fas', 'spinner']" /> # Same as above
-<font-awesome-icon :icon="['fas', 'align-left']" /> # Same as above
+<font-awesome-icon :icon="['fas', 'spinner']" /> // Same as above
+<font-awesome-icon :icon="['fas', 'align-left']" /> // Same as above
 ```
 
 For the above to work you must add the `spinner` and `align-left` icon to the library.
@@ -315,7 +315,7 @@ In the event that you are using an icon with a multi-word name please note that
 you would need to pass in the icon name using _kebab-case_ as opposed to _camelCase_.
 
 ```javascript
-<font-awesome-icon icon="address-card" />  # import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
+<font-awesome-icon icon="address-card" />  // import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 ```
 
 #### Explicit prefix (note the Vue bind shorthand because this uses an array)
