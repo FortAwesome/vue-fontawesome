@@ -37,7 +37,7 @@ if(coreHasFeature(ICON_ALIASES)) {
     const vm = mountFromProps({ icon: ['fas', 'close'] })
 
     expect(vm.$el.tagName).toBe('svg')
-    expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
   })
 }
 
@@ -87,7 +87,7 @@ test('using string format', () => {
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
-test.only('using imported object from svg icons package', () => {
+test('using imported object from svg icons package', () => {
   const vm = mountFromProps({ icon: faUser })
 
   expect(vm.$el.tagName).toBe('svg')
@@ -333,5 +333,21 @@ describe('title', () => {
 
     expect(vm.$el.getElementsByTagName('title').length)
       .toBe(0)
+  })
+})
+
+describe('using bounce', () => {
+  test('bounce', () => {
+    const vm = mountFromProps({ icon: faCoffee, bounce: true })
+
+    expect(vm.$el.classList.contains('fa-bounce')).toBeTruthy()
+  })
+})
+
+describe('using shake', () => {
+  test('shake', () => {
+    const vm = mountFromProps({ icon: faCoffee, shake: true })
+
+    expect(vm.$el.classList.contains('fa-shake')).toBeTruthy()
   })
 })
