@@ -124,7 +124,15 @@ export default {
     inverse: {
       type: Boolean,
       default: false
-    }
+    },
+    bounce: {
+      type: Boolean,
+      default: false
+    },
+    shake: {
+      type: Boolean,
+      default: false
+    },
   },
 
   render (createElement, context) {

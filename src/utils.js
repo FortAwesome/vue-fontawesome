@@ -20,7 +20,9 @@ export function classList (props) {
     [`fa-${props.size}`]: props.size !== null,
     [`fa-rotate-${props.rotation}`]: props.rotation !== null,
     [`fa-pull-${props.pull}`]: props.pull !== null,
-    'fa-swap-opacity': props.swapOpacity
+    'fa-swap-opacity': props.swapOpacity,
+    'fa-bounce': props.bounce,
+    'fa-shake': props.shake
   }
 
   return Object.keys(classes)
