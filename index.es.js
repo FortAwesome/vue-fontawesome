@@ -53,13 +53,13 @@ var humps = createCommonjsModule(function (module) {
       return chr ? chr.toUpperCase() : '';
     });
     // Ensure 1st char is always lowercase
-    return string.substr(0, 1).toLowerCase() + string.substr(1);
+    return string.slice(0, 1).toLowerCase() + string.slice(1);
   };
 
   var pascalize = function(string) {
     var camelized = camelize(string);
     // Ensure 1st char is always uppercase
-    return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
+    return camelized.slice(0, 1).toUpperCase() + camelized.slice(1);
   };
 
   var decamelize = function(string, options) {
