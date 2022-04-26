@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve'
-import commonJs from 'rollup-plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import commonJs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 
 const name = 'vue-fontawesome'
@@ -43,9 +43,6 @@ export default {
           targets: {"browsers": ["> 1%", "last 2 versions", "ie > 9"]},
           modules: false
         }]
-      ],
-      plugins: [
-        '@babel/plugin-external-helpers'
       ],
       exclude: 'node_modules/**'
     })
