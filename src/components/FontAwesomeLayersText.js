@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { config, parse, text } from '@fortawesome/fontawesome-svg-core'
 import convert from '../converter'
 import { objectWithKey } from '../utils'
