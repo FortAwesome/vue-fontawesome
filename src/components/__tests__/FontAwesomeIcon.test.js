@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
 import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
@@ -295,5 +299,21 @@ describe('reactivity', () => {
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
     expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+  })
+})
+
+describe('using bounce', () => {
+  test('bounce', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
+
+    expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
+  })
+})
+
+describe('using shake', () => {
+  test('shake', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, shake: true })
+
+    expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
   })
 })

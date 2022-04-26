@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { compileAndMount } from '../__fixtures__/helpers'
 import FontAwesomeLayersText from '../FontAwesomeLayersText'
 
