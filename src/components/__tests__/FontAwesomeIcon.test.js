@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
