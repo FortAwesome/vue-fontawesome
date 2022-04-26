@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
 import convert from '../converter'
 import log from '../logger'

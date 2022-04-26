@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import { config } from '@fortawesome/fontawesome-svg-core'
 import { addStaticClass } from '../utils'
 

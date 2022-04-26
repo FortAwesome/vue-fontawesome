@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Vue from 'vue/dist/vue'
 import FontAwesomeLayersText from '../FontAwesomeLayersText'
 import { compileAndMount } from '../__fixtures__/helpers'
