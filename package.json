@@ -43,9 +43,9 @@
     "vue": "~2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "babel-core": "^6.26.3",
     "babel-jest": "^28.0.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
@@ -54,7 +54,7 @@
     "cross-env": "^5.1.1",
     "humps": "^2.0.1",
     "husky": "^1.1.2",
-    "jest": "^28.0.1",
+    "jest": "^24.0.0",
     "lint-staged": "^12.4.1",
     "markdown-toc": "^1.2.0",
     "rollup": "^0.57.1",
@@ -67,5 +67,10 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11"
   }
 }
