@@ -321,7 +321,7 @@
 	    'fa-inverse': props.inverse,
 	    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
 	    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-	  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
+	  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), defineProperty(_classes, 'fa-bounce', props.bounce), defineProperty(_classes, 'fa-shake', props.shake), _classes);
 
 	  return Object.keys(classes).map(function (key) {
 	    return classes[key] ? key : null;
@@ -463,6 +463,14 @@
 	      default: null
 	    },
 	    inverse: {
+	      type: Boolean,
+	      default: false
+	    },
+	    bounce: {
+	      type: Boolean,
+	      default: false
+	    },
+	    shake: {
 	      type: Boolean,
 	      default: false
 	    }
