@@ -133,6 +133,10 @@ export default {
       type: Boolean,
       default: false
     },
+    beatFade: {
+      type: Boolean,
+      default: false
+    }
   },
 
   render (createElement, context) {

@@ -355,3 +355,11 @@ describe('using shake', () => {
     expect(vm.$el.classList.contains('fa-shake')).toBeTruthy()
   })
 })
+
+describe('using beat-fade', () => {
+  test('shake', () => {
+    const vm = mountFromProps({ icon: faCoffee, shake: true })
+
+    expect(vm.$el.classList.contains('fa-beat-fade')).toBeTruthy()
+  })
+})
