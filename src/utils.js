@@ -23,7 +23,6 @@ export function classList (props) {
     'fa-swap-opacity': props.swapOpacity,
     'fa-bounce': props.bounce,
     'fa-shake': props.shake,
-    'fa-bounce': props.bounce,
     'fa-beat-fade': props.beatFade
   }
 
