@@ -102,6 +102,18 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    beat: {
+      type: Boolean,
+      default: false
+    },
+    fade: {
+      type: Boolean,
+      default: false
+    },
+    beatFade: {
+      type: Boolean,
+      default: false
+    }
   },
 
   setup (props, { attrs }) {

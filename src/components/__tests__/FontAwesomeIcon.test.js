@@ -317,3 +317,30 @@ describe('using shake', () => {
     expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
   })
 })
+
+describe('using beat', () => {
+  test('beat', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, beat: true })
+
+    expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
+  })
+})
+
+
+describe('using fade', () => {
+  test('fade', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, fade: true })
+
+    expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
+  })
+})
+
+
+describe('using beat-fade', () => {
+  test('beat-fade', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
+
+    expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
+  })
+})
+
