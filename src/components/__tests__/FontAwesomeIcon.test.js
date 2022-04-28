@@ -212,7 +212,7 @@ test('swap opacity', () => {
 })
 
 test('using size', () => {
-  ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
+  ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
     const wrapper = mountFromProps({ icon: faCoffee, size: size })
 
     expect(wrapper.element.classList.contains(`fa-${size}`)).toBeTruthy()
@@ -326,7 +326,6 @@ describe('using beat', () => {
   })
 })
 
-
 describe('using fade', () => {
   test('fade', () => {
     const wrapper = mountFromProps({ icon: faCoffee, fade: true })
@@ -334,7 +333,6 @@ describe('using fade', () => {
     expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
   })
 })
-
 
 describe('using beat-fade', () => {
   test('beat-fade', () => {
@@ -344,3 +342,26 @@ describe('using beat-fade', () => {
   })
 })
 
+describe('using flash', () => {
+  test('flash', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, flash: true })
+
+    expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
+  })
+})
+
+describe('using spin-pulse', () => {
+  test('spin-pulse', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
+
+    expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
+  })
+})
+
+describe('using spin-revese', () => {
+  test('spin-reverse', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
+
+    expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
+  })
+})

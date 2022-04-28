@@ -20,7 +20,10 @@ export function classList (props) {
     'fa-shake': props.shake,
     'fa-beat': props.beat,
     'fa-fade': props.fade,
-    'fa-beat-fade': props.beatFade
+    'fa-beat-fade': props.beatFade,
+    'fa-flash': props.flash,
+    'fa-spin-pulse': props.spinPulse,
+    'fa-spin-reverse': props.spinReverse
   }
 
   return Object.keys(classes)

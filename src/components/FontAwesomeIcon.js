@@ -72,7 +72,7 @@ export default defineComponent({
     size: {
       type: String,
       default: null,
-      validator: (value) => ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1
+      validator: (value) => ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1
     },
     spin: {
       type: Boolean,
@@ -113,7 +113,19 @@ export default defineComponent({
     beatFade: {
       type: Boolean,
       default: false
-    }
+    },
+    flash: {
+      type: Boolean,
+      default: false
+    },
+    spinPulse: {
+      type: Boolean,
+      default: false
+    },
+    spinReverse: {
+      type: Boolean,
+      default: false
+    },
   },
 
   setup (props, { attrs }) {
