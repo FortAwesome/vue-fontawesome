@@ -1,4 +1,4 @@
-# Developing vue-fontawesome
+# Developing vue-fontawesome with Vue 3
 
 ## Tasks
 
