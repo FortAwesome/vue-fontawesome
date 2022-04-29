@@ -18,7 +18,7 @@ function normalizeIconArgs (icon) {
     return null
   }
 
-  if (typeof icon === 'object' && icon.prefix && icon.iconName) {
+  if (icon && typeof icon === 'object' && icon.prefix && icon.iconName) {
     return icon
   }
 
