@@ -3,7 +3,7 @@ import { ComponentPublicInstance } from 'vue'
 interface FontAwesomeIconProps {
   border: boolean
   fixedWidth: boolean
-  flip: 'horizontal' | 'vertical' | 'both' | null
+  flip: boolean | 'horizontal' | 'vertical' | 'both'
   icon: object | Array<string> | string
   mask: object | Array<string> | string | null
   listItem: boolean

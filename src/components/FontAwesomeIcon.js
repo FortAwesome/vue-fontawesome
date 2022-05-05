@@ -35,9 +35,9 @@ export default defineComponent({
       default: false
     },
     flip: {
-      type: String,
-      default: null,
-      validator: (value) => ['horizontal', 'vertical', 'both'].indexOf(value) > -1
+      type: [Boolean, String],
+      default: false,
+      validator: (value) => [true, false, 'horizontal', 'vertical', 'both'].indexOf(value) > -1
     },
     icon: {
       type: [Object, Array, String],

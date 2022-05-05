@@ -133,16 +133,29 @@ test('using fixedWidth', () => {
 })
 
 describe('using flip', () => {
+  test('flip', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, flip: true })
+
+    expect(wrapper.element.classList.contains('fa-flip')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+  })
+
   test('horizontal', () => {
     const wrapper = mountFromProps({ icon: faCoffee, flip: "horizontal" })
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
   })
 
   test('vertical', () => {
     const wrapper = mountFromProps({ icon: faCoffee, flip: "vertical" })
 
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
   })
 
   test('both', () => {
