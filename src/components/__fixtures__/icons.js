@@ -21,3 +21,15 @@ export const faCircle = {
     "..."
   ]
 }
+
+export const faAlien = {
+  prefix: 'fad',
+  iconName: 'alien',
+  icon: [
+    640,
+    512,
+    [],
+    "f003",
+    "..."
+  ]
+}
