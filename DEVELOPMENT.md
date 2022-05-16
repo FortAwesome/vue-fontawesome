@@ -16,8 +16,8 @@ test        | Execute unit tests
 1. Update `package.json` and change `version`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
-1. `npm publish`
-1. `npm publish --registry https://npm.fontawesome.com`
+1. `npm publish --tag 2x`
+1. `npm publish --tag 2x --registry https://npm.fontawesome.com`
 1. `git add .`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
