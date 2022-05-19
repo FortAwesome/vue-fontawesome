@@ -148,6 +148,7 @@ describe('using flip', () => {
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
     expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('vertical', () => {
@@ -156,6 +157,7 @@ describe('using flip', () => {
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
     expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('both', () => {
@@ -163,6 +165,7 @@ describe('using flip', () => {
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 })
 
