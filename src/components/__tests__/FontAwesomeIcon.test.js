@@ -12,7 +12,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  fontawesome.library.reset()
+  library.reset()
 })
 
 test('using array format, short prefix and short icon name', () => {
