@@ -2,63 +2,67 @@
  * @jest-environment jsdom
  */
 
- import { library } from '@fortawesome/fontawesome-svg-core'
- import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
- import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
- import FontAwesomeIcon from '../FontAwesomeIcon'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
+import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import FontAwesomeIcon from '../FontAwesomeIcon'
 
- beforeEach(() => {
-   library.add(faCoffee, faCircle, faAlien)
- })
+beforeEach(() => {
+  library.add(faCoffee, faCircle, faAlien)
+})
 
- test('using array format, short prefix and short icon name', () => {
-   const wrapper = mountFromProps({ icon: ['fas', 'coffee'] })
+afterEach(() => {
+  fontawesome.library.reset()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
- })
+test('using array format, short prefix and short icon name', () => {
+  const wrapper = mountFromProps({ icon: ['fas', 'coffee'] })
 
- test('using array format, short prefix and long icon name', () => {
-   const wrapper = mountFromProps({ icon: ['fas', 'fa-coffee'] })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
- })
+test('using array format, short prefix and long icon name', () => {
+  const wrapper = mountFromProps({ icon: ['fas', 'fa-coffee'] })
 
- test('using array format, long prefix and long icon name', () => {
-   const wrapper = mountFromProps({ icon: ['fa-solid', 'fa-coffee'] })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
- })
+test('using array format, long prefix and long icon name', () => {
+  const wrapper = mountFromProps({ icon: ['fa-solid', 'fa-coffee'] })
 
- test('using array format, long prefix and short icon name', () => {
-   const wrapper = mountFromProps({ icon: ['fa-duotone', 'alien'] })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
- })
+test('using array format, long prefix and short icon name', () => {
+  const wrapper = mountFromProps({ icon: ['fa-duotone', 'alien'] })
 
- test('using string format, icon name only', () => {
-   const wrapper = mountFromProps({ icon: 'coffee' })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
- })
+test('using string format, icon name only', () => {
+  const wrapper = mountFromProps({ icon: 'coffee' })
 
- test('using string format, with long prefix and long icon name', () => {
-   const wrapper = mountFromProps({ icon: 'fa-duotone fa-alien' })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
- })
+test('using string format, with long prefix and long icon name', () => {
+  const wrapper = mountFromProps({ icon: 'fa-duotone fa-alien' })
 
- test('using string format, with short prefix and long icon name', () => {
-   const wrapper = mountFromProps({ icon: 'fad fa-alien' })
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+})
 
-   expect(wrapper.element.tagName).toBe('svg')
-   expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
- })
+test('using string format, with short prefix and long icon name', () => {
+  const wrapper = mountFromProps({ icon: 'fad fa-alien' })
+
+  expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+})
 
 test('missing icon', () => {
   const wrapper = mountFromProps({ icon: ['fas', 'noicon'] })
