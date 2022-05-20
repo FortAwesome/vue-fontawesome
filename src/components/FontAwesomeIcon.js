@@ -5,6 +5,14 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
+  if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
+    return icon
+  }
+
+  if (faParse.icon) {
+    return faParse.icon(icon)
+  }
+
   if (icon === null) {
     return null
   }
