@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [2.0.7](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.7)  - 2022-06-07
+
+### Fixed
+* Animations for bounce, shake, beat and beat-fade
+* Flip animation when used by itself
+
+---
+
 ## [2.0.6](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.6)  - 2021-10-18
 
 ### Fixed
