@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Vue from 'vue/dist/vue'
 import FontAwesomeLayers from '../FontAwesomeLayers'
 import { library } from '@fortawesome/fontawesome-svg-core'

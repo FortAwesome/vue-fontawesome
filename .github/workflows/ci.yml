@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [14.x, 16.x, 18.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -21,8 +21,7 @@ jobs:
       run: |
         npm install
         npm run build
-        npm run test.latest
-        npm run test.next.proregistry
+        npm run test
       env:
         CI: true
         FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}

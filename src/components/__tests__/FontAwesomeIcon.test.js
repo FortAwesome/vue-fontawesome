@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -37,7 +41,7 @@ if(coreHasFeature(ICON_ALIASES)) {
     const vm = mountFromProps({ icon: ['fas', 'close'] })
 
     expect(vm.$el.tagName).toBe('svg')
-    expect(vm.$el.classList.contains('fa-close')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-xmark')).toBeTruthy()
   })
 }
 
@@ -87,7 +91,7 @@ test('using string format', () => {
   expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
 })
 
-test.only('using imported object from svg icons package', () => {
+test('using imported object from svg icons package', () => {
   const vm = mountFromProps({ icon: faUser })
 
   expect(vm.$el.tagName).toBe('svg')
@@ -171,16 +175,31 @@ test('using fixedWidth', () => {
 })
 
 describe('using flip', () => {
+  test('flip', () => {
+    const vm = mountFromProps({ icon: faCoffee, flip: true })
+
+    expect(vm.$el.classList.contains('fa-flip')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip-both')).toBeFalsy()
+  })
+
   test('horizontal', () => {
     const vm = mountFromProps({ icon: faCoffee, flip: "horizontal" })
 
     expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('vertical', () => {
     const vm = mountFromProps({ icon: faCoffee, flip: "vertical" })
 
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(vm.$el.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('both', () => {
@@ -188,6 +207,7 @@ describe('using flip', () => {
 
     expect(vm.$el.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(vm.$el.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(vm.$el.classList.contains('fa-flip')).toBeFalsy()
   })
 })
 
@@ -333,5 +353,29 @@ describe('title', () => {
 
     expect(vm.$el.getElementsByTagName('title').length)
       .toBe(0)
+  })
+})
+
+describe('using bounce', () => {
+  test('bounce', () => {
+    const vm = mountFromProps({ icon: faCoffee, bounce: true })
+
+    expect(vm.$el.classList.contains('fa-bounce')).toBeTruthy()
+  })
+})
+
+describe('using shake', () => {
+  test('shake', () => {
+    const vm = mountFromProps({ icon: faCoffee, shake: true })
+
+    expect(vm.$el.classList.contains('fa-shake')).toBeTruthy()
+  })
+})
+
+describe('using beat-fade', () => {
+  test('beat-fade', () => {
+    const vm = mountFromProps({ icon: faCoffee, beatFade: true })
+
+    expect(vm.$el.classList.contains('fa-beat-fade')).toBeTruthy()
   })
 })
