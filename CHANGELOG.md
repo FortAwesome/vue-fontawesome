@@ -5,6 +5,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [3.0.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0) - 2022-06-07
+
+### Added
+
+*  New animations for bounce and shake
+*  Feature to call icons using a string format
+
+### Fixed
+
+*  Animations for beat, fade, beat-fade, flash, spin-pulse, and spin-reverse
+*  Tee-shirt sizes to include 2xs, lg, xl, and 2xl
+*  Flip animation when used by itself
+
+---
+
 ## [3.0.0-5](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.0-5) - 2021-10-18
 
 ### Fixed
