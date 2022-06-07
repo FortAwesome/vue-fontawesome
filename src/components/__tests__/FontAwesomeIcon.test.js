@@ -1,37 +1,86 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCircle } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
+import { compileAndMount, mountFromProps, coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES } from '../__fixtures__/helpers'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle)
+  library.add(faCoffee, faCircle, faAlien)
 })
 
-test('using array format', () => {
-  const wrapper = mountFromProps({ icon: ['fas', 'coffee'] })
-
-  expect(wrapper.element.tagName).toBe('svg')
-  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+afterEach(() => {
+  library.reset()
 })
 
-test('using string format', () => {
-  const wrapper = mountFromProps({ icon: 'coffee' })
+describe('icons are showing', () => {
+  test('using array format, short prefix and short icon name', () => {
+    const wrapper = mountFromProps({ icon: ['fas', 'coffee'] })
 
-  expect(wrapper.element.tagName).toBe('svg')
-  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
-})
+    expect(wrapper.element.tagName).toBe('svg')
+    expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+  })
 
-test('missing icon', () => {
-  const wrapper = mountFromProps({ icon: ['fas', 'noicon'] })
+  if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+    test('using array format, short prefix and long icon name', () => {
+      const wrapper = mountFromProps({ icon: ['fas', 'fa-coffee'] })
 
-  expect(wrapper.element.tagName).toBeFalsy()
-})
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+    })
 
-test('using iconDefinition', () => {
-  const wrapper = mountFromProps({ icon: faCoffee })
+    test('using array format, long prefix and long icon name', () => {
+      const wrapper = mountFromProps({ icon: ['fa-solid', 'fa-coffee'] })
 
-  expect(wrapper.element.tagName).toBe('svg')
-  expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+    })
+
+    test('using array format, long prefix and short icon name', () => {
+      const wrapper = mountFromProps({ icon: ['fa-duotone', 'alien'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+    })
+  }
+
+  if (coreHasFeature(REFERENCE_ICON_USING_STRING)) {
+    test('using string format, with long prefix and long icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-duotone fa-alien' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+    })
+
+    test('using string format, with short prefix and long icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fad fa-alien' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+    })
+  }
+
+  test('using string format, icon name only', () => {
+    const wrapper = mountFromProps({ icon: 'coffee' })
+
+    expect(wrapper.element.tagName).toBe('svg')
+    expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+  })
+
+  test('missing icon', () => {
+    const wrapper = mountFromProps({ icon: ['fas', 'noicon'] })
+
+    expect(wrapper.element.tagName).toBeFalsy()
+  })
+
+  test('using iconDefinition', () => {
+    const wrapper = mountFromProps({ icon: faCoffee })
+
+    expect(wrapper.element.tagName).toBe('svg')
+    expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
+  })
 })
 
 describe('unrelated Vue data options', () => {
@@ -129,16 +178,31 @@ test('using fixedWidth', () => {
 })
 
 describe('using flip', () => {
+  test('flip', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, flip: true })
+
+    expect(wrapper.element.classList.contains('fa-flip')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+  })
+
   test('horizontal', () => {
     const wrapper = mountFromProps({ icon: faCoffee, flip: "horizontal" })
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('vertical', () => {
     const wrapper = mountFromProps({ icon: faCoffee, flip: "vertical" })
 
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip-both')).toBeFalsy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 
   test('both', () => {
@@ -146,6 +210,7 @@ describe('using flip', () => {
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-flip')).toBeFalsy()
   })
 })
 
@@ -208,7 +273,7 @@ test('swap opacity', () => {
 })
 
 test('using size', () => {
-  ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
+  ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
     const wrapper = mountFromProps({ icon: faCoffee, size: size })
 
     expect(wrapper.element.classList.contains(`fa-${size}`)).toBeTruthy()
@@ -295,5 +360,69 @@ describe('reactivity', () => {
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
     expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+  })
+})
+
+describe('using bounce', () => {
+  test('bounce', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
+
+    expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
+  })
+})
+
+describe('using shake', () => {
+  test('shake', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, shake: true })
+
+    expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
+  })
+})
+
+describe('using beat', () => {
+  test('beat', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, beat: true })
+
+    expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
+  })
+})
+
+describe('using fade', () => {
+  test('fade', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, fade: true })
+
+    expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
+  })
+})
+
+describe('using beat-fade', () => {
+  test('beat-fade', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
+
+    expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
+  })
+})
+
+describe('using flash', () => {
+  test('flash', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, flash: true })
+
+    expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
+  })
+})
+
+describe('using spin-pulse', () => {
+  test('spin-pulse', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
+
+    expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
+  })
+})
+
+describe('using spin-revese', () => {
+  test('spin-reverse', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
+
+    expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
   })
 })

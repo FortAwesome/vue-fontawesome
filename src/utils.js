@@ -10,12 +10,21 @@ export function classList (props) {
     'fa-border': props.border,
     'fa-li': props.listItem,
     'fa-inverse': props.inverse,
+    'fa-flip': props.flip === true,
     'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,
     [`fa-rotate-${props.rotation}`]: props.rotation !== null,
     [`fa-pull-${props.pull}`]: props.pull !== null,
-    'fa-swap-opacity': props.swapOpacity
+    'fa-swap-opacity': props.swapOpacity,
+    'fa-bounce': props.bounce,
+    'fa-shake': props.shake,
+    'fa-beat': props.beat,
+    'fa-fade': props.fade,
+    'fa-beat-fade': props.beatFade,
+    'fa-flash': props.flash,
+    'fa-spin-pulse': props.spinPulse,
+    'fa-spin-reverse': props.spinReverse
   }
 
   return Object.keys(classes)

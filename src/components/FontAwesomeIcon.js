@@ -5,6 +5,14 @@ import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
+  if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
+    return icon
+  }
+
+  if (faParse.icon) {
+    return faParse.icon(icon)
+  }
+
   if (icon === null) {
     return null
   }
@@ -35,9 +43,9 @@ export default defineComponent({
       default: false
     },
     flip: {
-      type: String,
-      default: null,
-      validator: (value) => ['horizontal', 'vertical', 'both'].indexOf(value) > -1
+      type: [Boolean, String],
+      default: false,
+      validator: (value) => [true, false, 'horizontal', 'vertical', 'both'].indexOf(value) > -1
     },
     icon: {
       type: [Object, Array, String],
@@ -72,7 +80,7 @@ export default defineComponent({
     size: {
       type: String,
       default: null,
-      validator: (value) => ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1
+      validator: (value) => ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1
     },
     spin: {
       type: Boolean,
@@ -93,7 +101,39 @@ export default defineComponent({
     inverse: {
       type: Boolean,
       default: false
-    }
+    },
+    bounce: {
+      type: Boolean,
+      default: false
+    },
+    shake: {
+      type: Boolean,
+      default: false
+    },
+    beat: {
+      type: Boolean,
+      default: false
+    },
+    fade: {
+      type: Boolean,
+      default: false
+    },
+    beatFade: {
+      type: Boolean,
+      default: false
+    },
+    flash: {
+      type: Boolean,
+      default: false
+    },
+    spinPulse: {
+      type: Boolean,
+      default: false
+    },
+    spinReverse: {
+      type: Boolean,
+      default: false
+    },
   },
 
   setup (props, { attrs }) {
