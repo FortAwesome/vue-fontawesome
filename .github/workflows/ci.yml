@@ -9,7 +9,20 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        fontawesome-svc-core: [
+          1.2.x,
+          6.x
+        ]
+        node-version: [
+          14.x,
+          16.x,
+          18.x
+        ]
+        vue: [
+          3.0.x,
+          3.1.x,
+          3.2.x
+        ]
 
     steps:
     - uses: actions/checkout@v1
@@ -19,9 +32,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: install, build, and test
       run: |
+        npm install -g npm
         npm install
+        npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} vue@${{ matrix.vue }}
         npm run build
-        npm run test
+        npm install --no-save vue@${{ matrix.vue }}
+        npm list vue
+        npm run test.5
+        npm run test.6
       env:
         CI: true
     - name: dist
