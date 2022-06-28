@@ -35,6 +35,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: install, build, and test
+      if: ${{ matrix.free-solid-svg-icons }} == '6.x'
       run: |
         npm install -g npm
         npm install
