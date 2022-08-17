@@ -27,7 +27,7 @@
 
 ## Documentation
 
-Official documentation is hosted at fontawesome.com: [Check it out here](https://fontawesome.com/docs/web/use-with/vue/)
+Official documentation is hosted at fontawesome.com: [Check it out here](https://fontawesome.com/v6/docs/web/use-with/vue/)
 
 ## How to Help
 
