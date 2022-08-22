@@ -74,7 +74,7 @@ if(coreHasFeature(REFERENCE_ICON_USING_STRING)) {
     expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
   })
 
-  test('using a sharp solid icon long prefix with array format', () => {
+  test('using a sharp solid icon long prefix with string format', () => {
     const vm = mountFromProps({ icon: 'fa-sharp fa-arrow-left' })
   
     expect(vm.$el.tagName).toBe('svg')
