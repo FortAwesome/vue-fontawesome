@@ -10,6 +10,14 @@ function normalizeIconArgs (icon) {
     return icon
   }
 
+  if (Array.isArray(icon) && (icon[0] === 'sharp' || icon[0] ==='fa-sharp')) {
+    if (icon.length === 2) {
+      return { prefix: 'fass', iconName: icon[1] }
+    } else {
+      return {prefix: 'fass', iconName: icon[2]}
+    }
+  }
+
   if (faParse.icon) {
     return faParse.icon(icon)
   }

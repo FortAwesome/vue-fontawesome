@@ -6,11 +6,11 @@ import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
+import { faCoffee, faCircle, faSpartan, faArrowLeft } from '../__fixtures__/icons'
 import { coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faSpartan)
+  library.add(faCoffee, faCircle, faSpartan, faArrowLeft)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
 })
 
@@ -23,6 +23,13 @@ test('using a FAT icon with array format', () => {
 
   expect(vm.$el.tagName).toBe('svg')
   expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+})
+
+test('using a FASS icon with array format', () => {
+  const vm = mountFromProps({ icon: ['fass', 'arrow-left']})
+
+  expect(vm.$el.tagName).toBe('svg')
+  expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
 })
 
 if(coreHasFeature(ICON_ALIASES)) {
@@ -59,6 +66,27 @@ if(coreHasFeature(REFERENCE_ICON_USING_STRING)) {
     expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-coffee')).toBeTruthy()
   })
+
+  test('using a FASS icon with string format', () => {
+    const vm = mountFromProps({ icon: 'fass fa-arrow-left'})
+  
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
+  })
+
+  test('using a sharp solid icon long prefix with array format', () => {
+    const vm = mountFromProps({ icon: 'fa-sharp fa-arrow-left' })
+  
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
+  })
+  
+  test('using a sharp solid icon long prefix and style with string format', () => {
+    const vm = mountFromProps({ icon: 'fa-sharp fa-solid fa-arrow-left' })
+  
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
+  })
 }
 
 if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
@@ -74,6 +102,20 @@ if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
 
     expect(vm.$el.tagName).toBe('svg')
     expect(vm.$el.classList.contains('fa-spartan')).toBeTruthy()
+  })
+
+  test('using a sharp solid icon long prefix with array format', () => {
+    const vm = mountFromProps({ icon: ['fa-sharp', 'arrow-left']})
+  
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
+  })
+  
+  test('using a sharp solid icon long prefix and style with array format', () => {
+    const vm = mountFromProps({ icon: ['fa-sharp', 'fa-solid', 'arrow-left']})
+  
+    expect(vm.$el.tagName).toBe('svg')
+    expect(vm.$el.classList.contains('fa-arrow-left')).toBeTruthy()
   })
 }
 
