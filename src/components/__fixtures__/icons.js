@@ -33,3 +33,15 @@ export const faSpartan = {
     "..."
   ]
 }
+
+export const faGlasses = {
+  prefix: 'fass',
+  iconName: 'glasses',
+  icon: [
+    640,
+    512,
+    [],
+    "f200",
+    "..."
+  ]
+}
