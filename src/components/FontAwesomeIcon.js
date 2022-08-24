@@ -10,6 +10,9 @@ function normalizeIconArgs (icon) {
     return icon
   }
 
+  console.log('Incoming..............')
+  console.log(icon)
+  console.log(faParse.icon(icon))
   if (faParse.icon) {
     return faParse.icon(icon)
   }

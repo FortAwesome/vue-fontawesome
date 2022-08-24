@@ -33,3 +33,15 @@ export const faSpartan = {
     "..."
   ]
 }
+
+export const faArrowLeft = {
+  prefix: 'fass',
+  iconName: 'arrow-left',
+  icon: [
+    640,
+    512,
+    [],
+    "f100",
+    "..."
+  ]
+}

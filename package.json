@@ -42,7 +42,7 @@
     "dist": "cross-env NODE_ENV=production npm run build",
     "test": "npm run test.5 && npm run test.6",
     "test.5": "npm --no-save install @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x && jest --silent",
-    "test.6": "npm --no-save install @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x && jest --silent",
+    "test.6": "npm --no-save install ../../../testing/6.2.0-rc3/npm-packages/fortawesome-fontawesome-svg-core-6.2.0.tgz @fortawesome/free-solid-svg-icons@6.x && jest",
     "prepack": "npm run dist"
   },
   "lint-staged": {
@@ -52,7 +52,7 @@
     ]
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~1 || ~6",
+    "@fortawesome/fontawesome-svg-core": "file:../../../testing/6.2.0-rc3/npm-packages/fortawesome-fontawesome-svg-core-6.2.0.tgz",
     "vue": "~2"
   },
   "devDependencies": {
@@ -63,8 +63,11 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.18.2",
-    "@fortawesome/fontawesome-svg-core": "~6",
+    "@fortawesome/fontawesome-svg-core": "file:../../../testing/6.2.0-rc3/npm-packages/fortawesome-fontawesome-svg-core-6.2.0.tgz",
     "@fortawesome/free-solid-svg-icons": "^6",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^28.1.1",
     "concurrently": "^7.2.1",
@@ -76,14 +79,14 @@
     "lint-staged": "^13.0.0",
     "markdown-toc": "^1.2.0",
     "rollup": "^2.75.6",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
     "vue": "^2.4.4"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-common-types": "file:../../../testing/6.2.0-rc3/npm-packages/fortawesome-fontawesome-common-types-6.2.0.tgz"
   }
 }
