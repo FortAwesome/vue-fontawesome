@@ -3,16 +3,48 @@
  */
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps, coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES } from '../__fixtures__/helpers'
+import { faCoffee, faCircle, faAlien, faGlasses } from '../__fixtures__/icons'
+import { coreHasFeature, compileAndMount, mountFromProps, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_USING_FAMILY } from '../__fixtures__/helpers'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faAlien)
+  library.add(faCoffee, faCircle, faAlien, faGlasses)
 })
 
 afterEach(() => {
   library.reset()
+})
+
+describe('using a family', () => {
+  if(coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
+    test('will find a sharp-solid-svg-icon with array format', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'glasses'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using short prefix with string format', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'glasses'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using long prefix with string format', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'glasses'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using long prefix and style with string format', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'glasses'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-glasses')).toBeTruthy()
+    })
+  }
 })
 
 describe('icons are showing', () => {
