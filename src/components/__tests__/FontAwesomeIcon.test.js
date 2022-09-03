@@ -6,16 +6,48 @@ import Vue from 'vue/dist/vue'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faSpartan } from '../__fixtures__/icons'
-import { coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import { faCoffee, faCircle, faSpartan, faGlasses } from '../__fixtures__/icons'
+import { coreHasFeature, compileAndMount, mountFromProps, REFERENCE_ICON_BY_STYLE, ICON_ALIASES, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_USING_FAMILY } from '../__fixtures__/helpers'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faSpartan)
+  library.add(faCoffee, faCircle, faSpartan, faGlasses)
   Vue.component('font-awesome-icon', FontAwesomeIcon)
 })
 
 afterEach(() => {
   library.reset()
+})
+
+describe('using a family', () => {
+  if(coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
+    test('will find a sharp-solid-svg-icon with array format', () => {
+      const vm = mountFromProps({ icon: ['fass', 'glasses'] })
+
+      expect(vm.$el.tagName).toBe('svg')
+      expect(vm.$el.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using short prefix with string format', () => {
+      const vm = mountFromProps({ icon: 'fass fa-glasses' })
+
+      expect(vm.$el.tagName).toBe('svg')
+      expect(vm.$el.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using long prefix with string format', () => {
+      const vm = mountFromProps({ icon: 'fa-sharp fa-glasses' })
+
+      expect(vm.$el.tagName).toBe('svg')
+      expect(vm.$el.classList.contains('fa-glasses')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using long prefix and style with string format', () => {
+      const vm = mountFromProps({ icon: 'fa-sharp fa-solid fa-glasses' })
+
+        expect(vm.$el.tagName).toBe('svg')
+        expect(vm.$el.classList.contains('fa-glasses')).toBeTruthy()
+    })
+  }
 })
 
 test('using a FAT icon with array format', () => {
