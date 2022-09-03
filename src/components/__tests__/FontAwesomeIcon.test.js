@@ -3,6 +3,7 @@
  */
 
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
 import { compileAndMount, mountFromProps, coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES } from '../__fixtures__/helpers'
 import FontAwesomeIcon from '../FontAwesomeIcon'
@@ -426,3 +427,29 @@ describe('using spin-revese', () => {
     expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
   })
 })
+
+test('using imported object from svg icons package', () => {
+  const wrapper = mountFromProps({ icon: faUser })
+
+  expect(wrapper.element.tagName).toBe('svg')
+})
+
+if(coreHasFeature(ICON_ALIASES)) {
+  test('find a free-solid-svg-icon with array format', () => {
+    library.reset()
+    library.add(faClose)
+    const wrapper = mountFromProps({ icon: ['fas', 'xmark'] })
+
+    expect(wrapper.element.tagName).toBe('svg')
+    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+  })
+
+  test('find a free-solid-svg-icon that is an alias', () => {
+    library.reset()
+    library.add(faClose)
+    const wrapper = mountFromProps({ icon: ['fas', 'close'] })
+
+    expect(wrapper.element.tagName).toBe('svg')
+    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+  })
+}
