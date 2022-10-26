@@ -434,7 +434,7 @@ test('using imported object from svg icons package', () => {
   expect(wrapper.element.tagName).toBe('svg')
 })
 
-if(coreHasFeature(ICON_ALIASES)) {
+if (coreHasFeature(ICON_ALIASES)) {
   test('find a free-solid-svg-icon with array format', () => {
     library.reset()
     library.add(faClose)
