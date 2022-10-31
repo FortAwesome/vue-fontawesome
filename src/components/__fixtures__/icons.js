@@ -45,3 +45,15 @@ export const faGlasses = {
     "..."
   ]
 }
+
+export const faJedi = {
+  prefix: 'fat',
+  iconName: 'jedi',
+  icon: [
+    640,
+    512,
+    [],
+    "f200",
+    "..."
+  ]
+}
