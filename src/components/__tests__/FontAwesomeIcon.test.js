@@ -16,7 +16,7 @@ afterEach(() => {
 })
 
 describe('using a family', () => {
-  if(coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
+  if (coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
     test('will find a sharp-solid-svg-icon with array format', () => {
       const wrapper = mountFromProps({ icon: ['fass', 'glasses'] })
 
