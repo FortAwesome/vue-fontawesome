@@ -30,21 +30,21 @@
 Official documentation is hosted at fontawesome.com
 
 Helpful Vue links:
-
-- [Set up with Vue](https://fontawesome.com/docs/web/use-with/vue/)
 - [Add Icons with Vue](https://fontawesome.com/docs/web/use-with/vue/add-icons)
 - [Adding Icon Styling with Vue](https://fontawesome.com/docs/web/use-with/vue/style)
+
+To find the Vue setup, go to our [Web docs](https://fontawesome.com/docs/web) and click the ***"Set Up with Vue"*** (left hand side menu).
 
 ## How to Help
 
 Review the following docs before diving in:
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+* [CONTRIBUTING.md](CONTRIBUTING.md)
+* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 And then:
 
-- Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
+* Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
 
 ## Contributors
 
