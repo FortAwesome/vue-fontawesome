@@ -30,6 +30,7 @@
 Official documentation is hosted at fontawesome.com
 
 Helpful Vue links:
+
 - [Add Icons with Vue](https://fontawesome.com/docs/web/use-with/vue/add-icons)
 - [Adding Icon Styling with Vue](https://fontawesome.com/docs/web/use-with/vue/style)
 
@@ -39,16 +40,16 @@ To find the Vue setup, go to our [Web docs](https://fontawesome.com/docs/web) an
 
 Review the following docs before diving in:
 
-* [CONTRIBUTING.md](CONTRIBUTING.md)
-* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 And then:
 
-* Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
+- Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
 
 ## Contributors
 
-The following contributors have either hepled to start this project, have contributed
+The following contributors have either helped to start this project, have contributed
 code, are actively maintaining it (including documentation), or in other ways
 being awesome contributors to this project. **We'd like to take a moment to recognize them.**
 
@@ -61,6 +62,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 | <img src="https://github.com/btaens.png?size=72" />         | btaens         | [@btaens](https://github.com/btaens)                 |
 | <img src="https://github.com/david-driscoll.png?size=72" /> | David Driscoll | [@david-driscoll](https://github.com/david-driscoll) |
 | <img src="https://github.com/tyranteon.png?size=72" />      | Tyranteon      | [@tyranteon](https://github.com/tyranteon)           |
+| <img src="https://github.com/parkeyparker.png?size=72" />   | Aaron Parker   | [@parkeyparker](https://github.com/parkeyparker)     |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
