@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
-## [2.0.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.0)  - 2022-11-07
+## [2.0.9](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.9)  - 2022-11-07
 
 ### Changed
 - README.md updated with spelling correction, linter fixes, and new contributor
