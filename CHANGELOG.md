@@ -1,7 +1,22 @@
 # Change Log
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
+
+---
+
+## [3.0.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.2) - 2022-11-07
+
+### Changed
+
+- Vue 3 Composition API TypeScript support (github issue #[276](https://github.com/FortAwesome/vue-fontawesome/issues/276))
+- Updated README.md with a spelling correction, linter fixes, and new contributor
+- Updated icon example in App.vue to use `fixed-width` rather than `full-width`
+
+### Added
+
+- Missing tests
 
 ---
 
@@ -9,7 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-*  README.md Documentation now points to https://fontawesome.com/docs/web/use-with/vue/
+- README.md Documentation now points to https://fontawesome.com/docs/web/use-with/vue/
 
 ---
 
@@ -17,14 +32,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-*  New animations for bounce and shake
-*  Feature to call icons using a string format
+- New animations for bounce and shake
+- Feature to call icons using a string format
 
 ### Fixed
 
-*  Animations for beat, fade, beat-fade, flash, spin-pulse, and spin-reverse
-*  Tee-shirt sizes to include 2xs, lg, xl, and 2xl
-*  Flip animation when used by itself
+- Animations for beat, fade, beat-fade, flash, spin-pulse, and spin-reverse
+- Tee-shirt sizes to include 2xs, lg, xl, and 2xl
+- Flip animation when used by itself
 
 ---
 
@@ -32,7 +47,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
-* Include 1.3.0-beta versions in peer dependencies
+- Include 1.3.0-beta versions in peer dependencies
 
 ---
 
@@ -40,7 +55,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
-* Fix reactivity #297
+- Fix reactivity #297
 
 ---
 
@@ -48,7 +63,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
-* Allow for non-RC releases of Vue 3
+- Allow for non-RC releases of Vue 3
 
 ---
 
@@ -56,7 +71,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
-* Make Vue as an external dependency #258 #260
+- Make Vue as an external dependency #258 #260
 
 ---
 
@@ -64,7 +79,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-* Support for Vue 3.x RC's and betas #246 #249
+- Support for Vue 3.x RC's and betas #246 #249
 
 ---
 
