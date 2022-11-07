@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue 2 component for Font Awesome",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "main": "index.js",
   "files": [
     "README.md",
@@ -34,7 +34,8 @@
     "Yannick Ihmels <github.com/ihmels>",
     "btaens <github.com/btaens>",
     "David Driscoll <github.com/david-driscoll>",
-    "Tyranteon <github.com/tyranteon>"
+    "Tyranteon <github.com/tyranteon>",
+    "Aaron Parker <github.com/parkeyparker>"
   ],
   "license": "MIT",
   "scripts": {

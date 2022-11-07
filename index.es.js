@@ -2,17 +2,14 @@ import { parse, icon, config, text } from '@fortawesome/fontawesome-svg-core';
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
-
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
     enumerableOnly && (symbols = symbols.filter(function (sym) {
       return Object.getOwnPropertyDescriptor(object, sym).enumerable;
     })), keys.push.apply(keys, symbols);
   }
-
   return keys;
 }
-
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
@@ -22,10 +19,8 @@ function _objectSpread2(target) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
-
   return target;
 }
-
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -35,7 +30,6 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
-
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -47,35 +41,26 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
-
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-
   var target = _objectWithoutPropertiesLoose(source, excluded);
-
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -83,22 +68,17 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
-
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -107,15 +87,11 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
-
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
   return arr2;
 }
-
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
@@ -259,7 +235,6 @@ var humps$1 = {exports: {}};
 var humps = humps$1.exports;
 
 var _excluded = ["class", "style", "attrs"];
-
 function styleToObject(style) {
   return style.split(';').map(function (s) {
     return s.trim();
@@ -273,65 +248,54 @@ function styleToObject(style) {
     return acc;
   }, {});
 }
-
 function classToObject(cls) {
   return cls.split(/\s+/).reduce(function (acc, c) {
     acc[c] = true;
     return acc;
   }, {});
 }
-
 function combineClassObjects() {
   for (var _len = arguments.length, objs = new Array(_len), _key = 0; _key < _len; _key++) {
     objs[_key] = arguments[_key];
   }
-
   return objs.reduce(function (acc, obj) {
     if (Array.isArray(obj)) {
       acc = acc.concat(obj);
     } else {
       acc.push(obj);
     }
-
     return acc;
   }, []);
 }
-
 function convert(h, element) {
   var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var data = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   var children = (element.children || []).map(convert.bind(null, h));
   var mixins = Object.keys(element.attributes || {}).reduce(function (acc, key) {
     var val = element.attributes[key];
-
     switch (key) {
       case 'class':
         acc['class'] = classToObject(val);
         break;
-
       case 'style':
         acc['style'] = styleToObject(val);
         break;
-
       default:
         acc.attrs[key] = val;
     }
-
     return acc;
   }, {
     'class': {},
     style: {},
     attrs: {}
   });
-
   var _data$class = data.class,
-      dClass = _data$class === void 0 ? {} : _data$class,
-      _data$style = data.style,
-      dStyle = _data$style === void 0 ? {} : _data$style,
-      _data$attrs = data.attrs,
-      dAttrs = _data$attrs === void 0 ? {} : _data$attrs,
-      remainingData = _objectWithoutProperties(data, _excluded);
-
+    dClass = _data$class === void 0 ? {} : _data$class,
+    _data$style = data.style,
+    dStyle = _data$style === void 0 ? {} : _data$style,
+    _data$attrs = data.attrs,
+    dAttrs = _data$attrs === void 0 ? {} : _data$attrs,
+    remainingData = _objectWithoutProperties(data, _excluded);
   if (typeof element === 'string') {
     return element;
   } else {
@@ -346,15 +310,12 @@ function convert(h, element) {
 }
 
 var PRODUCTION = false;
-
 try {
   PRODUCTION = process.env.NODE_ENV === 'production';
 } catch (e) {}
-
 function log () {
   if (!PRODUCTION && console && typeof console.error === 'function') {
     var _console;
-
     (_console = console).error.apply(_console, arguments);
   }
 }
@@ -364,7 +325,6 @@ function objectWithKey(key, value) {
 }
 function classList(props) {
   var _classes;
-
   var classes = (_classes = {
     'fa-spin': props.spin,
     'fa-spin-pulse': props.spinPulse,
@@ -398,26 +358,21 @@ function normalizeIconArgs(icon) {
   if (icon && _typeof(icon) === 'object' && icon.prefix && icon.iconName && icon.icon) {
     return icon;
   }
-
   if (parse.icon) {
     return parse.icon(icon);
   }
-
   if (icon === null) {
     return null;
   }
-
   if (_typeof(icon) === 'object' && icon.prefix && icon.iconName) {
     return icon;
   }
-
   if (Array.isArray(icon) && icon.length === 2) {
     return {
       prefix: icon[0],
       iconName: icon[1]
     };
   }
-
   if (typeof icon === 'string') {
     return {
       prefix: 'fas',
@@ -425,7 +380,6 @@ function normalizeIconArgs(icon) {
     };
   }
 }
-
 var FontAwesomeIcon = {
   name: 'FontAwesomeIcon',
   functional: true,
@@ -542,9 +496,9 @@ var FontAwesomeIcon = {
   render: function render(createElement, context) {
     var props = context.props;
     var iconArgs = props.icon,
-        maskArgs = props.mask,
-        symbol = props.symbol,
-        title = props.title;
+      maskArgs = props.mask,
+      symbol = props.symbol,
+      title = props.title;
     var icon$1 = normalizeIconArgs(iconArgs);
     var classes = objectWithKey('classes', classList(props));
     var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
@@ -553,11 +507,9 @@ var FontAwesomeIcon = {
       symbol: symbol,
       title: title
     }));
-
     if (!renderedIcon) {
       return log('Could not find one or more icon(s)', icon$1, mask);
     }
-
     var abstract = renderedIcon.abstract;
     var convertCurry = convert.bind(null, createElement);
     return convertCurry(abstract[0], {}, context.data);
@@ -614,11 +566,9 @@ var FontAwesomeLayersText = {
     var transform = objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
     var renderedText = text(props.value.toString(), _objectSpread2(_objectSpread2({}, transform), classes));
     var abstract = renderedText.abstract;
-
     if (props.counter) {
       abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
     }
-
     var convertCurry = convert.bind(null, createElement);
     return convertCurry(abstract[0], {}, context.data);
   }
