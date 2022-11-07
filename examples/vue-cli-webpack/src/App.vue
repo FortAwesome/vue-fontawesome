@@ -27,13 +27,13 @@
             <font-awesome-icon :icon="queen" size="4x" inverse/>
           </li>
           <li class="pv3 ph2 ma0 link grow">
-            <font-awesome-layers full-width class="fa-4x">
+            <font-awesome-layers fixed-width class="fa-4x">
               <font-awesome-icon :icon="['fas', 'archive']"/>
               <font-awesome-layers-text class="red8" transform="down-3 shrink-14" value="SECRET" />
             </font-awesome-layers>
           </li>
           <li class="pv3 ph2 ma0 link grow">
-            <font-awesome-layers full-width class="fa-4x">
+            <font-awesome-layers fixed-width class="fa-4x">
               <font-awesome-icon :icon="['fas', 'envelope']"/>
               <font-awesome-layers-text class="red8" value="1" position="top-right" />
             </font-awesome-layers>
