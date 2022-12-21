@@ -55,7 +55,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 
 |                                                             | Name           | GitHub                                               |
 | :--------------------------------------------------------:  | -------------- | ---------------------------------------------------- |
-| <img src="https://github.com/SirLamer.png?size=72" />       | SirLamer       | [@SirLamer](https://github.com/SirLamer)             |
+| <img src="https://github.com/GregPeden.png?size=72" />      | Greg Peden     | [@GregPeden](https://github.com/GregPeden)           |
 | <img src="https://github.com/meteorlxy.png?size=72" />      | Liu Xinyu      | [@meteorlxy](https://github.com/meteorlxy)           |
 | <img src="https://github.com/schulz3000.png?size=72" />     | Xaver Schulz   | [@schulz3000](https://github.com/schulz3000)         |
 | <img src="https://github.com/ihmels.png?size=72" />         | Yannick Ihmels | [@ihmels](https://github.com/ihmels)                 |
