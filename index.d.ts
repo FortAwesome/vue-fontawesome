@@ -18,6 +18,13 @@ interface FontAwesomeIconProps {
   symbol?: boolean | string
   title?: string
   inverse?: boolean
+  bounce?: boolean
+  shake?: boolean
+  beat?: boolean
+  fade?: boolean
+  beatFade?: boolean
+  spinPulse?: boolean
+  spinReverse?: boolean
 }
 
 interface FontAwesomeLayersProps {
