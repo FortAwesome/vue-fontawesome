@@ -60,6 +60,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 | <img src="https://github.com/viniciuslrangel.png?size=72" /> | Vinicius Rangel | [@viniciuslrangel](https://github.com/viniciuslrangel) |
 | <img src="https://github.com/otijhuis.png?size=72" />        | Okke Tijhuis    | [@otijhuis](https://github.com/otijhuis)               |
 | <img src="https://github.com/parkeyparker.png?size=72" />    | Aaron Parker    | [@parkeyparker](https://github.com/parkeyparker)       |
+| <img src="https://github.com/brandon-mork.png?size=72" />    | Brandon Mork    | [@brandon-mork](https://github.com/brandon-mork)       |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
