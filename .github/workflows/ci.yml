@@ -41,7 +41,6 @@ jobs:
         npm install
         npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }} vue@${{ matrix.vue }}
         npm run build
-        npm install --no-save vue@${{ matrix.vue }}
         npm list vue
         npm run test.5
         npm run test.6
