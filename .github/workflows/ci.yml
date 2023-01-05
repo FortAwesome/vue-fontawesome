@@ -38,12 +38,14 @@ jobs:
       run: |
         npm install -g npm
         npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }} vue@${{ matrix.vue }}
+        if [[ ${{ matrix.free-solid-svg-icons }} == '6.x' ]]; then
+          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }} vue@${{ matrix.vue }}
+        else
+          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }} vue@${{ matrix.vue }}
+        fi
         npm run build
-        npm install --no-save vue@${{ matrix.vue }}
         npm list vue
-        npm run test.5
-        npm run test.6
+        npm run test
       env:
         CI: true
     - name: dist
