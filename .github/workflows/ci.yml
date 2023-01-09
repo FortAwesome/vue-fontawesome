@@ -36,20 +36,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: v5 install, build, and test
-      if: ${{ matrix.free-solid-svg-icons }} == '5.x'
       run: |
         npm install -g npm
         npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
-        npm run build
-        npm list vue
-        npm run test
-    - name: v6 install, build, and test
-      if: ${{ matrix.free-solid-svg-icons }} == '6.x'
-      run: |
-        npm install -g npm
-        npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
+        if [[ ${{ matrix.free-solid-svg-icons }} == '5.x' ]]; then
+          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
+        else
+          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
+        fi
         npm run build
         npm list vue
         npm run test
