@@ -24,7 +24,7 @@ export default {
     {
       name,
       globals,
-      format: 'cjs',
+      format: 'es',
       file: 'index.es.js'
     }
   ],
