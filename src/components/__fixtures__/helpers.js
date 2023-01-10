@@ -1,9 +1,9 @@
-import Vue from 'vue/dist/vue'
+import Vue, { compile } from 'vue/dist/vue.js'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { parse } from '@fortawesome/fontawesome-svg-core'
 
 export function compileAndMount (str, params = {}) {
-  const res = Vue.compile(str)
+  const res = compile(str)
   const vm = new Vue({
     ...params,
     render: res.render,

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Vue from 'vue/dist/vue'
+import Vue, { component } from 'vue/dist/vue.js'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
