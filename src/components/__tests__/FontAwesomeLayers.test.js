@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Vue from 'vue/dist/vue'
+import Vue from 'vue/dist/vue.js'
 import FontAwesomeLayers from '../FontAwesomeLayers'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
