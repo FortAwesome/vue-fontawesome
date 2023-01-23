@@ -35,18 +35,26 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: install, build, and test
+    - name: v5 install, build, and test
+      if: ${{ matrix.free-solid-svg-icons }} == '5.x'
       run: |
         npm install -g npm
         npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }} vue@${{ matrix.vue }}
+        npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
         npm run build
         npm list vue
-        npm run test.5
-        npm run test.6
+        npm run test
+    - name: v6 install, build, and test
+      if: ${{ matrix.free-solid-svg-icons }} == '6.x'
+      run: |
+        npm install -g npm
+        npm install
+        npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
+        npm run build
+        npm list vue
+        npm run test
       env:
         CI: true
-        FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     - name: dist
       run: |
         npm run dist

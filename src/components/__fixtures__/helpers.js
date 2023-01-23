@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue'
+import Vue from 'vue/dist/vue.js'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 import { parse } from '@fortawesome/fontawesome-svg-core'
 
