@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 6",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "main": "index.js",
   "files": [
     "README.md",
@@ -37,7 +37,8 @@
     "Tyranteon <github.com/tyranteon>",
     "Vinicius Rangel <github.com/viniciuslrangel>",
     "Okke Tijhuis <github.com/otijhuis>",
-    "Aaron Parker <github.com/parkeyparker>"
+    "Aaron Parker <github.com/parkeyparker>",
+    "Brandon Mork <github.com/brandon-mork>"
   ],
   "license": "MIT",
   "scripts": {

@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [3.0.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.3) - 2023-01-24
+
+### Changed
+
+- NPM download `@fortawesome/vue-fontawesome-latest` is now set to Vue 3; to download the Vue 2 package you will have to use `@fortawesome/vue-fontawesome-latest-2`, which is described in our [Vue setup docs](https://fontawesome.com/docs/web/use-with/vue/#_3-add-the-vue-component)
+- CI workflow updated for testing
+- README.md and package.json updated for new contributor
+
+### Added
+
+- Missing TypeScript animations added  (github issue #[428](https://github.com/FortAwesome/vue-fontawesome/issues/428))
+- Missing TypeScript sizes added (github issue #[415](https://github.com/FortAwesome/vue-fontawesome/issues/415))
+
+---
+
 ## [3.0.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.2) - 2022-11-07
 
 ### Changed

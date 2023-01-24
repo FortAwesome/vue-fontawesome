@@ -34,12 +34,12 @@ To find the Vue setup, go to our [Web docs](https://fontawesome.com/docs/web) an
 
 Review the following docs before diving in:
 
-* [CONTRIBUTING.md](CONTRIBUTING.md)
-* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 And then:
 
-* Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
+- Check the existing [issues](https://github.com/FortAwesome/vue-fontawesome/issues) and see if you can help!
 
 ## Contributors
 
