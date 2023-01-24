@@ -420,7 +420,7 @@ describe('using spin-pulse', () => {
   })
 })
 
-describe('using spin-revese', () => {
+describe('using spin-reverse', () => {
   test('spin-reverse', () => {
     const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
 
