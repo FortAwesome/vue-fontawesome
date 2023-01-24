@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [CHANGELOG for version 3.x](https://github.com/FortAwesome/vue-fontawesome/blob/3.x/CHANGELOG.md)
 
 ---
+## [2.0.10](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.10)  - 2023-01-24
+
+### Changed
+- NPM download `@fortawesome/vue-fontawesome-latest` is now set to Vue 3; to download the Vue 2 package you will have to use `@fortawesome/vue-fontawesome-latest-2`, which is described in our [Vue setup docs](https://fontawesome.com/docs/web/use-with/vue/#_3-add-the-vue-component)
+- Updated CI workflow testing to include Vue 2.7.x
+- Updated contributor's GitHub user name in README.md and package.json files
+
+---
 
 ## [2.0.9](https://github.com/FortAwesome/vue-fontawesome/releases/tag/2.0.9)  - 2022-11-07
 

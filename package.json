@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue 2 component for Font Awesome",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "main": "index.js",
   "files": [
     "README.md",
@@ -28,7 +28,7 @@
   "contributors": [
     "Travis Chase <travis@fontawesome.com>",
     "Rob Madole <rob@fontawesome.com>",
-    "SirLamer <github.com/SirLamer>",
+    "Greg Peden <github.com/GregPeden>",
     "Liu Xinyu <github.com/meteorlxy>",
     "Xaver Schulz <github.com/schulz3000>",
     "Yannick Ihmels <github.com/ihmels>",
