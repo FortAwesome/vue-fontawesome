@@ -4,7 +4,7 @@
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClose, faUser } from "@fortawesome/free-solid-svg-icons";
-import { faCoffee, faCircle, faAlien, faDog } from "../__fixtures__/icons";
+import { faCoffee, faCircle, faAlien } from "../__fixtures__/icons";
 import {
   compileAndMount,
   mountFromProps,
@@ -17,11 +17,42 @@ import {
 import FontAwesomeIcon from "../FontAwesomeIcon";
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faAlien, faDog);
+  library.add(faCoffee, faCircle, faAlien);
 });
 
 afterEach(() => {
   library.reset();
+});
+
+describe("icon title prop", () => {
+  test("checks title attribute is null when title property is NOT st", () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+    });
+
+    expect(wrapper.element.getAttribute("aria-labelledby")).toBeFalsy();
+    expect(wrapper.element.querySelector("title")).toBeFalsy();
+  });
+
+  test("checks title attributes when title property is set", () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      title: "Drink your caf",
+      titleId: "caf-1138",
+    });
+
+    expect(wrapper.element.getAttribute("aria-labelledby")).toBe(
+      "svg-inline--fa-title-caf-1138"
+    );
+
+    expect(wrapper.element.querySelector("title").textContent).toBe(
+      "Drink your caf"
+    );
+
+    expect(wrapper.element.querySelector("title").id).toBe(
+      "svg-inline--fa-title-caf-1138"
+    );
+  });
 });
 
 describe("icons are showing", () => {
@@ -359,8 +390,22 @@ describe("mask", () => {
 
     expect(wrapper.element.innerHTML).toMatch(/clipPath/);
   });
+<<<<<<< HEAD
 });
 
+=======
+
+  test("will add icon referencing library", () => {
+    const wrapper = mountFromProps({
+      icon: ["fas", "coffee"],
+      mask: ["fas", "circle"],
+    });
+
+    // TODO: missing assertion here
+  });
+});
+
+>>>>>>> 3072263 (add tests checking for title prop)
 describe("symbol", () => {
   test("will not create a symbol", () => {
     const wrapper = mountFromProps({ icon: faCoffee });
