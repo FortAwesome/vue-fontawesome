@@ -3,17 +3,14 @@ import { h, defineComponent, computed, watch } from 'vue';
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
-
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
     enumerableOnly && (symbols = symbols.filter(function (sym) {
       return Object.getOwnPropertyDescriptor(object, sym).enumerable;
     })), keys.push.apply(keys, symbols);
   }
-
   return keys;
 }
-
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
@@ -23,10 +20,8 @@ function _objectSpread2(target) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
-
   return target;
 }
-
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -36,8 +31,8 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
-
 function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -48,35 +43,26 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
-
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-
   var target = _objectWithoutPropertiesLoose(source, excluded);
-
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -84,22 +70,17 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
-
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -108,17 +89,27 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
-
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
   return arr2;
 }
-
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
 }
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -260,12 +251,12 @@ var humps$1 = {exports: {}};
 var humps = humps$1.exports;
 
 var _excluded = ["class", "style"];
+
 /**
  * Converts a CSS style into a plain Javascript object.
  * @param {String} style The style to converts into a plain Javascript object.
  * @returns {Object}
  */
-
 function styleToObject(style) {
   return style.split(';').map(function (s) {
     return s.trim();
@@ -279,19 +270,19 @@ function styleToObject(style) {
     return output;
   }, {});
 }
+
 /**
  * Converts a CSS class list into a plain Javascript object.
  * @param {Array<String>} classes The class list to convert.
  * @returns {Object}
  */
-
-
 function classToObject(classes) {
   return classes.split(/\s+/).reduce(function (output, className) {
     output[className] = true;
     return output;
   }, {});
 }
+
 /**
  * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
@@ -299,50 +290,44 @@ function classToObject(classes) {
  * @param {Object} attrs The user-defined native HTML attributes.
  * @returns {VNode}
  */
-
-
 function convert(abstractElement) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
   // If the abstract element is a string, we'll just return a string render function
   if (typeof abstractElement === 'string') {
     return abstractElement;
-  } // Converting abstract element children into Vue VNodes
+  }
 
-
+  // Converting abstract element children into Vue VNodes
   var children = (abstractElement.children || []).map(function (child) {
     return convert(child);
-  }); // Converting abstract element attributes into valid Vue format
+  });
 
+  // Converting abstract element attributes into valid Vue format
   var mixins = Object.keys(abstractElement.attributes || {}).reduce(function (mixins, key) {
     var value = abstractElement.attributes[key];
-
     switch (key) {
       case 'class':
         mixins.class = classToObject(value);
         break;
-
       case 'style':
         mixins.style = styleToObject(value);
         break;
-
       default:
         mixins.attrs[key] = value;
     }
-
     return mixins;
   }, {
     attrs: {},
     class: {},
     style: {}
-  }); // Now, we'll return the VNode
+  });
 
+  // Now, we'll return the VNode
   attrs.class;
-      var _attrs$style = attrs.style,
-      aStyle = _attrs$style === void 0 ? {} : _attrs$style,
-      otherAttrs = _objectWithoutProperties(attrs, _excluded);
-
+    var _attrs$style = attrs.style,
+    aStyle = _attrs$style === void 0 ? {} : _attrs$style,
+    otherAttrs = _objectWithoutProperties(attrs, _excluded);
   return h(abstractElement.tag, _objectSpread2(_objectSpread2(_objectSpread2({}, props), {}, {
     class: mixins.class,
     style: _objectSpread2(_objectSpread2({}, mixins.style), aStyle)
@@ -350,15 +335,12 @@ function convert(abstractElement) {
 }
 
 var PRODUCTION = false;
-
 try {
   PRODUCTION = process.env.NODE_ENV === 'production';
 } catch (e) {}
-
 function log () {
   if (!PRODUCTION && console && typeof console.error === 'function') {
     var _console;
-
     (_console = console).error.apply(_console, arguments);
   }
 }
@@ -368,7 +350,6 @@ function objectWithKey(key, value) {
 }
 function classList(props) {
   var _classes;
-
   var classes = (_classes = {
     'fa-spin': props.spin,
     'fa-pulse': props.pulse,
@@ -388,39 +369,33 @@ function classList(props) {
 }
 
 function normalizeIconArgs(icon) {
-  if (icon && _typeof(icon) === 'object' && icon.prefix && icon.iconName && icon.icon) {
+  if (icon && _typeof(icon) === "object" && icon.prefix && icon.iconName && icon.icon) {
     return icon;
   }
-
   if (parse.icon) {
     return parse.icon(icon);
   }
-
   if (icon === null) {
     return null;
   }
-
-  if (_typeof(icon) === 'object' && icon.prefix && icon.iconName) {
+  if (_typeof(icon) === "object" && icon.prefix && icon.iconName) {
     return icon;
   }
-
   if (Array.isArray(icon) && icon.length === 2) {
     return {
       prefix: icon[0],
       iconName: icon[1]
     };
   }
-
-  if (typeof icon === 'string') {
+  if (typeof icon === "string") {
     return {
-      prefix: 'fas',
+      prefix: "fas",
       iconName: icon
     };
   }
 }
-
 var FontAwesomeIcon = defineComponent({
-  name: 'FontAwesomeIcon',
+  name: "FontAwesomeIcon",
   props: {
     border: {
       type: Boolean,
@@ -434,7 +409,7 @@ var FontAwesomeIcon = defineComponent({
       type: [Boolean, String],
       default: false,
       validator: function validator(value) {
-        return [true, false, 'horizontal', 'vertical', 'both'].indexOf(value) > -1;
+        return [true, false, "horizontal", "vertical", "both"].indexOf(value) > -1;
       }
     },
     icon: {
@@ -445,6 +420,10 @@ var FontAwesomeIcon = defineComponent({
       type: [Object, Array, String],
       default: null
     },
+    maskId: {
+      type: String,
+      default: null
+    },
     listItem: {
       type: Boolean,
       default: false
@@ -453,7 +432,7 @@ var FontAwesomeIcon = defineComponent({
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['right', 'left'].indexOf(value) > -1;
+        return ["right", "left"].indexOf(value) > -1;
       }
     },
     pulse: {
@@ -475,7 +454,7 @@ var FontAwesomeIcon = defineComponent({
       type: String,
       default: null,
       validator: function validator(value) {
-        return ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1;
+        return ["2xs", "xs", "sm", "lg", "xl", "2xl", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x"].indexOf(value) > -1;
       }
     },
     spin: {
@@ -491,6 +470,10 @@ var FontAwesomeIcon = defineComponent({
       default: false
     },
     title: {
+      type: String,
+      default: null
+    },
+    titleId: {
       type: String,
       default: null
     },
@@ -537,23 +520,25 @@ var FontAwesomeIcon = defineComponent({
       return normalizeIconArgs(props.icon);
     });
     var classes = computed(function () {
-      return objectWithKey('classes', classList(props));
+      return objectWithKey("classes", classList(props));
     });
     var transform = computed(function () {
-      return objectWithKey('transform', typeof props.transform === 'string' ? parse.transform(props.transform) : props.transform);
+      return objectWithKey("transform", typeof props.transform === "string" ? parse.transform(props.transform) : props.transform);
     });
     var mask = computed(function () {
-      return objectWithKey('mask', normalizeIconArgs(props.mask));
+      return objectWithKey("mask", normalizeIconArgs(props.mask));
     });
     var renderedIcon = computed(function () {
       return icon(icon$1.value, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, classes.value), transform.value), mask.value), {}, {
         symbol: props.symbol,
-        title: props.title
+        title: props.title,
+        titleId: props.titleId,
+        maskId: props.maskId
       }));
     });
     watch(renderedIcon, function (value) {
       if (!value) {
-        return log('Could not find one or more icon(s)', icon$1.value, mask.value);
+        return log("Could not find one or more icon(s)", icon$1.value, mask.value);
       }
     }, {
       immediate: true
@@ -623,12 +608,10 @@ var FontAwesomeLayersText = defineComponent({
     });
     var abstractElement = computed(function () {
       var _text = text(props.value.toString(), _objectSpread2(_objectSpread2({}, transform.value), classes.value)),
-          abstract = _text.abstract;
-
+        abstract = _text.abstract;
       if (props.counter) {
         abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
       }
-
       return abstract[0];
     });
     var vnode = computed(function () {
