@@ -4,14 +4,13 @@
 
 The following commands are available through `npm run` or `yarn`:
 
-Command     | Purpose
----         | ---
-build       | Build a development version of the library using Rollup
-dist        | Build a production version of the library using Rollup
-test        | Execute unit tests
+| Command | Purpose                                                 |
+| ------- | ------------------------------------------------------- |
+| build   | Build a development version of the library using Rollup |
+| dist    | Build a production version of the library using Rollup  |
+| test    | Execute unit tests                                      |
 
 ## Release this project
-<a name="release"></a>
 
 **During pre release, make sure and use `--tag` and `--npm-dist-tag`**
 
@@ -36,7 +35,7 @@ from a Font Awesome project owner.
 
 You can then run:
 
-```
+```bash
 npm login --registry https://npm.fontawesome.com
 ```
 

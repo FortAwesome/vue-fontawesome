@@ -25,6 +25,7 @@
 Official documentation is hosted at fontawesome.com
 
 Helpful Vue links:
+
 - [Add Icons with Vue](https://fontawesome.com/docs/web/use-with/vue/add-icons)
 - [Adding Icon Styling with Vue](https://fontawesome.com/docs/web/use-with/vue/style)
 
