@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import FontAwesomeIcon from '../FontAwesomeIcon'
-import { parse } from '@fortawesome/fontawesome-svg-core'
+import { mount } from "@vue/test-utils";
+import FontAwesomeIcon from "../FontAwesomeIcon";
+import { parse } from "@fortawesome/fontawesome-svg-core";
 
 export function compileAndMount(definition, props = {}) {
   return mount(definition, { props })
