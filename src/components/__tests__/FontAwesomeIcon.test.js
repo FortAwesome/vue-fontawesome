@@ -4,12 +4,20 @@
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faAlien } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps, coreHasFeature, REFERENCE_ICON_USING_STRING, REFERENCE_ICON_BY_STYLE, ICON_ALIASES } from '../__fixtures__/helpers'
+import { faCoffee, faCircle, faAlien, faDog } from '../__fixtures__/icons'
+import {
+  compileAndMount,
+  mountFromProps,
+  coreHasFeature,
+  REFERENCE_ICON_USING_STRING,
+  REFERENCE_ICON_BY_STYLE,
+  REFERENCE_ICON_USING_FAMILY,
+  ICON_ALIASES
+} from '../__fixtures__/helpers'
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faAlien)
+  library.add(faCoffee, faCircle, faAlien, faDog)
 })
 
 afterEach(() => {
@@ -88,7 +96,7 @@ describe('unrelated Vue data options', () => {
   test('with extra static class', () => {
     const wrapper = compileAndMount({
       template: '<font-awesome-icon class="extra" :icon="icon" />',
-      data () {
+      data() {
         return { icon: faCoffee }
       },
       components: {
@@ -117,7 +125,7 @@ describe('unrelated Vue data options', () => {
   test('with extra style', () => {
     const wrapper = compileAndMount({
       template: `<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`,
-      data () {
+      data() {
         return { icon: faCoffee }
       },
       components: {
@@ -131,7 +139,7 @@ describe('unrelated Vue data options', () => {
   test('with extra DOM property', () => {
     const wrapper = compileAndMount({
       template: `<font-awesome-icon rel="local" :icon="icon" />`,
-      data () {
+      data() {
         return { icon: faCoffee }
       },
       components: {
@@ -147,11 +155,11 @@ describe('unrelated Vue data options', () => {
 
     const wrapper = compileAndMount({
       template: '<font-awesome-icon @click="clicked" :icon="icon" />',
-      data () {
+      data() {
         return { icon: faCoffee }
       },
       methods: {
-        clicked () {
+        clicked() {
           hasBeenClicked = true
         }
       },
@@ -189,7 +197,7 @@ describe('using flip', () => {
   })
 
   test('horizontal', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, flip: "horizontal" })
+    const wrapper = mountFromProps({ icon: faCoffee, flip: 'horizontal' })
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeFalsy()
@@ -198,7 +206,7 @@ describe('using flip', () => {
   })
 
   test('vertical', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, flip: "vertical" })
+    const wrapper = mountFromProps({ icon: faCoffee, flip: 'vertical' })
 
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeFalsy()
@@ -207,7 +215,7 @@ describe('using flip', () => {
   })
 
   test('both', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, flip: "both" })
+    const wrapper = mountFromProps({ icon: faCoffee, flip: 'both' })
 
     expect(wrapper.element.classList.contains('fa-flip-horizontal')).toBeTruthy()
     expect(wrapper.element.classList.contains('fa-flip-vertical')).toBeTruthy()
@@ -223,13 +231,13 @@ test('using listItem', () => {
 
 describe('using pull', () => {
   test('right', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, pull: "right" })
+    const wrapper = mountFromProps({ icon: faCoffee, pull: 'right' })
 
     expect(wrapper.element.classList.contains('fa-pull-right')).toBeTruthy()
   })
 
   test('left', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, pull: "left" })
+    const wrapper = mountFromProps({ icon: faCoffee, pull: 'left' })
 
     expect(wrapper.element.classList.contains('fa-pull-left')).toBeTruthy()
   })
@@ -274,7 +282,7 @@ test('swap opacity', () => {
 })
 
 test('using size', () => {
-  ['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach(size => {
+  ;['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach((size) => {
     const wrapper = mountFromProps({ icon: faCoffee, size: size })
 
     expect(wrapper.element.classList.contains(`fa-${size}`)).toBeTruthy()
@@ -295,13 +303,26 @@ test('using inverse', () => {
 
 describe('using transform', () => {
   test('string', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, transform: 'grow-40 left-4 rotate-15' })
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      transform: 'grow-40 left-4 rotate-15'
+    })
 
     expect(wrapper.element).toBeTruthy()
   })
 
   test('object', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, transform: { flipX: false, flipY: false, rotate: 15, size: 56, x: -4, y: 0 } })
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      transform: {
+        flipX: false,
+        flipY: false,
+        rotate: 15,
+        size: 56,
+        x: -4,
+        y: 0
+      }
+    })
 
     expect(wrapper.element).toBeTruthy()
   })
@@ -313,22 +334,16 @@ describe('mask', () => {
 
     expect(wrapper.element.innerHTML).toMatch(/clipPath/)
   })
-
-  test('will add icon referencing library', () => {
-    const wrapper = mountFromProps({ icon: ['fas', 'coffee'], mask: ['fas', 'circle'] })
-
-    // missing assertion here
-  })
 })
 
 describe('symbol', () => {
-  test("will not create a symbol", () => {
+  test('will not create a symbol', () => {
     const wrapper = mountFromProps({ icon: faCoffee })
 
     expect(wrapper.element.style.getPropertyValue('display')).toBe('')
   })
 
-  test("will create a symbol", () => {
+  test('will create a symbol', () => {
     const wrapper = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
     expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
@@ -453,3 +468,42 @@ if (coreHasFeature(ICON_ALIASES)) {
     expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
   })
 }
+
+describe('using a family', () => {
+  if (coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
+    test('will find a sharp solid icon using array format, short prefix, and short icon name', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'dog'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using array format, short prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: ['fass', 'fa-dog'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using string format, short prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fass fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will default to a sharp solid icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will find a sharp solid icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp fa-solid fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+  }
+})
