@@ -1,4 +1,4 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { DefineComponent } from 'vue'
 
 interface FontAwesomeIconProps {
@@ -7,6 +7,7 @@ interface FontAwesomeIconProps {
   flip?: 'horizontal' | 'vertical' | 'both'
   icon: object | Array<string> | string | IconDefinition
   mask?: object | Array<string> | string
+  maskId?: object | Array<string> | string
   listItem?: boolean
   pull?: 'right' | 'left'
   pulse?: boolean
@@ -17,6 +18,7 @@ interface FontAwesomeIconProps {
   transform?: object | string
   symbol?: boolean | string
   title?: string
+  titleId?: string
   inverse?: boolean
   bounce?: boolean
   shake?: boolean
