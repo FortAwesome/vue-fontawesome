@@ -24,6 +24,37 @@ afterEach(() => {
   library.reset();
 });
 
+describe("icon title prop", () => {
+  test("checks title attribute is null when title property is NOT st", () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+    });
+
+    expect(wrapper.element.getAttribute("aria-labelledby")).toBeFalsy();
+    expect(wrapper.element.querySelector("title")).toBeFalsy();
+  });
+
+  test("checks title attributes when title property is set", () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      title: "Drink your caf",
+      titleId: "caf-1138",
+    });
+
+    expect(wrapper.element.getAttribute("aria-labelledby")).toBe(
+      "svg-inline--fa-title-caf-1138"
+    );
+
+    expect(wrapper.element.querySelector("title").textContent).toBe(
+      "Drink your caf"
+    );
+
+    expect(wrapper.element.querySelector("title").id).toBe(
+      "svg-inline--fa-title-caf-1138"
+    );
+  });
+});
+
 describe("icons are showing", () => {
   test("using array format, short prefix and short icon name", () => {
     const wrapper = mountFromProps({ icon: ["fas", "coffee"] });

@@ -55,6 +55,10 @@ export default defineComponent({
       type: [Object, Array, String],
       default: null
     },
+    maskId: {
+      type: String,
+      default: null
+    },
     listItem: {
       type: Boolean,
       default: false
@@ -95,6 +99,10 @@ export default defineComponent({
       default: false
     },
     title: {
+      type: String,
+      default: null
+    },
+    titleId: {
       type: String,
       default: null
     },
@@ -148,7 +156,9 @@ export default defineComponent({
         ...transform.value,
         ...mask.value,
         symbol: props.symbol,
-        title: props.title
+        title: props.title,
+        titleId: props.titleId,
+        maskId: props.maskId
       })
     )
 
