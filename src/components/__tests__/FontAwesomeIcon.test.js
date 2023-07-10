@@ -25,7 +25,7 @@ afterEach(() => {
 })
 
 describe('icon title prop', () => {
-  test('checks title attribute is null when title property is NOT st', () => {
+  test('checks title attribute is null when title property is NOT set', () => {
     const wrapper = mountFromProps({
       icon: faCoffee
     })
