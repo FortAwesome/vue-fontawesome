@@ -1,6 +1,6 @@
-import resolve from 'rollup-plugin-node-resolve'
-import commonJs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonJs from '@rollup/plugin-commonjs'
+import babel from '@rollup/plugin-babel'
 
 const name = 'vue-fontawesome'
 const globals = {
@@ -9,7 +9,8 @@ const globals = {
 
 export default {
   external: [
-    '@fortawesome/fontawesome-svg-core'
+    '@fortawesome/fontawesome-svg-core',
+    'vue',
   ],
   input: 'src/index.js',
   output: [
@@ -38,15 +39,11 @@ export default {
     babel({
       babelrc: false,
       presets: [
-        ['env', {
+        ['@babel/preset-env', {
           debug: true,
           targets: {"browsers": ["> 1%", "last 2 versions", "ie > 9"]},
           modules: false
-        }],
-        'stage-3'
-      ],
-      plugins: [
-        'external-helpers'
+        }]
       ],
       exclude: 'node_modules/**'
     })

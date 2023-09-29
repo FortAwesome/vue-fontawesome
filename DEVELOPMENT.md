@@ -1,23 +1,24 @@
-# Developing vue-fontawesome
+# Developing vue-fontawesome with Vue 3
 
 ## Tasks
 
 The following commands are available through `npm run` or `yarn`:
 
-Command     | Purpose
----         | ---
-build       | Build a development version of the library using Rollup
-dist        | Build a production version of the library using Rollup
-test        | Execute unit tests
+| Command | Purpose                                                 |
+| ------- | ------------------------------------------------------- |
+| build   | Build a development version of the library using Rollup |
+| dist    | Build a production version of the library using Rollup  |
+| test    | Execute unit tests                                      |
 
 ## Release this project
-<a name="release"></a>
+
+**During pre release, make sure and use `--tag` and `--npm-dist-tag`**
 
 1. Update `package.json` and change `version`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
-1. `npm publish`
-1. `npm publish --registry https://npm.fontawesome.com`
+1. `npm publish --tag latest-3`
+1. `npm publish --tag latest-3 --registry https://npm.fontawesome.com`
 1. `git add .`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
@@ -34,7 +35,7 @@ from a Font Awesome project owner.
 
 You can then run:
 
-```
+```bash
 npm login --registry https://npm.fontawesome.com
 ```
 

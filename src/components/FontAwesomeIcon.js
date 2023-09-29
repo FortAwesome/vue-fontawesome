@@ -1,11 +1,10 @@
 import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
+import { defineComponent, computed, watch } from 'vue'
 import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs (icon) {
-  // this has everything that it needs to be rendered which means it was probably imported
-  // directly from an icon svg package
   if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
     return icon
   }
@@ -31,10 +30,8 @@ function normalizeIconArgs (icon) {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'FontAwesomeIcon',
-
-  functional: true,
 
   props: {
     beat: {
@@ -58,9 +55,9 @@ export default {
       default: false
     },
     flip: {
-      type: String,
-      default: null,
-      validator: (value) => ['horizontal', 'vertical', 'both'].indexOf(value) > -1
+      type: [Boolean, String],
+      default: false,
+      validator: (value) => [true, false, 'horizontal', 'vertical', 'both'].indexOf(value) > -1
     },
     icon: {
       type: [Object, Array, String],
@@ -86,7 +83,7 @@ export default {
     rotation: {
       type: [String, Number],
       default: null,
-      validator: (value) => [90, 180, 270].indexOf(parseInt(value, 10)) > -1
+      validator: (value) => [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
     },
     swapOpacity: {
       type: Boolean,
@@ -124,28 +121,67 @@ export default {
     inverse: {
       type: Boolean,
       default: false
-    }
+    },
+    bounce: {
+      type: Boolean,
+      default: false
+    },
+    shake: {
+      type: Boolean,
+      default: false
+    },
+    beat: {
+      type: Boolean,
+      default: false
+    },
+    fade: {
+      type: Boolean,
+      default: false
+    },
+    beatFade: {
+      type: Boolean,
+      default: false
+    },
+    flash: {
+      type: Boolean,
+      default: false
+    },
+    spinPulse: {
+      type: Boolean,
+      default: false
+    },
+    spinReverse: {
+      type: Boolean,
+      default: false
+    },
   },
 
-  render (createElement, context) {
-    const { props } = context
-    const { icon: iconArgs, mask: maskArgs, symbol, title } = props
-    const icon = normalizeIconArgs(iconArgs)
-    const classes = objectWithKey('classes', classList(props))
-    const transform = objectWithKey('transform', (typeof props.transform === 'string') ? faParse.transform(props.transform) : props.transform)
-    const mask = objectWithKey('mask', normalizeIconArgs(maskArgs))
-    const renderedIcon = faIcon(
-      icon,
-      { ...classes, ...transform, ...mask, symbol, title }
-    )
+  setup (props, { attrs }) {
+    const icon = computed(() => normalizeIconArgs(props.icon))
+    const classes = computed(() => objectWithKey('classes', classList(props)))
+    const transform = computed(() => objectWithKey(
+      'transform',
+      (typeof props.transform === 'string')
+        ? faParse.transform(props.transform)
+        : props.transform
+    ))
+    const mask = computed(() => objectWithKey('mask', normalizeIconArgs(props.mask)))
 
-    if (!renderedIcon) {
-      return log('Could not find one or more icon(s)', icon, mask)
-    }
+    const renderedIcon = computed(() => faIcon(icon.value, {
+      ...classes.value,
+      ...transform.value,
+      ...mask.value,
+      symbol: props.symbol,
+      title: props.title
+    }))
 
-    const { abstract } = renderedIcon
-    const convertCurry = convert.bind(null, createElement)
+    watch(renderedIcon, (value) => {
+      if (!value) {
+        return log('Could not find one or more icon(s)', icon.value, mask.value)
+      }
+    }, { immediate: true })
 
-    return convertCurry(abstract[0], {}, context.data)
+    const vnode = computed(() => renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null)
+    return () => vnode.value
   }
-}
+})

@@ -27,13 +27,13 @@
             <font-awesome-icon :icon="queen" size="4x" inverse/>
           </li>
           <li class="pv3 ph2 ma0 link grow">
-            <font-awesome-layers full-width class="fa-4x">
+            <font-awesome-layers fixed-width class="fa-4x">
               <font-awesome-icon :icon="['fas', 'archive']"/>
               <font-awesome-layers-text class="red8" transform="down-3 shrink-14" value="SECRET" />
             </font-awesome-layers>
           </li>
           <li class="pv3 ph2 ma0 link grow">
-            <font-awesome-layers full-width class="fa-4x">
+            <font-awesome-layers fixed-width class="fa-4x">
               <font-awesome-icon :icon="['fas', 'envelope']"/>
               <font-awesome-layers-text class="red8" value="1" position="top-right" />
             </font-awesome-layers>
@@ -44,18 +44,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import { faChessQueen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
 
-export default {
+export default defineComponent({
   name: 'App',
 
-  computed: {
-    queen () {
-      return faChessQueen
-    }
+  setup () {
+    const queen = computed(() => faChessQueen)
+
+    return { queen }
+  },
+
+  components: {
+    FontAwesomeIcon,
+    FontAwesomeLayers,
+    FontAwesomeLayersText
   }
-}
+})
 </script>
 
 <style>
