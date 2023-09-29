@@ -5,7 +5,12 @@ export function objectWithKey (key, value) {
 export function classList (props) {
   let classes = {
     'fa-spin': props.spin,
+    'fa-spin-pulse': props.spinPulse,
+    'fa-spin-reverse': props.spinReverse,
     'fa-pulse': props.pulse,
+    'fa-beat': props.beat,
+    'fa-fade': props.fade,
+    'fa-flash': props.flash,
     'fa-fw': props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,

@@ -21,3 +21,15 @@ export const faDog = {
   iconName: 'dog',
   icon: [640, 512, [], 'f200', '...']
 }
+
+export const faSpartan = {
+  prefix: 'fat',
+  iconName: 'spartan',
+  icon: [
+    640,
+    512,
+    [],
+    "f100",
+    "..."
+  ]
+}

@@ -172,13 +172,13 @@ var humps$1 = {exports: {}};
 	      return chr ? chr.toUpperCase() : '';
 	    });
 	    // Ensure 1st char is always lowercase
-	    return string.substr(0, 1).toLowerCase() + string.substr(1);
+	    return string.slice(0, 1).toLowerCase() + string.slice(1);
 	  };
 
 	  var pascalize = function(string) {
 	    var camelized = camelize(string);
 	    // Ensure 1st char is always uppercase
-	    return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
+	    return camelized.slice(0, 1).toUpperCase() + camelized.slice(1);
 	  };
 
 	  var decamelize = function(string, options) {
@@ -371,7 +371,12 @@ function classList(props) {
 
   var classes = (_classes = {
     'fa-spin': props.spin,
+    'fa-spin-pulse': props.spinPulse,
+    'fa-spin-reverse': props.spinReverse,
     'fa-pulse': props.pulse,
+    'fa-beat': props.beat,
+    'fa-fade': props.fade,
+    'fa-flash': props.flash,
     'fa-fw': props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,
@@ -422,11 +427,23 @@ function normalizeIconArgs(icon) {
 var FontAwesomeIcon = defineComponent({
   name: 'FontAwesomeIcon',
   props: {
+    beat: {
+      type: Boolean,
+      default: false
+    },
     border: {
       type: Boolean,
       default: false
     },
+    fade: {
+      type: Boolean,
+      default: false
+    },
     fixedWidth: {
+      type: Boolean,
+      default: false
+    },
+    flash: {
       type: Boolean,
       default: false
     },
@@ -479,6 +496,14 @@ var FontAwesomeIcon = defineComponent({
       }
     },
     spin: {
+      type: Boolean,
+      default: false
+    },
+    spinPulse: {
+      type: Boolean,
+      default: false
+    },
+    spinReverse: {
       type: Boolean,
       default: false
     },

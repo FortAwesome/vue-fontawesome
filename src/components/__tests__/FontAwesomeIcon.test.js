@@ -295,6 +295,13 @@ test('using spin', () => {
   expect(wrapper.element.classList.contains('fa-spin')).toBeTruthy()
 })
 
+test('using spinPulse and spinReverse', () => {
+  const vm = mountFromProps({ icon: faCoffee, spinPulse: true, spinReverse: true })
+
+  expect(vm.$el.classList.contains('fa-spin-pulse')).toBeTruthy()
+  expect(vm.$el.classList.contains('fa-spin-reverse')).toBeTruthy()
+})
+
 test('using inverse', () => {
   const wrapper = mountFromProps({ icon: faCoffee, inverse: true })
 
