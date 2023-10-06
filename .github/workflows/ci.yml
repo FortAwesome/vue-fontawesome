@@ -4,56 +4,41 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        free-solid-svg-icons: [
-          5.x,
-          6.x
-        ]
-        fontawesome-svg-core: [
-          1.2.x,
-          6.x
-        ]
-        node-version: [
-          14.x,
-          16.x,
-          18.x
-        ]
-        vue: [
-          3.0.x,
-          3.1.x,
-          3.2.x
-        ]
+        free-solid-svg-icons: [5.x, 6.x]
+        fontawesome-svg-core: [1.2.x, 6.x]
+        node-version: [14.x, 16.x, 18.x, 20.x]
+        vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: v5 install, build, and test
-      if: ${{ matrix.free-solid-svg-icons }} == '5.x'
-      run: |
-        npm install -g npm
-        npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
-        npm run build
-        npm list vue
-        npm run test
-    - name: v6 install, build, and test
-      if: ${{ matrix.free-solid-svg-icons }} == '6.x'
-      run: |
-        npm install -g npm
-        npm install
-        npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
-        npm run build
-        npm list vue
-        npm run test
-      env:
-        CI: true
-    - name: dist
-      run: |
-        npm run dist
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: v5 install, build, and test
+        if: ${{ matrix.free-solid-svg-icons }} == '5.x'
+        run: |
+          npm install -g npm@8
+          npm install
+          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
+          npm run build
+          npm list vue
+          npm run test
+      - name: v6 install, build, and test
+        if: ${{ matrix.free-solid-svg-icons }} == '6.x'
+        run: |
+          npm install -g npm@8
+          npm install
+          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
+          npm run build
+          npm list vue
+          npm run test
+        env:
+          CI: true
+      - name: dist
+        run: |
+          npm run dist
