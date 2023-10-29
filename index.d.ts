@@ -1,12 +1,12 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { IconDefinition, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { DefineComponent } from 'vue'
 
 interface FontAwesomeIconProps {
   border?: boolean
   fixedWidth?: boolean
   flip?: 'horizontal' | 'vertical' | 'both'
-  icon: object | Array<string> | string | IconDefinition
-  mask?: object | Array<string> | string
+  icon: [IconPrefix, IconName] | IconName | IconDefinition
+  mask?: [IconPrefix, IconName] | IconName
   listItem?: boolean
   pull?: 'right' | 'left'
   pulse?: boolean
