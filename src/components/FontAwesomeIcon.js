@@ -4,7 +4,7 @@ import convert from '../converter'
 import log from '../logger'
 import { objectWithKey, classList } from '../utils'
 
-function normalizeIconArgs (icon) {
+function normalizeIconArgs(icon) {
   if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
     return icon
   }
@@ -55,6 +55,10 @@ export default defineComponent({
       type: [Object, Array, String],
       default: null
     },
+    maskId: {
+      type: String,
+      default: null
+    },
     listItem: {
       type: Boolean,
       default: false
@@ -98,6 +102,10 @@ export default defineComponent({
       type: String,
       default: null
     },
+    titleId: {
+      type: String,
+      default: null
+    },
     inverse: {
       type: Boolean,
       default: false
@@ -133,35 +141,38 @@ export default defineComponent({
     spinReverse: {
       type: Boolean,
       default: false
-    },
+    }
   },
 
-  setup (props, { attrs }) {
+  setup(props, { attrs }) {
     const icon = computed(() => normalizeIconArgs(props.icon))
     const classes = computed(() => objectWithKey('classes', classList(props)))
-    const transform = computed(() => objectWithKey(
-      'transform',
-      (typeof props.transform === 'string')
-        ? faParse.transform(props.transform)
-        : props.transform
-    ))
+    const transform = computed(() => objectWithKey('transform', typeof props.transform === 'string' ? faParse.transform(props.transform) : props.transform))
     const mask = computed(() => objectWithKey('mask', normalizeIconArgs(props.mask)))
 
-    const renderedIcon = computed(() => faIcon(icon.value, {
-      ...classes.value,
-      ...transform.value,
-      ...mask.value,
-      symbol: props.symbol,
-      title: props.title
-    }))
+    const renderedIcon = computed(() =>
+      faIcon(icon.value, {
+        ...classes.value,
+        ...transform.value,
+        ...mask.value,
+        symbol: props.symbol,
+        title: props.title,
+        titleId: props.titleId,
+        maskId: props.maskId
+      })
+    )
 
-    watch(renderedIcon, (value) => {
-      if (!value) {
-        return log('Could not find one or more icon(s)', icon.value, mask.value)
-      }
-    }, { immediate: true })
+    watch(
+      renderedIcon,
+      (value) => {
+        if (!value) {
+          return log('Could not find one or more icon(s)', icon.value, mask.value)
+        }
+      },
+      { immediate: true }
+    )
 
-    const vnode = computed(() => renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null)
+    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null))
     return () => vnode.value
   }
 })
