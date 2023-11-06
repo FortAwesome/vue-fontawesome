@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.4](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.4) - 2023-11-06
+
+### Changed
+
+### Added
+
+- Tests for Sharp Family
+- Ability to include a title prop (github issue #[181](https://github.com/FortAwesome/vue-fontawesome/issues/181))
+- Prettier config file
+
 ---
 
 ## [3.0.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.3) - 2023-01-24
@@ -16,7 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Missing TypeScript animations added  (github issue #[428](https://github.com/FortAwesome/vue-fontawesome/issues/428))
+- Missing TypeScript animations added (github issue #[428](https://github.com/FortAwesome/vue-fontawesome/issues/428))
 - Missing TypeScript sizes added (github issue #[415](https://github.com/FortAwesome/vue-fontawesome/issues/415))
 
 ---
