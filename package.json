@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 6",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "main": "index.js",
   "files": [
     "README.md",

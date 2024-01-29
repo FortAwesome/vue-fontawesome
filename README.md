@@ -48,20 +48,21 @@ The following contributors have either helped to start this project, have contri
 code, are actively maintaining it (including documentation), or in other ways
 being awesome contributors to this project. **We'd like to take a moment to recognize them.**
 
-|                                                              | Name            | GitHub                                                 |
-| :----------------------------------------------------------: | --------------- | ------------------------------------------------------ |
-| <img src="https://github.com/SirLamer.png?size=72" />        | SirLamer        | [@SirLamer](https://github.com/SirLamer)               |
-| <img src="https://github.com/meteorlxy.png?size=72" />       | Liu Xinyu       | [@meteorlxy](https://github.com/meteorlxy)             |
-| <img src="https://github.com/schulz3000.png?size=72" />      | Xaver Schulz    | [@schulz3000](https://github.com/schulz3000)           |
-| <img src="https://github.com/ihmels.png?size=72" />          | Yannick Ihmels  | [@ihmels](https://github.com/ihmels)                   |
-| <img src="https://github.com/btaens.png?size=72" />          | btaens          | [@btaens](https://github.com/btaens)                   |
-| <img src="https://github.com/david-driscoll.png?size=72" />  | David Driscoll  | [@david-driscoll](https://github.com/david-driscoll)   |
-| <img src="https://github.com/tyranteon.png?size=72" />       | Tyranteon       | [@tyranteon](https://github.com/tyranteon)             |
-| <img src="https://github.com/rigma.png?size=72" />           | Romain Failla   | [@rigma](https://github.com/rigma)                     |
-| <img src="https://github.com/viniciuslrangel.png?size=72" /> | Vinicius Rangel | [@viniciuslrangel](https://github.com/viniciuslrangel) |
-| <img src="https://github.com/otijhuis.png?size=72" />        | Okke Tijhuis    | [@otijhuis](https://github.com/otijhuis)               |
-| <img src="https://github.com/parkeyparker.png?size=72" />    | Aaron Parker    | [@parkeyparker](https://github.com/parkeyparker)       |
-| <img src="https://github.com/brandon-mork.png?size=72" />    | Brandon Mork    | [@brandon-mork](https://github.com/brandon-mork)       |
+|                                                                | Name              | GitHub                                                    |
+| :------------------------------------------------------------: | ----------------- | --------------------------------------------------------- |
+| <img src="https://github.com/SirLamer.png?size=72" />          | SirLamer          | [@SirLamer](https://github.com/SirLamer)                  |
+| <img src="https://github.com/meteorlxy.png?size=72" />         | Liu Xinyu         | [@meteorlxy](https://github.com/meteorlxy)                |
+| <img src="https://github.com/schulz3000.png?size=72" />        | Xaver Schulz      | [@schulz3000](https://github.com/schulz3000)              |
+| <img src="https://github.com/ihmels.png?size=72" />            | Yannick Ihmels    | [@ihmels](https://github.com/ihmels)                      |
+| <img src="https://github.com/btaens.png?size=72" />            | btaens            | [@btaens](https://github.com/btaens)                      |
+| <img src="https://github.com/david-driscoll.png?size=72" />    | David Driscoll    | [@david-driscoll](https://github.com/david-driscoll)      |
+| <img src="https://github.com/tyranteon.png?size=72" />         | Tyranteon         | [@tyranteon](https://github.com/tyranteon)                |
+| <img src="https://github.com/rigma.png?size=72" />             | Romain Failla     | [@rigma](https://github.com/rigma)                        |
+| <img src="https://github.com/viniciuslrangel.png?size=72" />   | Vinicius Rangel   | [@viniciuslrangel](https://github.com/viniciuslrangel)    |
+| <img src="https://github.com/otijhuis.png?size=72" />          | Okke Tijhuis      | [@otijhuis](https://github.com/otijhuis)                  |
+| <img src="https://github.com/parkeyparker.png?size=72" />      | Aaron Parker      | [@parkeyparker](https://github.com/parkeyparker)          |
+| <img src="https://github.com/brandon-mork.png?size=72" />      | Brandon Mork      | [@brandon-mork](https://github.com/brandon-mork)          |
+| <img src="https://github.com/michaelcozzolino.png?size=72" />  | Michael Cozzolino | [@michaelcozzolino](https://github.com/michaelcozzolino)  |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 

@@ -4,19 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.6](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.6) - 2024-01-29
+
+### Changed
+
+- Added missing exports to TS definition in `index.d.ts`
+
+---
+
 ## [3.0.5](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.5) - 2023-11-06
 
 ### Changed
 
 - Removed .tgz file
 
-### Added
-
 ---
 
 ## [3.0.4](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.4) - 2023-11-06
-
-### Changed
 
 ### Added
 
