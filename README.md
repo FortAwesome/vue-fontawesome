@@ -26,10 +26,9 @@ Official documentation is hosted at fontawesome.com
 
 Helpful Vue links:
 
-- [Add Icons with Vue](https://fontawesome.com/docs/web/use-with/vue/add-icons)
-- [Adding Icon Styling with Vue](https://fontawesome.com/docs/web/use-with/vue/style)
-
-To find the Vue setup, go to our [Web docs](https://fontawesome.com/docs/web) and click the ***"Set Up with Vue"*** (left hand side menu).
+- [Set Up With Vue](https://docs.fontawesome.com/web/use-with/vue/)
+- [Add Icons with Vue](https://docs.fontawesome.com/web/use-with/vue/add-icons)
+- [Adding Icon Styling with Vue](https://docs.fontawesome.com/web/use-with/vue/style)
 
 ## How to Help
 
