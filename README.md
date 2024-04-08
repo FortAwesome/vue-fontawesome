@@ -22,7 +22,7 @@
 
 ## Documentation
 
-Official documentation is hosted at fontawesome.com
+Official documentation is hosted at [docs.fontawesome.com](https://docs.fontawesome.com/)
 
 Helpful Vue links:
 
