@@ -15,7 +15,13 @@
     "src/**.js"
   ],
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "testEnvironmentOptions": {
+      "customExportConditions": [
+        "node",
+        "node-addons"
+      ]
+    }
   },
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
