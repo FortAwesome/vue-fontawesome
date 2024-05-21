@@ -4,7 +4,7 @@
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
-import { compileAndMount, mountFromProps } from '../__fixtures__/helpers'
+import { compileAndMount } from '../__fixtures__/helpers'
 import FontAwesomeLayers from '../FontAwesomeLayers'
 
 beforeEach(() => {
