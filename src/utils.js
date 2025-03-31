@@ -1,12 +1,22 @@
-export function objectWithKey (key, value) {
-  return ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) ? {[key]: value} : {}
+import { config } from '@fortawesome/fontawesome-svg-core'
+import semver from 'semver'
+
+export const ICON_PACKS_STARTING_VERSION = '7.0.0-alpha1'
+
+const svgCorePackageJson = require('@fortawesome/fontawesome-svg-core/package.json')
+
+export const SVG_CORE_VERSION = svgCorePackageJson.version
+
+export function objectWithKey(key, value) {
+  return (Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value) ? { [key]: value } : {}
 }
 
-export function classList (props) {
+export function classList(props) {
   let classes = {
     'fa-spin': props.spin,
     'fa-pulse': props.pulse,
-    'fa-fw': props.fixedWidth,
+    // the fixedWidth property has been deprecated as of version 7.0.0
+    'fa-fw': semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,
     'fa-inverse': props.inverse,
@@ -24,12 +34,14 @@ export function classList (props) {
     'fa-beat-fade': props.beatFade,
     'fa-flash': props.flash,
     'fa-spin-pulse': props.spinPulse,
-    'fa-spin-reverse': props.spinReverse
+    'fa-spin-reverse': props.spinReverse,
+    // the widthAuto property is only supported in version 7.0.0 and later
+    'fa-width-auto': semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.widthAuto
   }
 
   return Object.keys(classes)
-    .map(key => classes[key] ? key : null)
-    .filter(key => key)
+    .map((key) => (classes[key] ? key : null))
+    .filter((key) => key)
 }
 
 export function addStaticClass(to, what) {

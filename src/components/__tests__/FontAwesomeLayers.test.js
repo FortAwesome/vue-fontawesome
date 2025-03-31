@@ -2,10 +2,13 @@
  * @jest-environment jsdom
  */
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCircle } from '../__fixtures__/icons'
 import { compileAndMount } from '../__fixtures__/helpers'
+import { faCoffee, faCircle } from '../__fixtures__/icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION } from '../../utils'
+
 import FontAwesomeLayers from '../FontAwesomeLayers'
+import semver from 'semver'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle)
@@ -57,16 +60,19 @@ describe('class handling', () => {
     expect(wrapper.element.getAttribute('class')).toBe('fa-layers extra')
   })
 
-  test('fixed width', () => {
-    const wrapper = compileAndMount({
-      template: '<font-awesome-layers fixed-width />',
-      components: {
-        FontAwesomeLayers
-      }
-    })
+  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the fixedWidth property has been deprecated as of version 7.0.0
+    test('fixed width', () => {
+      const wrapper = compileAndMount({
+        template: '<font-awesome-layers fixed-width />',
+        components: {
+          FontAwesomeLayers
+        }
+      })
 
-    expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
-  })
+      expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
+    })
+  }
 })
 
 describe('reactivity', () => {
@@ -78,7 +84,10 @@ describe('reactivity', () => {
       }
     })
 
-    expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
+    if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+      // the fixedWidth property has been deprecated as of version 7.0.0
+      expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
+    }
 
     await wrapper.setProps({ fixedWidth: false })
 

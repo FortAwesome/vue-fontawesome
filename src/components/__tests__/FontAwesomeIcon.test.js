@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCoffee, faCircle, faAlien, faDog } from '../__fixtures__/icons'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION } from '../../utils'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
   mountFromProps,
@@ -14,7 +15,9 @@ import {
   REFERENCE_ICON_USING_FAMILY,
   ICON_ALIASES
 } from '../__fixtures__/helpers'
+
 import FontAwesomeIcon from '../FontAwesomeIcon'
+import semver from 'semver'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle, faAlien, faDog)
@@ -34,17 +37,20 @@ describe('icon title prop', () => {
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
 
-  test('checks title attributes when title property is set', () => {
-    const wrapper = mountFromProps({
-      icon: faCoffee,
-      title: 'Drink your caf',
-      titleId: 'caf-1138'
-    })
+  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+    test('checks title attributes when title property is set', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Drink your caf',
+        titleId: 'caf-1138'
+      })
 
-    expect(wrapper.element.getAttribute('aria-labelledby')).toBe('svg-inline--fa-title-caf-1138')
-    expect(wrapper.element.querySelector('title').textContent).toBe('Drink your caf')
-    expect(wrapper.element.querySelector('title').id).toBe('svg-inline--fa-title-caf-1138')
-  })
+      expect(wrapper.element.getAttribute('aria-labelledby')).toBe('svg-inline--fa-title-caf-1138')
+      expect(wrapper.element.querySelector('title').textContent).toBe('Drink your caf')
+      expect(wrapper.element.querySelector('title').id).toBe('svg-inline--fa-title-caf-1138')
+    })
+  }
 })
 
 describe('icons are showing', () => {
@@ -203,11 +209,23 @@ test('using border', () => {
   expect(wrapper.element.classList.contains('fa-border')).toBeTruthy()
 })
 
-test('using fixedWidth', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
+if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  // the fixedWidth property has been deprecated as of version 7.0.0
+  test('using fixedWidth', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
 
-  expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
-})
+    expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
+  })
+}
+
+if (semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  // the widthAuto property is only supported in version 7.0.0 and later
+  test('using widthAuto', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
+
+    expect(wrapper.element.classList.contains('fa-width-auto')).toBeTruthy()
+  })
+}
 
 describe('using flip', () => {
   test('flip', () => {
@@ -375,11 +393,14 @@ describe('symbol', () => {
 })
 
 describe('title', () => {
-  test('using title', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
+  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the title attribute will only apply to versions prior to version 7.0.0
+    test('using title', () => {
+      const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
 
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
-  })
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+    })
+  }
 
   test('not using title', () => {
     const wrapper = mountFromProps({ icon: faCoffee })
@@ -393,12 +414,20 @@ describe('reactivity', () => {
     const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
 
     expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+
+    if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+    }
 
     await wrapper.setProps({ icon: faCircle, title: 'Circle' })
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+
+    if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+    }
   })
 })
 
