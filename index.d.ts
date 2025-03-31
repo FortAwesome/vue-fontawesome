@@ -27,6 +27,7 @@ interface FontAwesomeIconProps {
   beatFade?: boolean
   spinPulse?: boolean
   spinReverse?: boolean
+  widthAuto?: boolean
 }
 
 interface FontAwesomeLayersProps {
