@@ -76,21 +76,28 @@ describe('class handling', () => {
 })
 
 describe('reactivity', () => {
-  test('changing props should update the element', async () => {
-    const wrapper = compileAndMount({
+  let wrapper
+
+  beforeEach(() => {
+    wrapper = compileAndMount({
       template: '<font-awesome-layers fixed-width />',
-      components: {
-        FontAwesomeLayers
-      }
+      components: { FontAwesomeLayers }
     })
-
-    if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-      // the fixedWidth property has been deprecated as of version 7.0.0
-      expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
-    }
-
-    await wrapper.setProps({ fixedWidth: false })
-
-    expect(wrapper.element.getAttribute('class')).toBe('fa-layers')
   })
+
+  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the fixedWidth property has been deprecated as of version 7.0.0
+    test('changing props should update the element prior to version 7', async () => {
+      expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
+
+      await wrapper.setProps({ fixedWidth: false })
+
+      expect(wrapper.element.getAttribute('class')).toBe('fa-layers')
+    })
+  } else {
+    test('should not have fa-fw class in version 7 or later', () => {
+      expect(wrapper.element.classList.contains('fa-fw')).toBeFalsy()
+      expect(wrapper.element.getAttribute('class')).toBe('fa-layers')
+    })
+  }
 })
