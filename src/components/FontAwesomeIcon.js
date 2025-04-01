@@ -81,6 +81,11 @@ export default defineComponent({
       default: null,
       validator: (value) => [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
     },
+    // the rotateBy property is only supported in version 7.0.0 and later
+    rotateBy: {
+      type: Boolean,
+      default: false
+    },
     swapOpacity: {
       type: Boolean,
       default: false

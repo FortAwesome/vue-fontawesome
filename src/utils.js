@@ -25,6 +25,8 @@ export function classList(props) {
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,
     [`fa-rotate-${props.rotation}`]: props.rotation !== null,
+    // the rotateBy property is only supported in version 7.0.0 and later
+    [`fa-rotate-by`]: semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.rotateBy,
     [`fa-pull-${props.pull}`]: props.pull !== null,
     'fa-swap-opacity': props.swapOpacity,
     'fa-bounce': props.bounce,

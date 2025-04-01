@@ -2421,6 +2421,7 @@ function classList(props) {
   var classes = (_classes = {
     'fa-spin': props.spin,
     'fa-pulse': props.pulse,
+    // the fixedWidth property has been deprecated as of version 7.0.0
     'fa-fw': semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,
@@ -2428,7 +2429,7 @@ function classList(props) {
     'fa-flip': props.flip === true,
     'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), 'fa-flash', props.flash), _defineProperty(_defineProperty(_defineProperty(_classes, 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse), 'fa-width-auto', semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.widthAuto));
+  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), "fa-rotate-by", semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.rotateBy), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, 'fa-flash', props.flash), 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse), 'fa-width-auto', semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.widthAuto));
   return Object.keys(classes).map(function (key) {
     return classes[key] ? key : null;
   }).filter(function (key) {
@@ -2746,6 +2747,11 @@ var FontAwesomeIcon = defineComponent({
         return [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1;
       }
     },
+    // the rotateBy property is only supported in version 7.0.0 and later
+    rotateBy: {
+      type: Boolean,
+      default: false
+    },
     swapOpacity: {
       type: Boolean,
       default: false
@@ -2813,6 +2819,7 @@ var FontAwesomeIcon = defineComponent({
       type: Boolean,
       default: false
     },
+    // the widthAuto property is only supported in version 7.0.0 and later
     widthAuto: {
       type: Boolean,
       default: false
@@ -2838,6 +2845,7 @@ var FontAwesomeIcon = defineComponent({
         maskId: props.maskId
       });
       if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+        // the title attribute will only apply to versions prior to version 7.0.0
         iconProps.title = props.title;
         iconProps.titleId = props.titleId;
       }

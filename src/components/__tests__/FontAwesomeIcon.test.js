@@ -316,6 +316,32 @@ describe('using rotation', () => {
   })
 })
 
+describe('using rotateBy', () => {
+  test('with a style attribute of 1000 will show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 1000deg' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('with a style attribute of `something-` will still show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: something-deg' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('without a style attribute will still show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('not using rotateBy shows will not show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeFalsy()
+  })
+})
+
 test('swap opacity', () => {
   const wrapper = mountFromProps({ icon: faCoffee, swapOpacity: true })
 
