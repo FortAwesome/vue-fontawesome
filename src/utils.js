@@ -1,4 +1,3 @@
-import { config } from '@fortawesome/fontawesome-svg-core'
 import semver from 'semver'
 
 export const ICON_PACKS_STARTING_VERSION = '7.0.0-alpha1'
