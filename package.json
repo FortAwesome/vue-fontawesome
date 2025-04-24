@@ -16,12 +16,16 @@
   ],
   "jest": {
     "verbose": true,
+    "testEnvironment": "jsdom",
     "testEnvironmentOptions": {
       "customExportConditions": [
         "node",
         "node-addons"
       ]
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@vue|vue-router)/)"
+    ]
   },
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -83,7 +87,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@vue/test-utils": "^2.0.0-beta.2",
+    "@vue/test-utils": "^2.4.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^28.1.1",
     "concurrently": "^7.2.1",
@@ -98,7 +102,8 @@
     "npm": "^10.2.2",
     "prettier": "^3.0.3",
     "rollup": "^2.75.6",
-    "vue": "^3"
+    "vue": "^3.0.0",
+    "core-js": "^3.30.0"
   },
   "husky": {
     "hooks": {
