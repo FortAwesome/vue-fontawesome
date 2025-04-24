@@ -15,7 +15,7 @@ export function classList(props) {
     'fa-spin': props.spin,
     'fa-pulse': props.pulse,
     // the fixedWidth property has been deprecated as of version 7.0.0
-    'fa-fw': semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth,
+    'fa-fw': props.fixedWidth,
     'fa-border': props.border,
     'fa-li': props.listItem,
     'fa-inverse': props.inverse,
@@ -24,8 +24,7 @@ export function classList(props) {
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,
     [`fa-rotate-${props.rotation}`]: props.rotation !== null,
-    // the rotateBy property is only supported in version 7.0.0 and later
-    'fa-rotate-by': semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.rotateBy,
+    'fa-rotate-by': props.rotateBy,
     [`fa-pull-${props.pull}`]: props.pull !== null,
     'fa-swap-opacity': props.swapOpacity,
     'fa-bounce': props.bounce,
@@ -37,7 +36,7 @@ export function classList(props) {
     'fa-spin-pulse': props.spinPulse,
     'fa-spin-reverse': props.spinReverse,
     // the widthAuto property is only supported in version 7.0.0 and later
-    'fa-width-auto': semver.gte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.widthAuto
+    'fa-width-auto': props.widthAuto
   }
 
   return Object.keys(classes)
