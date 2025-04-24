@@ -8,10 +8,10 @@ jobs:
 
     strategy:
       matrix:
-        free-solid-svg-icons: [5.x, 6.x]
-        fontawesome-svg-core: [1.2.x, 6.x]
-        node-version: [18.x, 20.x, 22.x]
-        vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x]
+        free-solid-svg-icons: [5.x, 6.x, 7.x]
+        fontawesome-svg-core: [1.2.x, 6.x, 7.x]
+        node-version: [22.x, 24.x]
+        vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x, 3.4x, 3.5.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -29,6 +29,15 @@ jobs:
           npm list vue
           npm run test
       - name: v6 install, build, and test
+        if: ${{ matrix.free-solid-svg-icons }} == '6.x'
+        run: |
+          npm install -g npm@8
+          npm install
+          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
+          npm run build
+          npm list vue
+          npm run test
+      - name: v7 install, build, and test
         if: ${{ matrix.free-solid-svg-icons }} == '6.x'
         run: |
           npm install -g npm@8
