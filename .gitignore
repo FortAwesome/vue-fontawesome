@@ -4,4 +4,4 @@ node_modules
 # WebStorm / PHPStorm
 .idea
 bin/act
-fortawesome-vue-fontawesome-*
+fortawesome-vue-fontawesome-*.tgz
