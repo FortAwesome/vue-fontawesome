@@ -16,16 +16,12 @@
   ],
   "jest": {
     "verbose": true,
-    "testEnvironment": "jsdom",
     "testEnvironmentOptions": {
       "customExportConditions": [
         "node",
         "node-addons"
       ]
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@vue|vue-router)/)"
-    ]
+    }
   },
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
@@ -83,7 +79,7 @@
     "@fortawesome/fontawesome-common-types": "file:fortawesome-fontawesome-common-types-7.0.0-alpha8.tgz",
     "@fortawesome/fontawesome-svg-core": "file:fortawesome-fontawesome-svg-core-7.0.0-alpha8.tgz",
     "@fortawesome/free-brands-svg-icons": "file:fortawesome-free-brands-svg-icons-7.0.0-alpha8.tgz",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "file:fortawesome-free-solid-svg-icons-7.0.0-alpha8.tgz",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -102,8 +98,7 @@
     "npm": "^10.2.2",
     "prettier": "^3.0.3",
     "rollup": "^2.75.6",
-    "vue": "^3.0.0",
-    "core-js": "^3.30.0"
+    "vue": "^3.0.0"
   },
   "husky": {
     "hooks": {

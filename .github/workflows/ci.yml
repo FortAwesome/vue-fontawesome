@@ -30,7 +30,7 @@ jobs:
         run: |
           npm install -g npm@10
           npm install
-          npm install --no-save ./fortawesome-fontawesome-svg-core-7.0.0-alpha8.tgz ./fortawesome-fontawesome-common-types-7.0.0-alpha8.tgz @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
+          npm install --no-save ./fortawesome-fontawesome-svg-core-7.0.0-alpha8.tgz ./fortawesome-fontawesome-common-types-7.0.0-alpha8.tgz ./fortawesome-free-solid-svg-icons-7.0.0-alpha8.tgz vue@${{ matrix.vue }}
           if [[ "${{ matrix.vue }}" < "3.2.13" ]]; then
             npm install --no-save @vue/server-renderer@${{ matrix.vue }}
           fi
