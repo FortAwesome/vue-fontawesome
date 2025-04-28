@@ -105,7 +105,5 @@
       "pre-commit": "lint-staged"
     }
   },
-  "dependencies": {
-    "semver": "^7.7.1"
-  }
+  "dependencies": {}
 }

@@ -1,6 +1,6 @@
 import { computed, defineComponent, h } from 'vue'
 import { config } from '@fortawesome/fontawesome-svg-core'
-import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION } from '../utils'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../utils'
 
 import semver from 'semver'
 
@@ -19,7 +19,7 @@ export default defineComponent({
 
     const className = computed(() => [
       `${familyPrefix}-layers`,
-      ...(semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth ? [`${familyPrefix}-fw`] : [])
+      ...(versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth ? [`${familyPrefix}-fw`] : [])
     ])
 
     return () => h('div', { class: className.value }, slots.default ? slots.default() : [])

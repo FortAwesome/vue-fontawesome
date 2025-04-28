@@ -5,7 +5,7 @@
 import { compileAndMount } from '../__fixtures__/helpers'
 import { faCoffee, faCircle } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION } from '../../utils'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../../utils'
 
 import FontAwesomeLayers from '../FontAwesomeLayers'
 import semver from 'semver'
@@ -60,7 +60,7 @@ describe('class handling', () => {
     expect(wrapper.element.getAttribute('class')).toBe('fa-layers extra')
   })
 
-  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
     // the fixedWidth property has been deprecated as of version 7.0.0
     test('fixed width', () => {
       const wrapper = compileAndMount({
@@ -85,7 +85,7 @@ describe('reactivity', () => {
     })
   })
 
-  if (semver.lt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
     // the fixedWidth property has been deprecated as of version 7.0.0
     test('changing props should update the element prior to version 7', async () => {
       expect(wrapper.element.getAttribute('class')).toBe('fa-layers fa-fw')
