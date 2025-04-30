@@ -10,10 +10,10 @@ jobs:
       matrix:
         free-solid-svg-icons: [7.x, 6.x, 5.x]
         fontawesome-svg-core: [7.x, 6.x, 1.2.x]
-        node-version: [20.x, 22.x]
+        node-version: [20.x, 18.x]
         vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x, 3.4.x, 3.5.x]
         exclude:
-          # Exclude Font Awesome 7.x free-solid-svg-icons with older svg-core versions
+          # Only exclude v7.x icons with v6.x and v1.2.x core
           - free-solid-svg-icons: '7.x'
             fontawesome-svg-core: '6.x'
           - free-solid-svg-icons: '7.x'
@@ -21,49 +21,70 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Setup npm
+        run: |
+          npm install -g npm@10
+          npm --version
+
       - name: v7 install, build, and test
-        if: ${{ matrix.free-solid-svg-icons == '7.x' && matrix.fontawesome-svg-core == '7.x' && matrix.vue >= '3.2.x' }}
+        if: ${{ matrix.fontawesome-svg-core == '7.x' }}
         run: |
-          npm install -g npm@10
           npm install
-          npm install --no-save ./fortawesome-fontawesome-svg-core-7.0.0-alpha8.tgz ./fortawesome-fontawesome-common-types-7.0.0-alpha8.tgz ./fortawesome-free-solid-svg-icons-7.0.0-alpha8.tgz vue@${{ matrix.vue }}
-          if [[ "${{ matrix.vue }}" < "3.2.13" ]]; then
+          # Install v7 packages from local files when using v7 icons or core
+          npm install --no-save ./fortawesome-fontawesome-svg-core-7.0.0-alpha8.tgz ./fortawesome-fontawesome-common-types-7.0.0-alpha8.tgz
+          if [ "${{ matrix.free-solid-svg-icons }}" = "7.x" ]; then
+            npm install --no-save ./fortawesome-free-solid-svg-icons-7.0.0-alpha8.tgz
+          else
+            npm install --no-save @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
+          fi
+          # Install Vue version and server-renderer for older versions
+          npm install --no-save vue@${{ matrix.vue }}
+          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
+          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
             npm install --no-save @vue/server-renderer@${{ matrix.vue }}
           fi
           npm run build
-          npm list vue
           npm run test
+
       - name: v6 install, build, and test
-        if: ${{ matrix.free-solid-svg-icons == '6.x' }}
+        if: ${{ matrix.fontawesome-svg-core == '6.x' }}
         run: |
-          npm install -g npm@10
           npm install
-          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@6.x vue@${{ matrix.vue }}
-          if [[ "${{ matrix.vue }}" < "3.2.13" ]]; then
+          # Install v6 packages from npm
+          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
+          # Install Vue version and server-renderer for older versions
+          npm install --no-save vue@${{ matrix.vue }}
+          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
+          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
             npm install --no-save @vue/server-renderer@${{ matrix.vue }}
           fi
           npm run build
-          npm list vue
           npm run test
+
       - name: v5 install, build, and test
-        if: ${{ matrix.free-solid-svg-icons == '5.x' }}
+        if: ${{ matrix.fontawesome-svg-core == '1.2.x' }}
         run: |
-          npm install -g npm@10
           npm install
-          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@5.x vue@${{ matrix.vue }}
-          if [[ "${{ matrix.vue }}" < "3.2.13" ]]; then
+          # Install v1.2.x core and icons from npm
+          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
+          # Install Vue version and server-renderer for older versions
+          npm install --no-save vue@${{ matrix.vue }}
+          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
+          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
             npm install --no-save @vue/server-renderer@${{ matrix.vue }}
           fi
           npm run build
-          npm list vue
           npm run test
-        env:
-          CI: true
+
       - name: dist
         run: |
           npm install
           npm run dist
+        env:
+          CI: true
