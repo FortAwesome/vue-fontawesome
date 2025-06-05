@@ -3,7 +3,7 @@
  */
 
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faAlien, faDog } from '../__fixtures__/icons'
+import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
 import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckGte, versionCheckLt } from '../../utils'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -17,10 +17,9 @@ import {
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
-import semver from 'semver'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faAlien, faDog)
+  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish)
 })
 
 afterEach(() => {
@@ -582,6 +581,48 @@ describe('using a family', () => {
 
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will default to a sharp-duotone solid icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp-duotone fa-bat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
+    })
+
+    test('will find a sharp-duotone solid icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp-duotone fa-solid fa-bat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
+    })
+
+    test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+    })
+
+    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
     })
   }
 })
