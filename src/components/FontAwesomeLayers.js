@@ -2,8 +2,6 @@ import { computed, defineComponent, h } from 'vue'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../utils'
 
-import semver from 'semver'
-
 export default defineComponent({
   name: 'FontAwesomeLayers',
 

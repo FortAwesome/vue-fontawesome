@@ -5,7 +5,6 @@ import { icon as faIcon, parse as faParse } from '@fortawesome/fontawesome-svg-c
 
 import convert from '../converter'
 import log from '../logger'
-import semver from 'semver'
 
 function normalizeIconArgs(icon) {
   if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {

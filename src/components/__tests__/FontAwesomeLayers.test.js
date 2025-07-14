@@ -8,7 +8,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../../utils'
 
 import FontAwesomeLayers from '../FontAwesomeLayers'
-import semver from 'semver'
 
 beforeEach(() => {
   library.add(faCoffee, faCircle)
