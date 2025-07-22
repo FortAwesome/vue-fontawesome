@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.0) - 2025-07-22
+
+### Changed
+
+- Font Awesome Pro+ icons are now available with an active Pro+ subscription.
+
+- Added `widthAuto` prop
+
+- Added `rotateBy` prop
+
+- Deprecated `fa-fw` prop
+
+---
+
 ## [3.0.8](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.0.8) - 2024-05-21
 
 ### Changed
