@@ -36,13 +36,8 @@ jobs:
         if: ${{ matrix.fontawesome-svg-core == '7.x' }}
         run: |
           npm install
-          # Install v7 packages from local files when using v7 icons or core
-          npm install --no-save ./fortawesome-fontawesome-svg-core-7.0.0-rc1.tgz ./fortawesome-fontawesome-common-types-7.0.0-rc1.tgz
-          if [ "${{ matrix.free-solid-svg-icons }}" = "7.x" ]; then
-            npm install --no-save ./fortawesome-free-solid-svg-icons-7.0.0-rc1.tgz
-          else
-            npm install --no-save @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          fi
+          # Install v7 packages from npm
+          npm install --no-save @fortawesome/fontawesome-svg-core@7.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
           # Install Vue version and server-renderer for older versions
           npm install --no-save vue@${{ matrix.vue }}
           VER=$(npm list vue | grep vue@ | cut -d@ -f3)

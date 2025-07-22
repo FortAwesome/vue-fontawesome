@@ -65,7 +65,7 @@
     ]
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~1 || ~6 || ~7 || ^7.0.0-rc3",
+    "@fortawesome/fontawesome-svg-core": "~1 || ~6 || ~7",
     "vue": ">= 3.0.0 < 4"
   },
   "devDependencies": {
@@ -76,10 +76,9 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.18.2",
-    "@fortawesome/fontawesome-common-types": "file:../fontawesome/assets/npm-packages/fortawesome-fontawesome-common-types-7.0.0-rc3.tgz",
-    "@fortawesome/fontawesome-svg-core": "file:../fontawesome/assets/npm-packages/fortawesome-fontawesome-svg-core-7.0.0-rc3.tgz",
-    "@fortawesome/free-brands-svg-icons": "file:../fontawesome/assets/npm-packages/fortawesome-free-brands-svg-icons-7.0.0-rc3.tgz",
-    "@fortawesome/free-solid-svg-icons": "file:../fontawesome-buildsystem/dist/free/js-packages/@fortawesome/free-solid-svg-icons/fortawesome-free-solid-svg-icons-7.0.0-rc3.tgz",
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-brands-svg-icons": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",

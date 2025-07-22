@@ -1,4 +1,4 @@
-export const ICON_PACKS_STARTING_VERSION = '7.0.0-alpha1'
+export const ICON_PACKS_STARTING_VERSION = '7.0.0'
 
 const svgCorePackageJson = require('@fortawesome/fontawesome-svg-core/package.json')
 
