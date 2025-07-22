@@ -1,6 +1,61 @@
-import { parse, icon, config, text } from '@fortawesome/fontawesome-svg-core';
 import { h, defineComponent, computed, watch } from 'vue';
+import { parse, icon, config, text } from '@fortawesome/fontawesome-svg-core';
 
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
+function _arrayWithoutHoles(r) {
+  if (Array.isArray(r)) return _arrayLikeToArray(r);
+}
+function _defineProperty(e, r, t) {
+  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
+}
+function _iterableToArray(r) {
+  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+}
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
 function ownKeys(e, r) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -21,6 +76,32 @@ function _objectSpread2(e) {
     });
   }
   return e;
+}
+function _objectWithoutProperties(e, t) {
+  if (null == e) return {};
+  var o,
+    r,
+    i = _objectWithoutPropertiesLoose(e, t);
+  if (Object.getOwnPropertySymbols) {
+    var n = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+  }
+  return i;
+}
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (-1 !== e.indexOf(n)) continue;
+    t[n] = r[n];
+  }
+  return t;
+}
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _toConsumableArray(r) {
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
 }
 function _toPrimitive(t, r) {
   if ("object" != typeof t || !t) return t;
@@ -45,70 +126,67 @@ function _typeof(o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
   }, _typeof(o);
 }
-function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
   }
-  return obj;
 }
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
-    }
+
+var ICON_PACKS_STARTING_VERSION = '7.0.0';
+var svgCorePackageJson = require('@fortawesome/fontawesome-svg-core/package.json');
+var SVG_CORE_VERSION = svgCorePackageJson.version;
+function objectWithKey(key, value) {
+  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty({}, key, value) : {};
+}
+function classList(props) {
+  var _classes;
+  var classes = (_classes = {
+    'fa-spin': props.spin,
+    'fa-pulse': props.pulse,
+    // the fixedWidth property has been deprecated as of version 7.0.0
+    'fa-fw': props.fixedWidth,
+    'fa-border': props.border,
+    'fa-li': props.listItem,
+    'fa-inverse': props.inverse,
+    'fa-flip': props.flip === true,
+    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
+    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
+  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), 'fa-rotate-by', props.rotateBy), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, 'fa-flash', props.flash), 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse), 'fa-width-auto', props.widthAuto));
+  return Object.keys(classes).map(function (key) {
+    return classes[key] ? key : null;
+  }).filter(function (key) {
+    return key;
+  });
+}
+
+// check if verion1 is less than version2
+function versionCheckLt(version1, version2) {
+  var _version1$split = version1.split('-'),
+    _version1$split2 = _slicedToArray(_version1$split, 2),
+    v1Base = _version1$split2[0],
+    v1PreRelease = _version1$split2[1];
+  var _version2$split = version2.split('-'),
+    _version2$split2 = _slicedToArray(_version2$split, 2),
+    v2Base = _version2$split2[0],
+    v2PreRelease = _version2$split2[1];
+  var v1Parts = v1Base.split('.').map(Number);
+  var v2Parts = v2Base.split('.').map(Number);
+
+  // Compare version numbers first
+  for (var i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
+    var v1Part = v1Parts[i] || 0;
+    var v2Part = v2Parts[i] || 0;
+    if (v1Part < v2Part) return true;
+    if (v1Part > v2Part) return false;
   }
-  return target;
-}
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+
+  // If version numbers are equal, compare pre-release identifiers
+  // A version with a pre-release identifier is less than one without
+  if (v1PreRelease && !v2PreRelease) return true;
+  if (!v1PreRelease && v2PreRelease) return false;
+  return false;
 }
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -344,29 +422,6 @@ function log () {
   }
 }
 
-function objectWithKey(key, value) {
-  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty({}, key, value) : {};
-}
-function classList(props) {
-  var _classes;
-  var classes = (_classes = {
-    'fa-spin': props.spin,
-    'fa-pulse': props.pulse,
-    'fa-fw': props.fixedWidth,
-    'fa-border': props.border,
-    'fa-li': props.listItem,
-    'fa-inverse': props.inverse,
-    'fa-flip': props.flip === true,
-    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
-    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), 'fa-flash', props.flash), _defineProperty(_defineProperty(_classes, 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse));
-  return Object.keys(classes).map(function (key) {
-    return classes[key] ? key : null;
-  }).filter(function (key) {
-    return key;
-  });
-}
-
 function normalizeIconArgs(icon) {
   if (icon && _typeof(icon) === 'object' && icon.prefix && icon.iconName && icon.icon) {
     return icon;
@@ -400,6 +455,7 @@ var FontAwesomeIcon = defineComponent({
       type: Boolean,
       default: false
     },
+    // the fixedWidth property has been deprecated as of version 7
     fixedWidth: {
       type: Boolean,
       default: false
@@ -444,6 +500,11 @@ var FontAwesomeIcon = defineComponent({
       validator: function validator(value) {
         return [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1;
       }
+    },
+    // the rotateBy property is only supported in version 7.0.0 and later
+    rotateBy: {
+      type: Boolean,
+      default: false
     },
     swapOpacity: {
       type: Boolean,
@@ -511,6 +572,11 @@ var FontAwesomeIcon = defineComponent({
     spinReverse: {
       type: Boolean,
       default: false
+    },
+    // the widthAuto property is only supported in version 7.0.0 and later
+    widthAuto: {
+      type: Boolean,
+      default: false
     }
   },
   setup: function setup(props, _ref) {
@@ -528,12 +594,16 @@ var FontAwesomeIcon = defineComponent({
       return objectWithKey('mask', normalizeIconArgs(props.mask));
     });
     var renderedIcon = computed(function () {
-      return icon(icon$1.value, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, classes.value), transform.value), mask.value), {}, {
+      var iconProps = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, classes.value), transform.value), mask.value), {}, {
         symbol: props.symbol,
-        title: props.title,
-        titleId: props.titleId,
         maskId: props.maskId
-      }));
+      });
+      if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+        // the title attribute will only apply to versions prior to version 7.0.0
+        iconProps.title = props.title;
+        iconProps.titleId = props.titleId;
+      }
+      return icon(icon$1.value, iconProps);
     });
     watch(renderedIcon, function (value) {
       if (!value) {
@@ -563,7 +633,7 @@ var FontAwesomeLayers = defineComponent({
     var slots = _ref.slots;
     var familyPrefix = config.familyPrefix;
     var className = computed(function () {
-      return ["".concat(familyPrefix, "-layers")].concat(_toConsumableArray(props.fixedWidth ? ["".concat(familyPrefix, "-fw")] : []));
+      return ["".concat(familyPrefix, "-layers")].concat(_toConsumableArray(versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth ? ["".concat(familyPrefix, "-fw")] : []));
     });
     return function () {
       return h('div', {

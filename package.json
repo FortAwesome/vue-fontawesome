@@ -65,7 +65,7 @@
     ]
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~1 || ~6",
+    "@fortawesome/fontawesome-svg-core": "~1 || ~6 || ~7",
     "vue": ">= 3.0.0 < 4"
   },
   "devDependencies": {
@@ -76,12 +76,13 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.18.2",
-    "@fortawesome/fontawesome-svg-core": "~6",
-    "@fortawesome/free-solid-svg-icons": "^6",
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-brands-svg-icons": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@vue/test-utils": "^2.0.0-beta.2",
+    "@vue/test-utils": "^2.4.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^28.1.1",
     "concurrently": "^7.2.1",
@@ -96,11 +97,12 @@
     "npm": "^10.2.2",
     "prettier": "^3.0.3",
     "rollup": "^2.75.6",
-    "vue": "^3"
+    "vue": "^3.0.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "dependencies": {}
 }

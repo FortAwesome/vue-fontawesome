@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faCoffee, faCircle, faAlien, faDog } from '../__fixtures__/icons'
+import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckGte, versionCheckLt } from '../../utils'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
   mountFromProps,
@@ -14,10 +15,11 @@ import {
   REFERENCE_ICON_USING_FAMILY,
   ICON_ALIASES
 } from '../__fixtures__/helpers'
+
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faCoffee, faCircle, faAlien, faDog)
+  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish)
 })
 
 afterEach(() => {
@@ -34,17 +36,20 @@ describe('icon title prop', () => {
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
 
-  test('checks title attributes when title property is set', () => {
-    const wrapper = mountFromProps({
-      icon: faCoffee,
-      title: 'Drink your caf',
-      titleId: 'caf-1138'
-    })
+  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+    test('checks title attributes when title property is set', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Drink your caf',
+        titleId: 'caf-1138'
+      })
 
-    expect(wrapper.element.getAttribute('aria-labelledby')).toBe('svg-inline--fa-title-caf-1138')
-    expect(wrapper.element.querySelector('title').textContent).toBe('Drink your caf')
-    expect(wrapper.element.querySelector('title').id).toBe('svg-inline--fa-title-caf-1138')
-  })
+      expect(wrapper.element.getAttribute('aria-labelledby')).toBe('svg-inline--fa-title-caf-1138')
+      expect(wrapper.element.querySelector('title').textContent).toBe('Drink your caf')
+      expect(wrapper.element.querySelector('title').id).toBe('svg-inline--fa-title-caf-1138')
+    })
+  }
 })
 
 describe('icons are showing', () => {
@@ -203,11 +208,23 @@ test('using border', () => {
   expect(wrapper.element.classList.contains('fa-border')).toBeTruthy()
 })
 
-test('using fixedWidth', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
+if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  // the fixedWidth property has been deprecated as of version 7.0.0
+  test('using fixedWidth', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
 
-  expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
-})
+    expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
+  })
+}
+
+if (versionCheckGte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+  // the widthAuto property is only supported in version 7.0.0 and later
+  test('using widthAuto', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
+
+    expect(wrapper.element.classList.contains('fa-width-auto')).toBeTruthy()
+  })
+}
 
 describe('using flip', () => {
   test('flip', () => {
@@ -298,6 +315,32 @@ describe('using rotation', () => {
   })
 })
 
+describe('using rotateBy', () => {
+  test('with a style attribute of 1000 will show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 1000deg' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('with a style attribute of `something-` will still show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: something-deg' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('without a style attribute will still show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+  })
+
+  test('not using rotateBy shows will not show the fa-rotate-by class', () => {
+    const wrapper = mountFromProps({ icon: faDog })
+
+    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeFalsy()
+  })
+})
+
 test('swap opacity', () => {
   const wrapper = mountFromProps({ icon: faCoffee, swapOpacity: true })
 
@@ -375,11 +418,14 @@ describe('symbol', () => {
 })
 
 describe('title', () => {
-  test('using title', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
+  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+    // the title attribute will only apply to versions prior to version 7.0.0
+    test('using title', () => {
+      const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
 
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
-  })
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+    })
+  }
 
   test('not using title', () => {
     const wrapper = mountFromProps({ icon: faCoffee })
@@ -393,12 +439,20 @@ describe('reactivity', () => {
     const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
 
     expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+
+    if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
+    }
 
     await wrapper.setProps({ icon: faCircle, title: 'Circle' })
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
-    expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+
+    if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
+      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
+    }
   })
 })
 
@@ -527,6 +581,48 @@ describe('using a family', () => {
 
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will default to a sharp-duotone solid icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp-duotone fa-bat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
+    })
+
+    test('will find a sharp-duotone solid icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-sharp-duotone fa-solid fa-bat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
+    })
+
+    test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+    })
+
+    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
     })
   }
 })

@@ -1,8 +1,10 @@
-import { parse as faParse, icon as faIcon } from '@fortawesome/fontawesome-svg-core'
-import { defineComponent, computed, watch } from 'vue'
+import { classList, objectWithKey } from '../utils'
+import { computed, defineComponent, watch } from 'vue'
+import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../utils'
+import { icon as faIcon, parse as faParse } from '@fortawesome/fontawesome-svg-core'
+
 import convert from '../converter'
 import log from '../logger'
-import { objectWithKey, classList } from '../utils'
 
 function normalizeIconArgs(icon) {
   if (icon && typeof icon === 'object' && icon.prefix && icon.iconName && icon.icon) {
@@ -38,6 +40,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    // the fixedWidth property has been deprecated as of version 7
     fixedWidth: {
       type: Boolean,
       default: false
@@ -76,6 +79,11 @@ export default defineComponent({
       type: [String, Number],
       default: null,
       validator: (value) => [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
+    },
+    // the rotateBy property is only supported in version 7.0.0 and later
+    rotateBy: {
+      type: Boolean,
+      default: false
     },
     swapOpacity: {
       type: Boolean,
@@ -141,6 +149,11 @@ export default defineComponent({
     spinReverse: {
       type: Boolean,
       default: false
+    },
+    // the widthAuto property is only supported in version 7.0.0 and later
+    widthAuto: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -150,17 +163,23 @@ export default defineComponent({
     const transform = computed(() => objectWithKey('transform', typeof props.transform === 'string' ? faParse.transform(props.transform) : props.transform))
     const mask = computed(() => objectWithKey('mask', normalizeIconArgs(props.mask)))
 
-    const renderedIcon = computed(() =>
-      faIcon(icon.value, {
+    const renderedIcon = computed(() => {
+      const iconProps = {
         ...classes.value,
         ...transform.value,
         ...mask.value,
         symbol: props.symbol,
-        title: props.title,
-        titleId: props.titleId,
         maskId: props.maskId
-      })
-    )
+      }
+
+      if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
+        // the title attribute will only apply to versions prior to version 7.0.0
+        iconProps.title = props.title
+        iconProps.titleId = props.titleId
+      }
+
+      return faIcon(icon.value, iconProps)
+    })
 
     watch(
       renderedIcon,
