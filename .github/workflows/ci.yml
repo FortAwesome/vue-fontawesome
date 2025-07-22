@@ -32,43 +32,10 @@ jobs:
           npm install -g npm@10
           npm --version
 
-      - name: v7 install, build, and test
-        if: ${{ matrix.fontawesome-svg-core == '7.x' }}
+      - name: install, build, and test
         run: |
           npm install
-          # Install v7 packages from npm
-          npm install --no-save @fortawesome/fontawesome-svg-core@7.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          # Install Vue version and server-renderer for older versions
-          npm install --no-save vue@${{ matrix.vue }}
-          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
-          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
-            npm install --no-save @vue/server-renderer@${{ matrix.vue }}
-          fi
-          npm run build
-          npm run test
-
-      - name: v6 install, build, and test
-        if: ${{ matrix.fontawesome-svg-core == '6.x' }}
-        run: |
-          npm install
-          # Install v6 packages from npm
-          npm install --no-save @fortawesome/fontawesome-svg-core@6.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          # Install Vue version and server-renderer for older versions
-          npm install --no-save vue@${{ matrix.vue }}
-          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
-          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
-            npm install --no-save @vue/server-renderer@${{ matrix.vue }}
-          fi
-          npm run build
-          npm run test
-
-      - name: v5 install, build, and test
-        if: ${{ matrix.fontawesome-svg-core == '1.2.x' }}
-        run: |
-          npm install
-          # Install v1.2.x core and icons from npm
-          npm install --no-save @fortawesome/fontawesome-svg-core@1.2.x @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          # Install Vue version and server-renderer for older versions
+          npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
           npm install --no-save vue@${{ matrix.vue }}
           VER=$(npm list vue | grep vue@ | cut -d@ -f3)
           if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
