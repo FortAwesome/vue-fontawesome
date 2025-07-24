@@ -1,6 +1,5 @@
 import { classList, objectWithKey } from '../utils'
 import { computed, defineComponent, watch } from 'vue'
-import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckLt } from '../utils'
 import { icon as faIcon, parse as faParse } from '@fortawesome/fontawesome-svg-core'
 
 import convert from '../converter'
@@ -172,11 +171,9 @@ export default defineComponent({
         maskId: props.maskId
       }
 
-      if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-        // the title attribute will only apply to versions prior to version 7.0.0
-        iconProps.title = props.title
-        iconProps.titleId = props.titleId
-      }
+      // the title attribute will only apply to versions prior to version 7.0.0
+      iconProps.title = props.title
+      iconProps.titleId = props.titleId
 
       return faIcon(icon.value, iconProps)
     })
