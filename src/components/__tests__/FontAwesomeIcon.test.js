@@ -4,7 +4,6 @@
 
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
-import { ICON_PACKS_STARTING_VERSION, SVG_CORE_VERSION, versionCheckGte, versionCheckLt } from '../../utils'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
@@ -35,21 +34,6 @@ describe('icon title prop', () => {
     expect(wrapper.element.getAttribute('aria-labelledby')).toBeFalsy()
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
-
-  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-    // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
-    test('checks title attributes when title property is set', () => {
-      const wrapper = mountFromProps({
-        icon: faCoffee,
-        title: 'Drink your caf',
-        titleId: 'caf-1138'
-      })
-
-      expect(wrapper.element.getAttribute('aria-labelledby')).toBe('svg-inline--fa-title-caf-1138')
-      expect(wrapper.element.querySelector('title').textContent).toBe('Drink your caf')
-      expect(wrapper.element.querySelector('title').id).toBe('svg-inline--fa-title-caf-1138')
-    })
-  }
 })
 
 describe('icons are showing', () => {
@@ -207,24 +191,6 @@ test('using border', () => {
 
   expect(wrapper.element.classList.contains('fa-border')).toBeTruthy()
 })
-
-if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-  // the fixedWidth property has been deprecated as of version 7.0.0
-  test('using fixedWidth', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
-
-    expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
-  })
-}
-
-if (versionCheckGte(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-  // the widthAuto property is only supported in version 7.0.0 and later
-  test('using widthAuto', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
-
-    expect(wrapper.element.classList.contains('fa-width-auto')).toBeTruthy()
-  })
-}
 
 describe('using flip', () => {
   test('flip', () => {
@@ -418,15 +384,6 @@ describe('symbol', () => {
 })
 
 describe('title', () => {
-  if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-    // the title attribute will only apply to versions prior to version 7.0.0
-    test('using title', () => {
-      const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
-
-      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
-    })
-  }
-
   test('not using title', () => {
     const wrapper = mountFromProps({ icon: faCoffee })
 
@@ -440,19 +397,9 @@ describe('reactivity', () => {
 
     expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
 
-    if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
-      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Coffee')
-    }
-
     await wrapper.setProps({ icon: faCircle, title: 'Circle' })
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
-
-    if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-      // the title and aria-labelledby attribute will only apply to versions prior to version 7.0.0
-      expect(wrapper.element.getElementsByTagName('title')[0].innerHTML).toBe('Circle')
-    }
   })
 })
 
