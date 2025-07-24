@@ -6,9 +6,6 @@ function _arrayLikeToArray(r, a) {
   for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
   return n;
 }
-function _arrayWithHoles(r) {
-  if (Array.isArray(r)) return r;
-}
 function _arrayWithoutHoles(r) {
   if (Array.isArray(r)) return _arrayLikeToArray(r);
 }
@@ -22,36 +19,6 @@ function _defineProperty(e, r, t) {
 }
 function _iterableToArray(r) {
   if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
-}
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -97,9 +64,6 @@ function _objectWithoutPropertiesLoose(r, e) {
   }
   return t;
 }
-function _slicedToArray(r, e) {
-  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
-}
 function _toConsumableArray(r) {
   return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
 }
@@ -134,9 +98,6 @@ function _unsupportedIterableToArray(r, a) {
   }
 }
 
-var ICON_PACKS_STARTING_VERSION = '7.0.0';
-var svgCorePackageJson = require('@fortawesome/fontawesome-svg-core/package.json');
-var SVG_CORE_VERSION = svgCorePackageJson.version;
 function objectWithKey(key, value) {
   return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty({}, key, value) : {};
 }
@@ -159,34 +120,6 @@ function classList(props) {
   }).filter(function (key) {
     return key;
   });
-}
-
-// check if verion1 is less than version2
-function versionCheckLt(version1, version2) {
-  var _version1$split = version1.split('-'),
-    _version1$split2 = _slicedToArray(_version1$split, 2),
-    v1Base = _version1$split2[0],
-    v1PreRelease = _version1$split2[1];
-  var _version2$split = version2.split('-'),
-    _version2$split2 = _slicedToArray(_version2$split, 2),
-    v2Base = _version2$split2[0],
-    v2PreRelease = _version2$split2[1];
-  var v1Parts = v1Base.split('.').map(Number);
-  var v2Parts = v2Base.split('.').map(Number);
-
-  // Compare version numbers first
-  for (var i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
-    var v1Part = v1Parts[i] || 0;
-    var v2Part = v2Parts[i] || 0;
-    if (v1Part < v2Part) return true;
-    if (v1Part > v2Part) return false;
-  }
-
-  // If version numbers are equal, compare pre-release identifiers
-  // A version with a pre-release identifier is less than one without
-  if (v1PreRelease && !v2PreRelease) return true;
-  if (!v1PreRelease && v2PreRelease) return false;
-  return false;
 }
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -598,11 +531,10 @@ var FontAwesomeIcon = defineComponent({
         symbol: props.symbol,
         maskId: props.maskId
       });
-      if (versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION)) {
-        // the title attribute will only apply to versions prior to version 7.0.0
-        iconProps.title = props.title;
-        iconProps.titleId = props.titleId;
-      }
+
+      // the title attribute will only apply to versions prior to version 7.0.0
+      iconProps.title = props.title;
+      iconProps.titleId = props.titleId;
       return icon(icon$1.value, iconProps);
     });
     watch(renderedIcon, function (value) {
@@ -633,7 +565,7 @@ var FontAwesomeLayers = defineComponent({
     var slots = _ref.slots;
     var familyPrefix = config.familyPrefix;
     var className = computed(function () {
-      return ["".concat(familyPrefix, "-layers")].concat(_toConsumableArray(versionCheckLt(SVG_CORE_VERSION, ICON_PACKS_STARTING_VERSION) && props.fixedWidth ? ["".concat(familyPrefix, "-fw")] : []));
+      return ["".concat(familyPrefix, "-layers")].concat(_toConsumableArray(props.fixedWidth ? ["".concat(familyPrefix, "-fw")] : []));
     });
     return function () {
       return h('div', {
