@@ -17,8 +17,10 @@ The following commands are available through `npm run` or `yarn`:
 1. Update `package.json` and change `version`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
-1. `npm publish --tag latest-3`
-1. `npm publish --tag latest-3 --registry https://npm.fontawesome.com`
+1. `npm publish --tag latest-3 --registry=https://registry.npmjs.org/`
+1. `npm dist-tag add --registry=https://registry.npmjs.org/ @fortawesome/vue-fontawesome@[VERSION_NUMBER] latest`
+1. `npm publish --tag latest-3 --registry=https://npm.fontawesome.com`
+1. `npm dist-tag add --registry=https://npm.fontawesome.com @fortawesome/vue-fontawesome@[VERSION_NUMBER] latest`
 1. `git add .`
 1. `git commit -a -m 'Release VERSION'`
 1. `git push`
