@@ -4,10 +4,10 @@ import { DefineComponent } from 'vue'
 interface FontAwesomeIconProps {
   border?: boolean
   fixedWidth?: boolean
-  flip?: 'horizontal' | 'vertical' | 'both'
+  flip?: 'horizontal' | 'vertical' | 'both' | boolean
   icon: object | Array<string> | string | IconDefinition
   mask?: object | Array<string> | string
-  maskId?: object | Array<string> | string
+  maskId?: string
   listItem?: boolean
   pull?: 'right' | 'left'
   pulse?: boolean
