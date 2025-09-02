@@ -14,15 +14,7 @@
     "src/components/**.js",
     "src/**.js"
   ],
-  "jest": {
-    "verbose": true,
-    "testEnvironmentOptions": {
-      "customExportConditions": [
-        "node",
-        "node-addons"
-      ]
-    }
-  },
+
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
   "types": "index.d.ts",
@@ -55,7 +47,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dist": "cross-env NODE_ENV=production npm run build",
-    "test": "jest --silent",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepack": "npm run dist"
   },
   "lint-staged": {
@@ -84,15 +77,14 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@vue/test-utils": "^2.4.6",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^28.1.1",
     "concurrently": "^7.2.1",
     "cross-env": "^7.0.3",
     "humps": "^2.0.1",
     "husky": "^8.0.1",
     "install": "^0.13.0",
-    "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1",
+    "jsdom": "^22.1.0",
     "lint-staged": "^13.0.0",
+    "vitest": "^0.34.4",
     "markdown-toc": "^1.2.0",
     "npm": "^10.2.2",
     "prettier": "^3.0.3",
