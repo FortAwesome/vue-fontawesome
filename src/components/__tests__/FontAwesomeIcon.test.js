@@ -1,4 +1,3 @@
-import { describe, test, expect, beforeEach, afterEach } from 'vitest'
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'

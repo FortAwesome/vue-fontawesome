@@ -3,7 +3,6 @@
  */
 
 import { compileAndMount } from '../__fixtures__/helpers'
-import { describe, test, expect, beforeEach, afterEach } from 'vitest'
 import { faCircle, faCoffee } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 

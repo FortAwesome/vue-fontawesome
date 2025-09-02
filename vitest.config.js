@@ -7,6 +7,7 @@ export default defineConfig({
       jsdom: {
         customExportConditions: ['node', 'node-addons']
       }
-    }
+    },
+    globals: true
   }
 })
