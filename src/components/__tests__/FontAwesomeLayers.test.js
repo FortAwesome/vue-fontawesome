@@ -3,7 +3,7 @@
  */
 
 import { compileAndMount } from '../__fixtures__/helpers'
-import { faCoffee, faCircle } from '../__fixtures__/icons'
+import { faCircle, faCoffee } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import FontAwesomeLayers from '../FontAwesomeLayers'

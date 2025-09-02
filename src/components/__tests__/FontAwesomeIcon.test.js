@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,6 +8,7 @@ import {
   REFERENCE_ICON_USING_STRING,
   REFERENCE_ICON_BY_STYLE,
   REFERENCE_ICON_USING_FAMILY,
+  REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
   ICON_ALIASES
 } from '../__fixtures__/helpers'
 
@@ -544,32 +541,42 @@ describe('using a family', () => {
       expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
     })
 
-    test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
+    if (coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)) {
+      test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
 
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-    })
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+      })
 
-    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
+      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
 
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-    })
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+      })
 
-    test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
+      test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
 
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
-    })
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+      })
 
-    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
+      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
 
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+      })
+    } else {
+      test.skip('icon pack tests (jelly-duo, whiteboard) are only available in 7.x', () => {
+        // Skipped: icon packs not supported in this core version
+      })
+    }
+  } else {
+    test('REFERENCE_ICON_USING_FAMILY is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_USING_FAMILY)).toBeFalsy()
     })
   }
 })
