@@ -3,7 +3,7 @@ import pkg from '@fortawesome/fontawesome-svg-core/package.json'
 import { mount } from '@vue/test-utils'
 import { parse } from '@fortawesome/fontawesome-svg-core'
 
-const coreMajorVersion = parseInt(pkg.version.split('.')[0], 10)
+const coreMajorVersion = Number.parseInt(pkg.version?.split('.')[0], 10) || 0
 
 export function compileAndMount(definition, props = {}) {
   return mount(definition, { props })
