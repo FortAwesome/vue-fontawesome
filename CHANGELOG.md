@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.2) - 2025-09-09
+
+### Changed
+
+- Replaced Jest with Vitest as the test runner for unit tests. This will help improve test performance and better aligns
+  with the Vue 3 + Vite ecosystem.
+
+- Updated `FontAwesomeIconProps`:
+  - `flip` now accepts the `boolean` type in addition to `'horizontal' | 'vertical' | 'both'`
+  - `maskId` is now correctly typed as `string`
+
+- Updated `DEVELOPMENT.md` with revised release instructions
+
+---
+
 ## [3.1.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.1) - 2025-07-24
 
 ### Changed
