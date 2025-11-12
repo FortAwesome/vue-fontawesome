@@ -10,7 +10,7 @@ jobs:
       matrix:
         free-solid-svg-icons: [7.x, 6.x, 5.x]
         fontawesome-svg-core: [7.x, 6.x, 1.2.x]
-        node-version: [20.x, 18.x]
+        node-version: [24.x, 22.x]
         vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x, 3.4.x, 3.5.x]
         exclude:
           # Only exclude v7.x icons with v6.x and v1.2.x core
