@@ -51,6 +51,7 @@ We'll contribute according to the [Code of Conduct](CODE_OF_CONDUCT.md).
 # Wanted: Core Contributors
 
 We're seeking core contributors to help drive this project. Core contributors:
+
 1. Share these goals
 1. Demonstrate competence through contributions
 1. Contribute with conduct fitting with our code of conduct
