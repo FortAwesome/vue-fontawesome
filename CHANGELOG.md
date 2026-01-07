@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.3) - 2026-01-07
+
+### Changed
+
+- ci.yml update for node-versions
+- a markdown lint fixup in CONTRIUBUTING.md
+- update vitest version to 4.0.16 in `package.json`
+
+---
+
 ## [3.1.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.2) - 2025-09-09
 
 ### Changed
