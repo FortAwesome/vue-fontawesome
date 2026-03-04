@@ -40,25 +40,6 @@ function classToObject (classes) {
 }
 
 /**
- * Combines collections of style classes into one collection
- * @param  {Array<String | String[]>} collections The collections to combine.
- * @returns {Array<String>}
- */
-function combineClassObjects (...collections) {
-  const finalSet = new Set([])
-
-  collections.forEach(set => {
-    if (Array.isArray(set)) {
-      finalSet.forEach(className => finalSet.add(className))
-    } else {
-      finalSet.add(set)
-    }
-  })
-
-  return Array.from(finalSet)
-}
-
-/**
  * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
  * @param {Object} props The user-defined props.
