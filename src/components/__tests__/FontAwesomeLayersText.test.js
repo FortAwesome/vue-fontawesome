@@ -93,16 +93,28 @@ describe('class attr', () => {
     expect(wrapper.element.classList.contains('gray8')).toBe(true)
   })
 
+  test('fa-inverse is applied alongside fa-layers-text', () => {
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers-text value="NEW" class="fa-inverse" />',
+      components: {
+        FontAwesomeLayersText
+      }
+    })
+
+    expect(wrapper.element.classList.contains('fa-layers-text')).toBe(true)
+    expect(wrapper.element.classList.contains('fa-inverse')).toBe(true)
+  })
+
   test('user-provided class does not replace fa-layers-counter', () => {
     const wrapper = compileAndMount({
-      template: '<font-awesome-layers-text :value="42" :counter="true" class="my-counter" />',
+      template: '<font-awesome-layers-text :value="42" :counter="true" class="fa-inverse" />',
       components: {
         FontAwesomeLayersText
       }
     })
 
     expect(wrapper.element.classList.contains('fa-layers-counter')).toBe(true)
-    expect(wrapper.element.classList.contains('my-counter')).toBe(true)
+    expect(wrapper.element.classList.contains('fa-inverse')).toBe(true)
   })
 })
 
