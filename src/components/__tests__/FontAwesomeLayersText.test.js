@@ -105,7 +105,7 @@ describe('class attr', () => {
     expect(wrapper.element.classList.contains('fa-inverse')).toBe(true)
   })
 
-  test('user-provided class does not replace fa-layers-counter', () => {
+  test('user-provided class is applied alongside fa-layers-counter', () => {
     const wrapper = compileAndMount({
       template: '<font-awesome-layers-text :value="42" :counter="true" class="fa-inverse" />',
       components: {
