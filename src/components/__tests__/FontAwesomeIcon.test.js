@@ -600,12 +600,16 @@ describe('gradientFill prop', () => {
     })
 
     expect(wrapper.element.getAttribute('fill')).toBe('url(#myLinearGradient)')
+
     const gradient = wrapper.element.querySelector('linearGradient')
+
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myLinearGradient')
     expect(gradient.getAttribute('x1')).toBe('0%')
     expect(gradient.getAttribute('x2')).toBe('100%')
+
     const stops = gradient.querySelectorAll('stop')
+
     expect(stops.length).toBe(2)
     expect(stops[0].getAttribute('offset')).toBe('0%')
     expect(stops[0].getAttribute('stop-color')).toBe('#FF5F6D')
@@ -631,10 +635,14 @@ describe('gradientFill prop', () => {
     })
 
     expect(wrapper.element.getAttribute('fill')).toBe('url(#myRadialGradient)')
+
     const gradient = wrapper.element.querySelector('radialGradient')
+
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myRadialGradient')
+
     const stops = gradient.querySelectorAll('stop')
+
     expect(stops.length).toBe(3)
     expect(stops[1].getAttribute('stop-opacity')).toBe('0.8')
   })
@@ -650,7 +658,7 @@ describe('gradientFill prop', () => {
     })
 
     const paths = wrapper.element.querySelectorAll('path')
-    paths.forEach(path => {
+    paths.forEach((path) => {
       expect(path.getAttribute('fill')).toBeNull()
     })
   })
@@ -660,7 +668,9 @@ describe('gradientFill prop', () => {
 
     expect(wrapper.element.querySelector('linearGradient')).toBeNull()
     expect(wrapper.element.querySelector('radialGradient')).toBeNull()
+
     const fill = wrapper.element.getAttribute('fill')
+
     expect(fill === null || !fill.includes('url(')).toBe(true)
   })
 })
