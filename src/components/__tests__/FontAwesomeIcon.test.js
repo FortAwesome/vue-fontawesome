@@ -9,6 +9,7 @@ import {
   REFERENCE_ICON_BY_STYLE,
   REFERENCE_ICON_USING_FAMILY,
   REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
+  REFERENCE_ICON_USING_7X_GRAPHITE_ICONS,
   ICON_ALIASES
 } from '../__fixtures__/helpers'
 
@@ -62,6 +63,10 @@ describe('icons are showing', () => {
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
+  } else {
+    test('REFERENCE_ICON_BY_STYLE is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_BY_STYLE)).toBeFalsy()
+    })
   }
 
   if (coreHasFeature(REFERENCE_ICON_USING_STRING)) {
@@ -77,6 +82,10 @@ describe('icons are showing', () => {
 
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+    })
+  } else {
+    test('REFERENCE_ICON_USING_STRING is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_USING_STRING)).toBeFalsy()
     })
   }
 
@@ -304,7 +313,7 @@ describe('using rotateBy', () => {
   })
 })
 
-test('swap opacity', () => {
+test('using swap opacity', () => {
   const wrapper = mountFromProps({ icon: faCoffee, swapOpacity: true })
 
   expect(wrapper.element.classList.contains('fa-swap-opacity')).toBeTruthy()
@@ -563,12 +572,32 @@ describe('using a family', () => {
         expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
       })
 
-      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
         const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
 
         expect(wrapper.element.tagName).toBe('svg')
         expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
       })
+
+      if (coreHasFeature(REFERENCE_ICON_USING_7X_GRAPHITE_ICONS)) {
+        test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
+          const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
+
+          expect(wrapper.element.tagName).toBe('svg')
+          expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+        })
+
+        test('will find a graphite thin icon using string format, long prefix, long style, and long fa-icon name', () => {
+          const wrapper = mountFromProps({ icon: 'fa-graphite fa-thin fa-dog' })
+
+          expect(wrapper.element.tagName).toBe('svg')
+          expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+        })
+      } else {
+        test('REFERENCE_ICON_USING_7X_GRAPHITE_ICONS is not available in this core version', () => {
+          expect(coreHasFeature(REFERENCE_ICON_USING_7X_GRAPHITE_ICONS)).toBeFalsy()
+        })
+      }
     } else {
       test.skip('icon pack tests (jelly-duo, whiteboard) are only available in 7.x', () => {
         // Skipped: icon packs not supported in this core version

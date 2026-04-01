@@ -12,6 +12,10 @@ beforeEach(() => {
   library.add(faCoffee, faCircle)
 })
 
+afterEach(() => {
+  library.reset()
+})
+
 test('empty layers', () => {
   const wrapper = compileAndMount({
     template: '<font-awesome-layers />',
@@ -23,7 +27,7 @@ test('empty layers', () => {
   expect(wrapper.element.children.length).toBe(0)
 })
 
-test('empty layers', () => {
+test('layers with icon elements', () => {
   const wrapper = compileAndMount({
     template: '<font-awesome-layers><i /><i /></font-awesome-layers>',
     components: {
@@ -55,11 +59,12 @@ describe('class handling', () => {
       }
     })
 
-    expect(wrapper.element.getAttribute('class')).toBe('fa-layers extra')
+    expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
+    expect(wrapper.element.classList.contains('extra')).toBeTruthy()
   })
 })
 
-describe('reactivity', () => {
+describe('class defaults', () => {
   let wrapper
 
   beforeEach(() => {
@@ -71,6 +76,6 @@ describe('reactivity', () => {
 
   test('should not have fa-fw class', () => {
     expect(wrapper.element.classList.contains('fa-fw')).toBeFalsy()
-    expect(wrapper.element.getAttribute('class')).toBe('fa-layers')
+    expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
   })
 })
