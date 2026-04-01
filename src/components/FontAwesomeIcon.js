@@ -153,6 +153,10 @@ export default defineComponent({
     widthAuto: {
       type: Boolean,
       default: false
+    },
+    gradientFill: {
+      type: Object,
+      default: null
     }
   },
 
@@ -188,7 +192,7 @@ export default defineComponent({
       { immediate: true }
     )
 
-    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null))
+    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs, props.gradientFill) : null))
     return () => vnode.value
   }
 })
