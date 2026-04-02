@@ -673,4 +673,38 @@ describe('gradientFill prop', () => {
 
     expect(fill === null || !fill.includes('url(')).toBe(true)
   })
+
+  test('works with array icon syntax', () => {
+    const wrapper = mountFromProps({
+      icon: ['fas', 'coffee'],
+      gradientFill: {
+        id: 'arrayGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#arrayGradient)')
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+  })
+
+  test('works with string icon syntax', () => {
+    const wrapper = mountFromProps({
+      icon: 'coffee',
+      gradientFill: {
+        id: 'stringGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#stringGradient)')
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+  })
 })
