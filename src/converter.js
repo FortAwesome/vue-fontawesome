@@ -63,24 +63,25 @@ function createGradientStop (stop, index) {
  * @param {Object} props The user-defined props.
  * @param {Object} attrs The user-defined native HTML attributes.
  * @param {Object} [gradientFill] Optional gradient fill config.
+ * @param {boolean} [stripFills] Whether to strip fill from descendant path elements.
  * @returns {VNode}
  */
-export default function convert (abstractElement, props = {}, attrs = {}, gradientFill = null) {
+export default function convert (abstractElement, props = {}, attrs = {}, gradientFill = null, stripFills = false) {
   // If the abstract element is a string, we'll just return a string render function
   if (typeof abstractElement === 'string') {
     return abstractElement
   }
 
   // Converting abstract element children into Vue VNodes
-  // If a gradientFill (or fill attr) is provided, strip fill from child path elements
+  // If a gradientFill (or fill attr) is provided, strip fill from all descendant path elements
   // so the gradient/fill takes precedence over the icon's built-in fill
-  const hasFillOverride = gradientFill || ('fill' in attrs)
+  const shouldStripFills = stripFills || !!gradientFill || ('fill' in attrs)
   const children = (abstractElement.children || [])
     .map(child => {
-      if (hasFillOverride && child.tag === 'path' && child.attributes && 'fill' in child.attributes) {
-        return convert({ ...child, attributes: { ...child.attributes, fill: undefined } })
+      if (shouldStripFills && child.tag === 'path' && child.attributes && 'fill' in child.attributes) {
+        return convert({ ...child, attributes: { ...child.attributes, fill: undefined } }, {}, {}, null, true)
       }
-      return convert(child)
+      return convert(child, {}, {}, null, shouldStripFills)
     })
 
   // Converting abstract element attributes into valid Vue format
@@ -112,8 +113,8 @@ export default function convert (abstractElement, props = {}, attrs = {}, gradie
   // Now, we'll return the VNode
   const { class: _aClass = {}, style: aStyle = {}, ...otherAttrs } = attrs
 
-  // If a gradientFill is provided, inject the gradient element and set fill to reference it
-  if (gradientFill) {
+  // If a valid gradientFill is provided, inject the gradient element and set fill to reference it
+  if (gradientFill && gradientFill.id && (gradientFill.type === 'linear' || gradientFill.type === 'radial')) {
     const { type: gradientType, stops = [], id, ...gradientProps } = gradientFill
     const gradientTag = gradientType === 'linear' ? 'linearGradient' : 'radialGradient'
     const gradientVNode = h(gradientTag, { ...gradientProps, id }, stops.map(createGradientStop))

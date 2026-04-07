@@ -156,7 +156,18 @@ export default defineComponent({
     },
     gradientFill: {
       type: Object,
-      default: null
+      default: null,
+      validator (value) {
+        if (typeof value.id !== 'string' || !value.id) {
+          console.warn('FontAwesomeIcon: gradientFill.id must be a non-empty string')
+          return false
+        }
+        if (value.type !== 'linear' && value.type !== 'radial') {
+          console.warn('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"')
+          return false
+        }
+        return true
+      }
     }
   },
 
