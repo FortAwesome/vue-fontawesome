@@ -203,7 +203,11 @@ export default defineComponent({
       { immediate: true }
     )
 
-    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs, props.gradientFill) : null))
+    if (props.gradientFill && props.symbol) {
+      log('gradientFill is not supported when symbol is true and will be ignored')
+    }
+
+    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs, props.symbol ? null : props.gradientFill) : null))
     return () => vnode.value
   }
 })

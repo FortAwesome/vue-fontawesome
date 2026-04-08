@@ -707,4 +707,26 @@ describe('gradientFill prop', () => {
     expect(wrapper.element.getAttribute('fill')).toBe('url(#stringGradient)')
     expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
   })
+
+  test('ignores gradientFill and warns when symbol is true', () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      symbol: true,
+      gradientFill: {
+        id: 'symbolGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+    const fill = wrapper.element.getAttribute('fill')
+    expect(fill === null || !fill.includes('url(')).toBe(true)
+    consoleSpy.mockRestore()
+  })
 })
