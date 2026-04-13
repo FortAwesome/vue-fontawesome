@@ -157,7 +157,7 @@ export default defineComponent({
     gradientFill: {
       type: Object,
       default: null,
-      validator (value) {
+      validator(value) {
         if (typeof value.id !== 'string' || !value.id) {
           console.warn('FontAwesomeIcon: gradientFill.id must be a non-empty string')
           return false
@@ -207,7 +207,10 @@ export default defineComponent({
       log('gradientFill is not supported when symbol is true and will be ignored')
     }
 
-    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs, props.symbol ? null : props.gradientFill) : null))
+    const vnode = computed(() =>
+      renderedIcon.value ? convert(renderedIcon.value.abstract[0], { gradientFill: props.symbol ? null : props.gradientFill }, attrs) : null
+    )
+
     return () => vnode.value
   }
 })
