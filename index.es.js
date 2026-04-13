@@ -260,8 +260,7 @@ var humps$1 = {exports: {}};
 
 var humps = humps$1.exports;
 
-var _excluded = ["class", "style"],
-  _excluded2 = ["type", "stops", "id"];
+var _excluded = ["class", "style"];
 
 /**
  * Converts a CSS style into a plain Javascript object.
@@ -295,56 +294,23 @@ function classToObject(classes) {
 }
 
 /**
- * Creates a Vue VNode for an SVG gradient stop element.
- * @param {Object} stop The gradient stop definition.
- * @param {string|number} stop.offset The offset of the stop.
- * @param {string} stop.color The color of the stop.
- * @param {number} [stop.opacity] The opacity of the stop.
- * @param {number} index The index of the stop.
- * @returns {VNode}
- */
-function createGradientStop(stop, index) {
-  return h('stop', _objectSpread2({
-    key: "".concat(index, "-").concat(stop.offset),
-    offset: stop.offset,
-    'stop-color': stop.color
-  }, stop.opacity !== undefined && {
-    'stop-opacity': stop.opacity
-  }));
-}
-
-/**
  * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
  * @param {Object} props The user-defined props.
  * @param {Object} attrs The user-defined native HTML attributes.
- * @param {Object} [gradientFill] Optional gradient fill config.
- * @param {boolean} [stripFills] Whether to strip fill from descendant path elements.
  * @returns {VNode}
  */
 function convert(abstractElement) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var gradientFill = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var stripFills = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
   // If the abstract element is a string, we'll just return a string render function
   if (typeof abstractElement === 'string') {
     return abstractElement;
   }
 
   // Converting abstract element children into Vue VNodes
-  // If a gradientFill (or fill attr) is provided, strip fill from all descendant path elements
-  // so the gradient/fill takes precedence over the icon's built-in fill
-  var shouldStripFills = stripFills || !!gradientFill || 'fill' in attrs;
   var children = (abstractElement.children || []).map(function (child) {
-    if (shouldStripFills && child.tag === 'path' && child.attributes && 'fill' in child.attributes) {
-      return convert(_objectSpread2(_objectSpread2({}, child), {}, {
-        attributes: _objectSpread2(_objectSpread2({}, child.attributes), {}, {
-          fill: undefined
-        })
-      }), {}, {}, null, true);
-    }
-    return convert(child, {}, {}, null, shouldStripFills);
+    return convert(child);
   });
 
   // Converting abstract element attributes into valid Vue format
@@ -372,25 +338,6 @@ function convert(abstractElement) {
     var _attrs$style = attrs.style,
     aStyle = _attrs$style === void 0 ? {} : _attrs$style,
     otherAttrs = _objectWithoutProperties(attrs, _excluded);
-
-  // If a valid gradientFill is provided, inject the gradient element and set fill to reference it
-  if (gradientFill && gradientFill.id && (gradientFill.type === 'linear' || gradientFill.type === 'radial')) {
-    var gradientType = gradientFill.type,
-      _gradientFill$stops = gradientFill.stops,
-      stops = _gradientFill$stops === void 0 ? [] : _gradientFill$stops,
-      id = gradientFill.id,
-      gradientProps = _objectWithoutProperties(gradientFill, _excluded2);
-    var gradientTag = gradientType === 'linear' ? 'linearGradient' : 'radialGradient';
-    var gradientVNode = h(gradientTag, _objectSpread2(_objectSpread2({}, gradientProps), {}, {
-      id: id
-    }), stops.map(createGradientStop));
-    return h(abstractElement.tag, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, props), {}, {
-      class: mixins.class,
-      style: _objectSpread2(_objectSpread2({}, mixins.style), aStyle)
-    }, mixins.attrs), otherAttrs), {}, {
-      fill: "url(#".concat(id, ")")
-    }), [gradientVNode].concat(_toConsumableArray(children)));
-  }
   return h(abstractElement.tag, _objectSpread2(_objectSpread2(_objectSpread2({}, props), {}, {
     class: mixins.class,
     style: _objectSpread2(_objectSpread2({}, mixins.style), aStyle)
@@ -563,21 +510,6 @@ var FontAwesomeIcon = defineComponent({
     widthAuto: {
       type: Boolean,
       default: false
-    },
-    gradientFill: {
-      type: Object,
-      default: null,
-      validator: function validator(value) {
-        if (typeof value.id !== 'string' || !value.id) {
-          console.warn('FontAwesomeIcon: gradientFill.id must be a non-empty string');
-          return false;
-        }
-        if (value.type !== 'linear' && value.type !== 'radial') {
-          console.warn('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"');
-          return false;
-        }
-        return true;
-      }
     }
   },
   setup: function setup(props, _ref) {
@@ -612,11 +544,8 @@ var FontAwesomeIcon = defineComponent({
     }, {
       immediate: true
     });
-    if (props.gradientFill && props.symbol) {
-      log('gradientFill is not supported when symbol is true and will be ignored');
-    }
     var vnode = computed(function () {
-      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs, props.symbol ? null : props.gradientFill) : null;
+      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
     });
     return function () {
       return vnode.value;
