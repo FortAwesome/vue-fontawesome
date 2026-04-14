@@ -15,6 +15,7 @@ The following commands are available through `npm run` or `yarn`:
 **During pre release, make sure and use `--tag` and `--npm-dist-tag`**
 
 1. Update `package.json` and change `version`
+1. Run `npm install` to sync `package-lock.json`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
 1. `npm publish --tag latest-3 --registry=https://registry.npmjs.org/`

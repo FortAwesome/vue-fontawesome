@@ -260,7 +260,9 @@ var humps$1 = {exports: {}};
 
 var humps = humps$1.exports;
 
-var _excluded = ["class", "style"];
+var _excluded = ["gradientFill"],
+  _excluded2 = ["class", "style"],
+  _excluded3 = ["type", "stops", "id"];
 
 /**
  * Converts a CSS style into a plain Javascript object.
@@ -294,9 +296,49 @@ function classToObject(classes) {
 }
 
 /**
+ * Creates a Vue VNode for an SVG gradient stop element.
+ * @param {Object} stop The gradient stop definition.
+ * @param {string|number} stop.offset The offset of the stop.
+ * @param {string} stop.color The color of the stop.
+ * @param {number} [stop.opacity] The opacity of the stop.
+ * @param {number} index The index of the stop.
+ * @returns {VNode}
+ */
+function createGradientStop(stop, index) {
+  return h('stop', _objectSpread2({
+    'key': "".concat(index, "-").concat(stop.offset),
+    'offset': stop.offset,
+    'stop-color': stop.color
+  }, stop.opacity !== undefined && {
+    'stop-opacity': stop.opacity
+  }));
+}
+
+/**
+ * Recursively removes the fill attribute from all path elements in an abstract element tree.
+ * @param {AbstractElement | String} abstractElement
+ * @returns {AbstractElement | String}
+ */
+function stripFillsFromPaths(abstractElement) {
+  if (typeof abstractElement === 'string') return abstractElement;
+  var children = (abstractElement.children || []).map(stripFillsFromPaths);
+  if (abstractElement.tag === 'path' && abstractElement.attributes && 'fill' in abstractElement.attributes) {
+    return _objectSpread2(_objectSpread2({}, abstractElement), {}, {
+      attributes: _objectSpread2(_objectSpread2({}, abstractElement.attributes), {}, {
+        fill: undefined
+      }),
+      children: children
+    });
+  }
+  return _objectSpread2(_objectSpread2({}, abstractElement), {}, {
+    children: children
+  });
+}
+
+/**
  * Converts a FontAwesome abstract element of an icon into a Vue VNode.
  * @param {AbstractElement | String} abstractElement The element to convert.
- * @param {Object} props The user-defined props.
+ * @param {Object} props Options including gradientFill and any extra VNode props.
  * @param {Object} attrs The user-defined native HTML attributes.
  * @returns {VNode}
  */
@@ -307,15 +349,23 @@ function convert(abstractElement) {
   if (typeof abstractElement === 'string') {
     return abstractElement;
   }
+  var _props$gradientFill = props.gradientFill,
+    gradientFill = _props$gradientFill === void 0 ? null : _props$gradientFill,
+    renderProps = _objectWithoutProperties(props, _excluded);
+
+  // If a gradientFill (or fill attr) is provided, strip fill from all descendant path elements
+  // up front so the gradient/fill takes precedence over the icon's built-in fill
+  var shouldStripFills = !!gradientFill || 'fill' in attrs;
+  var element = shouldStripFills ? stripFillsFromPaths(abstractElement) : abstractElement;
 
   // Converting abstract element children into Vue VNodes
-  var children = (abstractElement.children || []).map(function (child) {
-    return convert(child);
+  var children = (element.children || []).map(function (child) {
+    return convert(child, {}, {});
   });
 
   // Converting abstract element attributes into valid Vue format
-  var mixins = Object.keys(abstractElement.attributes || {}).reduce(function (mixins, key) {
-    var value = abstractElement.attributes[key];
+  var mixins = Object.keys(element.attributes || {}).reduce(function (mixins, key) {
+    var value = element.attributes[key];
     switch (key) {
       case 'class':
         mixins.class = classToObject(value);
@@ -337,8 +387,27 @@ function convert(abstractElement) {
   attrs.class;
     var _attrs$style = attrs.style,
     aStyle = _attrs$style === void 0 ? {} : _attrs$style,
-    otherAttrs = _objectWithoutProperties(attrs, _excluded);
-  return h(abstractElement.tag, _objectSpread2(_objectSpread2(_objectSpread2({}, props), {}, {
+    otherAttrs = _objectWithoutProperties(attrs, _excluded2);
+
+  // If a valid gradientFill is provided, inject the gradient element and set fill to reference it
+  if (gradientFill && gradientFill.id && (gradientFill.type === 'linear' || gradientFill.type === 'radial')) {
+    var gradientType = gradientFill.type,
+      _gradientFill$stops = gradientFill.stops,
+      stops = _gradientFill$stops === void 0 ? [] : _gradientFill$stops,
+      id = gradientFill.id,
+      gradientProps = _objectWithoutProperties(gradientFill, _excluded3);
+    var gradientTag = gradientType === 'linear' ? 'linearGradient' : 'radialGradient';
+    var gradientVNode = h(gradientTag, _objectSpread2(_objectSpread2({}, gradientProps), {}, {
+      id: id
+    }), stops.map(createGradientStop));
+    return h(element.tag, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, renderProps), {}, {
+      class: mixins.class,
+      style: _objectSpread2(_objectSpread2({}, mixins.style), aStyle)
+    }, mixins.attrs), otherAttrs), {}, {
+      fill: "url(#".concat(id, ")")
+    }), [gradientVNode].concat(_toConsumableArray(children)));
+  }
+  return h(abstractElement.tag, _objectSpread2(_objectSpread2(_objectSpread2({}, renderProps), {}, {
     class: mixins.class,
     style: _objectSpread2(_objectSpread2({}, mixins.style), aStyle)
   }, mixins.attrs), otherAttrs), children);
@@ -510,6 +579,21 @@ var FontAwesomeIcon = defineComponent({
     widthAuto: {
       type: Boolean,
       default: false
+    },
+    gradientFill: {
+      type: Object,
+      default: null,
+      validator: function validator(value) {
+        if (typeof value.id !== 'string' || !value.id) {
+          console.warn('FontAwesomeIcon: gradientFill.id must be a non-empty string');
+          return false;
+        }
+        if (value.type !== 'linear' && value.type !== 'radial') {
+          console.warn('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"');
+          return false;
+        }
+        return true;
+      }
     }
   },
   setup: function setup(props, _ref) {
@@ -544,8 +628,13 @@ var FontAwesomeIcon = defineComponent({
     }, {
       immediate: true
     });
+    if (props.gradientFill && props.symbol) {
+      log('gradientFill is not supported when symbol is true and will be ignored');
+    }
     var vnode = computed(function () {
-      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null;
+      return renderedIcon.value ? convert(renderedIcon.value.abstract[0], {
+        gradientFill: props.symbol ? null : props.gradientFill
+      }, attrs) : null;
     });
     return function () {
       return vnode.value;

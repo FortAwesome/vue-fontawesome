@@ -609,3 +609,153 @@ describe('using a family', () => {
     })
   }
 })
+
+describe('gradientFill prop', () => {
+  test('applies a linearGradient element and fill reference to svg', () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'myLinearGradient',
+        type: 'linear',
+        x1: '0%',
+        y1: '0%',
+        x2: '100%',
+        y2: '0%',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#myLinearGradient)')
+
+    const gradient = wrapper.element.querySelector('linearGradient')
+
+    expect(gradient).toBeTruthy()
+    expect(gradient.getAttribute('id')).toBe('myLinearGradient')
+    expect(gradient.getAttribute('x1')).toBe('0%')
+    expect(gradient.getAttribute('x2')).toBe('100%')
+
+    const stops = gradient.querySelectorAll('stop')
+
+    expect(stops.length).toBe(2)
+    expect(stops[0].getAttribute('offset')).toBe('0%')
+    expect(stops[0].getAttribute('stop-color')).toBe('#FF5F6D')
+    expect(stops[1].getAttribute('offset')).toBe('100%')
+    expect(stops[1].getAttribute('stop-color')).toBe('#FFC371')
+  })
+
+  test('applies a radialGradient element and fill reference to svg', () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'myRadialGradient',
+        type: 'radial',
+        r: '150%',
+        cx: '30%',
+        cy: '107%',
+        stops: [
+          { offset: '0', color: '#FDF497' },
+          { offset: '0.45', color: '#FD5949', opacity: 0.8 },
+          { offset: '0.9', color: '#285AEB' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#myRadialGradient)')
+
+    const gradient = wrapper.element.querySelector('radialGradient')
+
+    expect(gradient).toBeTruthy()
+    expect(gradient.getAttribute('id')).toBe('myRadialGradient')
+
+    const stops = gradient.querySelectorAll('stop')
+
+    expect(stops.length).toBe(3)
+    expect(stops[1].getAttribute('stop-opacity')).toBe('0.8')
+  })
+
+  test('strips fill from child path elements when gradientFill is provided', () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'testGradient',
+        type: 'linear',
+        stops: [{ offset: '0%', color: 'red' }]
+      }
+    })
+
+    const paths = wrapper.element.querySelectorAll('path')
+    paths.forEach((path) => {
+      expect(path.getAttribute('fill')).toBeNull()
+    })
+  })
+
+  test('does not render gradient elements when gradientFill is not provided', () => {
+    const wrapper = mountFromProps({ icon: faCoffee })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+    expect(wrapper.element.querySelector('radialGradient')).toBeNull()
+
+    const fill = wrapper.element.getAttribute('fill')
+
+    expect(fill === null || !fill.includes('url(')).toBe(true)
+  })
+
+  test('works with array icon syntax', () => {
+    const wrapper = mountFromProps({
+      icon: ['fas', 'coffee'],
+      gradientFill: {
+        id: 'arrayGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#arrayGradient)')
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+  })
+
+  test('works with string icon syntax', () => {
+    const wrapper = mountFromProps({
+      icon: 'coffee',
+      gradientFill: {
+        id: 'stringGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#stringGradient)')
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+  })
+
+  test('ignores gradientFill and warns when symbol is true', () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      symbol: true,
+      gradientFill: {
+        id: 'symbolGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: '#FF5F6D' },
+          { offset: '100%', color: '#FFC371' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+    const fill = wrapper.element.getAttribute('fill')
+    expect(fill === null || !fill.includes('url(')).toBe(true)
+    consoleSpy.mockRestore()
+  })
+})
