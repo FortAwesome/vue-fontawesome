@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.2.0) - 2026-04-14
+
+### Added
+
+- Support for custom gradient fills
+
+---
+
 ## [3.1.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.1.3) - 2026-01-07
 
 ### Changed
