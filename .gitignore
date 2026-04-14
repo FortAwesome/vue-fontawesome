@@ -5,3 +5,6 @@ node_modules
 .idea
 bin/act
 fortawesome-vue-fontawesome-*.tgz
+
+# Local Claude Code settings
+.claude/settings.json

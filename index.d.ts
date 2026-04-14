@@ -1,6 +1,33 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { DefineComponent } from 'vue'
 
+interface GradientStop {
+  offset: string | number
+  color: string
+  opacity?: number
+}
+
+interface LinearGradientFill {
+  type: 'linear'
+  id: string
+  x1?: string | number
+  y1?: string | number
+  x2?: string | number
+  y2?: string | number
+  stops: GradientStop[]
+}
+
+interface RadialGradientFill {
+  type: 'radial'
+  id: string
+  cx?: string | number
+  cy?: string | number
+  r?: string | number
+  fx?: string | number
+  fy?: string | number
+  stops: GradientStop[]
+}
+
 interface FontAwesomeIconProps {
   border?: boolean
   fixedWidth?: boolean
@@ -26,9 +53,11 @@ interface FontAwesomeIconProps {
   beat?: boolean
   fade?: boolean
   beatFade?: boolean
+  flash?: boolean
   spinPulse?: boolean
   spinReverse?: boolean
   widthAuto?: boolean
+  gradientFill?: LinearGradientFill | RadialGradientFill
 }
 
 interface FontAwesomeLayersProps {
@@ -46,4 +75,4 @@ declare const FontAwesomeIcon: DefineComponent<FontAwesomeIconProps>
 declare const FontAwesomeLayers: DefineComponent<FontAwesomeLayersProps>
 declare const FontAwesomeLayersText: DefineComponent<FontAwesomeLayersTextProps>
 
-export { FontAwesomeIcon, FontAwesomeIconProps, FontAwesomeLayers, FontAwesomeLayersProps, FontAwesomeLayersText, FontAwesomeLayersTextProps }
+export { FontAwesomeIcon, FontAwesomeIconProps, FontAwesomeLayers, FontAwesomeLayersProps, FontAwesomeLayersText, FontAwesomeLayersTextProps, GradientStop, LinearGradientFill, RadialGradientFill }

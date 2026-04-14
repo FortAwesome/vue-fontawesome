@@ -153,6 +153,21 @@ export default defineComponent({
     widthAuto: {
       type: Boolean,
       default: false
+    },
+    gradientFill: {
+      type: Object,
+      default: null,
+      validator(value) {
+        if (typeof value.id !== 'string' || !value.id) {
+          console.warn('FontAwesomeIcon: gradientFill.id must be a non-empty string')
+          return false
+        }
+        if (value.type !== 'linear' && value.type !== 'radial') {
+          console.warn('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"')
+          return false
+        }
+        return true
+      }
     }
   },
 
@@ -188,7 +203,14 @@ export default defineComponent({
       { immediate: true }
     )
 
-    const vnode = computed(() => (renderedIcon.value ? convert(renderedIcon.value.abstract[0], {}, attrs) : null))
+    if (props.gradientFill && props.symbol) {
+      log('gradientFill is not supported when symbol is true and will be ignored')
+    }
+
+    const vnode = computed(() =>
+      renderedIcon.value ? convert(renderedIcon.value.abstract[0], { gradientFill: props.symbol ? null : props.gradientFill }, attrs) : null
+    )
+
     return () => vnode.value
   }
 })
