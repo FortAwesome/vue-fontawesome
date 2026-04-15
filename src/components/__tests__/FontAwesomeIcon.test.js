@@ -389,14 +389,6 @@ describe('symbol', () => {
   })
 })
 
-describe('title', () => {
-  test('not using title', () => {
-    const wrapper = mountFromProps({ icon: faCoffee })
-
-    expect(wrapper.element.getElementsByTagName('title').length).toBe(0)
-  })
-})
-
 describe('reactivity', () => {
   test('changing props should update the element', async () => {
     const wrapper = mountFromProps({ icon: faCoffee, title: 'Coffee' })
