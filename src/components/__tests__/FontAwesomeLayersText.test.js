@@ -49,8 +49,9 @@ describe('transform', () => {
       }
     })
 
-    // It appears the jsdom doesn't set the transform for this, not sure why
-    expect(wrapper.element)
+    expect(wrapper.element.tagName).toBe('SPAN')
+    expect(wrapper.element.classList.contains('fa-layers-text')).toBeTruthy()
+    expect(wrapper.element.innerHTML).toBe('1')
   })
 })
 
