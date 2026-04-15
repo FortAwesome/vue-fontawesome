@@ -39,15 +39,3 @@ export const faFish = {
   iconName: 'fish',
   icon: [640, 512, [], 'f578', '...']
 }
-
-export const faDogUtility = {
-  prefix: 'faufsb',
-  iconName: 'dog',
-  icon: [640, 512, [], 'f6d4', '...']
-}
-
-export const faDogGraphite = {
-  prefix: 'fagt',
-  iconName: 'dog',
-  icon: [640, 512, [], 'f6d3', '...']
-}

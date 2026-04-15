@@ -1,23 +1,22 @@
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faDogUtility, faFish } from '../__fixtures__/icons'
+import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
   mountFromProps,
-  SUPPORTS_7X_GRAPHITE_ICONS,
-  SUPPORTS_7X_SMALL_BATCH_ICONS,
-  SUPPORTS_7X_UTILITY_ICONS,
-  SUPPORTS_ICON_ALIASES,
-  SUPPORTS_ICON_BY_STYLE,
-  SUPPORTS_ICON_USING_FAMILY,
-  SUPPORTS_ICON_USING_STRING,
-  SUPPORTS_TITLE_PROP
+  coreHasFeature,
+  REFERENCE_ICON_BY_STYLE,
+  REFERENCE_ICON_USING_STRING,
+  REFERENCE_ICON_USING_FAMILY,
+  REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
+  ICON_ALIASES,
+  ICON_TITLE_PROP
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faDogUtility, faFish)
+  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish)
 })
 
 afterEach(() => {
@@ -34,7 +33,7 @@ describe('icon title prop', () => {
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
 
-  if (SUPPORTS_TITLE_PROP) {
+  if (coreHasFeature(ICON_TITLE_PROP)) {
     test('renders a title element and aria-labelledby when title is set', () => {
       const wrapper = mountFromProps({
         icon: faCoffee,
@@ -48,8 +47,8 @@ describe('icon title prop', () => {
       expect(wrapper.element.getAttribute('aria-labelledby')).toContain('coffee-title')
     })
   } else {
-    test('title prop is not supported in this core version', () => {
-      expect(SUPPORTS_TITLE_PROP).toBeFalsy()
+    test('ICON_TITLE_PROP is not available in this core version', () => {
+      expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
     })
   }
 })
@@ -62,7 +61,7 @@ describe('icons are showing', () => {
     expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
   })
 
-  if (SUPPORTS_ICON_BY_STYLE) {
+  if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
     test('using array format, short prefix and long icon name', () => {
       const wrapper = mountFromProps({ icon: ['fas', 'fa-coffee'] })
 
@@ -84,12 +83,12 @@ describe('icons are showing', () => {
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
   } else {
-    test('icon by style is not supported in this core version', () => {
-      expect(SUPPORTS_ICON_BY_STYLE).toBeFalsy()
+    test('REFERENCE_ICON_BY_STYLE is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_BY_STYLE)).toBeFalsy()
     })
   }
 
-  if (SUPPORTS_ICON_USING_STRING) {
+  if (coreHasFeature(REFERENCE_ICON_USING_STRING)) {
     test('using string format, with long prefix and long icon name', () => {
       const wrapper = mountFromProps({ icon: 'fa-duotone fa-alien' })
 
@@ -104,8 +103,8 @@ describe('icons are showing', () => {
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
   } else {
-    test('string icon reference is not supported in this core version', () => {
-      expect(SUPPORTS_ICON_USING_STRING).toBeFalsy()
+    test('REFERENCE_ICON_USING_STRING is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_USING_STRING)).toBeFalsy()
     })
   }
 
@@ -506,7 +505,7 @@ test('using imported object from svg icons package', () => {
   expect(wrapper.element.classList.contains('fa-user')).toBeTruthy()
 })
 
-if (SUPPORTS_ICON_ALIASES) {
+if (coreHasFeature(ICON_ALIASES)) {
   describe('icon aliases', () => {
     beforeEach(() => {
       library.reset()
@@ -528,13 +527,13 @@ if (SUPPORTS_ICON_ALIASES) {
     })
   })
 } else {
-  test('icon aliases are not supported in this core version', () => {
-    expect(SUPPORTS_ICON_ALIASES).toBeFalsy()
+  test('ICON_ALIASES is not available in this core version', () => {
+    expect(coreHasFeature(ICON_ALIASES)).toBeFalsy()
   })
 }
 
 describe('using a family', () => {
-  if (SUPPORTS_ICON_USING_FAMILY) {
+  if (coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
     test('will find a sharp solid icon using array format, short prefix, and short icon name', () => {
       const wrapper = mountFromProps({ icon: ['fass', 'dog'] })
 
@@ -583,76 +582,43 @@ describe('using a family', () => {
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
     })
+
+    if (coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)) {
+      test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
+
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+      })
+
+      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
+
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+      })
+
+      test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
+
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+      })
+
+      test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
+        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
+
+        expect(wrapper.element.tagName).toBe('svg')
+        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+      })
+    } else {
+      test('REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS is not available in this core version', () => {
+        expect(coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)).toBeFalsy()
+      })
+    }
   } else {
-    test('family icon reference is not supported in this core version', () => {
-      expect(SUPPORTS_ICON_USING_FAMILY).toBeFalsy()
-    })
-  }
-
-  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
-    test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-    })
-
-    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-    })
-
-    test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
-    })
-
-    test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
-    })
-  } else if (SUPPORTS_ICON_USING_FAMILY) {
-    test('7x small batch icons are not supported in this core version', () => {
-      expect(SUPPORTS_7X_SMALL_BATCH_ICONS).toBeFalsy()
-    })
-  }
-
-  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_UTILITY_ICONS) {
-    test('will find a utility fill-semibold icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-utility fa-fill-semibold fa-dog' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
-    })
-  } else if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
-    test('7x utility icons are not supported in this core version', () => {
-      expect(SUPPORTS_7X_UTILITY_ICONS).toBeFalsy()
-    })
-  }
-
-  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_GRAPHITE_ICONS) {
-    test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
-    })
-
-    test('will find a graphite thin icon using string format, long prefix, long style, and long fa-icon name', () => {
-      const wrapper = mountFromProps({ icon: 'fa-graphite fa-thin fa-dog' })
-
-      expect(wrapper.element.tagName).toBe('svg')
-      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
-    })
-  } else if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
-    test('7x graphite icons are not supported in this core version', () => {
-      expect(SUPPORTS_7X_GRAPHITE_ICONS).toBeFalsy()
+    test('REFERENCE_ICON_USING_FAMILY is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_USING_FAMILY)).toBeFalsy()
     })
   }
 })
