@@ -15,6 +15,8 @@ test('empty', () => {
   })
 
   expect(wrapper.element.tagName).toBe('SPAN')
+  expect(wrapper.element.classList.contains('fa-layers-text')).toBeTruthy()
+  expect(wrapper.element.innerHTML).toBe('')
 })
 
 test('simple text', () => {
