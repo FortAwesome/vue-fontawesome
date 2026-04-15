@@ -783,6 +783,7 @@ describe('gradientFill prop', () => {
       }
     })
 
+    expect(consoleSpy).toHaveBeenCalledWith('gradientFill is not supported when symbol is true and will be ignored')
     expect(wrapper.element.querySelector('linearGradient')).toBeNull()
     const fill = wrapper.element.getAttribute('fill')
     expect(fill === null || !fill.includes('url(')).toBe(true)
