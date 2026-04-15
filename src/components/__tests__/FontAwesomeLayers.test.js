@@ -24,6 +24,7 @@ test('empty layers', () => {
     }
   })
 
+  expect(wrapper.element.tagName).toBe('DIV')
   expect(wrapper.element.children.length).toBe(0)
 })
 
