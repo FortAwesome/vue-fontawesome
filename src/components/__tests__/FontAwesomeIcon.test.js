@@ -10,7 +10,8 @@ import {
   REFERENCE_ICON_USING_FAMILY,
   REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
   REFERENCE_ICON_USING_7X_GRAPHITE_ICONS,
-  ICON_ALIASES
+  ICON_ALIASES,
+  ICON_TITLE_PROP
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
@@ -32,6 +33,25 @@ describe('icon title prop', () => {
     expect(wrapper.element.getAttribute('aria-labelledby')).toBeFalsy()
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
+
+  if (coreHasFeature(ICON_TITLE_PROP)) {
+    test('renders a title element and aria-labelledby when title is set', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Coffee Icon',
+        titleId: 'coffee-title'
+      })
+
+      const titleEl = wrapper.element.querySelector('title')
+      expect(titleEl).toBeTruthy()
+      expect(titleEl.textContent).toBe('Coffee Icon')
+      expect(wrapper.element.getAttribute('aria-labelledby')).toContain('coffee-title')
+    })
+  } else {
+    test('ICON_TITLE_PROP is not available in this core version', () => {
+      expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
+    })
+  }
 })
 
 describe('icons are showing', () => {

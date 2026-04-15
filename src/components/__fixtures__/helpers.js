@@ -26,6 +26,10 @@ export function coreHasFeature(feature) {
   if (feature === REFERENCE_ICON_USING_7X_GRAPHITE_ICONS) {
     return coreMajorVersion === 7 && coreMinorVersion >= 2
   }
+
+  if (feature === ICON_TITLE_PROP) {
+    return coreMajorVersion < 7
+  }
 }
 
 export const REFERENCE_ICON_BY_STYLE = 0x00
@@ -34,3 +38,4 @@ export const REFERENCE_ICON_USING_STRING = 0x02
 export const REFERENCE_ICON_USING_FAMILY = 0x03
 export const REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS = 0x04
 export const REFERENCE_ICON_USING_7X_GRAPHITE_ICONS = 0x05
+export const ICON_TITLE_PROP = 0x06
