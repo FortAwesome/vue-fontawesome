@@ -346,7 +346,8 @@ describe('using transform', () => {
       transform: 'grow-40 left-4 rotate-15'
     })
 
-    expect(wrapper.element).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('transform-origin')).toBeTruthy()
+    expect(wrapper.element.querySelector('g[transform]')).toBeTruthy()
   })
 
   test('object', () => {
@@ -362,7 +363,8 @@ describe('using transform', () => {
       }
     })
 
-    expect(wrapper.element).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('transform-origin')).toBeTruthy()
+    expect(wrapper.element.querySelector('g[transform]')).toBeTruthy()
   })
 })
 
