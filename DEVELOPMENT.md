@@ -10,6 +10,25 @@ The following commands are available through `npm run` or `yarn`:
 | dist    | Build a production version of the library using Rollup  |
 | test    | Execute unit tests                                      |
 
+## Testing against multiple Font Awesome SVG Core versions
+
+The library supports `@fortawesome/fontawesome-svg-core` v1 (Font Awesome 5), v6, and v7. The default devDependency is v7, but you can temporarily swap versions without modifying `package.json`:
+
+```bash
+# Test against v5
+npm install --no-save @fortawesome/fontawesome-svg-core@~1 @fortawesome/free-solid-svg-icons@~5
+npm run test
+
+# Test against v6
+npm install --no-save @fortawesome/fontawesome-svg-core@~6 @fortawesome/free-solid-svg-icons@~6
+npm run test
+
+# Restore v7
+npm install --no-save @fortawesome/fontawesome-svg-core@~7 @fortawesome/free-solid-svg-icons@~7
+```
+
+Each version runs a subset of the tests — blocks guarded by version feature flags are automatically skipped.
+
 ## Release this project
 
 **During pre release, make sure and use `--tag` and `--npm-dist-tag`**
