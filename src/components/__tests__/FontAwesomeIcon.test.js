@@ -347,6 +347,12 @@ test('using size', () => {
   })
 })
 
+test('using widthAuto', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
+
+  expect(wrapper.element.classList.contains('fa-width-auto')).toBeTruthy()
+})
+
 test('using spin', () => {
   const wrapper = mountFromProps({ icon: faCoffee, spin: true })
 
