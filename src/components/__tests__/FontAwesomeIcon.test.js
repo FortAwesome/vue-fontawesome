@@ -373,8 +373,20 @@ describe('using transform', () => {
 })
 
 describe('mask', () => {
-  test('will add icon', () => {
+  test('will add icon using iconDefinition', () => {
     const wrapper = mountFromProps({ icon: faCoffee, mask: faCircle })
+
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
+  })
+
+  test('will add icon using array format', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: ['fas', 'circle'] })
+
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
+  })
+
+  test('will add icon using string format', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: 'circle' })
 
     expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
   })
