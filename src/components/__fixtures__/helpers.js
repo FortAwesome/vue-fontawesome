@@ -14,28 +14,17 @@ export function mountFromProps(props = {}) {
   return mount(FontAwesomeIcon, { props })
 }
 
-export function coreHasFeature(feature) {
-  if (feature === REFERENCE_ICON_BY_STYLE || feature === ICON_ALIASES || feature === REFERENCE_ICON_USING_STRING || feature === REFERENCE_ICON_USING_FAMILY) {
-    return parse.icon
-  }
+// Available in v6+
+export const SUPPORTS_ICON_BY_STYLE = !!parse.icon
+export const SUPPORTS_ICON_ALIASES = !!parse.icon
+export const SUPPORTS_ICON_USING_STRING = !!parse.icon
+export const SUPPORTS_ICON_USING_FAMILY = !!parse.icon
 
-  if (feature === REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS) {
-    return coreMajorVersion === 7
-  }
+// Available in v7+ only
+export const SUPPORTS_7X_SMALL_BATCH_ICONS = coreMajorVersion === 7
 
-  if (feature === REFERENCE_ICON_USING_7X_GRAPHITE_ICONS) {
-    return coreMajorVersion === 7 && coreMinorVersion >= 2
-  }
+// Available in v7.2+ only
+export const SUPPORTS_7X_GRAPHITE_ICONS = coreMajorVersion === 7 && coreMinorVersion >= 2
 
-  if (feature === ICON_TITLE_PROP) {
-    return coreMajorVersion < 7
-  }
-}
-
-export const REFERENCE_ICON_BY_STYLE = 0x00
-export const ICON_ALIASES = 0x01
-export const REFERENCE_ICON_USING_STRING = 0x02
-export const REFERENCE_ICON_USING_FAMILY = 0x03
-export const REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS = 0x04
-export const REFERENCE_ICON_USING_7X_GRAPHITE_ICONS = 0x05
-export const ICON_TITLE_PROP = 0x06
+// Available in pre-v7 only
+export const SUPPORTS_TITLE_PROP = coreMajorVersion < 7

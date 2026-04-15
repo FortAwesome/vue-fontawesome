@@ -4,14 +4,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
   mountFromProps,
-  coreHasFeature,
-  REFERENCE_ICON_USING_STRING,
-  REFERENCE_ICON_BY_STYLE,
-  REFERENCE_ICON_USING_FAMILY,
-  REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
-  REFERENCE_ICON_USING_7X_GRAPHITE_ICONS,
-  ICON_ALIASES,
-  ICON_TITLE_PROP
+  SUPPORTS_ICON_BY_STYLE,
+  SUPPORTS_ICON_ALIASES,
+  SUPPORTS_ICON_USING_STRING,
+  SUPPORTS_ICON_USING_FAMILY,
+  SUPPORTS_7X_SMALL_BATCH_ICONS,
+  SUPPORTS_7X_GRAPHITE_ICONS,
+  SUPPORTS_TITLE_PROP
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
@@ -34,7 +33,7 @@ describe('icon title prop', () => {
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
 
-  if (coreHasFeature(ICON_TITLE_PROP)) {
+  if (SUPPORTS_TITLE_PROP) {
     test('renders a title element and aria-labelledby when title is set', () => {
       const wrapper = mountFromProps({
         icon: faCoffee,
@@ -48,8 +47,8 @@ describe('icon title prop', () => {
       expect(wrapper.element.getAttribute('aria-labelledby')).toContain('coffee-title')
     })
   } else {
-    test('ICON_TITLE_PROP is not available in this core version', () => {
-      expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
+    test('title prop is not supported in this core version', () => {
+      expect(SUPPORTS_TITLE_PROP).toBeFalsy()
     })
   }
 })
@@ -62,7 +61,7 @@ describe('icons are showing', () => {
     expect(wrapper.element.classList.contains('fa-coffee')).toBeTruthy()
   })
 
-  if (coreHasFeature(REFERENCE_ICON_BY_STYLE)) {
+  if (SUPPORTS_ICON_BY_STYLE) {
     test('using array format, short prefix and long icon name', () => {
       const wrapper = mountFromProps({ icon: ['fas', 'fa-coffee'] })
 
@@ -84,12 +83,12 @@ describe('icons are showing', () => {
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
   } else {
-    test('REFERENCE_ICON_BY_STYLE is not available in this core version', () => {
-      expect(coreHasFeature(REFERENCE_ICON_BY_STYLE)).toBeFalsy()
+    test('icon by style is not supported in this core version', () => {
+      expect(SUPPORTS_ICON_BY_STYLE).toBeFalsy()
     })
   }
 
-  if (coreHasFeature(REFERENCE_ICON_USING_STRING)) {
+  if (SUPPORTS_ICON_USING_STRING) {
     test('using string format, with long prefix and long icon name', () => {
       const wrapper = mountFromProps({ icon: 'fa-duotone fa-alien' })
 
@@ -104,8 +103,8 @@ describe('icons are showing', () => {
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
   } else {
-    test('REFERENCE_ICON_USING_STRING is not available in this core version', () => {
-      expect(coreHasFeature(REFERENCE_ICON_USING_STRING)).toBeFalsy()
+    test('string icon reference is not supported in this core version', () => {
+      expect(SUPPORTS_ICON_USING_STRING).toBeFalsy()
     })
   }
 
@@ -506,7 +505,7 @@ test('using imported object from svg icons package', () => {
   expect(wrapper.element.classList.contains('fa-user')).toBeTruthy()
 })
 
-if (coreHasFeature(ICON_ALIASES)) {
+if (SUPPORTS_ICON_ALIASES) {
   test('find a free-solid-svg-icon with array format', () => {
     library.reset()
     library.add(faClose)
@@ -525,13 +524,13 @@ if (coreHasFeature(ICON_ALIASES)) {
     expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
   })
 } else {
-  test('ICON_ALIASES is not available in this core version', () => {
-    expect(coreHasFeature(ICON_ALIASES)).toBeFalsy()
+  test('icon aliases are not supported in this core version', () => {
+    expect(SUPPORTS_ICON_ALIASES).toBeFalsy()
   })
 }
 
 describe('using a family', () => {
-  if (coreHasFeature(REFERENCE_ICON_USING_FAMILY)) {
+  if (SUPPORTS_ICON_USING_FAMILY) {
     test('will find a sharp solid icon using array format, short prefix, and short icon name', () => {
       const wrapper = mountFromProps({ icon: ['fass', 'dog'] })
 
@@ -581,7 +580,7 @@ describe('using a family', () => {
       expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
     })
 
-    if (coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)) {
+    if (SUPPORTS_7X_SMALL_BATCH_ICONS) {
       test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
         const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
 
@@ -610,7 +609,7 @@ describe('using a family', () => {
         expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
       })
 
-      if (coreHasFeature(REFERENCE_ICON_USING_7X_GRAPHITE_ICONS)) {
+      if (SUPPORTS_7X_GRAPHITE_ICONS) {
         test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
           const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
 
@@ -625,18 +624,18 @@ describe('using a family', () => {
           expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
         })
       } else {
-        test('REFERENCE_ICON_USING_7X_GRAPHITE_ICONS is not available in this core version', () => {
-          expect(coreHasFeature(REFERENCE_ICON_USING_7X_GRAPHITE_ICONS)).toBeFalsy()
+        test('7x graphite icons are not supported in this core version', () => {
+          expect(SUPPORTS_7X_GRAPHITE_ICONS).toBeFalsy()
         })
       }
     } else {
-      test('REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS is not available in this core version', () => {
-        expect(coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)).toBeFalsy()
+      test('7x small batch icons are not supported in this core version', () => {
+        expect(SUPPORTS_7X_SMALL_BATCH_ICONS).toBeFalsy()
       })
     }
   } else {
-    test('REFERENCE_ICON_USING_FAMILY is not available in this core version', () => {
-      expect(coreHasFeature(REFERENCE_ICON_USING_FAMILY)).toBeFalsy()
+    test('family icon reference is not supported in this core version', () => {
+      expect(SUPPORTS_ICON_USING_FAMILY).toBeFalsy()
     })
   }
 })
