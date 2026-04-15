@@ -451,68 +451,52 @@ describe('reactivity', () => {
   })
 })
 
-describe('using bounce', () => {
-  test('bounce', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
+test('using bounce', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
 
-    expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
 })
 
-describe('using shake', () => {
-  test('shake', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, shake: true })
+test('using shake', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, shake: true })
 
-    expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
 })
 
-describe('using beat', () => {
-  test('beat', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, beat: true })
+test('using beat', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, beat: true })
 
-    expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
 })
 
-describe('using fade', () => {
-  test('fade', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, fade: true })
+test('using fade', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, fade: true })
 
-    expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
 })
 
-describe('using beat-fade', () => {
-  test('beat-fade', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
+test('using beat-fade', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
 
-    expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
 })
 
-describe('using flash', () => {
-  test('flash', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, flash: true })
+test('using flash', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, flash: true })
 
-    expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
 })
 
-describe('using spin-pulse', () => {
-  test('spin-pulse', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
+test('using spin-pulse', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
 
-    expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
 })
 
-describe('using spin-reverse', () => {
-  test('spin-reverse', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
+test('using spin-reverse', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
 
-    expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
-  })
+  expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
 })
 
 test('using imported object from svg icons package', () => {
