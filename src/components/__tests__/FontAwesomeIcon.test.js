@@ -3,6 +3,7 @@ import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__f
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
+  compileWithTemplate,
   coreHasFeature,
   mountFromProps,
   ICON_ALIASES,
@@ -142,58 +143,26 @@ describe('icons are showing', () => {
 
 describe('unrelated Vue data options', () => {
   test('with extra static class', () => {
-    const wrapper = compileAndMount({
-      template: '<font-awesome-icon class="extra" :icon="icon" />',
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate('<font-awesome-icon class="extra" :icon="icon" />', faCoffee)
 
     expect(wrapper.element.classList.contains('extra')).toBeTruthy()
   })
 
   test('with extra bound class', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon :class="['extra1', {'extra2': true}]" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon :class="['extra1', {'extra2': true}]" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.classList.contains('extra1')).toBeTruthy()
     expect(wrapper.element.classList.contains('extra2')).toBeTruthy()
   })
 
   test('with extra style', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.style.getPropertyValue('font-size')).toBe('42px')
   })
 
   test('with extra DOM property', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon rel="local" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon rel="local" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.getAttribute('rel')).toBe('local')
   })

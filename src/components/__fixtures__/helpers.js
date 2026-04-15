@@ -13,6 +13,18 @@ export function mountFromProps(props = {}) {
   return mount(FontAwesomeIcon, { props })
 }
 
+export function compileWithTemplate(template, icon) {
+  return compileAndMount({
+    template,
+    data() {
+      return { icon }
+    },
+    components: {
+      FontAwesomeIcon
+    }
+  })
+}
+
 export function coreHasFeature(feature) {
   if (feature === REFERENCE_ICON_BY_STYLE || feature === ICON_ALIASES || feature === REFERENCE_ICON_USING_STRING || feature === REFERENCE_ICON_USING_FAMILY) {
     return parse.icon
