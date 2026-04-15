@@ -497,6 +497,10 @@ if (coreHasFeature(ICON_ALIASES)) {
     expect(wrapper.element.tagName).toBe('svg')
     expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
   })
+} else {
+  test('ICON_ALIASES is not available in this core version', () => {
+    expect(coreHasFeature(ICON_ALIASES)).toBeFalsy()
+  })
 }
 
 describe('using a family', () => {
