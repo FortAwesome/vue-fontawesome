@@ -46,6 +46,17 @@ describe('icon title prop', () => {
       expect(titleEl.textContent).toBe('Coffee Icon')
       expect(wrapper.element.getAttribute('aria-labelledby')).toContain('coffee-title')
     })
+
+    test('renders a title element without titleId', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Coffee Icon'
+      })
+
+      const titleEl = wrapper.element.querySelector('title')
+      expect(titleEl).toBeTruthy()
+      expect(titleEl.textContent).toBe('Coffee Icon')
+    })
   } else {
     test('ICON_TITLE_PROP is not available in this core version', () => {
       expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
@@ -432,6 +443,47 @@ describe('reactivity', () => {
     await wrapper.setProps({ icon: faCircle, title: 'Circle' })
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
+  })
+
+  test('adding gradientFill updates the element', async () => {
+    const wrapper = mountFromProps({ icon: faCoffee })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+
+    await wrapper.setProps({
+      gradientFill: {
+        id: 'reactiveGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: 'red' },
+          { offset: '100%', color: 'blue' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#reactiveGradient)')
+  })
+
+  test('removing gradientFill updates the element', async () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'reactiveGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: 'red' },
+          { offset: '100%', color: 'blue' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+
+    await wrapper.setProps({ gradientFill: null })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+    expect(wrapper.element.getAttribute('fill')).toBeNull()
   })
 })
 
