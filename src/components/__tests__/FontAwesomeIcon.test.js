@@ -326,7 +326,7 @@ describe('using rotateBy', () => {
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
   })
 
-  test('not using rotateBy shows will not show the fa-rotate-by class', () => {
+  test('not using rotateBy will not show the fa-rotate-by class', () => {
     const wrapper = mountFromProps({ icon: faDog })
 
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeFalsy()
