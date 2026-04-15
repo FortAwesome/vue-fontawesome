@@ -4,6 +4,7 @@
 
 import { compileAndMount } from '../__fixtures__/helpers'
 import FontAwesomeLayersText from '../FontAwesomeLayersText'
+import { mount } from '@vue/test-utils'
 
 test('empty', () => {
   const wrapper = compileAndMount({
@@ -120,12 +121,7 @@ describe('class attr', () => {
 
 describe('reactivity', () => {
   test('changing props should update the element', async () => {
-    const wrapper = compileAndMount({
-      template: '<font-awesome-layers-text :value="42" :counter="true" />',
-      components: {
-        FontAwesomeLayersText
-      }
-    })
+    const wrapper = mount(FontAwesomeLayersText, { props: { value: 42, counter: true } })
 
     expect(wrapper.element.innerHTML).toBe('42')
 
