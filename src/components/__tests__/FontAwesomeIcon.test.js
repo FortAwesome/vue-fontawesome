@@ -406,6 +406,13 @@ describe('mask', () => {
 
     expect(wrapper.element.innerHTML).toMatch(/clipPath/)
   })
+
+  test('will use maskId for clipPath and mask ids', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: faCircle, maskId: 'my-mask' })
+
+    expect(wrapper.element.querySelector('clipPath').getAttribute('id')).toBe('clip-my-mask')
+    expect(wrapper.element.querySelector('mask').getAttribute('id')).toBe('mask-my-mask')
+  })
 })
 
 describe('symbol', () => {
