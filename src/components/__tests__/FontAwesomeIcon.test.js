@@ -211,16 +211,24 @@ describe('unrelated Vue data options', () => {
   })
 })
 
-describe('boolean props apply the correct CSS class', () => {
+describe('display props', () => {
   test.each([
     ['border', 'fa-border'],
     ['listItem', 'fa-li'],
-    ['pulse', 'fa-pulse'],
-    ['swapOpacity', 'fa-swap-opacity'],
     ['fixedWidth', 'fa-fw'],
     ['widthAuto', 'fa-width-auto'],
-    ['spin', 'fa-spin'],
     ['inverse', 'fa-inverse'],
+    ['swapOpacity', 'fa-swap-opacity'],
+  ])('using %s', (prop, cls) => {
+    const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
+    expect(wrapper.element.classList.contains(cls)).toBeTruthy()
+  })
+})
+
+describe('animation props', () => {
+  test.each([
+    ['spin', 'fa-spin'],
+    ['pulse', 'fa-pulse'],
     ['bounce', 'fa-bounce'],
     ['shake', 'fa-shake'],
     ['beat', 'fa-beat'],
