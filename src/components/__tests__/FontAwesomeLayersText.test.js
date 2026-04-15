@@ -33,7 +33,7 @@ test('accept number for value', () => {
 })
 
 describe('transform', () => {
-  test('string', () => {
+  test('accepts string transform prop', () => {
     const wrapper = mountLayersText('<font-awesome-layers-text value="1" transform="shrink-6" />')
 
     expect(wrapper.element.tagName).toBe('SPAN')
@@ -57,7 +57,7 @@ describe('counter', () => {
   })
 })
 
-describe('class attr', () => {
+describe('class attribute coexistence', () => {
   test('user-provided class is applied alongside fa-layers-text', () => {
     const wrapper = mountLayersText('<font-awesome-layers-text value="New!" class="gray8" />')
 
