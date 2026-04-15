@@ -3,14 +3,14 @@ import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__f
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
-  mountFromProps,
   coreHasFeature,
-  REFERENCE_ICON_BY_STYLE,
-  REFERENCE_ICON_USING_STRING,
-  REFERENCE_ICON_USING_FAMILY,
-  REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
+  mountFromProps,
   ICON_ALIASES,
-  ICON_TITLE_PROP
+  ICON_TITLE_PROP,
+  REFERENCE_ICON_BY_STYLE,
+  REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
+  REFERENCE_ICON_USING_FAMILY,
+  REFERENCE_ICON_USING_STRING
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
@@ -211,10 +211,28 @@ describe('unrelated Vue data options', () => {
   })
 })
 
-test('using border', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, border: true })
-
-  expect(wrapper.element.classList.contains('fa-border')).toBeTruthy()
+describe('boolean props apply the correct CSS class', () => {
+  test.each([
+    ['border', 'fa-border'],
+    ['listItem', 'fa-li'],
+    ['pulse', 'fa-pulse'],
+    ['swapOpacity', 'fa-swap-opacity'],
+    ['fixedWidth', 'fa-fw'],
+    ['widthAuto', 'fa-width-auto'],
+    ['spin', 'fa-spin'],
+    ['inverse', 'fa-inverse'],
+    ['bounce', 'fa-bounce'],
+    ['shake', 'fa-shake'],
+    ['beat', 'fa-beat'],
+    ['fade', 'fa-fade'],
+    ['beatFade', 'fa-beat-fade'],
+    ['flash', 'fa-flash'],
+    ['spinPulse', 'fa-spin-pulse'],
+    ['spinReverse', 'fa-spin-reverse'],
+  ])('using %s', (prop, cls) => {
+    const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
+    expect(wrapper.element.classList.contains(cls)).toBeTruthy()
+  })
 })
 
 describe('using flip', () => {
@@ -254,12 +272,6 @@ describe('using flip', () => {
   })
 })
 
-test('using listItem', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, listItem: true })
-
-  expect(wrapper.element.classList.contains('fa-li')).toBeTruthy()
-})
-
 describe('using pull', () => {
   test('right', () => {
     const wrapper = mountFromProps({ icon: faCoffee, pull: 'right' })
@@ -272,12 +284,6 @@ describe('using pull', () => {
 
     expect(wrapper.element.classList.contains('fa-pull-left')).toBeTruthy()
   })
-})
-
-test('using pulse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, pulse: true })
-
-  expect(wrapper.element.classList.contains('fa-pulse')).toBeTruthy()
 })
 
 describe('using rotation', () => {
@@ -332,42 +338,12 @@ describe('using rotateBy', () => {
   })
 })
 
-test('using swap opacity', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, swapOpacity: true })
-
-  expect(wrapper.element.classList.contains('fa-swap-opacity')).toBeTruthy()
-})
-
 test('using size', () => {
   ;['2xs', 'xs', 'sm', 'lg', 'xl', '2xl', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].forEach((size) => {
     const wrapper = mountFromProps({ icon: faCoffee, size: size })
 
     expect(wrapper.element.classList.contains(`fa-${size}`)).toBeTruthy()
   })
-})
-
-test('using fixedWidth', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
-
-  expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
-})
-
-test('using widthAuto', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
-
-  expect(wrapper.element.classList.contains('fa-width-auto')).toBeTruthy()
-})
-
-test('using spin', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, spin: true })
-
-  expect(wrapper.element.classList.contains('fa-spin')).toBeTruthy()
-})
-
-test('using inverse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, inverse: true })
-
-  expect(wrapper.element.classList.contains('fa-inverse')).toBeTruthy()
 })
 
 describe('using transform', () => {
@@ -448,54 +424,6 @@ describe('reactivity', () => {
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
   })
-})
-
-test('using bounce', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
-
-  expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
-})
-
-test('using shake', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, shake: true })
-
-  expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
-})
-
-test('using beat', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, beat: true })
-
-  expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
-})
-
-test('using fade', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, fade: true })
-
-  expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
-})
-
-test('using beat-fade', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
-
-  expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
-})
-
-test('using flash', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, flash: true })
-
-  expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
-})
-
-test('using spin-pulse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
-
-  expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
-})
-
-test('using spin-reverse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
-
-  expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
 })
 
 test('using imported object from svg icons package', () => {
