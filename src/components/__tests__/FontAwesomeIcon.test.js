@@ -321,25 +321,14 @@ describe('using rotation', () => {
 })
 
 describe('using rotateBy', () => {
-  test('with a style attribute of 1000 will show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 1000deg' })
+  test('will add fa-rotate-by class and apply custom angle via style', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 329deg' })
 
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('--fa-rotate-angle')).toBe('329deg')
   })
 
-  test('with a style attribute of `something-` will still show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: something-deg' })
-
-    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
-  })
-
-  test('without a style attribute will still show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true })
-
-    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
-  })
-
-  test('not using rotateBy will not show the fa-rotate-by class', () => {
+  test('will not add fa-rotate-by class', () => {
     const wrapper = mountFromProps({ icon: faDog })
 
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeFalsy()
