@@ -92,8 +92,8 @@ describe('class attr', () => {
       }
     })
 
-    expect(wrapper.element.classList.contains('fa-layers-text')).toBe(true)
-    expect(wrapper.element.classList.contains('gray8')).toBe(true)
+    expect(wrapper.element.classList.contains('fa-layers-text')).toBeTruthy()
+    expect(wrapper.element.classList.contains('gray8')).toBeTruthy()
   })
 
   test('fa-inverse is applied alongside fa-layers-text', () => {
@@ -104,8 +104,8 @@ describe('class attr', () => {
       }
     })
 
-    expect(wrapper.element.classList.contains('fa-layers-text')).toBe(true)
-    expect(wrapper.element.classList.contains('fa-inverse')).toBe(true)
+    expect(wrapper.element.classList.contains('fa-layers-text')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-inverse')).toBeTruthy()
   })
 
   test('user-provided class is applied alongside fa-layers-counter', () => {
@@ -116,8 +116,8 @@ describe('class attr', () => {
       }
     })
 
-    expect(wrapper.element.classList.contains('fa-layers-counter')).toBe(true)
-    expect(wrapper.element.classList.contains('fa-inverse')).toBe(true)
+    expect(wrapper.element.classList.contains('fa-layers-counter')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-inverse')).toBeTruthy()
   })
 })
 
