@@ -347,6 +347,12 @@ test('using size', () => {
   })
 })
 
+test('using fixedWidth', () => {
+  const wrapper = mountFromProps({ icon: faCoffee, fixedWidth: true })
+
+  expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
+})
+
 test('using widthAuto', () => {
   const wrapper = mountFromProps({ icon: faCoffee, widthAuto: true })
 
