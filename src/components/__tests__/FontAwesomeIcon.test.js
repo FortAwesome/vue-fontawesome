@@ -603,8 +603,8 @@ describe('using a family', () => {
         })
       }
     } else {
-      test.skip('icon pack tests (jelly-duo, whiteboard) are only available in 7.x', () => {
-        // Skipped: icon packs not supported in this core version
+      test('REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS is not available in this core version', () => {
+        expect(coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)).toBeFalsy()
       })
     }
   } else {
