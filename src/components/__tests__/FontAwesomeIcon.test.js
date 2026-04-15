@@ -404,7 +404,7 @@ describe('mask', () => {
   test('will add icon', () => {
     const wrapper = mountFromProps({ icon: faCoffee, mask: faCircle })
 
-    expect(wrapper.element.innerHTML).toMatch(/clipPath/)
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
   })
 
   test('will use maskId for clipPath and mask ids', () => {
