@@ -665,7 +665,9 @@ describe('gradientFill prop', () => {
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myLinearGradient')
     expect(gradient.getAttribute('x1')).toBe('0%')
+    expect(gradient.getAttribute('y1')).toBe('0%')
     expect(gradient.getAttribute('x2')).toBe('100%')
+    expect(gradient.getAttribute('y2')).toBe('0%')
 
     const stops = gradient.querySelectorAll('stop')
 
@@ -699,11 +701,41 @@ describe('gradientFill prop', () => {
 
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myRadialGradient')
+    expect(gradient.getAttribute('r')).toBe('150%')
+    expect(gradient.getAttribute('cx')).toBe('30%')
+    expect(gradient.getAttribute('cy')).toBe('107%')
+    expect(gradient.getAttribute('fx')).toBeNull()
+    expect(gradient.getAttribute('fy')).toBeNull()
 
     const stops = gradient.querySelectorAll('stop')
 
     expect(stops.length).toBe(3)
     expect(stops[1].getAttribute('stop-opacity')).toBe('0.8')
+  })
+
+  test('applies a radialGradient with optional fx and fy focal point attributes', () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'myRadialGradientFocal',
+        type: 'radial',
+        r: '150%',
+        cx: '30%',
+        cy: '107%',
+        fx: '50%',
+        fy: '50%',
+        stops: [
+          { offset: '0', color: '#FDF497' },
+          { offset: '1', color: '#285AEB' }
+        ]
+      }
+    })
+
+    const gradient = wrapper.element.querySelector('radialGradient')
+
+    expect(gradient).toBeTruthy()
+    expect(gradient.getAttribute('fx')).toBe('50%')
+    expect(gradient.getAttribute('fy')).toBe('50%')
   })
 
   test('strips fill from child path elements when gradientFill is provided', () => {
