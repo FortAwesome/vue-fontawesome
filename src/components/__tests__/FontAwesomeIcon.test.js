@@ -503,6 +503,7 @@ test('using imported object from svg icons package', () => {
   const wrapper = mountFromProps({ icon: faUser })
 
   expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-user')).toBeTruthy()
 })
 
 if (coreHasFeature(ICON_ALIASES)) {
@@ -762,7 +763,7 @@ describe('gradientFill prop', () => {
 
     const fill = wrapper.element.getAttribute('fill')
 
-    expect(fill === null || !fill.includes('url(')).toBe(true)
+    expect(fill).toBeNull()
   })
 
   test('works with array icon syntax', () => {
@@ -818,7 +819,7 @@ describe('gradientFill prop', () => {
     expect(consoleSpy).toHaveBeenCalledWith('gradientFill is not supported when symbol is true and will be ignored')
     expect(wrapper.element.querySelector('linearGradient')).toBeNull()
     const fill = wrapper.element.getAttribute('fill')
-    expect(fill === null || !fill.includes('url(')).toBe(true)
+    expect(fill).toBeNull()
     consoleSpy.mockRestore()
   })
 })
