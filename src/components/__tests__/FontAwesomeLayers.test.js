@@ -65,17 +65,23 @@ describe('class handling', () => {
 })
 
 describe('class defaults', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = compileAndMount({
+  test('should have fa-layers class and not fa-fw by default', () => {
+    const wrapper = compileAndMount({
       template: '<font-awesome-layers />',
       components: { FontAwesomeLayers }
     })
+
+    expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-fw')).toBeFalsy()
   })
 
-  test('should not have fa-fw class', () => {
-    expect(wrapper.element.classList.contains('fa-fw')).toBeFalsy()
+  test('should have fa-fw class when fixedWidth is true', () => {
+    const wrapper = compileAndMount({
+      template: '<font-awesome-layers :fixed-width="true" />',
+      components: { FontAwesomeLayers }
+    })
+
     expect(wrapper.element.classList.contains('fa-layers')).toBeTruthy()
+    expect(wrapper.element.classList.contains('fa-fw')).toBeTruthy()
   })
 })
