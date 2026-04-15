@@ -722,4 +722,35 @@ describe('gradientFill prop', () => {
     expect(fill).toBeNull()
     consoleSpy.mockRestore()
   })
+
+  test('warns when gradientFill.id is missing', () => {
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        type: 'linear',
+        stops: SAMPLE_LINEAR_STOPS
+      }
+    })
+
+    expect(consoleSpy).toHaveBeenCalledWith('FontAwesomeIcon: gradientFill.id must be a non-empty string')
+    consoleSpy.mockRestore()
+  })
+
+  test('warns when gradientFill.type is invalid', () => {
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'myGradient',
+        type: 'diagonal',
+        stops: SAMPLE_LINEAR_STOPS
+      }
+    })
+
+    expect(consoleSpy).toHaveBeenCalledWith('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"')
+    consoleSpy.mockRestore()
+  })
 })
