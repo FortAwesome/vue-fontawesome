@@ -403,11 +403,20 @@ describe('symbol', () => {
     expect(wrapper.element.style.getPropertyValue('display')).toBe('')
   })
 
-  test('will create a symbol', () => {
+  test('will create a symbol with a string id', () => {
     const wrapper = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
     expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
     expect(wrapper.element.children[0].tagName).toBe('symbol')
+    expect(wrapper.element.children[0].getAttribute('id')).toBe('coffee-icon')
+  })
+
+  test('will create a symbol with an auto-generated id when symbol is true', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, symbol: true })
+
+    expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
+    expect(wrapper.element.children[0].tagName).toBe('symbol')
+    expect(wrapper.element.children[0].getAttribute('id')).toBe('fas-fa-coffee')
   })
 })
 
