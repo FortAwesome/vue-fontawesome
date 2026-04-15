@@ -506,22 +506,25 @@ test('using imported object from svg icons package', () => {
 })
 
 if (SUPPORTS_ICON_ALIASES) {
-  test('find a free-solid-svg-icon with array format', () => {
-    library.reset()
-    library.add(faClose)
-    const wrapper = mountFromProps({ icon: ['fas', 'xmark'] })
+  describe('icon aliases', () => {
+    beforeEach(() => {
+      library.reset()
+      library.add(faClose)
+    })
 
-    expect(wrapper.element.tagName).toBe('svg')
-    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
-  })
+    test('find a free-solid-svg-icon with array format', () => {
+      const wrapper = mountFromProps({ icon: ['fas', 'xmark'] })
 
-  test('find a free-solid-svg-icon that is an alias', () => {
-    library.reset()
-    library.add(faClose)
-    const wrapper = mountFromProps({ icon: ['fas', 'close'] })
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    })
 
-    expect(wrapper.element.tagName).toBe('svg')
-    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    test('find a free-solid-svg-icon that is an alias', () => {
+      const wrapper = mountFromProps({ icon: ['fas', 'close'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    })
   })
 } else {
   test('icon aliases are not supported in this core version', () => {
@@ -579,68 +582,73 @@ describe('using a family', () => {
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-bat')).toBeTruthy()
     })
-
-    if (SUPPORTS_7X_SMALL_BATCH_ICONS) {
-      test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
-        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
-
-        expect(wrapper.element.tagName).toBe('svg')
-        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-      })
-
-      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
-        const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
-
-        expect(wrapper.element.tagName).toBe('svg')
-        expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
-      })
-
-      test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
-        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
-
-        expect(wrapper.element.tagName).toBe('svg')
-        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
-      })
-
-      test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
-        const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
-
-        expect(wrapper.element.tagName).toBe('svg')
-        expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
-      })
-
-      if (SUPPORTS_7X_GRAPHITE_ICONS) {
-        test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
-          const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
-
-          expect(wrapper.element.tagName).toBe('svg')
-          expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
-        })
-
-        test('will find a graphite thin icon using string format, long prefix, long style, and long fa-icon name', () => {
-          const wrapper = mountFromProps({ icon: 'fa-graphite fa-thin fa-dog' })
-
-          expect(wrapper.element.tagName).toBe('svg')
-          expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
-        })
-      } else {
-        test('7x graphite icons are not supported in this core version', () => {
-          expect(SUPPORTS_7X_GRAPHITE_ICONS).toBeFalsy()
-        })
-      }
-    } else {
-      test('7x small batch icons are not supported in this core version', () => {
-        expect(SUPPORTS_7X_SMALL_BATCH_ICONS).toBeFalsy()
-      })
-    }
   } else {
     test('family icon reference is not supported in this core version', () => {
       expect(SUPPORTS_ICON_USING_FAMILY).toBeFalsy()
     })
   }
+
+  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
+    test('will default to a jelly-duo regular icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-jelly-duo fa-regular fa-cat' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-cat')).toBeTruthy()
+    })
+
+    test('will default to a whiteboard semibold icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+    })
+
+    test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
+    })
+  } else if (SUPPORTS_ICON_USING_FAMILY) {
+    test('7x small batch icons are not supported in this core version', () => {
+      expect(SUPPORTS_7X_SMALL_BATCH_ICONS).toBeFalsy()
+    })
+  }
+
+  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS && SUPPORTS_7X_GRAPHITE_ICONS) {
+    test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+
+    test('will find a graphite thin icon using string format, long prefix, long style, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-graphite fa-thin fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+  } else if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
+    test('7x graphite icons are not supported in this core version', () => {
+      expect(SUPPORTS_7X_GRAPHITE_ICONS).toBeFalsy()
+    })
+  }
 })
 
 describe('gradientFill prop', () => {
+  const SAMPLE_LINEAR_STOPS = [
+    { offset: '0%', color: '#FF5F6D' },
+    { offset: '100%', color: '#FFC371' }
+  ]
+
   test('applies a linearGradient element and fill reference to svg', () => {
     const wrapper = mountFromProps({
       icon: faCoffee,
@@ -651,10 +659,7 @@ describe('gradientFill prop', () => {
         y1: '0%',
         x2: '100%',
         y2: '0%',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -771,10 +776,7 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'arrayGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -788,10 +790,7 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'stringGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -808,10 +807,7 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'symbolGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
