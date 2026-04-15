@@ -65,7 +65,6 @@ describe('counter', () => {
     })
 
     expect(wrapper.element.getAttribute('class')).toBe('fa-layers-counter')
-    expect(wrapper.element.getAttribute('class')).not.toBe('fa-layers-text')
     expect(wrapper.element.innerHTML).toBe('42')
   })
 
