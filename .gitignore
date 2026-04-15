@@ -8,3 +8,5 @@ fortawesome-vue-fontawesome-*.tgz
 
 # Local Claude Code settings
 .claude/settings.json
+.claude/commands
+

@@ -1,5 +1,5 @@
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__fixtures__/icons'
+import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faFish } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
@@ -16,7 +16,7 @@ import {
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish)
+  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faFish)
 })
 
 afterEach(() => {
