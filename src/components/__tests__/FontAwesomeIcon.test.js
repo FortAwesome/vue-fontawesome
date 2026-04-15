@@ -1,22 +1,23 @@
 import { faClose, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faFish } from '../__fixtures__/icons'
+import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faDogUtility, faFish } from '../__fixtures__/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
   mountFromProps,
-  SUPPORTS_ICON_BY_STYLE,
-  SUPPORTS_ICON_ALIASES,
-  SUPPORTS_ICON_USING_STRING,
-  SUPPORTS_ICON_USING_FAMILY,
-  SUPPORTS_7X_SMALL_BATCH_ICONS,
   SUPPORTS_7X_GRAPHITE_ICONS,
+  SUPPORTS_7X_SMALL_BATCH_ICONS,
+  SUPPORTS_7X_UTILITY_ICONS,
+  SUPPORTS_ICON_ALIASES,
+  SUPPORTS_ICON_BY_STYLE,
+  SUPPORTS_ICON_USING_FAMILY,
+  SUPPORTS_ICON_USING_STRING,
   SUPPORTS_TITLE_PROP
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
 
 beforeEach(() => {
-  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faFish)
+  library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faDogGraphite, faDogUtility, faFish)
 })
 
 afterEach(() => {
@@ -622,7 +623,20 @@ describe('using a family', () => {
     })
   }
 
-  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS && SUPPORTS_7X_GRAPHITE_ICONS) {
+  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_UTILITY_ICONS) {
+    test('will find a utility fill-semibold icon using string format, long prefix, and long fa-icon name', () => {
+      const wrapper = mountFromProps({ icon: 'fa-utility fa-fill-semibold fa-dog' })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-dog')).toBeTruthy()
+    })
+  } else if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_SMALL_BATCH_ICONS) {
+    test('7x utility icons are not supported in this core version', () => {
+      expect(SUPPORTS_7X_UTILITY_ICONS).toBeFalsy()
+    })
+  }
+
+  if (SUPPORTS_ICON_USING_FAMILY && SUPPORTS_7X_GRAPHITE_ICONS) {
     test('will default to a graphite thin icon using string format, long prefix, and long fa-icon name', () => {
       const wrapper = mountFromProps({ icon: 'fa-graphite fa-dog' })
 
