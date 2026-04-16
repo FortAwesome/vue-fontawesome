@@ -1,5 +1,7 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { IconDefinition, IconLookup, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core'
 import { DefineComponent } from 'vue'
+
+type IconProp = IconDefinition | IconLookup | [IconPrefix, IconName] | IconName | (string & {}) | object
 
 interface GradientStop {
   offset: string | number
@@ -32,8 +34,8 @@ interface FontAwesomeIconProps {
   border?: boolean
   fixedWidth?: boolean
   flip?: 'horizontal' | 'vertical' | 'both' | boolean
-  icon: object | Array<string> | string | IconDefinition
-  mask?: object | Array<string> | string
+  icon: IconProp
+  mask?: IconProp
   maskId?: string
   listItem?: boolean
   pull?: 'right' | 'left'
@@ -75,4 +77,4 @@ declare const FontAwesomeIcon: DefineComponent<FontAwesomeIconProps>
 declare const FontAwesomeLayers: DefineComponent<FontAwesomeLayersProps>
 declare const FontAwesomeLayersText: DefineComponent<FontAwesomeLayersTextProps>
 
-export { FontAwesomeIcon, FontAwesomeIconProps, FontAwesomeLayers, FontAwesomeLayersProps, FontAwesomeLayersText, FontAwesomeLayersTextProps, GradientStop, LinearGradientFill, RadialGradientFill }
+export { FontAwesomeIcon, FontAwesomeIconProps, FontAwesomeLayers, FontAwesomeLayersProps, FontAwesomeLayersText, FontAwesomeLayersTextProps, GradientStop, LinearGradientFill, RadialGradientFill, IconProp }
