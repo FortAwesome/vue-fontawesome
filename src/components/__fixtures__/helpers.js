@@ -37,6 +37,8 @@ export function coreHasFeature(feature) {
   if (feature === ICON_TITLE_PROP) {
     return coreMajorVersion < 7
   }
+
+  return false
 }
 
 export const REFERENCE_ICON_BY_STYLE = 0x00
