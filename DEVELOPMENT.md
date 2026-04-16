@@ -12,7 +12,7 @@ The following commands are available through `npm run` or `yarn`:
 
 ## Testing against multiple Font Awesome SVG Core versions
 
-The library supports `@fortawesome/fontawesome-svg-core` v1 (Font Awesome 5), v6, and v7. The default devDependency is v7, but you can temporarily swap versions without modifying `package.json`:
+The library supports `@fortawesome/fontawesome-svg-core` v1 (Font Awesome 5), v6, and v7. The default devDependency is v7, but you can temporarily swap versions without modifying `package.json`. Note that `package-lock.json` will be updated — run `git checkout -- package-lock.json` when done to restore it.
 
 ```bash
 # Test against v5
@@ -25,6 +25,9 @@ npm run test
 
 # Restore v7
 npm install --no-save @fortawesome/fontawesome-svg-core@~7 @fortawesome/free-solid-svg-icons@~7
+
+# Clean up lockfile changes
+git checkout -- package-lock.json
 ```
 
 Each version runs a subset of the tests — blocks guarded by version feature flags are automatically skipped.
