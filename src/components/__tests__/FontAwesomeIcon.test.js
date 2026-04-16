@@ -3,13 +3,15 @@ import { faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish } from '../__f
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   compileAndMount,
-  mountFromProps,
+  compileWithTemplate,
   coreHasFeature,
-  REFERENCE_ICON_USING_STRING,
+  mountFromProps,
+  ICON_ALIASES,
+  ICON_TITLE_PROP,
   REFERENCE_ICON_BY_STYLE,
-  REFERENCE_ICON_USING_FAMILY,
   REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS,
-  ICON_ALIASES
+  REFERENCE_ICON_USING_FAMILY,
+  REFERENCE_ICON_USING_STRING
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
@@ -31,6 +33,36 @@ describe('icon title prop', () => {
     expect(wrapper.element.getAttribute('aria-labelledby')).toBeFalsy()
     expect(wrapper.element.querySelector('title')).toBeFalsy()
   })
+
+  if (coreHasFeature(ICON_TITLE_PROP)) {
+    test('renders a title element and aria-labelledby when title is set', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Coffee Icon',
+        titleId: 'coffee-title'
+      })
+
+      const titleEl = wrapper.element.querySelector('title')
+      expect(titleEl).toBeTruthy()
+      expect(titleEl.textContent).toBe('Coffee Icon')
+      expect(wrapper.element.getAttribute('aria-labelledby')).toContain('coffee-title')
+    })
+
+    test('renders a title element without titleId', () => {
+      const wrapper = mountFromProps({
+        icon: faCoffee,
+        title: 'Coffee Icon'
+      })
+
+      const titleEl = wrapper.element.querySelector('title')
+      expect(titleEl).toBeTruthy()
+      expect(titleEl.textContent).toBe('Coffee Icon')
+    })
+  } else {
+    test('ICON_TITLE_PROP is not available in this core version', () => {
+      expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
+    })
+  }
 })
 
 describe('icons are showing', () => {
@@ -62,6 +94,10 @@ describe('icons are showing', () => {
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
     })
+  } else {
+    test('REFERENCE_ICON_BY_STYLE is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_BY_STYLE)).toBeFalsy()
+    })
   }
 
   if (coreHasFeature(REFERENCE_ICON_USING_STRING)) {
@@ -77,6 +113,10 @@ describe('icons are showing', () => {
 
       expect(wrapper.element.tagName).toBe('svg')
       expect(wrapper.element.classList.contains('fa-alien')).toBeTruthy()
+    })
+  } else {
+    test('REFERENCE_ICON_USING_STRING is not available in this core version', () => {
+      expect(coreHasFeature(REFERENCE_ICON_USING_STRING)).toBeFalsy()
     })
   }
 
@@ -103,58 +143,26 @@ describe('icons are showing', () => {
 
 describe('unrelated Vue data options', () => {
   test('with extra static class', () => {
-    const wrapper = compileAndMount({
-      template: '<font-awesome-icon class="extra" :icon="icon" />',
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate('<font-awesome-icon class="extra" :icon="icon" />', faCoffee)
 
     expect(wrapper.element.classList.contains('extra')).toBeTruthy()
   })
 
   test('with extra bound class', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon :class="['extra1', {'extra2': true}]" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon :class="['extra1', {'extra2': true}]" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.classList.contains('extra1')).toBeTruthy()
     expect(wrapper.element.classList.contains('extra2')).toBeTruthy()
   })
 
   test('with extra style', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon :style="{'font-size': '42px'}" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.style.getPropertyValue('font-size')).toBe('42px')
   })
 
   test('with extra DOM property', () => {
-    const wrapper = compileAndMount({
-      template: `<font-awesome-icon rel="local" :icon="icon" />`,
-      data() {
-        return { icon: faCoffee }
-      },
-      components: {
-        FontAwesomeIcon
-      }
-    })
+    const wrapper = compileWithTemplate(`<font-awesome-icon rel="local" :icon="icon" />`, faCoffee)
 
     expect(wrapper.element.getAttribute('rel')).toBe('local')
   })
@@ -183,10 +191,36 @@ describe('unrelated Vue data options', () => {
   })
 })
 
-test('using border', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, border: true })
+describe('display props', () => {
+  test.each([
+    ['border', 'fa-border'],
+    ['listItem', 'fa-li'],
+    ['fixedWidth', 'fa-fw'],
+    ['widthAuto', 'fa-width-auto'],
+    ['inverse', 'fa-inverse'],
+    ['swapOpacity', 'fa-swap-opacity'],
+  ])('using %s', (prop, cls) => {
+    const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
+    expect(wrapper.element.classList.contains(cls)).toBeTruthy()
+  })
+})
 
-  expect(wrapper.element.classList.contains('fa-border')).toBeTruthy()
+describe('animation props', () => {
+  test.each([
+    ['spin', 'fa-spin'],
+    ['pulse', 'fa-pulse'],
+    ['bounce', 'fa-bounce'],
+    ['shake', 'fa-shake'],
+    ['beat', 'fa-beat'],
+    ['fade', 'fa-fade'],
+    ['beatFade', 'fa-beat-fade'],
+    ['flash', 'fa-flash'],
+    ['spinPulse', 'fa-spin-pulse'],
+    ['spinReverse', 'fa-spin-reverse'],
+  ])('using %s', (prop, cls) => {
+    const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
+    expect(wrapper.element.classList.contains(cls)).toBeTruthy()
+  })
 })
 
 describe('using flip', () => {
@@ -226,12 +260,6 @@ describe('using flip', () => {
   })
 })
 
-test('using listItem', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, listItem: true })
-
-  expect(wrapper.element.classList.contains('fa-li')).toBeTruthy()
-})
-
 describe('using pull', () => {
   test('right', () => {
     const wrapper = mountFromProps({ icon: faCoffee, pull: 'right' })
@@ -244,12 +272,6 @@ describe('using pull', () => {
 
     expect(wrapper.element.classList.contains('fa-pull-left')).toBeTruthy()
   })
-})
-
-test('using pulse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, pulse: true })
-
-  expect(wrapper.element.classList.contains('fa-pulse')).toBeTruthy()
 })
 
 describe('using rotation', () => {
@@ -279,35 +301,18 @@ describe('using rotation', () => {
 })
 
 describe('using rotateBy', () => {
-  test('with a style attribute of 1000 will show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 1000deg' })
+  test('will add fa-rotate-by class and apply custom angle via style', () => {
+    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: 329deg' })
 
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('--fa-rotate-angle')).toBe('329deg')
   })
 
-  test('with a style attribute of `something-` will still show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true, style: '--fa-rotate-angle: something-deg' })
-
-    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
-  })
-
-  test('without a style attribute will still show the fa-rotate-by class', () => {
-    const wrapper = mountFromProps({ icon: faDog, rotateBy: true })
-
-    expect(wrapper.element.classList.contains('fa-rotate-by')).toBeTruthy()
-  })
-
-  test('not using rotateBy shows will not show the fa-rotate-by class', () => {
+  test('will not add fa-rotate-by class', () => {
     const wrapper = mountFromProps({ icon: faDog })
 
     expect(wrapper.element.classList.contains('fa-rotate-by')).toBeFalsy()
   })
-})
-
-test('swap opacity', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, swapOpacity: true })
-
-  expect(wrapper.element.classList.contains('fa-swap-opacity')).toBeTruthy()
 })
 
 test('using size', () => {
@@ -318,18 +323,6 @@ test('using size', () => {
   })
 })
 
-test('using spin', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, spin: true })
-
-  expect(wrapper.element.classList.contains('fa-spin')).toBeTruthy()
-})
-
-test('using inverse', () => {
-  const wrapper = mountFromProps({ icon: faCoffee, inverse: true })
-
-  expect(wrapper.element.classList.contains('fa-inverse')).toBeTruthy()
-})
-
 describe('using transform', () => {
   test('string', () => {
     const wrapper = mountFromProps({
@@ -337,7 +330,8 @@ describe('using transform', () => {
       transform: 'grow-40 left-4 rotate-15'
     })
 
-    expect(wrapper.element).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('transform-origin')).toBeTruthy()
+    expect(wrapper.element.querySelector('g[transform]')).toBeTruthy()
   })
 
   test('object', () => {
@@ -353,15 +347,35 @@ describe('using transform', () => {
       }
     })
 
-    expect(wrapper.element).toBeTruthy()
+    expect(wrapper.element.style.getPropertyValue('transform-origin')).toBeTruthy()
+    expect(wrapper.element.querySelector('g[transform]')).toBeTruthy()
   })
 })
 
 describe('mask', () => {
-  test('will add icon', () => {
+  test('will add icon using iconDefinition', () => {
     const wrapper = mountFromProps({ icon: faCoffee, mask: faCircle })
 
-    expect(wrapper.element.innerHTML).toMatch(/clipPath/)
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
+  })
+
+  test('will add icon using array format', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: ['fas', 'circle'] })
+
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
+  })
+
+  test('will add icon using string format', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: 'circle' })
+
+    expect(wrapper.element.querySelector('clipPath')).toBeTruthy()
+  })
+
+  test('will use maskId for clipPath and mask ids', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, mask: faCircle, maskId: 'my-mask' })
+
+    expect(wrapper.element.querySelector('clipPath').getAttribute('id')).toBe('clip-my-mask')
+    expect(wrapper.element.querySelector('mask').getAttribute('id')).toBe('mask-my-mask')
   })
 })
 
@@ -372,19 +386,20 @@ describe('symbol', () => {
     expect(wrapper.element.style.getPropertyValue('display')).toBe('')
   })
 
-  test('will create a symbol', () => {
+  test('will create a symbol with a string id', () => {
     const wrapper = mountFromProps({ icon: faCoffee, symbol: 'coffee-icon' })
 
     expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
     expect(wrapper.element.children[0].tagName).toBe('symbol')
+    expect(wrapper.element.children[0].getAttribute('id')).toBe('coffee-icon')
   })
-})
 
-describe('title', () => {
-  test('not using title', () => {
-    const wrapper = mountFromProps({ icon: faCoffee })
+  test('will create a symbol with an auto-generated id when symbol is true', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, symbol: true })
 
-    expect(wrapper.element.getElementsByTagName('title').length).toBe(0)
+    expect(wrapper.element.style.getPropertyValue('display')).toBe('none')
+    expect(wrapper.element.children[0].tagName).toBe('symbol')
+    expect(wrapper.element.children[0].getAttribute('id')).toBe('fas-fa-coffee')
   })
 })
 
@@ -398,69 +413,46 @@ describe('reactivity', () => {
 
     expect(wrapper.element.classList.contains('fa-circle')).toBeTruthy()
   })
-})
 
-describe('using bounce', () => {
-  test('bounce', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, bounce: true })
+  test('adding gradientFill updates the element', async () => {
+    const wrapper = mountFromProps({ icon: faCoffee })
 
-    expect(wrapper.element.classList.contains('fa-bounce')).toBeTruthy()
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+
+    await wrapper.setProps({
+      gradientFill: {
+        id: 'reactiveGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: 'red' },
+          { offset: '100%', color: 'blue' }
+        ]
+      }
+    })
+
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
+    expect(wrapper.element.getAttribute('fill')).toBe('url(#reactiveGradient)')
   })
-})
 
-describe('using shake', () => {
-  test('shake', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, shake: true })
+  test('removing gradientFill updates the element', async () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'reactiveGradient',
+        type: 'linear',
+        stops: [
+          { offset: '0%', color: 'red' },
+          { offset: '100%', color: 'blue' }
+        ]
+      }
+    })
 
-    expect(wrapper.element.classList.contains('fa-shake')).toBeTruthy()
-  })
-})
+    expect(wrapper.element.querySelector('linearGradient')).toBeTruthy()
 
-describe('using beat', () => {
-  test('beat', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, beat: true })
+    await wrapper.setProps({ gradientFill: null })
 
-    expect(wrapper.element.classList.contains('fa-beat')).toBeTruthy()
-  })
-})
-
-describe('using fade', () => {
-  test('fade', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, fade: true })
-
-    expect(wrapper.element.classList.contains('fa-fade')).toBeTruthy()
-  })
-})
-
-describe('using beat-fade', () => {
-  test('beat-fade', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, beatFade: true })
-
-    expect(wrapper.element.classList.contains('fa-beat-fade')).toBeTruthy()
-  })
-})
-
-describe('using flash', () => {
-  test('flash', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, flash: true })
-
-    expect(wrapper.element.classList.contains('fa-flash')).toBeTruthy()
-  })
-})
-
-describe('using spin-pulse', () => {
-  test('spin-pulse', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, spinPulse: true })
-
-    expect(wrapper.element.classList.contains('fa-spin-pulse')).toBeTruthy()
-  })
-})
-
-describe('using spin-reverse', () => {
-  test('spin-reverse', () => {
-    const wrapper = mountFromProps({ icon: faCoffee, spinReverse: true })
-
-    expect(wrapper.element.classList.contains('fa-spin-reverse')).toBeTruthy()
+    expect(wrapper.element.querySelector('linearGradient')).toBeNull()
+    expect(wrapper.element.getAttribute('fill')).toBeNull()
   })
 })
 
@@ -468,25 +460,33 @@ test('using imported object from svg icons package', () => {
   const wrapper = mountFromProps({ icon: faUser })
 
   expect(wrapper.element.tagName).toBe('svg')
+  expect(wrapper.element.classList.contains('fa-user')).toBeTruthy()
 })
 
 if (coreHasFeature(ICON_ALIASES)) {
-  test('find a free-solid-svg-icon with array format', () => {
-    library.reset()
-    library.add(faClose)
-    const wrapper = mountFromProps({ icon: ['fas', 'xmark'] })
+  describe('icon aliases', () => {
+    beforeEach(() => {
+      library.reset()
+      library.add(faClose)
+    })
 
-    expect(wrapper.element.tagName).toBe('svg')
-    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    test('find a free-solid-svg-icon with array format', () => {
+      const wrapper = mountFromProps({ icon: ['fas', 'xmark'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    })
+
+    test('find a free-solid-svg-icon that is an alias', () => {
+      const wrapper = mountFromProps({ icon: ['fas', 'close'] })
+
+      expect(wrapper.element.tagName).toBe('svg')
+      expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+    })
   })
-
-  test('find a free-solid-svg-icon that is an alias', () => {
-    library.reset()
-    library.add(faClose)
-    const wrapper = mountFromProps({ icon: ['fas', 'close'] })
-
-    expect(wrapper.element.tagName).toBe('svg')
-    expect(wrapper.element.classList.contains('fa-xmark')).toBeTruthy()
+} else {
+  test('ICON_ALIASES is not available in this core version', () => {
+    expect(coreHasFeature(ICON_ALIASES)).toBeFalsy()
   })
 }
 
@@ -563,15 +563,15 @@ describe('using a family', () => {
         expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
       })
 
-      test('will find a jelly-duo regular icon using string format, long prefix, long style, and long fa-icon name', () => {
+      test('will find a whiteboard semibold icon using string format, long prefix, long style, and long fa-icon name', () => {
         const wrapper = mountFromProps({ icon: 'fa-whiteboard fa-semibold fa-fish' })
 
         expect(wrapper.element.tagName).toBe('svg')
         expect(wrapper.element.classList.contains('fa-fish')).toBeTruthy()
       })
     } else {
-      test.skip('icon pack tests (jelly-duo, whiteboard) are only available in 7.x', () => {
-        // Skipped: icon packs not supported in this core version
+      test('REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS is not available in this core version', () => {
+        expect(coreHasFeature(REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS)).toBeFalsy()
       })
     }
   } else {
@@ -582,6 +582,11 @@ describe('using a family', () => {
 })
 
 describe('gradientFill prop', () => {
+  const SAMPLE_LINEAR_STOPS = [
+    { offset: '0%', color: '#FF5F6D' },
+    { offset: '100%', color: '#FFC371' }
+  ]
+
   test('applies a linearGradient element and fill reference to svg', () => {
     const wrapper = mountFromProps({
       icon: faCoffee,
@@ -592,10 +597,7 @@ describe('gradientFill prop', () => {
         y1: '0%',
         x2: '100%',
         y2: '0%',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -606,7 +608,9 @@ describe('gradientFill prop', () => {
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myLinearGradient')
     expect(gradient.getAttribute('x1')).toBe('0%')
+    expect(gradient.getAttribute('y1')).toBe('0%')
     expect(gradient.getAttribute('x2')).toBe('100%')
+    expect(gradient.getAttribute('y2')).toBe('0%')
 
     const stops = gradient.querySelectorAll('stop')
 
@@ -640,11 +644,41 @@ describe('gradientFill prop', () => {
 
     expect(gradient).toBeTruthy()
     expect(gradient.getAttribute('id')).toBe('myRadialGradient')
+    expect(gradient.getAttribute('r')).toBe('150%')
+    expect(gradient.getAttribute('cx')).toBe('30%')
+    expect(gradient.getAttribute('cy')).toBe('107%')
+    expect(gradient.getAttribute('fx')).toBeNull()
+    expect(gradient.getAttribute('fy')).toBeNull()
 
     const stops = gradient.querySelectorAll('stop')
 
     expect(stops.length).toBe(3)
     expect(stops[1].getAttribute('stop-opacity')).toBe('0.8')
+  })
+
+  test('applies a radialGradient with optional fx and fy focal point attributes', () => {
+    const wrapper = mountFromProps({
+      icon: faCoffee,
+      gradientFill: {
+        id: 'myRadialGradientFocal',
+        type: 'radial',
+        r: '150%',
+        cx: '30%',
+        cy: '107%',
+        fx: '50%',
+        fy: '50%',
+        stops: [
+          { offset: '0', color: '#FDF497' },
+          { offset: '1', color: '#285AEB' }
+        ]
+      }
+    })
+
+    const gradient = wrapper.element.querySelector('radialGradient')
+
+    expect(gradient).toBeTruthy()
+    expect(gradient.getAttribute('fx')).toBe('50%')
+    expect(gradient.getAttribute('fy')).toBe('50%')
   })
 
   test('strips fill from child path elements when gradientFill is provided', () => {
@@ -671,7 +705,7 @@ describe('gradientFill prop', () => {
 
     const fill = wrapper.element.getAttribute('fill')
 
-    expect(fill === null || !fill.includes('url(')).toBe(true)
+    expect(fill).toBeNull()
   })
 
   test('works with array icon syntax', () => {
@@ -680,10 +714,7 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'arrayGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -697,10 +728,7 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'stringGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
@@ -717,16 +745,44 @@ describe('gradientFill prop', () => {
       gradientFill: {
         id: 'symbolGradient',
         type: 'linear',
-        stops: [
-          { offset: '0%', color: '#FF5F6D' },
-          { offset: '100%', color: '#FFC371' }
-        ]
+        stops: SAMPLE_LINEAR_STOPS
       }
     })
 
+    expect(consoleSpy).toHaveBeenCalledWith('gradientFill is not supported when symbol is true and will be ignored')
     expect(wrapper.element.querySelector('linearGradient')).toBeNull()
     const fill = wrapper.element.getAttribute('fill')
-    expect(fill === null || !fill.includes('url(')).toBe(true)
+    expect(fill).toBeNull()
     consoleSpy.mockRestore()
+  })
+
+  describe('validator warnings', () => {
+    let consoleSpy
+
+    beforeEach(() => {
+      consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      consoleSpy.mockRestore()
+    })
+
+    test('warns when gradientFill.id is missing', () => {
+      mountFromProps({
+        icon: faCoffee,
+        gradientFill: { type: 'linear', stops: SAMPLE_LINEAR_STOPS }
+      })
+
+      expect(consoleSpy).toHaveBeenCalledWith('FontAwesomeIcon: gradientFill.id must be a non-empty string')
+    })
+
+    test('warns when gradientFill.type is invalid', () => {
+      mountFromProps({
+        icon: faCoffee,
+        gradientFill: { id: 'myGradient', type: 'diagonal', stops: SAMPLE_LINEAR_STOPS }
+      })
+
+      expect(consoleSpy).toHaveBeenCalledWith('FontAwesomeIcon: gradientFill.type must be "linear" or "radial"')
+    })
   })
 })

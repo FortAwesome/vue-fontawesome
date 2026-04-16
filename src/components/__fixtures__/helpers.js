@@ -13,6 +13,18 @@ export function mountFromProps(props = {}) {
   return mount(FontAwesomeIcon, { props })
 }
 
+export function compileWithTemplate(template, icon) {
+  return compileAndMount({
+    template,
+    data() {
+      return { icon }
+    },
+    components: {
+      FontAwesomeIcon
+    }
+  })
+}
+
 export function coreHasFeature(feature) {
   if (feature === REFERENCE_ICON_BY_STYLE || feature === ICON_ALIASES || feature === REFERENCE_ICON_USING_STRING || feature === REFERENCE_ICON_USING_FAMILY) {
     return parse.icon
@@ -21,6 +33,12 @@ export function coreHasFeature(feature) {
   if (feature === REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS) {
     return coreMajorVersion === 7
   }
+
+  if (feature === ICON_TITLE_PROP) {
+    return coreMajorVersion < 7
+  }
+
+  return false
 }
 
 export const REFERENCE_ICON_BY_STYLE = 0x00
@@ -28,3 +46,4 @@ export const ICON_ALIASES = 0x01
 export const REFERENCE_ICON_USING_STRING = 0x02
 export const REFERENCE_ICON_USING_FAMILY = 0x03
 export const REFERENCE_ICON_USING_7X_SMALL_BATCH_ICONS = 0x04
+export const ICON_TITLE_PROP = 0x06
