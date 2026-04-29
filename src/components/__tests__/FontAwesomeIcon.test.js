@@ -289,24 +289,28 @@ describe('using rotation', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 90 })
 
     expect(wrapper.element.classList.contains('fa-rotate-90')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('180', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 180 })
 
     expect(wrapper.element.classList.contains('fa-rotate-180')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('270', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 270 })
 
     expect(wrapper.element.classList.contains('fa-rotate-270')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('as a string', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: '90' })
 
     expect(wrapper.element.classList.contains('fa-rotate-90')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('0 does not add a rotation class and does not warn', () => {
