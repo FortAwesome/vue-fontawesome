@@ -38,7 +38,7 @@ interface FontAwesomeIconProps {
   listItem?: boolean
   pull?: 'right' | 'left'
   pulse?: boolean
-  rotation?: 90 | 180 | 270 | '90' | '180' | '270'
+  rotation?: 0 | 90 | 180 | 270 | '0' | '90' | '180' | '270'
   rotateBy?: boolean
   swapOpacity?: boolean
   size?: '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '1x' | '2x' | '3x' | '4x' | '5x' | '6x' | '7x' | '8x' | '9x' | '10x'

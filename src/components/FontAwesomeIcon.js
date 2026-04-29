@@ -77,7 +77,7 @@ export default defineComponent({
     rotation: {
       type: [String, Number],
       default: null,
-      validator: (value) => [90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
+      validator: (value) => [0, 90, 180, 270].indexOf(Number.parseInt(value, 10)) > -1
     },
     // the rotateBy property is only supported in version 7.0.0 and later
     rotateBy: {

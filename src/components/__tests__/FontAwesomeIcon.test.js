@@ -298,6 +298,18 @@ describe('using rotation', () => {
 
     expect(wrapper.element.classList.contains('fa-rotate-90')).toBeTruthy()
   })
+
+  test('0 does not add a rotation class', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: 0 })
+
+    expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
+  })
+
+  test('0 as a string does not add a rotation class', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: '0' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
+  })
 })
 
 describe('using rotateBy', () => {

@@ -15,7 +15,7 @@ export function classList(props) {
     'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both',
     [`fa-${props.size}`]: props.size !== null,
-    [`fa-rotate-${props.rotation}`]: props.rotation !== null,
+    [`fa-rotate-${props.rotation}`]: props.rotation !== null && props.rotation !== 0 && props.rotation !== '0',
     'fa-rotate-by': props.rotateBy,
     [`fa-pull-${props.pull}`]: props.pull !== null,
     'fa-swap-opacity': props.swapOpacity,
