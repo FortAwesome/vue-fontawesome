@@ -318,6 +318,12 @@ describe('using rotation', () => {
 
     consoleSpy.mockRestore()
   })
+
+  test('null does not add any rotation class', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: null })
+
+    expect(wrapper.element.getAttribute('class')).not.toMatch(/fa-rotate-/)
+  })
 })
 
 describe('using rotateBy', () => {
