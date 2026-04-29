@@ -275,6 +275,16 @@ describe('using pull', () => {
 })
 
 describe('using rotation', () => {
+  let consoleSpy
+
+  beforeEach(() => {
+    consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    consoleSpy.mockRestore()
+  })
+
   test('90', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 90 })
 
@@ -300,23 +310,17 @@ describe('using rotation', () => {
   })
 
   test('0 does not add a rotation class and does not warn', () => {
-    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 0 })
 
     expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
     expect(consoleSpy).not.toHaveBeenCalled()
-
-    consoleSpy.mockRestore()
   })
 
   test('0 as a string does not add a rotation class and does not warn', () => {
-    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const wrapper = mountFromProps({ icon: faCoffee, rotation: '0' })
 
     expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
     expect(consoleSpy).not.toHaveBeenCalled()
-
-    consoleSpy.mockRestore()
   })
 
   test('null does not add any rotation class', () => {
