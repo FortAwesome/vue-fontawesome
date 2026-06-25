@@ -198,7 +198,7 @@ describe('display props', () => {
     ['fixedWidth', 'fa-fw'],
     ['widthAuto', 'fa-width-auto'],
     ['inverse', 'fa-inverse'],
-    ['swapOpacity', 'fa-swap-opacity'],
+    ['swapOpacity', 'fa-swap-opacity']
   ])('using %s', (prop, cls) => {
     const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
     expect(wrapper.element.classList.contains(cls)).toBeTruthy()
@@ -217,6 +217,15 @@ describe('animation props', () => {
     ['flash', 'fa-flash'],
     ['spinPulse', 'fa-spin-pulse'],
     ['spinReverse', 'fa-spin-reverse'],
+    ['flip360', 'fa-flip-360'],
+    ['buzz', 'fa-buzz'],
+    ['float', 'fa-float'],
+    ['jello', 'fa-jello'],
+    ['spinSnap', 'fa-spin-snap'],
+    ['spinSnap4', 'fa-spin-snap-4'],
+    ['spinSnap8', 'fa-spin-snap-8'],
+    ['swing', 'fa-swing'],
+    ['wag', 'fa-wag']
   ])('using %s', (prop, cls) => {
     const wrapper = mountFromProps({ icon: faCoffee, [prop]: true })
     expect(wrapper.element.classList.contains(cls)).toBeTruthy()

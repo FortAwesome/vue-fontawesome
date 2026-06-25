@@ -28,7 +28,17 @@ export function classList(props) {
     'fa-spin-pulse': props.spinPulse,
     'fa-spin-reverse': props.spinReverse,
     // the widthAuto property is only supported in version 7.0.0 and later
-    'fa-width-auto': props.widthAuto
+    'fa-width-auto': props.widthAuto,
+    // the following animations are only supported in version 7.3.0 and later
+    'fa-flip-360': props.flip360,
+    'fa-buzz': props.buzz,
+    'fa-float': props.float,
+    'fa-jello': props.jello,
+    'fa-spin-snap': props.spinSnap,
+    'fa-spin-snap-4': props.spinSnap4,
+    'fa-spin-snap-8': props.spinSnap8,
+    'fa-swing': props.swing,
+    'fa-wag': props.wag
   }
 
   return Object.keys(classes)

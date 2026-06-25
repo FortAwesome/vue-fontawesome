@@ -60,6 +60,15 @@ interface FontAwesomeIconProps {
   spinReverse?: boolean
   widthAuto?: boolean
   gradientFill?: LinearGradientFill | RadialGradientFill
+  flip360?: boolean
+  buzz?: boolean
+  float?: boolean
+  jello?: boolean
+  spinSnap?: boolean
+  spinSnap4?: boolean
+  spinSnap8?: boolean
+  swing?: boolean
+  wag?: boolean
 }
 
 interface FontAwesomeLayersProps {
@@ -77,4 +86,15 @@ declare const FontAwesomeIcon: DefineComponent<FontAwesomeIconProps>
 declare const FontAwesomeLayers: DefineComponent<FontAwesomeLayersProps>
 declare const FontAwesomeLayersText: DefineComponent<FontAwesomeLayersTextProps>
 
-export { FontAwesomeIcon, FontAwesomeIconProps, FontAwesomeLayers, FontAwesomeLayersProps, FontAwesomeLayersText, FontAwesomeLayersTextProps, GradientStop, LinearGradientFill, RadialGradientFill, IconProp }
+export {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+  FontAwesomeLayers,
+  FontAwesomeLayersProps,
+  FontAwesomeLayersText,
+  FontAwesomeLayersTextProps,
+  GradientStop,
+  LinearGradientFill,
+  RadialGradientFill,
+  IconProp
+}
