@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.0) - 2026-06-26
+
+### Added
+
+- Support for the new animation props introduced in Font Awesome 7.3.0: `flip360`, `buzz`, `float`, `jello`,
+  `spinSnap`, `spinSnap4`, `spinSnap8`, `swing`, and `wag`
+
+### Changed
+
+- Improved TypeScript types for the `icon` and `mask` props
+- Test suite updates and added testing notes to `DEVELOPMENT.md`
+
+---
+
 ## [3.2.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.2.0) - 2026-04-14
 
 ### Added
