@@ -168,6 +168,43 @@ export default defineComponent({
         }
         return true
       }
+    },
+    // the following animation properties are only supported in version 7.3.0 and later
+    flip360: {
+      type: Boolean,
+      default: false
+    },
+    buzz: {
+      type: Boolean,
+      default: false
+    },
+    float: {
+      type: Boolean,
+      default: false
+    },
+    jello: {
+      type: Boolean,
+      default: false
+    },
+    spinSnap: {
+      type: Boolean,
+      default: false
+    },
+    spinSnap4: {
+      type: Boolean,
+      default: false
+    },
+    spinSnap8: {
+      type: Boolean,
+      default: false
+    },
+    swing: {
+      type: Boolean,
+      default: false
+    },
+    wag: {
+      type: Boolean,
+      default: false
     }
   },
 
