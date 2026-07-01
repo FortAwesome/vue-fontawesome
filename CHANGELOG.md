@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- `TS2590: Expression produces a union type that is too complex to represent` when using `FontAwesomeIcon`
+  in a Vue render function (`h(FontAwesomeIcon, { icon })`), a regression from #559. The bare `IconName`
+  literal-union member is removed from the `icon`/`mask` prop type; the `[prefix, name]` tuple form is
+  retained. The change is types-only, runtime-neutral, and non-breaking.
+
+---
+
 ## [3.3.0](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.0) - 2026-06-26
 
 ### Added

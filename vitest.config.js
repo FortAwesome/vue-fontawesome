@@ -8,6 +8,10 @@ export default defineConfig({
         customExportConditions: ['node', 'node-addons']
       }
     },
-    globals: true
+    globals: true,
+    typecheck: {
+      tsconfig: './types-test/tsconfig.json',
+      include: ['types-test/**/*.test-d.ts']
+    }
   }
 })

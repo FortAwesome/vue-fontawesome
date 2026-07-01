@@ -44,6 +44,10 @@ jobs:
           npm run build
           npm run test
 
+      - name: type-check public API types
+        if: matrix.fontawesome-svg-core == '7.x' && matrix.vue == '3.5.x'
+        run: npm run test:types
+
       - name: dist
         run: |
           npm install

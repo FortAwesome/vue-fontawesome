@@ -1,7 +1,7 @@
 import { IconDefinition, IconLookup, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core'
 import { DefineComponent } from 'vue'
 
-type IconProp = IconDefinition | IconLookup | [IconPrefix, IconName] | IconName | (string & {}) | object
+type IconProp = IconDefinition | IconLookup | [IconPrefix, IconName] | (string & {}) | object
 
 interface GradientStop {
   offset: string | number
