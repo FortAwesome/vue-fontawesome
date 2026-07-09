@@ -9,9 +9,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 - `TS2590: Expression produces a union type that is too complex to represent` when using `FontAwesomeIcon`
-  in a Vue render function (`h(FontAwesomeIcon, { icon })`), a regression from #559. The bare `IconName`
-  literal-union member is removed from the `icon`/`mask` prop type; the `[prefix, name]` tuple form is
-  retained. The change is types-only, runtime-neutral, and non-breaking.
+  in a Vue render function (`h(FontAwesomeIcon, { icon })`), a regression from #559. `FontAwesomeIcon` is
+  now declared as a `FunctionalComponent` instead of a `DefineComponent`, which avoids the Vue type
+  machinery that overflows on the large `IconName` union (vuejs/core#10514). The `icon`/`mask` prop type
+  is unchanged, so bare icon name autocomplete is preserved. The change is types-only, runtime-neutral,
+  and non-breaking.
 
 ---
 
