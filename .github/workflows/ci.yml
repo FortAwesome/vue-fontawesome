@@ -36,11 +36,7 @@ jobs:
         run: |
           npm install
           npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          npm install --no-save vue@${{ matrix.vue }}
-          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
-          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
-            npm install --no-save @vue/server-renderer@${{ matrix.vue }}
-          fi
+          npm install --no-save --legacy-peer-deps vue@${{ matrix.vue }} @vue/server-renderer@${{ matrix.vue }}
           npm run build
           npm run test
 
