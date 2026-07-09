@@ -4,16 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.3.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.1) - 2026-07-09
 
 ### Fixed
 
-- `TS2590: Expression produces a union type that is too complex to represent` when using `FontAwesomeIcon`
-  in a Vue render function (`h(FontAwesomeIcon, { icon })`), a regression from #559. `FontAwesomeIcon` is
-  now declared as a `FunctionalComponent` instead of a `DefineComponent`, which avoids the Vue type
-  machinery that overflows on the large `IconName` union (vuejs/core#10514). The `icon`/`mask` prop type
-  is unchanged, so bare icon name autocomplete is preserved. The change is types-only, runtime-neutral,
-  and non-breaking.
+- Fixed `TS2590: Expression produces a union type that is too complex to represent` when using
+  `FontAwesomeIcon` in a Vue render function (`h(FontAwesomeIcon, { icon })`), a regression from #559.
+  Types-only and non-breaking.
+
+### Changed
+
+- CI: fixed the build matrix failing with `npm ERESOLVE` when installing older Vue versions in the test
+  matrix (a regression surfaced by #576 adding `typescript` to the lockfile), and added a strict
+  peer-dependency check job
+- Documented the `test:types` command in `DEVELOPMENT.md` and added test-first and explicit `dist` steps
+  to the release checklist
 
 ---
 
