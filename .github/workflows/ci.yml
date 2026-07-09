@@ -37,6 +37,13 @@ jobs:
           npm install
           npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
           npm install --no-save --legacy-peer-deps vue@${{ matrix.vue }} @vue/server-renderer@${{ matrix.vue }}
+          # vue and @vue/server-renderer ship in lockstep (exact peer). --legacy-peer-deps lets the
+          # version swap past the committed lockfile pin, so assert the resolved versions actually
+          # match — a genuinely incompatible combo mismatches here and fails before tests run.
+          VUE_V=$(node -p "require('vue/package.json').version")
+          SSR_V=$(node -p "require('@vue/server-renderer/package.json').version")
+          echo "Testing against vue@$VUE_V / @vue/server-renderer@$SSR_V"
+          [ "$VUE_V" = "$SSR_V" ] || { echo "vue@$VUE_V and @vue/server-renderer@$SSR_V do not match"; exit 1; }
           npm run build
           npm run test
 
