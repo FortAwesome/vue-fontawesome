@@ -1,5 +1,5 @@
 import { IconDefinition, IconLookup, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core'
-import { DefineComponent } from 'vue'
+import { DefineComponent, FunctionalComponent } from 'vue'
 
 type IconProp = IconDefinition | IconLookup | [IconPrefix, IconName] | IconName | (string & {}) | object
 
@@ -82,7 +82,7 @@ interface FontAwesomeLayersTextProps {
   position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
 }
 
-declare const FontAwesomeIcon: DefineComponent<FontAwesomeIconProps>
+declare const FontAwesomeIcon: FunctionalComponent<FontAwesomeIconProps>
 declare const FontAwesomeLayers: DefineComponent<FontAwesomeLayersProps>
 declare const FontAwesomeLayersText: DefineComponent<FontAwesomeLayersTextProps>
 
