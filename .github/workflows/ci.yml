@@ -10,7 +10,7 @@ jobs:
       matrix:
         free-solid-svg-icons: [7.x, 6.x, 5.x]
         fontawesome-svg-core: [7.x, 6.x, 1.2.x]
-        node-version: [24.x, 22.x]
+        node-version: [26.x, 24.x]
         vue: [3.0.x, 3.1.x, 3.2.x, 3.3.x, 3.4.x, 3.5.x]
         exclude:
           # Only exclude v7.x icons with v6.x and v1.2.x core
@@ -36,11 +36,14 @@ jobs:
         run: |
           npm install
           npm install --no-save @fortawesome/fontawesome-svg-core@${{ matrix.fontawesome-svg-core }} @fortawesome/free-solid-svg-icons@${{ matrix.free-solid-svg-icons }}
-          npm install --no-save vue@${{ matrix.vue }}
-          VER=$(npm list vue | grep vue@ | cut -d@ -f3)
-          if [ "$(printf '%s\n' "3.2.12" "$VER" | sort -V | head -n1)" = "$VER" ]; then
-            npm install --no-save @vue/server-renderer@${{ matrix.vue }}
-          fi
+          npm install --no-save --legacy-peer-deps vue@${{ matrix.vue }} @vue/server-renderer@${{ matrix.vue }}
+          # vue and @vue/server-renderer ship in lockstep (exact peer). --legacy-peer-deps lets the
+          # version swap past the committed lockfile pin, so assert the resolved versions actually
+          # match — a genuinely incompatible combo mismatches here and fails before tests run.
+          VUE_V=$(node -p "require('vue/package.json').version")
+          SSR_V=$(node -p "require('@vue/server-renderer/package.json').version")
+          echo "Testing against vue@$VUE_V / @vue/server-renderer@$SSR_V"
+          [ "$VUE_V" = "$SSR_V" ] || { echo "vue@$VUE_V and @vue/server-renderer@$SSR_V do not match"; exit 1; }
           npm run build
           npm run test
 
@@ -54,3 +57,28 @@ jobs:
           npm run dist
         env:
           CI: true
+
+  # Validate peer dependencies at the default (lockfile) versions. The build matrix
+  # force-swaps vue with --legacy-peer-deps, which silences peer checks, so a genuine
+  # peer conflict introduced by a dependency bump could otherwise slip through. This
+  # job installs strictly and fails loudly if any peer is unsatisfiable.
+  # Note: it only catches conflicts present at the default versions — a conflict that
+  # appears only on a downgraded matrix cell is still covered by the test suite.
+  peer-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 24.x
+
+      - name: Setup npm
+        run: |
+          npm install -g npm@10
+          npm --version
+
+      - name: strict peer dependency check
+        run: npm install --strict-peer-deps

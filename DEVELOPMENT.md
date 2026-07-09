@@ -2,13 +2,14 @@
 
 ## Tasks
 
-The following commands are available through `npm run` or `yarn`:
+The following commands are available through `npm run`:
 
-| Command | Purpose                                                 |
-| ------- | ------------------------------------------------------- |
-| build   | Build a development version of the library using Rollup |
-| dist    | Build a production version of the library using Rollup  |
-| test    | Execute unit tests                                      |
+| Command    | Purpose                                                      |
+| ---------- | ------------------------------------------------------------ |
+| test       | Execute unit tests                                           |
+| test:types | Type-check the public API (`index.d.ts`) with `vitest`/`tsc` |
+| build      | Build a development version of the library using Rollup      |
+| dist       | Build a production version of the library using Rollup       |
 
 ## Testing against multiple Font Awesome SVG Core versions
 
@@ -36,10 +37,12 @@ Each version runs a subset of the tests — blocks guarded by version feature fl
 
 **During pre release, make sure and use `--tag` and `--npm-dist-tag`**
 
+1. Run `npm run test` and `npm run test:types` and confirm both pass (do this first — `npm publish` builds via `prepack`, so verify before anything is built or published)
 1. Update `package.json` and change `version`
 1. Run `npm install` to sync `package-lock.json`
 1. Update `README.md` and `package.json`; adding any contributors
 1. Update the `CHANGELOG.md`
+1. Run `npm run dist` to build the production bundle (optional but recommended — surfaces build errors here instead of mid-`publish`, since `npm publish` runs it via `prepack`)
 1. `npm publish --tag latest-3 --registry=https://registry.npmjs.org/`
 1. `npm dist-tag add --registry=https://registry.npmjs.org/ @fortawesome/vue-fontawesome@[VERSION_NUMBER] latest`
 1. `npm publish --tag latest-3 --registry=https://npm.fontawesome.com`
