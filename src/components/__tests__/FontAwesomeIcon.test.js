@@ -197,6 +197,8 @@ describe('display props', () => {
     ['listItem', 'fa-li'],
     ['fixedWidth', 'fa-fw'],
     ['widthAuto', 'fa-width-auto'],
+    ['canvasSquare', 'fa-canvas-square'],
+    ['canvasRoomy', 'fa-canvas-roomy'],
     ['inverse', 'fa-inverse'],
     ['swapOpacity', 'fa-swap-opacity']
   ])('using %s', (prop, cls) => {

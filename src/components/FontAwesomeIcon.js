@@ -154,6 +154,15 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    // the canvasSquare and canvasRoomy properties are only supported in version 7.3.0 and later
+    canvasSquare: {
+      type: Boolean,
+      default: false
+    },
+    canvasRoomy: {
+      type: Boolean,
+      default: false
+    },
     gradientFill: {
       type: Object,
       default: null,
