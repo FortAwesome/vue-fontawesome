@@ -59,6 +59,8 @@ interface FontAwesomeIconProps {
   spinPulse?: boolean
   spinReverse?: boolean
   widthAuto?: boolean
+  canvasSquare?: boolean
+  canvasRoomy?: boolean
   gradientFill?: LinearGradientFill | RadialGradientFill
   flip360?: boolean
   buzz?: boolean

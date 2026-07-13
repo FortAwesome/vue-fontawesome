@@ -29,6 +29,9 @@ export function classList(props) {
     'fa-spin-reverse': props.spinReverse,
     // the widthAuto property is only supported in version 7.0.0 and later
     'fa-width-auto': props.widthAuto,
+    // the canvasSquare and canvasRoomy properties are only supported in version 7.3.0 and later
+    'fa-canvas-square': props.canvasSquare,
+    'fa-canvas-roomy': props.canvasRoomy,
     // the following animations are only supported in version 7.3.0 and later
     'fa-flip-360': props.flip360,
     'fa-buzz': props.buzz,
