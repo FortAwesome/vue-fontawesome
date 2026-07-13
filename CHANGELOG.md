@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.2) - 2026-07-13
+
+### Added
+
+- New `canvasSquare` and `canvasRoomy` props for the canvas sizing options introduced in Font Awesome 7.3.0
+
+---
+
 ## [3.3.1](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.1) - 2026-07-09
 
 ### Fixed

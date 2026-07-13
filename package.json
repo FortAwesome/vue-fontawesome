@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/vue-fontawesome",
   "description": "Official Vue component for Font Awesome 7",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "main": "index.js",
   "files": [
     "README.md",
@@ -27,6 +27,7 @@
     "Brandon Mork <github.com/brandon-mork>",
     "btaens <github.com/btaens>",
     "David Driscoll <github.com/david-driscoll>",
+    "Graham Campbell <github.com/GrahamCampbell>",
     "Liu Xinyu <github.com/meteorlxy>",
     "Michael Cozzolino <https://github.com/michaelcozzolino>",
     "Okke Tijhuis <github.com/otijhuis>",
@@ -37,6 +38,7 @@
     "Xaver Schulz <github.com/schulz3000>",
     "Yannick Ihmels <github.com/ihmels>",
     "Brian Talbot <https://github.com/talbs>",
+    "Frances Botsford <https://github.com/frrrances>",
     "Jason Lundien <https://github.com/jasonlundien>",
     "Mike Wilkerson <https://github.com/mlwilkerson>",
     "Rob Madole <rob@fontawesome.com>",

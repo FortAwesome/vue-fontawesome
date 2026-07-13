@@ -114,7 +114,7 @@ function classList(props) {
     'fa-flip': props.flip === true,
     'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
     'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), 'fa-rotate-by', props.rotateBy), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, 'fa-flash', props.flash), 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse), 'fa-width-auto', props.widthAuto), 'fa-flip-360', props.flip360), 'fa-buzz', props.buzz), 'fa-float', props.float), 'fa-jello', props.jello), 'fa-spin-snap', props.spinSnap), 'fa-spin-snap-4', props.spinSnap4), _defineProperty(_defineProperty(_defineProperty(_classes, 'fa-spin-snap-8', props.spinSnap8), 'fa-swing', props.swing), 'fa-wag', props.wag));
+  }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, "fa-".concat(props.size), props.size !== null), "fa-rotate-".concat(props.rotation), props.rotation !== null), 'fa-rotate-by', props.rotateBy), "fa-pull-".concat(props.pull), props.pull !== null), 'fa-swap-opacity', props.swapOpacity), 'fa-bounce', props.bounce), 'fa-shake', props.shake), 'fa-beat', props.beat), 'fa-fade', props.fade), 'fa-beat-fade', props.beatFade), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, 'fa-flash', props.flash), 'fa-spin-pulse', props.spinPulse), 'fa-spin-reverse', props.spinReverse), 'fa-width-auto', props.widthAuto), 'fa-canvas-square', props.canvasSquare), 'fa-canvas-roomy', props.canvasRoomy), 'fa-flip-360', props.flip360), 'fa-buzz', props.buzz), 'fa-float', props.float), 'fa-jello', props.jello), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_classes, 'fa-spin-snap', props.spinSnap), 'fa-spin-snap-4', props.spinSnap4), 'fa-spin-snap-8', props.spinSnap8), 'fa-swing', props.swing), 'fa-wag', props.wag));
   return Object.keys(classes).map(function (key) {
     return classes[key] ? key : null;
   }).filter(function (key) {
@@ -577,6 +577,15 @@ var FontAwesomeIcon = defineComponent({
     },
     // the widthAuto property is only supported in version 7.0.0 and later
     widthAuto: {
+      type: Boolean,
+      default: false
+    },
+    // the canvasSquare and canvasRoomy properties are only supported in version 7.3.0 and later
+    canvasSquare: {
+      type: Boolean,
+      default: false
+    },
+    canvasRoomy: {
       type: Boolean,
       default: false
     },

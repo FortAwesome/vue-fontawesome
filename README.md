@@ -49,32 +49,33 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 
 |                                                                                      | Name              | GitHub                                                   |
 | :----------------------------------------------------------------------------------: | ----------------- | -------------------------------------------------------- |
-|     <img src="https://github.com/SirLamer.png?size=72" width="72" height="72" />     | SirLamer          | [@SirLamer](https://github.com/SirLamer)                 |
-|    <img src="https://github.com/meteorlxy.png?size=72" width="72" height="72" />     | Liu Xinyu         | [@meteorlxy](https://github.com/meteorlxy)               |
-|    <img src="https://github.com/schulz3000.png?size=72" width="72" height="72" />    | Xaver Schulz      | [@schulz3000](https://github.com/schulz3000)             |
-|      <img src="https://github.com/ihmels.png?size=72" width="72" height="72" />      | Yannick Ihmels    | [@ihmels](https://github.com/ihmels)                     |
-|      <img src="https://github.com/btaens.png?size=72" width="72" height="72" />      | btaens            | [@btaens](https://github.com/btaens)                     |
-|  <img src="https://github.com/david-driscoll.png?size=72" width="72" height="72" />  | David Driscoll    | [@david-driscoll](https://github.com/david-driscoll)     |
-|    <img src="https://github.com/tyranteon.png?size=72" width="72" height="72" />     | Tyranteon         | [@tyranteon](https://github.com/tyranteon)               |
-|      <img src="https://github.com/rigma.png?size=72" width="72" height="72" />       | Romain Failla     | [@rigma](https://github.com/rigma)                       |
-| <img src="https://github.com/viniciuslrangel.png?size=72" width="72" height="72" />  | Vinicius Rangel   | [@viniciuslrangel](https://github.com/viniciuslrangel)   |
-|     <img src="https://github.com/otijhuis.png?size=72" width="72" height="72" />     | Okke Tijhuis      | [@otijhuis](https://github.com/otijhuis)                 |
 |   <img src="https://github.com/parkeyparker.png?size=72" width="72" height="72" />   | Aaron Parker      | [@parkeyparker](https://github.com/parkeyparker)         |
 |   <img src="https://github.com/brandon-mork.png?size=72" width="72" height="72" />   | Brandon Mork      | [@brandon-mork](https://github.com/brandon-mork)         |
-| <img src="https://github.com/michaelcozzolino.png?size=72" width="72" height="72" /> | Michael Cozzolino | [@michaelcozzolino](https://github.com/michaelcozzolino) |
+|      <img src="https://github.com/btaens.png?size=72" width="72" height="72" />      | btaens            | [@btaens](https://github.com/btaens)                     |
+|  <img src="https://github.com/david-driscoll.png?size=72" width="72" height="72" />  | David Driscoll    | [@david-driscoll](https://github.com/david-driscoll)     |
 |  <img src="https://github.com/GrahamCampbell.png?size=72" width="72" height="72" />  | Graham Campbell   | [@GrahamCampbell](https://github.com/GrahamCampbell)     |
+|    <img src="https://github.com/meteorlxy.png?size=72" width="72" height="72" />     | Liu Xinyu         | [@meteorlxy](https://github.com/meteorlxy)               |
+| <img src="https://github.com/michaelcozzolino.png?size=72" width="72" height="72" /> | Michael Cozzolino | [@michaelcozzolino](https://github.com/michaelcozzolino) |
+|     <img src="https://github.com/otijhuis.png?size=72" width="72" height="72" />     | Okke Tijhuis      | [@otijhuis](https://github.com/otijhuis)                 |
+|      <img src="https://github.com/rigma.png?size=72" width="72" height="72" />       | Romain Failla     | [@rigma](https://github.com/rigma)                       |
+|     <img src="https://github.com/SirLamer.png?size=72" width="72" height="72" />     | SirLamer          | [@SirLamer](https://github.com/SirLamer)                 |
+|    <img src="https://github.com/tyranteon.png?size=72" width="72" height="72" />     | Tyranteon         | [@tyranteon](https://github.com/tyranteon)               |
+| <img src="https://github.com/viniciuslrangel.png?size=72" width="72" height="72" />  | Vinicius Rangel   | [@viniciuslrangel](https://github.com/viniciuslrangel)   |
+|    <img src="https://github.com/schulz3000.png?size=72" width="72" height="72" />    | Xaver Schulz      | [@schulz3000](https://github.com/schulz3000)             |
+|      <img src="https://github.com/ihmels.png?size=72" width="72" height="72" />      | Yannick Ihmels    | [@ihmels](https://github.com/ihmels)                     |
 
 If we've missed someone (which is quite likely) submit a Pull Request to us and we'll get it resolved.
 
 The Font Awesome team:
 
-|                                                                                   | Name           | GitHub                                             |
-| :-------------------------------------------------------------------------------: | -------------- | -------------------------------------------------- |
-| <img src="https://github.com/supercodepoet.png?size=72" width="72" height="72" /> | Travis Chase   | [@supercodepoet](https://github.com/supercodepoet) |
-|   <img src="https://github.com/robmadole.png?size=72" width="72" height="72" />   | Rob Madole     | [@robmadole](https://github.com/robmadole)         |
-|  <img src="https://github.com/mlwilkerson.png?size=72" width="72" height="72" />  | Mike Wilkerson | [@mlwilkerson](https://github.com/mlwilkerson)     |
-|     <img src="https://github.com/talbs.png?size=72" width="72" height="72" />     | Brian Talbot   | [@talbs](https://github.com/talbs)                 |
-| <img src="https://github.com/jasonlundien.png?size=72" width="72" height="72" />  | Jason Lundien  | [@jasonlundien](https://github.com/jasonlundien)   |
+|                                                                                   | Name             | GitHub                                             |
+| :-------------------------------------------------------------------------------: | ---------------- | -------------------------------------------------- |
+|     <img src="https://github.com/talbs.png?size=72" width="72" height="72" />     | Brian Talbot     | [@talbs](https://github.com/talbs)                 |
+|   <img src="https://github.com/frrrances.png?size=72" width="72" height="72" />   | Frances Botsford | [@frrrances](https://github.com/frrrances)         |
+| <img src="https://github.com/jasonlundien.png?size=72" width="72" height="72" />  | Jason Lundien    | [@jasonlundien](https://github.com/jasonlundien)   |
+|  <img src="https://github.com/mlwilkerson.png?size=72" width="72" height="72" />  | Mike Wilkerson   | [@mlwilkerson](https://github.com/mlwilkerson)     |
+|   <img src="https://github.com/robmadole.png?size=72" width="72" height="72" />   | Rob Madole       | [@robmadole](https://github.com/robmadole)         |
+| <img src="https://github.com/supercodepoet.png?size=72" width="72" height="72" /> | Travis Chase     | [@supercodepoet](https://github.com/supercodepoet) |
 
 ## Releasing this project (only project owners can do this)
 
