@@ -47,8 +47,14 @@ jobs:
           npm run build
           npm run test
 
+      # Type-check the public API against both the newest and oldest supported Vue.
+      # The matrix step above has already swapped in vue@${{ matrix.vue }}, so this
+      # runs test:types against that version. Covering the floor (3.0.x) as well as
+      # the ceiling (3.5.x) catches type-only regressions that depend on a helper
+      # that older Vue does not export (peer range is vue >= 3.0.0) — a gap a
+      # 3.5-only check silently misses.
       - name: type-check public API types
-        if: matrix.fontawesome-svg-core == '7.x' && matrix.vue == '3.5.x'
+        if: matrix.fontawesome-svg-core == '7.x' && (matrix.vue == '3.5.x' || matrix.vue == '3.0.x')
         run: npm run test:types
 
       - name: dist
