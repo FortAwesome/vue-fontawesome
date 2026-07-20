@@ -30,16 +30,17 @@ describe('FontAwesomeIcon icon/mask prop types', () => {
   })
 })
 
-describe('FontAwesomeIcon global attributes (regression: #582)', () => {
-  // Since 3.3.1, FontAwesomeIcon is declared as a FunctionalComponent. In JSX/TSX a
-  // functional component's accepted attributes resolve from the first parameter of
-  // its call signature — so that surface must carry Vue's global component props
-  // (class, style via AllowedComponentProps; key, ref via VNodeProps), or
-  // `<FontAwesomeIcon class="..."/>` fails to type-check (issue #582). The existing
-  // h()-based tests above could not catch this: h()'s RawProps includes a
-  // `Record<string, any>` index signature that accepts any attribute, masking the gap.
-  // These assertions target the call-signature parameter directly — the exact type
-  // TSX consults — without needing a JSX parser.
+describe('FontAwesomeIcon global attributes in JSX/TSX', () => {
+  // FontAwesomeIcon is declared as a FunctionalComponent. In JSX/TSX a functional
+  // component's accepted attributes resolve from the first parameter of its call
+  // signature, so that surface must carry Vue's global component props — class and
+  // style from AllowedComponentProps, key and ref from VNodeProps — otherwise
+  // `<FontAwesomeIcon class="..." />` fails to type-check.
+  //
+  // The h()-based tests above cannot cover this: h()'s RawProps includes a
+  // `Record<string, any>` index signature that accepts any attribute, so those pass
+  // regardless of the declaration. These assertions target the call-signature
+  // parameter directly — the exact type TSX consults — without needing a JSX parser.
   type IconAttrs = Parameters<typeof FontAwesomeIcon>[0]
 
   test('accepts class and style', () => {
