@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.3](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.3) - 2026-07-21
+
+### Fixed
+
+- Fixed `class` and `style` failing to type-check on `<FontAwesomeIcon>` in JSX/TSX, a regression from
+  #576. `FontAwesomeIcon` is declared as a `FunctionalComponent`, whose JSX attribute surface resolves
+  from the component's own props only; the declaration now also intersects `AllowedComponentProps` and
+  `VNodeProps`, restoring `class`, `style`, `key`, and `ref`. Types-only and non-breaking.
+
+### Changed
+
+- CI: the public API type-check now runs against the oldest supported Vue (3.0.x) as well as the newest,
+  so type-only regressions that depend on a helper only newer Vue versions export are caught
+- Removed the unused `npm` and `install` `devDependencies`. Development-only; the published package is
+  unchanged.
+
+---
+
 ## [3.3.2](https://github.com/FortAwesome/vue-fontawesome/releases/tag/3.3.2) - 2026-07-13
 
 ### Added
