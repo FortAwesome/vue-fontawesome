@@ -286,28 +286,62 @@ describe('using pull', () => {
 })
 
 describe('using rotation', () => {
+  let consoleSpy
+
+  beforeEach(() => {
+    consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    consoleSpy.mockRestore()
+  })
+
   test('90', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 90 })
 
     expect(wrapper.element.classList.contains('fa-rotate-90')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('180', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 180 })
 
     expect(wrapper.element.classList.contains('fa-rotate-180')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('270', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: 270 })
 
     expect(wrapper.element.classList.contains('fa-rotate-270')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   test('as a string', () => {
     const wrapper = mountFromProps({ icon: faCoffee, rotation: '90' })
 
     expect(wrapper.element.classList.contains('fa-rotate-90')).toBeTruthy()
+    expect(consoleSpy).not.toHaveBeenCalled()
+  })
+
+  test('0 does not add a rotation class and does not warn', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: 0 })
+
+    expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
+    expect(consoleSpy).not.toHaveBeenCalled()
+  })
+
+  test('0 as a string does not add a rotation class and does not warn', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: '0' })
+
+    expect(wrapper.element.classList.contains('fa-rotate-0')).toBeFalsy()
+    expect(consoleSpy).not.toHaveBeenCalled()
+  })
+
+  test('null does not add any rotation class', () => {
+    const wrapper = mountFromProps({ icon: faCoffee, rotation: null })
+
+    expect(wrapper.element.getAttribute('class')).not.toMatch(/fa-rotate-/)
   })
 })
 
