@@ -15,6 +15,7 @@ import {
 } from '../__fixtures__/helpers'
 
 import FontAwesomeIcon from '../FontAwesomeIcon'
+import { mount } from '@vue/test-utils'
 
 beforeEach(() => {
   library.add(faAlien, faBat, faCat, faCircle, faCoffee, faDog, faFish)
@@ -63,6 +64,34 @@ describe('icon title prop', () => {
       expect(coreHasFeature(ICON_TITLE_PROP)).toBeFalsy()
     })
   }
+})
+
+describe('accessible labels', () => {
+  test('is hidden from assistive technology by default', () => {
+    const wrapper = mountFromProps({ icon: faCoffee })
+
+    expect(wrapper.element.getAttribute('aria-hidden')).toBe('true')
+  })
+
+  test('is not hidden when an aria-label is set', () => {
+    const wrapper = mount(FontAwesomeIcon, { props: { icon: faCoffee }, attrs: { 'aria-label': 'Coffee' } })
+
+    expect(wrapper.element.getAttribute('aria-label')).toBe('Coffee')
+    expect(wrapper.element.hasAttribute('aria-hidden')).toBe(false)
+  })
+
+  test('is not hidden when an aria-labelledby is set', () => {
+    const wrapper = mount(FontAwesomeIcon, { props: { icon: faCoffee }, attrs: { 'aria-labelledby': 'coffee-label' } })
+
+    expect(wrapper.element.getAttribute('aria-labelledby')).toBe('coffee-label')
+    expect(wrapper.element.hasAttribute('aria-hidden')).toBe(false)
+  })
+
+  test('keeps an explicit aria-hidden', () => {
+    const wrapper = mount(FontAwesomeIcon, { props: { icon: faCoffee }, attrs: { 'aria-label': 'Coffee', 'aria-hidden': 'true' } })
+
+    expect(wrapper.element.getAttribute('aria-hidden')).toBe('true')
+  })
 })
 
 describe('icons are showing', () => {

@@ -119,6 +119,12 @@ export default function convert(abstractElement, props = {}, attrs = {}) {
   // Now, we'll return the VNode
   const { class: _aClass = {}, style: aStyle = {}, ...otherAttrs } = attrs
 
+  // fontawesome-svg-core marks every icon as decorative with aria-hidden="true".
+  // An icon given an accessible name must stay visible to assistive technology.
+  if ((otherAttrs['aria-label'] || otherAttrs['aria-labelledby']) && !('aria-hidden' in otherAttrs)) {
+    delete mixins.attrs['aria-hidden']
+  }
+
   // If a valid gradientFill is provided, inject the gradient element and set fill to reference it
   if (gradientFill && gradientFill.id && (gradientFill.type === 'linear' || gradientFill.type === 'radial')) {
     const { type: gradientType, stops = [], id, ...gradientProps } = gradientFill
